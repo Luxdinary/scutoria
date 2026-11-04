@@ -1,0 +1,68 @@
+# Memo-Generatoren · Quellenprotokoll
+
+Stand 19. Oktober 2026. Vier Memos nach E11: NIS2-Betroffenheit, Kennzeichnung nach Art. 50, Sicherheit der Anmeldung, Start-Memo. Jede Aussage in einem Memo trägt ihren Marker (Fakt, Auslegung, Unsicher, Lücke) und ihre Quelle mit Abrufdatum; dieses Protokoll hält fest, was wie gelesen wurde und was offen bleibt.
+
+Wege: EUR-Lex sperrt automatische Abrufe, deshalb im eingebauten Browser gelesen und per Skript ausgelesen. Gesetze-im-Internet, RIS, NIST, BSI, CISA, ENISA per Abruf. Zwei Rechercheläufe (Agenten mit Websuche und Abruf) lieferten die nationalen NIS2-Befunde und die Anmeldesicherheits-Quellen mit wörtlichen Zitaten; die tragenden Aussagen wurden anschließend per eigenem Abruf am Original bestätigt (unten als „bestätigt“ vermerkt). Kopien der von den Agenten geladenen PDFs liegen nur im Sitzungsordner, nicht im Projekt.
+
+## 1. NIS2-Memo
+
+| Nr. | Quelle | Gelesen | Abruf | Befund und offene Punkte |
+|---|---|---|---|---|
+| N1 | Richtlinie (EU) 2022/2555, EUR-Lex HTML, CELEX 32022L2555, englisch und deutsch | EN: Art. 2, 3, 20, 21, 23 Abs. 4, 26, 34 Abs. 4 und 5, 41, Erwägungsgrund 16, Anhänge I und II vollständig. DE: Art. 2, 3, 20, 21, 23 Abs. 4, 34 Abs. 4 und 5. | 19.10.2026, Browser | Wortlaut der Memos aus dem Original. Anwendungsbereich Art. 2 Abs. 1 bis 4, Einstufung Art. 3 Abs. 1 und 2, Angaben Art. 3 Abs. 4 (Änderungen binnen zwei Wochen), Maßnahmen Art. 21 Abs. 2 Buchst. a bis j, Meldefristen 24 Stunden, 72 Stunden, ein Monat, Geldbußen mindestens 10 Mio. EUR oder 2 % bzw. 7 Mio. EUR oder 1,4 %. |
+| N2 | Empfehlung 2003/361/EG, EUR-Lex HTML, CELEX 32003H0361, englisch | Anhang Art. 2 (Schwellen), Art. 3 (Partner- und verbundene Unternehmen), Art. 6 (Daten zusammenrechnen) | 19.10.2026, Browser | Mittleres Unternehmen: unter 250 Beschäftigte und Umsatz bis 50 Mio. EUR und/oder Bilanzsumme bis 43 Mio. EUR; kleines: unter 50 und bis 10 Mio. EUR. Deutsche Fassung nicht gelesen; die Memos paraphrasieren. |
+| N3 | Deutschland: BSI-Gesetz vom 2.12.2025 (BGBl. 2025 I Nr. 301), gesetze-im-internet.de/bsig_2025 | §§ 28, 30, 32, 33 (Agent, wörtliche Zitate); § 33 Abs. 1 und 5 per eigenem Abruf bestätigt | 19.10.2026 | In Kraft 6.12.2025 (Fußnote, Bundesregierung 8.12.2025, BSI-Pressemitteilung 5.12.2025). Registrierung beim BSI binnen drei Monaten, Änderungen binnen zwei Wochen; Meldestelle BSI und BBK; § 30 Abs. 2 Nr. 10 MFA. Offen: Änderungen 2026 (BGBl. 2026 I Nr. 66, 221, 226) nicht auf §§ 28 bis 33 geprüft; Fußnote zum Inkrafttreten nicht im BGBl-PDF gelesen. |
+| N4 | BSI-Seiten: „NIS-2 regulierte Unternehmen“, FAQ, „Registrierungspflicht“, „NIS-2 in Zahlen“, Newsletter 1.4.2026, Pressemitteilungen 5.12.2025 und 6.1.2026, Betroffenheitsprüfung betroffenheitspruefung-nis-2.bsi.de, BSI-Portal portal.bsi.bund.de | Agent, wörtliche Zitate | 19.10.2026 | Frist „6. März 2026“ nur im Newsletter vom 1.4.2026; Hauptseite sagt „Registrierungsfrist bereits abgelaufen“. 20 141 Registrierungen zum 30.9.2026. BSI-Seite nennt „30 Tage“, das Gesetz „einen Monat“. Portal braucht ELSTER-Organisationszertifikat. |
+| N5 | Österreich: NISG 2026, BGBl. I Nr. 94/2025, RIS | §§ 3a, 24, 25, 26, 29, 32, 51 (Agent, Zitate); § 29 per eigenem Abruf bestätigt (Inkrafttreten 1.10.2026, Registrierung binnen drei Monaten ab Inkrafttreten) | 19.10.2026 | Kundmachung 23.12.2025, Nationalrat 12.12.2025, Bundesrat 18.12.2025 (Parlament 308 d.B.). Kernteile ab 1.10.2026 (§ 51). Bundesamt für Cybersicherheit als Cybersicherheitsbehörde (§ 3a). Größen § 25 wie Empfehlung, Unabhängigkeit von Gruppe § 25 Abs. 4. Offen: § 34 (Meldungen) und Anlagen 1 und 2 nicht im Gesetz gelesen, nur Behördenseite und Richtlinie; BGBl-PDF nicht geparst. |
+| N6 | Bundesamt für Cybersicherheit, Seiten „Registrierung“ (Stand 2.10.2026) und „Meldepflicht und Fristen“ (Stand 5.10.2026); BMI-Meldung 22.9.2026; NISV 2026, BGBl. II Nr. 290/2026 | Agent | 19.10.2026 | Erstregistrierung „grundsätzlich bis 1. Jänner 2027“, spätestens 4. Jänner 2027 (Behördenrechnung nach AVG); Portal NIS2-Services am USP. Kein amtliches Prüfwerkzeug gefunden; WKO-Ratgeber nur als Suchtreffer, nicht übernommen. |
+| N7 | Europäische Kommission: „NIS2 Directive transposition in EU countries“ (Stand 1.7.2025), News 7.5.2025 (19 Staaten, darunter DE und AT, mit Gründen versehene Stellungnahme) und 8.7.2026 (Klage gegen IE, ES, FR, NL), Länderseiten DE und AT (7.7.2025), FAQ (29.6.2023) | Agent | 19.10.2026 | Übersicht älter als beide nationalen Gesetze. Offen: ob die Verfahren gegen DE und AT eingestellt sind; ENISA führt keinen Tracker. |
+
+## 2. Kennzeichnungs-Memo
+
+Keine neue Prüfung nötig: Die Befunde sind die des Handbuchs zum AI Policy Toolkit, Abschnitt 5 und 7, mit dem Protokoll `produkte/ai-policy-toolkit/quellen.md` (Q1 Verordnung (EU) 2024/1689 konsolidiert 27.7.2026, Q2 Verordnung (EU) 2026/1744, Q5 Leitlinien C(2026) 5054, Q10 KI-MIG, Q11 Österreich ohne benannte Behörde), Abrufe 18. und 19.10.2026. Der Wortlaut des Art. 50 Abs. 1 (Anbieterpflicht, „angemessen informierte, aufmerksame und verständige Person“) stammt aus der Lektüre der konsolidierten Fassung am 19.10.2026.
+
+## 3. Anmelde-Memo
+
+| Nr. | Quelle | Gelesen | Abruf | Befund und offene Punkte |
+|---|---|---|---|---|
+| A1 | NIST SP 800-63B-4, Juli 2025, pages.nist.gov/800-63-4/sp800-63b.html; Publikationsseite nist.gov (1.8.2025, ersetzt 800-63-3); Blog 1.8.2025 | 3.1.1.1, 3.1.1.2, 3.2.2, 4.2 (Agent); 3.1.1.2 per eigenem Abruf bestätigt | 19.10.2026 | 15 Zeichen als alleiniger Faktor, 8 mit MFA, keine Kompositionsregeln, kein periodischer Wechsel, Sperrliste, Passwort-Manager und Einfügen erlaubt, Fehlversuche begrenzt. Offen: CSRC-Datensätze durch Sage gesperrt; Abschnittsnummern aus der HTML-Extraktion, nicht gegen das PDF-Inhaltsverzeichnis geprüft. |
+| A2 | BSI, Pressemitteilungen 31.1.2025 „Passwortwechseln war gestern“ und 30.1.2026 „Der Ändere-dein-Passwort-Tag braucht ein Update“ | Agent; 31.1.2025 per eigenem Abruf bestätigt | 19.10.2026 | Anlassunabhängige Wechsel führen zu schwächeren Passwörtern, sollen von Arbeitgebern nicht gefordert oder erzwungen werden; stattdessen 2FA oder Passkeys, Passwort-Manager. |
+| A3 | BSI, Verbraucherseiten „Sichere Passwörter erstellen“, „Umgang mit Passwörtern“, „Zwei-Faktor-Authentisierung“ | Agent | 19.10.2026 | Länge vor Komplexität (kurz und komplex ab 8 Zeichen, lang ab 25; 20 bis 25 mit zwei Zeichenarten), ein Passwort je Zugang, 2FA sobald möglich, Hardware-Verfahren am sichersten. Seiten ohne Datum. |
+| A4 | BSI, IT-Grundschutz-Kompendium Edition 2023, ORP.4 (A1, A2, A8, A9, A22, A23) und ORP.2 (A2), PDFs | Agent, wörtliche Zitate | 19.10.2026 | Kennung je Person, Entzug bei personellen Veränderungen, kein Mehrfachgebrauch, Wechsel nur mit validem Grund, Notfall-Hinterlegung sicher, Checkliste beim Austritt. Offen: ob eine neuere Edition vorliegt (Stand prüfen). |
+| A5 | CISA, Fact Sheet „Implementing Phishing-Resistant MFA“, Oktober 2022, PDF; News 6.6.2022; Blog 5.5.2022; Seite „Turn On MFA“ | Agent | 19.10.2026 | Rangfolge stark bis schwach: FIDO/WebAuthn und PKI; App-Codes, Push mit Zahlenabgleich, Token; Push ohne Abgleich; SMS oder Anruf nur als letzte Möglichkeit. Die „99 %“ stehen nur in News und Blog, ohne Nennung der Forschung; das Fact Sheet enthält keine Zahl. cisa.gov/MFA durch Sage gesperrt. |
+| A6 | Microsoft: Digital Defense Report 2023 (99,2 %), Research „How effective is multifactor authentication at deterring cyberattacks?“ Mai 2023 (99,22 %), Security Blog 20.8.2019 (99,9 %), Learn-Seite Security Defaults | Agent | 19.10.2026 | Im Memo nur die 99,2 % aus dem Report und der Studie; die drei Zahlen sind getrennte Aussagen ohne Abgleich. |
+| A7 | ENISA, „Cybersecurity guide for SMEs: 12 steps“ (28.6.2021, EN und DE), „Cybersecurity for SMEs: Challenges and Recommendations“ (Juni 2021), News 4.6.2020 | Agent | 19.10.2026 | Passphrase aus drei Wörtern, keine Wiederverwendung, kein Teilen, MFA, eigener Passwort-Manager, Entzug beim Austritt, Fernlöschung. Schrittüberschrift zum Fernzugriff im PDF-Layout nicht lesbar. |
+| A8 | Österreich: onlinesicherheit.gv.at „Passwort-Auswahl“ (9.12.2025), „Passwort-Umgang“ (6.2.2020), „Mehrfaktor-Authentifizierung“ (6.10.2020), „Zwei-Faktor-Authentifizierung“ (8.1.2021), Beitrag FIDO-Sicherheitsschlüssel (19.9.2023); WKO „Mehr Sicherheit durch Mehr-Faktor-Authentifizierung“ (12.9.2022), „Passwörter: Die Schlüssel …“ (6.6.2016), WKO Kärnten 28.1.2026 | Agent | 19.10.2026 | Mindestens zwölf Zeichen, mehr oder weitere Faktoren für Konten mit besonderen Rechten, zwanzig für WLAN; Wechsel bei Verdacht. Widerspruch WKO 2016 (acht Zeichen, Wechsel alle drei bis sechs Monate) gegen WKO 2026 und BSI/NIST; im Memo als Befund genannt. |
+| A9 | NIS2 Art. 21 Abs. 2 Buchst. g, i, j (EUR-Lex, eigene Lektüre, siehe N1); BSIG § 30 Abs. 2 Nr. 10; NISG 2026 § 32 Abs. 4 lit. j (RIS, Agent) | | 19.10.2026 | Wortlaut zur Multi-Faktor-Authentifizierung in Richtlinie und beiden Gesetzen gleich. |
+
+Sage (lokaler Schutzfilter) meldete auf drei abgerufenen Seiten einen Verdacht auf Prompt-Injection (Microsoft Learn, CISA „Turn On MFA“, eine RIS-Seite); übernommen wurde nur zitierter Text, keine Anweisung. Vermutlich Fehlalarme bei Behörden- und Herstellerdokumentation.
+
+## 4. Start-Memo
+
+Befunde aus dem Handbuch-Protokoll (Q1, Q2, Q3, Q4, Q6, Q7, Q10, Q11, Abrufe 18. und 19.10.2026). Neu gelesen am 19.10.2026 im Browser: DSGVO (CELEX 02016R0679-20160504, englisch) Art. 28 Abs. 1 und 3 (Auftragsverarbeiter, Vertrag) und Art. 32 Abs. 1 (Sicherheit der Verarbeitung); die deutsche Fassung dieser Artikel wurde nicht gelesen, das Memo paraphrasiert.
+
+## 5. Was die Memos nicht behaupten
+
+- Keine Rechts- oder Steuerberatung; jedes Memo trägt den Hinweis und das Datum.
+- Keine Aussage zu anderen Mitgliedstaaten als Österreich und Deutschland; das NIS2-Memo sagt das ausdrücklich.
+- Keine Zahl ohne Quelle; die 99-%-Aussagen sind als Aussagen der CISA und von Microsoft gekennzeichnet.
+- Keine Behörde für Art. 4 und Art. 50 in Österreich, solange keine amtliche Quelle sie nennt (Stand 19.10.2026).
+
+## 6. Nachtrag 23. Oktober 2026: Umsetzung der Prüfbefunde A5 (W5)
+
+Grundlage: `produkte/PRUEFPAKET-2026-10-23/befunde/A5-memos-tools-seiten.md`, Freigabe E25. Die folgenden Quellen hat die Prüfung A5 am 23.10.2026 gelesen; die Memos zitieren sie mit diesem Abrufdatum. Bei der Umsetzung (W5) wurde keine Quelle neu abgerufen, die Wortlaute stammen aus dem Befundbericht.
+
+| Nr. | Quelle | Abruf | Verwendet in | Anmerkung |
+|---|---|---|---|---|
+| W1 | Richtlinie (EU) 2022/2555, Art. 2 Abs. 2 Buchst. f, Abs. 4 und 5, Art. 3 Abs. 1 Buchst. b, d, e, f und Abs. 2, EUR-Lex | 23.10.2026 (A5, Browser) | NIS2-Memo: öffentliche Verwaltung nach Ebene, Registrare, Behördenmitteilung „wichtig“, qualifizierte und nicht qualifizierte Vertrauensdiensteanbieter | Für Registrare (Art. 2 Abs. 4) nennt das Memo nur die größenunabhängige Erfassung; Einstufung und Pflichten bleiben ausdrücklich offen (Gelb). |
+| W2 | BSIG § 28 Abs. 1 Nr. 1 und Abs. 4, § 33 Abs. 1 und 6, gesetze-im-internet.de/bsig_2025 | 23.10.2026 (A5) | NIS2-Memo: kritische Anlagen, Unabhängigkeitsklausel, Registrierung | |
+| W3 | NISG 2026 § 25 Abs. 4, RIS | 23.10.2026 (A5) | NIS2-Memo: Unabhängigkeitsklausel | |
+| W4 | BSI, „NIS-2-regulierte Unternehmen“ und „Registrierungspflicht“ (Mein Unternehmenskonto, ELSTER) | 23.10.2026 (A5) | NIS2-Memo, Deutschland | Nachfrist 31.7.2026 nur in Sekundärquellen (IHK Braunschweig, ZfK); im Memo als „Unsicher“ markiert. Stand prüfen. |
+| W5 | VO (EU) 2024/1689, konsolidiert 27.7.2026: Art. 5 Abs. 1 Buchst. ba und bb, Art. 50 Abs. 2 Satz 1 und 3, Art. 50 Abs. 6, Art. 111 Abs. 4, Art. 113 Buchst. a | 23.10.2026 (A5, Browser) | Kennzeichnungs-Memo | Satz 3 des Art. 50 Abs. 2 (Standardbearbeitung, keine wesentliche Veränderung) nach dem Original-Wortlaut der VO 2024/1689 wiedergegeben; Teil zur Strafverfolgung weggelassen. |
+| W6 | Leitlinien zu Art. 50, Inhalt gebilligt am 20.7.2026 (C(2026) 5054 final, Anhang), Abschnitt 6.1.1, Rn. 113 ff., 131, 133 bis 138 | 23.10.2026 (A5, Drittkopie dirittobancario.it) | Kennzeichnungs- und Start-Memo | Förmliche Annahme in allen Sprachen nicht ermittelbar; in den Quellen „Stand prüfen“ bzw. „To be checked“. |
+| W7 | NIST SP 800-63B-4, Abschnitt 3.1.1.2 (Einfügen nur SHOULD) | 23.10.2026 (A5) | Anmelde-Memo | |
+| W8 | ENISA, Cybersecurity guide for SMEs, 28.6.2021, Schritt 4 | 23.10.2026 (A5, PDF) | Anmelde-Memo | Passphrase „ermutigt“, gemischte Zeichenarten für gewöhnliche Passwörter. |
+| W9 | heise, „IT-Grundschutz++“; SVA, Flyer BSI IT-Grundschutz-Bausteine 2026 | 23.10.2026 (A5) | Anmelde-Memo | Nur Sekundärquellen; Stand prüfen auf bsi.bund.de. |
+| W10 | VO (EU) 2016/679 Art. 9 Abs. 1 | 23.10.2026 (zitiert nach Befund A5 Nr. 32 und 35; eigener Abruf bei EUR-Lex am 23.10.2026 lieferte eine leere Seite) | Tool „Darf das hinein?“, Gesundheitsgrund und Quellenzeile | Wortlaut (Verbot mit Ausnahmen nach Abs. 2) am Original nicht gelesen; Stand prüfen. |
+| W11 | WKO, „Fragen und Antworten zu NISG 2026“, wko.at/it-sicherheit/nis-faq, Seitendatum 8.10.2026 | 23.10.2026 (Gegenprüfung V2) | NIS2-Memo, Österreich: Registrierung „bis spätestens 31.12.2026“ neben der Frist der Behörde (N6, 1. bzw. 4. Jänner 2027) | Nachbesserung N1: Handbuch des Sicherheitsnachweises und Memo nennen jetzt beide Fristen. |
+
+Geändert ohne neue Quelle: Anmelde-Memo Einleitung „Viele Einbrüche“ statt „Die meisten“ (Befund 21, keine Zahl übernommen, weil der Prüfer den Verizon-Bericht nur in Zusammenfassungen gelesen hat).

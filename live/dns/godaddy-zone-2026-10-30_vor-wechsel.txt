@@ -1,0 +1,36 @@
+GoDaddy-DNS scutoria.com, vollständige Zone vor dem Domainwechsel
+Abgelesen 30.10.2026 abends aus dcc.godaddy.com (DNS Records, 22 Einträge, Stefan angemeldet), von Claude.
+
+Typ   | Name                         | Wert                                                                          | TTL
+A     | @                            | 216.24.57.1                                                                   | 1 Stunde   <- wird geändert
+NS    | @                            | ns03.domaincontrol.com.                                                       | 1 Stunde
+NS    | @                            | ns04.domaincontrol.com.                                                       | 1 Stunde
+CNAME | autodiscover                 | autodiscover.outlook.com.                                                     | 1 Stunde
+CNAME | brevo1._domainkey            | b1.scutoria-com.dkim.brevo.com.                                               | 1 Stunde
+CNAME | brevo2._domainkey            | b2.scutoria-com.dkim.brevo.com.                                               | 1 Stunde
+CNAME | email                        | email.secureserver.net.                                                       | 1 Stunde
+CNAME | lyncdiscover                 | webdir.online.lync.com.                                                       | 1 Stunde
+CNAME | msoid                        | clientconfig.microsoftonline-p.net.                                           | 1 Stunde
+CNAME | selector1._domainkey         | selector1-scutoria-com._domainkey.netorgft21105009.r-v1.dkim.mail.microsoft.  | 1 Stunde
+CNAME | selector2._domainkey         | selector2-scutoria-com._domainkey.netorgft21105009.r-v1.dkim.mail.microsoft.  | 1 Stunde
+CNAME | sip                          | sipdir.online.lync.com.                                                       | 1 Stunde
+CNAME | www                          | swk-shop.onrender.com.                                                        | 1 Stunde   <- wird ersetzt
+CNAME | _domainconnect               | _domainconnect.gd.domaincontrol.com.                                          | 1 Stunde
+SOA   | @                            | Primary nameserver: ns03.domaincontrol.com.                                   | 1 Stunde
+MX    | @                            | scutoria-com.mail.protection.outlook.com. (Priorität 0)                       | 1 Stunde
+TXT   | @                            | brevo-code:fe292ffdd44e84c1f986f9197de27d17                                   | 1 Stunde
+TXT   | @                            | NETORGFT21105009.onmicrosoft.com                                              | 1 Stunde
+TXT   | @                            | v=spf1 include:secureserver.net -all                                          | 1 Stunde
+TXT   | _dmarc                       | v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com                              | 1 Stunde
+SRV   | _sip._tls.@                  | 100 1 443 sipdir.online.lync.com.                                             | 1 Stunde
+SRV   | _sipfederationtls._tcp.@     | 100 1 5061 sipfed.online.lync.com.                                            | 1 Stunde
+
+Änderung (Lovable verlangt laut Workspace-Domains, DNS records, 30.10.2026 nur diese zwei):
+  A @    216.24.57.1 -> 185.158.133.1, TTL 600 Sekunden
+  www    CNAME swk-shop.onrender.com. -> A 185.158.133.1, TTL 600 Sekunden
+Alles andere bleibt unverändert (Microsoft 365, Brevo, DMARC, SPF, SIP).
+
+Rückweg:
+  A @    wieder 216.24.57.1
+  www    A-Eintrag löschen lassen und wieder CNAME swk-shop.onrender.com. anlegen
+  Der alte Shop ist bei Render weiter mit scutoria.com verbunden (Wartungsmodus an).

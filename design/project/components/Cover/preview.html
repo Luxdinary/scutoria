@@ -1,0 +1,37 @@
+<!-- @dsCard height=288 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  .cv { position: relative; width: 960px; height: 288px; background: var(--ground); color: var(--ink); font-family: var(--font-sans); overflow: hidden; }
+  .cv svg { position: absolute; inset: 0; }
+  .cv .slab { fill: var(--accent); }
+  .cv .sat-a { fill: var(--line-security); }
+  .cv .sat-b { fill: var(--line-setup); }
+  .cv .inkblock { fill: var(--ink); }
+  .cv .plus { stroke: var(--ink-muted); stroke-width: 1.5; stroke-linecap: round; }
+  .cv .name { position: absolute; left: 48px; bottom: 44px; font-size: 88px; line-height: 0.92; font-weight: 800; letter-spacing: -0.035em; max-width: 440px; }
+  .cv .tag { position: absolute; left: 50px; bottom: 22px; font-size: 14px; line-height: 1.2; color: var(--ink-muted); max-width: 440px; }
+</style>
+<div class="cv">
+  <!--
+    Blocks: slab accent 168×336 (bleeds top and bottom, radius-card 20); satellites line-security 104×104 (radius-card 20) and line-setup 104×56 (pill, rx 28); ink block 96×184 (radius-sm 6).
+    Arrangement: one tall slab with satellites, right of x = 480; the slab echoes the cover stripe of every product.
+    Pattern: plus grid at space-12 (48px) pitch, units space-2 (8px), in ink-muted: a precise, dated, source-lined system, so the row is "precise, technical, grid".
+    Scales used: space-2, space-12, radius-sm, radius-card; the slab and blocks are multiples of space-2.
+  -->
+  <svg viewBox="0 0 960 288" width="960" height="288" aria-hidden="true">
+    <g class="plus">
+      <path d="M484 20h8M488 16v8 M532 20h8M536 16v8 M580 20h8M584 16v8 M628 20h8M632 16v8 M676 20h8M680 16v8 M724 20h8M728 16v8 M772 20h8M776 16v8 M820 20h8M824 16v8 M868 20h8M872 16v8 M916 20h8M920 16v8"/>
+      <path d="M484 68h8M488 64v8 M532 68h8M536 64v8 M580 68h8M584 64v8 M628 68h8M632 64v8 M676 68h8M680 64v8 M724 68h8M728 64v8 M772 68h8M776 64v8 M820 68h8M824 64v8 M868 68h8M872 64v8 M916 68h8M920 64v8"/>
+      <path d="M484 116h8M488 112v8 M532 116h8M536 112v8 M580 116h8M584 112v8 M628 116h8M632 112v8 M676 116h8M680 112v8 M724 116h8M728 112v8 M772 116h8M776 112v8 M820 116h8M824 112v8 M868 116h8M872 112v8 M916 116h8M920 112v8"/>
+      <path d="M484 164h8M488 160v8 M532 164h8M536 160v8 M580 164h8M584 160v8 M628 164h8M632 160v8 M676 164h8M680 160v8 M724 164h8M728 160v8 M772 164h8M776 160v8 M820 164h8M824 160v8 M868 164h8M872 160v8 M916 164h8M920 160v8"/>
+      <path d="M484 212h8M488 208v8 M532 212h8M536 208v8 M580 212h8M584 208v8 M628 212h8M632 208v8 M676 212h8M680 208v8 M724 212h8M728 208v8 M772 212h8M776 208v8 M820 212h8M824 208v8 M868 212h8M872 208v8 M916 212h8M920 208v8"/>
+      <path d="M484 260h8M488 256v8 M532 260h8M536 256v8 M580 260h8M584 256v8 M628 260h8M632 256v8 M676 260h8M680 256v8 M724 260h8M728 256v8 M772 260h8M776 256v8 M820 260h8M824 256v8 M868 260h8M872 256v8 M916 260h8M920 256v8"/>
+    </g>
+    <rect class="slab" x="560" y="-24" width="168" height="336" rx="20"/>
+    <rect class="sat-a" x="752" y="40" width="104" height="104" rx="20"/>
+    <rect class="sat-b" x="752" y="168" width="104" height="56" rx="28"/>
+    <rect class="inkblock" x="880" y="40" width="96" height="184" rx="6"/>
+  </svg>
+  <div class="name">Scutoria</div>
+  <div class="tag">Sourced. Dated. Ready to show.</div>
+</div>

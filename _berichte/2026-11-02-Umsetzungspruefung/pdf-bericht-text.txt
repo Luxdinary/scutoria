@@ -1,0 +1,558 @@
+Umsetzungsbericht scutoria.com:
+Fremdanalyse vom 1. November 2026 und
+Redesign
+ Nov 2, 2026  ·  @Stefan Dallinger
+Scutoria.com hat alle 18 Befunde der ChatGPT-Analyse vom 1. November 2026 bearbeitet:
+13 erledigt, 3 teilweise, F04 bewusst bis zum Live-Schalter offen, F18 nicht Teil dieses
+Laufs. Redesign nach Variante A und neue Datenschutzerklärung sind seit 2. November
+live, im Vorschaumodus. Verfasst von Claude (Claude Code) für Stefan Dallinger zur
+Weitergabe an ChatGPT.
+1 Kurzfassung
+Alle 18 Befunde wurden geprüft. 13 sind erledigt, 3 teilweise (F02, F05, F10), F04 bleibt
+bewusst offen bis zum Live-Schalter, F18 war nicht Teil dieses Laufs.
+Variante A ist umgesetzt, mit vier Anpassungen an die Markenregeln: Claim bleibt als
+Markenzeile, Blatt schräg in Ruhe, kein Mint, keine fremden Schriften und keine
+Messung.
+Zwei Veröffentlichungen am 2. November 2026, beide auf Stefans ausdrückliches
+Wort: zuerst „Stufe 1“ (Kaufweg, Handy-Menü, Fehlerseite, Abzeichen und
+Besucherstatistik aus), am Abend das Redesign zusammen mit der neuen
+Datenschutzerklärung.
+216 automatisierte Tests laufen ohne Fehler. Die Barrierefreiheitsprüfung mit axe
+(WCAG 2.0, 2.1 und 2.2, Stufen A und AA) meldet auf 16 Seitentypen keinen Verstoß.
+Die Website läuft weiter im Vorschaumodus: Suchmaschinen sind gesperrt, das
+Abzeichen „Vorschau“ ist sichtbar. Die Kasse ist aber echt (siehe Abschnitt 14).
+Vor dem regulären Verkauf fehlen: Gewerbe, Klärung der Umsatzsteuer, Bereinigung
+der Rechtstexte, Live-Schalter, Probekauf.
+2 Wer was macht und wie gearbeitet wurde
+Stefan entscheidet und gibt frei. Er programmiert nicht. Drei Tore sind ihm
+vorbehalten: Geld, Recht, Veröffentlichen.
+Claude plant, schreibt die Texte, formuliert die Aufträge, prüft Code und Ergebnis und
+führt das Protokoll (STAND, AUFGABEN, ENTSCHEIDUNGEN).
+Lovable (KI-Entwickler der Plattform, auf der die Website läuft) setzt den Code um.
+Ablauf je Phase:
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 1 of 15
+1. Claude schickt einen englischen Auftrag mit festen Regeln und Abnahmekriterien.
+2. Lovable lässt die volle Testsuite am Anfang und am Ende laufen und prüft im
+eigenen Testbrowser (Chromium, ohne Fenster) bei 360, 390 und 1440 Pixeln.
+3. Claude liest den Code-Unterschied jeder Phase.
+4. Claude prüft in Stefans Chrome nach.
+5. Abweichungen gehen in die nächste Phase.
+Gesperrt ohne Stefans Wort: Veröffentlicht wurde nur, wenn Stefan es ausdrücklich
+gesagt hat. Ohne sein Wort wurde nichts an Preisen, Stripe-Einstellungen,
+Geheimnissen oder dem alten Shop geändert.
+Feste Regeln in jedem Auftrag:
+Farben nur aus den Design-Tokens.
+Nur die Schriften Manrope und IBM Plex Mono, selbst gehostet.
+Keine eingebetteten Skripte oder Stilattribute (Sicherheitsregel CSP).
+Keine Anfragen an Dritte, kein Tracker.
+Alles muss ohne JavaScript lesbar sein.
+Genau eine H1 je Seite.
+Bewegung kurz und nie endlos; bei reduzierter Bewegung gilt sofort der
+Endzustand.
+Auf der Website „Sie“.
+Nie die Wörter „compliant“, „secure“, „safe“ oder „zertifiziert“.
+3 Ausgangslage am 1. November 2026
+Plattform: Lovable. Die Seiten werden auf dem Server erzeugt; der ursprüngliche
+Seitencode wurde unverändert übernommen.
+Daten: Datenbank Lovable Cloud (Supabase) bei Amazon Web Services in Irland (eu-
+west-1).
+Dienste: Kasse über Stripe Checkout, Mails über Brevo.
+Domain: scutoria.com zeigt seit 30. Oktober 2026 auf Lovable. Der alte Shop (Render)
+ist im Wartungsmodus.
+Angebot:
+zwei Toolkits: KI-Richtlinien und Sicherheitsnachweis, je Jahreslizenz, Gründerpreis
+99 Euro für die ersten zehn Käufer
+vier Online-Handbücher
+Muster-PDFs eines erfundenen Beispielbetriebs
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 2 of 15
+vier Memo-Generatoren: NIS2, Kennzeichnung nach Artikel 50, Anmeldesicherheit,
+Womit anfangen
+zwei Browser-Tools: „Darf das hinein?“ und „Steht da etwas Persönliches drin?“
+Modus: Vorschau. Die Seiten tragen noindex, robots.txt sperrt alles, das Abzeichen
+„Vorschau“ ist sichtbar, der Generator läuft ohne Lizenz. Die Kasse ist echt.
+4 Gegenprüfung der Befunde (2. November, vormittags)
+Claude hat die Befunde vor der Umsetzung selbst nachgeprüft.
+Selbst bestätigt:
+F01: Der Kaufknopf führte in Chrome ins Leere. Die Sicherheitsregel erlaubte
+Formulare nur an die eigene Adresse ( form-action 'self' ). Chrome verwarf
+deshalb die Weiterleitung zu Stripe.
+F03: Kein Menü unter 640 Pixeln.
+F14: Unbekannte Adressen zeigten mit Status 404 die Startseite.
+F17: Abzeichen „Edit with Lovable“.
+F06, ergänzt: Neben dem Cloudflare-Cookie __cf_bm  lud jede Seite die
+Besucherstatistik von Lovable (Skript /__l5e/… , Ereignisse an
+/__l5e/trackevents ). Die Datenschutzerklärung nannte beides nicht.
+Bewusst so:
+F04: Sperre für Suchmaschinen im Vorschaumodus.
+Die Klammern „Stand prüfen“ in den Rechtstexten (Belegregel).
+Vor der Umsetzung nicht selbst nachgeprüft: F05, F07, F08, F12, F13, F15, F16, F18. Sie
+wurden mit der Umsetzung geprüft.
+5 Stufe 1: Sofortmaßnahmen, veröffentlicht am 2. November
+Lovable-Commits f73c6ea und 9be1984, 141 von 141 Tests grün.
+1. Kaufweg (F01): Die Sicherheitsregel erlaubt jetzt Formulare zusätzlich an
+https://checkout.stripe.com  und https://billing.stripe.com  (Kundenportal).
+Alles andere an der Regel blieb gleich. Ein Test prüft den genauen Wert.
+2. Handy-Menü (F03):
+Unter 640 Pixeln gibt es einen Knopf „Menu“ bzw. „Menü“ mit Produkte, Tools, Konto
+und Sprachwechsel.
+Escape schließt das Menü und gibt den Fokus an den Knopf zurück.
+Ohne JavaScript bleiben die Links sichtbar.
+Einblendung in 180 ms, bei reduzierter Bewegung ohne Weg.
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 3 of 15
+Ein Folgefehler (Sprachlink am Desktop doppelt) wurde sofort korrigiert.
+3. Fehlerseite (F14): Echte Seite „Page not found“ bzw. „Seite nicht gefunden“ mit Status
+404, noindex und Wegen zu Startseite, Toolkits und Tools. Die vier Umleitungen /agb ,
+/datenschutz , /impressum , /widerruf  bleiben.
+4. Abzeichen (F17): In den Lovable-Einstellungen eingeschaltet: „Hide Lovable badge“.
+5. Besucherstatistik: Ebenfalls in den Lovable-Einstellungen: „Visitor analytics“
+ausgeschaltet. Das Skript /__l5e/…  ist seitdem aus dem HTML verschwunden.
+6. Live geprüft:
+Sicherheitsregel mit Stripe-Zielen.
+Menü auf Englisch und Deutsch.
+Kein Abzeichen, kein Statistik-Skript.
+Fehlerseiten mit 404.
+Kaufadressen beider Toolkits antworten mit 303 und leiten zu checkout.stripe.com.
+Ein echter Klick in Stefans Chrome landete in der Stripe-Kasse. Nichts wurde
+bezahlt.
+6 Planung des Redesigns nach Variante A
+Variante A passt zur Marke, wenn drei Dinge aus dem ChatGPT-Prototyp nicht
+übernommen werden. Stefan entschied am 2. November (Entscheidung E29).
+Punkt ChatGPT-Prototyp Umgesetzt Grund
+Überschrift „Wenn jemand fragt,
+können Sie
+antworten.“ ersetzt
+den Claim
+R1 B: Situationsfrage
+„Jemand fragt. Was
+zeigen Sie?“ als H1,
+Claim „Belegt. Datiert.
+Vorzeigbar.“ bleibt als
+Markenzeile in drei
+Takten darüber
+Claim ist Markenkern
+Blatt im
+Hero
+frontal, gerade R2 C: in Ruhe 2 Grad
+schräg, gerade und
+lesbar, sobald ein
+Schritt gewählt ist
+Markeninszenierung
+„ein echtes Blatt“
+Farbe neues Mint #62CFBB kein Mint; nur Farben
+aus den Tokens
+Markenregel
+Schriften Bahnschrift, Segoe,
+Consolas, Cambria
+Manrope und IBM Plex
+Mono
+Markenregel, keine
+fremden Schriften
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 4 of 15
+Die Credits für Lovable hat Stefan aufgeladen (Tor Geld). Claude hatte den Bedarf auf 60
+bis 95 Credits geschätzt.
+7 Phase 0: Texte und Beispiele (Claude, ohne Lovable)
+Alle neuen Texte stehen in Englisch und Deutsch in der Datei lovable/REDESIGN-PHASE-
+0-TEXTE.md . Zitate stammen wörtlich aus den veröffentlichten Musterdokumenten und
+Handbüchern (Fassung 23. Oktober 2026). Sie sind damit bereits freigegebener
+Produktinhalt.
+Hero (Deutsch):
+Markenzeile: „Belegt. Datiert. Vorzeigbar.“
+H1: „Jemand fragt. Was zeigen Sie?“
+Einleitung: „Eine Kollegin fragt, ob ein Text in ein KI-Tool darf. Ein Kunde schickt
+einen Sicherheitsfragebogen. An einem Rechner passiert etwas. Wählen Sie eine
+Situation und sehen Sie, wie aus der Frage eine Entscheidung und ein datiertes
+Dokument wird.“
+Knöpfe: „Beispiel ansehen“, „Toolkits ansehen“.
+Drei Situationen, jede mit Frage, Entscheidung (Zitat aus dem Muster), Nachweis und
+Muster-PDF in der Sprache der Seite:
+KI im Betrieb. Frage: Darf die Belegschaft Angebote mit einem KI-Tool entwerfen?
+Nachweis: KI-Nutzungsrichtlinie (D1), § 2 und § 3.
+Ein Kunde fragt nach Nachweisen. Frage: Gibt es eine Datensicherung? Antwort:
+„Teilweise … geplant bis 22. November 2026“. Nachweis: Selbstauskunft (D1), Feld
+D1.
+Punkt ChatGPT-Prototyp Umgesetzt Grund
+Messung Kennzahlen zu
+Auswahl und
+Übergängen
+keine; nur die
+vorhandene Zählung
+ohne Personenbezug
+Markenregel „kein
+Tracker“
+Dritte
+Situation
+„Ein Vorfall“ R4 A: mit der
+Notfallkarte aus dem
+Sicherheits-Toolkit
+echtes
+Musterdokument
+vorhanden
+Tool-Probe vorgetäuschter Prüfer das echte Tool mit
+seiner echten
+Erkennung
+keine Attrappe
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 5 of 15
+Ein Vorfall. Frage: Dateien sind verschlüsselt, was passiert in der ersten Stunde?
+Antwort: „1. Trennen. 2. Nicht löschen, nicht neu aufsetzen. 3. Anrufen. 4.
+Aufschreiben.“ Nachweis: Notfallkarte (D3).
+„Warum es im Alltag zählt“ mit drei Alltagsfragen statt Angstzahlen:
+Wer entscheidet im Zweifel?
+Was zeigen Sie einem Kunden oder Versicherer?
+Wo steht der Meldeweg?
+Vier Marker-Beispiele aus dem KI-Handbuch, Quellen am 2. November geprüft:
+Fakt: Orientierungshilfe der Datenschutzkonferenz vom 6. Mai 2024, Abschnitt 2.2.
+Auslegung: Keine Norm verlangt ausdrücklich eine schriftliche KI-Richtlinie.
+Unsicher: offener Punkt 8.12 (Richtlinie als Geheimhaltungsmaßnahme).
+Lücke: Wiederholung und Aufbewahrung der Einweisung.
+Produkte kurz: ein Satz Nutzen und vier Punkte je Toolkit. Preisbox unverändert.
+Abnahmekriterien: wörtliche Zitate, richtiges PDF je Sprache, echtes Tool,
+Quellenlinks in neuem Tab, alles ohne JavaScript lesbar, Blatt-Verhalten nach R2 C.
+8 Phase 1: neue Startseite (Commit a377288)
+Hero: wie in Phase 0. Der Hauptknopf springt zur Werkbank und spielt die drei Schritte
+einmal ab.
+Situationswahl und Werkbank:
+Drei Knöpfe für die Situationen ( aria-pressed ) und drei Schrittknöpfe: „1 · Die
+Frage“, „2 · Ihre Entscheidung“, „3 · Der Nachweis“.
+Knopf „Ablauf zeigen“: rund 950 ms je Schritt, nur auf Klick. Ein weiterer Klick
+startet neu, jeder andere Klick hält an. Bei reduzierter Bewegung springt der Ablauf
+direkt auf Schritt 3.
+Der wechselnde Bereich ist eine Live-Region ( aria-live="polite" ).
+Ohne JavaScript stehen alle drei Situationen vollständig untereinander.
+Abschnitt „Warum es im Alltag zählt“: mit den drei Fragen aus Phase 0.
+Produkte: ein Satz und vier Punkte statt langer Absätze; Buch, Preis und Knöpfe
+unverändert.
+Marker-Modul:
+Vier Knöpfe mit den Markerformen (Quadrat, Raute, Halbkreis, gestrichelter Kreis;
+nie nur Farbe) steuern ein gemeinsames Feld.
+Das Feld zeigt Bedeutung, Beispiel, Quelle als Link und den Handbuchabschnitt.
+Escape schließt und gibt den Fokus zurück. Ohne JavaScript stehen alle vier
+untereinander.
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 6 of 15
+„Ausprobieren: Steht da etwas Persönliches drin?“: nutzt dieselbe
+Erkennungsfunktion wie das echte Tool, nichts wird gesendet. Dabei wurde die
+Erkennung um Namen nach „call … back“ ergänzt.
+Schalter „Bewegung an/aus“.
+9 Phase 2: Feinschliff, Memos, seitenweite Bedienung (Commit
+a970134, 191 Tests)
+Werkbank: Inhalte stehen oben bündig, die Höhe bleibt beim Wechsel stabil.
+Schritt 1 zeigt die Frage mit dem Blatt als blasse Vorschau.
+Schritt 2 hebt die Entscheidung auf dem Blatt hervor.
+Schritt 3 zeigt den Nachweis mit PDF-Link.
+Tools auf der Startseite: Die Überschrift steht jetzt vor dem Probefeld.
+Auf jeder Seite:
+Sprunglink „Zum Inhalt springen“ als erstes fokussierbares Element.
+Bewegungsschalter im Fußbereich, gespeichert im Browser; ohne Wahl folgt er der
+Systemeinstellung.
+Genau eine H1; vorher hatten die Memo-Ergebnisse zwei (F16).
+Memos (F07):
+Das Freitextfeld für den Betriebsnamen ist aus allen vier Fragebögen entfernt. Die
+Ergebnisadresse enthält nur noch Auswahlwerte (beim NIS2-Memo zum Beispiel
+Land, Größe, Sektor, Lieferant).
+Der Name kann nur noch im Formular „PDF per E-Mail“ angegeben werden. Er wird
+per POST gesendet, nur für dieses PDF verwendet und nicht gespeichert.
+Sprachwechsel auf Memo-Ergebnissen (F13): führt zum gleichen Ergebnis in der
+anderen Sprache, mit denselben Antworten.
+Toolseite: neue Zeile zum Datenfluss der Memos. Lovable hat sie gegen den Code
+geprüft.
+10 Phase 3: Quellenlinks und Generator (Commit aec9868, 201
+Tests)
+Quellenlinks in den vier Online-Handbüchern (F05):
+Claude hat 194 Quellenzeilen ausgelesen, 75 Dokumente zugeordnet und 70
+Originaladressen am 2. November geprüft. Ergebnis ist die Zuordnungsdatei
+content/toolkits/source-links.json .
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 7 of 15
+Jede Quellenzeile verlinkt jetzt ihre Originale in neuem Tab: KI-Richtlinien 43 von 43
+Zeilen, Sicherheitsnachweis 54 von 54, je Englisch und Deutsch.
+Der Handbuchtext und die Handbuch-PDFs sind unverändert.
+Zwei Einstiege in den Generator (F08):
+„Mit Ihrem Betrieb beginnen“: leere Felder, das Beispiel steht nur als Hinweis
+„Beispiel: …“ darunter.
+„Zuerst das Beispiel ansehen“: der erfundene Beispielbetrieb ist vorbelegt.
+In einem Beispiellauf steht auf jeder Seite ein ruhiger Hinweis, dass es der
+erfundene Beispielbetrieb ist.
+Orientierung (F12):
+Zeile „Abschnitt A · Der Betrieb · Frage 1 von 33“.
+Aufklappliste „Alle Abschnitte“ mit „beantwortet x von y“.
+Handbuchlink heißt „Warum wir das fragen: Handbuch, Abschnitt n“ statt nur einer
+Ziffer.
+Speicherhinweis „Nach jedem Schritt gespeichert. Sie kommen über die Adresse
+dieser Seite zurück.“; bei Läufen im Konto zusätzlich „Sie finden ihn auch in Ihrem
+Konto.“
+Prüfseite „Antworten prüfen“ vor den Dokumenten (F08, F12):
+Alle Antworten nach Abschnitt, jede mit „Ändern“; danach geht es zurück zur
+Prüfseite.
+Kennzeichnung „Aus dem Beispiel, bitte prüfen“ für unveränderte Beispielwerte.
+„Offen“ für leere freiwillige Antworten, „Fehlt, Pflichtfrage“ für leere
+Pflichtantworten (letzteres ab Phase 4).
+Texte: Sätze, die den vorbelegten Beispielbetrieb als einzigen Start beschrieben, sind
+angepasst. „Ein datierter Dokumentensatz morgen“ (F15) ist ersetzt durch „steht
+bereit, sobald Sie fertig sind“.
+11 Phase 4: Barrierefreiheit, Konsistenz, Erinnerungen, Live-Probe
+(Commit c2f629d, 211 Tests)
+Barrierefreiheit (F16):
+axe 4.14.0 nach WCAG 2.0, 2.1 und 2.2, Stufen A und AA.
+Geprüft auf 16 Seitentypen in Englisch und Deutsch bei 1440, 390 und 360 Pixeln:
+Startseite, beide Produktseiten, ein Handbuch, Toolübersicht, beide Tools, Memo-
+Übersicht, Memo-Formular und Ergebnis, Generator-Frage, Prüfseite, Anmeldung,
+Rechtsseite, Über-Seite, Fehlerseite.
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 8 of 15
+Vorher 6 schwere Verstöße, danach 0 in allen Stufen. Die axe-Prüfung läuft jetzt in
+der Testsuite mit.
+Tastatur-Durchgang dokumentiert: Startseite, Handy-Menü, Memo, Personendaten-
+Tool, Prüfseite mit „Ändern“.
+Bericht in docs/ACCESSIBILITY.md .
+Screenreader wurden nicht getestet.
+Konsistenz (F15):
+Über-Seite in beiden Sprachen: „bis zu etwa fünfzig Beschäftigten“ statt „bis zu
+einigen hundert“, und „zwei Toolkits und ein drittes in Vorbereitung“ statt „drei
+Toolkits“.
+Einleitung des Sicherheits-Fragebogens ohne „vorbelegt“.
+Eine Liste aller Größen- und Mengenangaben auf der Website (58 Stellen) liegt bei
+Lovable. Widersprüche wurden darin keine mehr gefunden.
+Erinnerungs-Job für ablaufende Lizenzen:
+Der Endpunkt ist fertig und hat einen Schalter reminders  in content/site-
+settings.json . Er steht auf „off“: Das ist ein Probelauf, der nur zählt und nichts
+sendet.
+Mit „on“ geht höchstens eine Erinnerung je Lizenz hinaus, 14 Tage vor Ablauf, keine
+bei erneuerter Lizenz. Das ist mit Attrappen getestet.
+Den täglichen Aufruf (pg_cron, 06:00 UTC) durfte Lovables Agent nicht anlegen,
+weil die Plattform ihm den Zugriff auf Geheimnisse verweigert. Das SQL liegt in
+docs/reminder-schedule.sql .
+Live-Probe in Tests (Einstellungsdatei bleibt auf „preview“):
+Ohne Vorschau-Abzeichen; öffentliche Seiten ohne noindex.
+Konto, Kassenrückkehr, Generator-Läufe und Memo-Ergebnisse mit noindex.
+robots.txt erlaubt öffentliche Seiten und sperrt die privaten Pfade.
+Die Sitemap lässt Rechtsseiten weg, solange die Rechtsprüfung nicht eingetragen
+ist.
+Kaufknöpfe sind da. Ohne Lizenz legt der Generator keinen Lauf an und leitet zum
+Kauf.
+Gefunden und behoben: Die Handbuchseiten trugen noindex.
+Zwei Korrekturen aus Claudes Prüfung von Phase 3:
+„Fehlt, Pflichtfrage“ auf der Prüfseite.
+Linktext „NISG 2026“ statt „NISG 2026, §“.
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 9 of 15
+12 Phase 5 und Schlusskorrektur (Commits 6428e62 und 66e65fa,
+216 Tests)
+Handy:
+Das deutsche KI-Handbuch war 395 statt 360 Pixel breit. Ursache: eine lange
+Überschrift in einem Unsicher-Kasten. Behoben.
+Alle vier Handbücher messen jetzt bei 320, 360 und 390 Pixeln genau die
+Bildschirmbreite.
+102 Handy- und 128 Regressionsprüfungen laufen ohne Überbreite.
+Folgen der Barrierefreiheits-Korrektur zurückgenommen: Links im Fließtext brechen
+wieder normal um. Knopftexte brechen nicht mehr mitten im Wort. Die Mindestgröße
+von 24 Pixeln gilt weiter für eigenständige Bedienelemente.
+Cookie-Satz (F06): Die Toolseite sagte „setzen kein Cookie“. Claude hat
+nachgemessen, dass jede Seite von Cloudflare das Cookie __cf_bm  bekommt. Neuer
+Text: „die Tools selbst setzen kein Cookie“, in Englisch und Deutsch.
+Memo-Ergebnis: gleicher Abstand oben wie die anderen Seiten.
+Tastatur und Konto:
+Ein eigener Generatorlauf geht komplett per Tastatur bis zu den Dokumenten.
+Die Kontoübersicht mit Lizenz ist bei 1440 und 360 Pixeln mit axe und Tastatur
+geprüft.
+Schlusskorrektur: Chrome meldete bei jedem Seitenwechsel einen Fehler der
+Seitenübergänge in der Konsole; für Besucher war er unsichtbar. Behoben mit einem
+kleinen eigenen Skript transitions.js . Lovable hat echte Klickketten in drei
+Zuständen geprüft (normal, reduzierte Bewegung, Bewegung aus): ohne Fehler.
+Testdaten: Lovable hat alle eigenen Testdaten wieder entfernt, mit Zählung je Phase.
+13 Datenschutzerklärung und Veröffentlichung (Entscheidung
+E30)
+Neue Fassung vom 2. November (Deutsch und Englisch):
+nennt das Cloudflare-Cookie __cf_bm : Bot-Schutz, verfällt nach 30 Minuten ohne
+Aktivität (Quelle: Cloudflare, „Cloudflare Cookies“, Stand 12. Oktober 2026,
+abgerufen 2. November 2026)
+den Vertrag zur Auftragsverarbeitung mit Lovable im Business-Tarif
+den Betriebsnamen nur im Memo-PDF, nicht gespeichert
+die gespeicherte Benachrichtigungswahl
+Die Lovable-Besucherstatistik ist nicht mehr erwähnt, weil sie aus ist.
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 10 of 15
+Übertragung: Stefan hat die Fassung freigegeben. Sie wurde byte-genau zu Lovable
+übertragen. Prüfsummen (SHA-256, erste 12 Zeichen): Deutsch a2cdc5fac561, Englisch
+6fa81767c902.
+Veröffentlichung: Stefans Wort „Beides veröffentlichen“ am Abend des 2. November;
+veröffentlicht gegen 18:22 Uhr (Wien), Lovable-Deployment 511d0a08.
+Live von außen geprüft:
+31 Adressen in Englisch und Deutsch mit dem erwarteten Status, jede mit genau
+einer H1; unbekannte Pfade mit 404.
+Neue Startseite; Datenschutz mit __cf_bm ; neuer Cookie-Satz auf der Toolseite;
+Über-Seite mit „fünfzig“.
+Beide Einstiege auf den Produktseiten.
+Deutsches KI-Handbuch: 43 Quellzeilen mit 66 Links.
+Memo-Sprachlink behält die Antworten.
+Kein Abzeichen, keine Besucherstatistik.
+Sicherheitsregel unverändert mit den Stripe-Zielen.
+Statusseite /health  meldet Vorschau, Kasse Stripe, Webhook und Mail aktiv.
+robots.txt sperrt weiter alles (Vorschaumodus).
+Kaufadresse leitet mit 303 zur Stripe-Kasse.
+14 Ist ein Kauf jetzt möglich?
+Technisch ja. Der Kaufknopf führt zur echten Stripe-Kasse im Live-Modus. Eine Zahlung
+würde wirklich abgebucht und die Lizenz über den Stripe-Webhook freigeschaltet. Bisher
+gibt es keinen Kauf: Auf beiden Produktseiten steht „Gründerpreis für die ersten zehn
+Käufer, noch 10 frei“ (Stand 2. November 2026).
+Was dabei noch nicht geklärt oder geprüft ist:
+Ob der Webhook mit dem hinterlegten Geheimnis zusammenpasst, zeigt erst das erste
+echte Ereignis. Darum ist der Probekauf geplant.
+Gewerbe: Eine Gewerbeanmeldung von Stefan war in den öffentlichen Registern nicht
+auffindbar (GISA-Abfrage 30. Oktober 2026). Ob ohne sie verkauft werden darf, ist
+eine Rechtsfrage (Stand prüfen; keine Rechtsberatung).
+Umsatzsteuer: Stripe Tax ist aktiv, und die Seite sagt „Umsatzsteuer laut Kasse“. Ob
+Scutoria Kleinunternehmer ist oder Umsatzsteuer ausweisen muss, klärt der
+Steuerberater. Bei Kleinunternehmerregelung darf die Kasse keine Umsatzsteuer
+aufschlagen (Stand prüfen).
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 11 of 15
+Rechtstexte: Impressum, AGB und Datenschutz enthalten noch sichtbare Platzhalter
+in eckigen Klammern. Im Impressum stehen zum Beispiel noch Gewerbebezeichnung,
+Fachgruppe und Steuerstatus offen.
+Die Website ist im Vorschaumodus und für Suchmaschinen gesperrt. Kaufen kann
+praktisch nur, wer den Link kennt.
+Empfehlung von Claude: Den Kauf sperren, bis Gewerbe und Steuer geklärt sind; der
+Knopf verweist so lange auf die Warteliste. Diese Änderung wäre klein, braucht aber eine
+Veröffentlichung, also Stefans Wort.
+Entscheidung von Stefan (2. November 2026, E31): Kauf offen lassen. Die Kasse bleibt
+erreichbar.
+15 Stand aller Befunde F01 bis F18
+Nr Befund (ChatGPT) Stand Was getan wurde
+F01 Kaufweg ohne Reaktion erledigt Sicherheitsregel um Stripe-Ziele
+ergänzt, live mit echtem Klick
+geprüft
+F02 Verkaufsversprechen trifft
+auf Entwürfe
+teilweise Datenschutz aktualisiert;
+Klammern in Impressum, AGB,
+Datenschutz und der Status
+„Vorschau mit echter Kasse“
+bleiben bis Gewerbe, Steuer und
+Live-Schalter
+F03 Handy-Navigation fehlt erledigt Menüknopf mit Escape,
+Fokusführung und Fallback ohne
+JavaScript
+F04 Suchmaschinen gesperrt bewusst offen Live-Modus in Tests geprüft;
+Freigabe kommt mit dem Live-
+Schalter
+F05 Quellen nicht verlinkt teilweise alle 194 Quellzeilen der vier
+Online-Handbücher verlinkt;
+Quellen in den Memos und in den
+PDFs stehen weiter als Text
+F06 Cookie-Aussage falsch erledigt Datenschutz nennt __cf_bm ;
+Besucherstatistik aus; Toolseite
+korrigiert
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 12 of 15
+16 Was nicht gemacht oder nicht selbst geprüft wurde
+Screenreader: nicht getestet, nur axe und Tastatur.
+Nr Befund (ChatGPT) Stand Was getan wurde
+F07 Betriebsname in Memo-
+Adressen
+erledigt Name nur noch im PDF-Formular
+per POST, nicht gespeichert
+F08 Muster wirkt wie eigene
+Angaben
+erledigt zwei Einstiege, Beispiel nur als
+Hinweis, Prüfseite mit
+Kennzeichnung
+F09 Umfang vor Nutzen erledigt Startseite beginnt mit
+Situationen und Werkbank
+F10 zu viele gleichartige
+Abschnitte
+teilweise Startseite gekürzt; die langen
+Listen auf den Produktseiten
+sind unverändert
+F11 Dokumente als Dekoration erledigt lesbares Blatt mit wählbaren
+Schritten und echtem Muster-
+PDF; endloser Blattstapel auf der
+Startseite ersetzt
+F12 Generator ohne Orientierung erledigt Abschnittszeile, Abschnittsliste,
+Speicherhinweis, Prüfseite,
+Handbuchlink mit Text
+F13 Sprachwechsel verliert Memo erledigt Ergebnis bleibt beim
+Sprachwechsel
+F14 Fehlerseite mit falschem
+Inhalt
+erledigt echte 404-Seite
+F15 redaktionelle Widersprüche erledigt „morgen“ entfernt; Zielgruppe
+und Toolkit-Zahl vereinheitlicht
+F16 Barrierefreiheit nicht belegt erledigt axe 0 Verstöße, Tastatur
+dokumentiert, Sprunglink, eine
+H1; Screenreader nicht getestet
+F17 Lovable-Abzeichen erledigt Abzeichen ausgeblendet
+F18 Inhaltsqualität der Dateien nicht Teil
+dieses Laufs
+Produktprüfung vom 23. Oktober
+2026 mit Korrekturen (E25)
+bleibt die letzte inhaltliche
+Abnahme
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 13 of 15
+Klicktest nach der Schlusskorrektur: Den Seitenwechsel ohne Konsolenfehler hat nur
+Lovable geprüft. Claudes Klicktest war nicht möglich, weil das Chrome-Fenster in dem
+Moment nichts zeichnete.
+Kontoübersicht mit echter Lizenz: nur im Testbrowser von Lovable mit einem
+Testkunden geprüft, nicht mit einem echten Kauf.
+Echte Mailzustellung: des Memo-PDFs nach den Änderungen nicht erneut geprüft. Die
+Abläufe sind mit Attrappen getestet.
+Produktseiten: nicht gekürzt (F10, Rest).
+Memos und PDFs: Quellen nicht verlinkt (F05, Rest).
+Handbuchtexte: nicht geändert, weil sie freigegeben sind. Abschnitt 0 beider
+Handbücher sagt noch, der Generator sei mit dem Beispielbetrieb vorbelegt. Das
+Sicherheits-Handbuch nennt „rund vierzig Minuten“ für die Fragen, ohne Messung.
+17 Offene Punkte bis zum regulären Verkauf, in dieser Reihenfolge
+1. Gewerbe klären (Stefan).
+2. Umsatzsteuer mit dem Steuerberater klären: Kleinunternehmer oder
+Regelbesteuerung, OSS. Danach Stripe Tax passend einstellen (Stefan, Tor Geld).
+3. Rechtstexte bereinigen (Claude bereitet vor, Stefan gibt frei):
+Klammern in Impressum, AGB und Datenschutz auflösen.
+Den leeren Newsletter-Abschnitt entfernen.
+Optional eine anwaltliche Prüfung; danach das Datum in legalReviewedAt
+eintragen.
+4. Live-Schalter: siteMode  auf „live“. Damit sind Suchmaschinen erlaubt, das Abzeichen
+verschwindet, der Generator braucht eine Lizenz. Nur auf Stefans Wort.
+5. Probekauf durch Stefan. Er prüft auch den Webhook; den Betrag erstattet Stefan
+danach selbst.
+6. Google Search Console und Sitemap.
+7. Später: Erinnerungs-Job anlegen (spätestens elf Monate nach dem ersten Verkauf).
+8. Später: den alten Render-Dienst anhalten.
+9. Später: das Webhook-Geheimnis einmal neu erzeugen.
+10. Später: Produktseiten kürzen (F10).
+11. Später: Memo-Quellen verlinken (F05).
+12. Später: Abschnitt 0 der Handbücher anpassen.
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 14 of 15
+18 Technische Eckdaten
+Lovable-Commits des 2. November:
+f73c6ea und 9be1984: Stufe 1
+a377288: Phase 1
+a970134: Phase 2
+aec9868: Phase 3
+c2f629d: Phase 4
+6428e62: Phase 5
+66e65fa: Schlusskorrektur
+a521eed: Datenschutz
+Tests: von 141 auf 216 gewachsen, alle grün.
+Sicherheitsregel (Content-Security-Policy): default-src 'self'; img-src 'self'
+data:; font-src 'self'; style-src 'self'; script-src 'self'; form-action
+'self' https://checkout.stripe.com https://billing.stripe.com; frame-
+ancestors 'none'; base-uri 'none'; object-src 'none' .
+Cookies:
+Die Website setzt selbst nur das Sitzungs-Cookie des Kundenkontos, und nur bei
+Anmeldung.
+Cloudflare setzt __cf_bm .
+Keine Werbe- oder Analysedienste, keine Schriften oder Skripte von fremden
+Servern.
+Daten: Lovable Cloud in AWS eu-west-1 (Irland). Kasse über Stripe Checkout, Mails
+über Brevo.
+Protokoll im Projektordner: STAND.md , AUFGABEN.md  und ENTSCHEIDUNGEN.md  (E29
+Redesign, E30 Veröffentlichung) sind nachgetragen; die Entscheidungen stehen auch
+im Dossier.
+Umsetzungsbericht scutoria.com: Fremdanalyse vom 1. November 2026 und Redesign
+Page 15 of 15

@@ -1,0 +1,49 @@
+:root {
+  /* Farbrollen aus Sapphire Cinema */
+  --sc-bg: #080f20;
+  --sc-header: #0b1529;
+  --sc-surface: #111d34;
+  --sc-surface-raised: #172a49;
+  --sc-surface-studio: #11223d;
+  --sc-surface-sources: #11223c;
+  --sc-text: #edf3ff;
+  --sc-text-muted: #a8b9d2;
+  --sc-border: #2d4264;
+  --sc-accent: #75a7ff;
+  --sc-primary: #306cea;
+  --sc-petrol-muted: #142c40;
+  --sc-indigo-muted: #1a2645;
+  /* Typorollen: vorhandene lokale Brandfonts zuerst prüfen */
+  --sc-font-display: 'Manrope', 'Bahnschrift', sans-serif;
+  --sc-font-body: 'Manrope', 'Segoe UI', sans-serif;
+  --sc-font-meta: 'IBM Plex Mono', 'Consolas', monospace;
+  --sc-h1-hero: 4.125rem;
+  --sc-h1-mobile: 2.8125rem;
+  --sc-leading-heading: 1.06;
+  --sc-leading-body: 1.65;
+  /* Abstandsrollen */
+  --sc-space-1: 4px;
+  --sc-space-2: 8px;
+  --sc-space-3: 12px;
+  --sc-space-4: 16px;
+  --sc-space-5: 20px;
+  --sc-space-6: 24px;
+  --sc-space-8: 32px;
+  --sc-space-10: 40px;
+  --sc-space-12: 48px;
+  --sc-space-14: 56px;
+  --sc-space-18: 72px;
+  --sc-content-max: 1240px;
+  --sc-radius-control: 6px;
+  --sc-radius-card: 8px;
+  --sc-radius-hero: 9px;
+  /* Motion: Systempräferenz und Schalter in der Implementierung anwenden */
+  --sc-motion-fast: 200ms;
+  --sc-motion-card: 400ms;
+  --sc-motion-enter-text: 700ms;
+  --sc-motion-enter-image: 900ms;
+  --sc-ease-feedback: cubic-bezier(.2,.7,.2,1);
+  --sc-ease-enter: cubic-bezier(.2,.65,.3,1);
+}
+/* Keine externe Font-Anfrage und keine globale Stilanwendung in dieser Datei.
+   In das vorhandene Designsystem übertragen, nicht ungeprüft darüberlegen. */

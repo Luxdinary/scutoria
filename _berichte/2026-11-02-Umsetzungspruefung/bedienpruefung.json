@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-02",
+  "checks": [
+    {
+      "test": "Werkbank: Kundenfrage",
+      "pass": true
+    },
+    {
+      "test": "Werkbank: Notfallkarte",
+      "pass": true
+    },
+    {
+      "test": "Startseiten-Tool",
+      "pass": true
+    },
+    {
+      "test": "Menü geöffnet",
+      "pass": true
+    },
+    {
+      "test": "Eigener Generator startet leer",
+      "pass": true
+    },
+    {
+      "test": "Musterlauf zeigt eigenen Beispielhinweis",
+      "pass": true
+    },
+    {
+      "test": "KI-Kaufbutton DE öffnet Stripe ohne Zahlung",
+      "pass": true
+    }
+  ],
+  "menuEscape": {
+    "expanded": false,
+    "focus": "Menü"
+  },
+  "questionCount": {
+    "empty": 33,
+    "example": 34,
+    "interpretation": "Antwort- oder einstiegsabhängig plausibel; kein nachgewiesener Zählfehler."
+  },
+  "paymentExecuted": false
+}

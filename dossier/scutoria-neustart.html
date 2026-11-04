@@ -1,0 +1,997 @@
+<title>Scutoria Neustart</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sticky section index on the left (desktop), one reading column on the right.
+   Facts live in tables with status chips, the concept in a few cards, decisions as option cards that save. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --surface-2:#e9edf3; --fg:#15202f; --muted:#5b6779; --line:#d5dbe5;
+  --accent:#1d5bd6; --accent-soft:#e2ebfb; --accent-ink:#ffffff;
+  --ok:#1b7f4b; --ok-soft:#ddf3e6; --warn:#946312; --warn-soft:#fbefd0; --crit:#b4301f; --crit-soft:#fbe2dd; --nb:#5d6a7b; --nb-soft:#e6eaef;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1220; --surface:#121a2b; --surface-2:#1a2438; --fg:#e8edf5; --muted:#9aa6b8; --line:#273349;
+    --accent:#6f9cff; --accent-soft:#182a52; --accent-ink:#0b1220;
+    --ok:#4fc38a; --ok-soft:#10301f; --warn:#e4b857; --warn-soft:#352a0e; --crit:#ff8578; --crit-soft:#3d1b17; --nb:#a6b0c0; --nb-soft:#1f2838;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1220; --surface:#121a2b; --surface-2:#1a2438; --fg:#e8edf5; --muted:#9aa6b8; --line:#273349;
+  --accent:#6f9cff; --accent-soft:#182a52; --accent-ink:#0b1220;
+  --ok:#4fc38a; --ok-soft:#10301f; --warn:#e4b857; --warn-soft:#352a0e; --crit:#ff8578; --crit-soft:#3d1b17; --nb:#a6b0c0; --nb-soft:#1f2838;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1.02rem;line-height:1.6;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 4rem}
+a{color:var(--accent)}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.45rem,2.6vw,1.9rem);font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+h4{font-size:1rem;font-weight:700}
+p{margin:0 0 1rem}
+ul,ol{margin:0 0 1rem;padding-left:1.3rem}
+li{margin:.25rem 0}
+strong{font-weight:600}
+code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);padding:.05em .35em;border-radius:4px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.shell{max-width:1180px;margin:0 auto}
+.masthead{padding-block:2.5rem 1.5rem;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:.8rem}
+.brandline{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.brandline .mark{display:inline-flex;align-items:center;gap:.5rem;color:var(--fg);font-weight:500}
+.brandline .mark svg{width:20px;height:20px}
+.lede{font-size:1.12rem;max-width:68ch;color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:1fr;gap:2rem;padding-block:1.5rem}
+@media (min-width:1000px){.grid{grid-template-columns:230px minmax(0,1fr);gap:3rem}}
+.toc{display:none}
+@media (min-width:1000px){
+  .toc{display:block;position:sticky;top:env(safe-area-inset-top,0px);align-self:start;padding-top:1rem;max-height:100vh;overflow:auto}
+  .toc ol{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.15rem}
+  .toc a{display:grid;grid-template-columns:2rem 1fr;gap:.4rem;padding:.35rem .5rem;border-radius:6px;color:var(--muted);text-decoration:none;font-size:.9rem;line-height:1.3}
+  .toc a span{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted);padding-top:.15rem}
+  .toc a:hover,.toc a.is-active{background:var(--surface);color:var(--fg)}
+  .toc a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+}
+main{min-width:0;display:flex;flex-direction:column;gap:3.2rem;padding-top:1rem}
+section{min-width:0;scroll-margin-top:1rem}
+.sechead{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.1rem}
+.prose{max-width:70ch}
+.lead{font-size:1.08rem}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding:.18rem .6rem;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+.chip::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:currentColor}
+.chip.ok{color:var(--ok);background:var(--ok-soft)}
+.chip.warn{color:var(--warn);background:var(--warn-soft)}
+.chip.crit{color:var(--crit);background:var(--crit-soft)}
+.chip.nb{color:var(--nb);background:var(--nb-soft)}
+.chip.acc{color:var(--accent);background:var(--accent-soft)}
+/* boxes */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem}
+.box.accent{border-color:var(--accent);background:var(--accent-soft)}
+.box.crit{border-color:var(--crit)}
+.box h3{margin-bottom:.5rem}
+.box :last-child{margin-bottom:0}
+.kurz{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:820px){.kurz{grid-template-columns:3fr 2fr}}
+.kurz ol{margin:0;padding-left:1.2rem}
+.kurz li{margin:.45rem 0}
+.only-you li{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:start}
+.only-you li b{font-family:var(--mono);font-weight:500;font-size:.8rem;letter-spacing:.08em;color:var(--accent);padding-top:.25rem}
+/* tables */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;vertical-align:top;padding:.65rem .8rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-weight:500;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td .src{display:block;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+/* cards */
+.cards{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:760px){.cards.three{grid-template-columns:repeat(3,minmax(0,1fr))}.cards.two{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ws{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.2rem;display:flex;flex-direction:column;gap:.7rem}
+.ws .eyebrow{color:var(--accent)}
+.ws h3{font-size:1.25rem}
+.ws dl{margin:0;display:grid;grid-template-columns:1fr;gap:.45rem}
+.ws dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ws dd{margin:0 0 .3rem;font-size:.95rem}
+.ws .price{margin-top:auto;padding-top:.6rem;border-top:1px solid var(--line);font-family:var(--display);font-weight:700;font-size:1.2rem;display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.ws .price small{font-family:var(--mono);font-weight:400;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.steps{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:900px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.step .eyebrow{color:var(--accent);margin-bottom:.3rem}
+.step h3{font-size:1.05rem;margin-bottom:.5rem}
+.step ul{padding-left:1.1rem;font-size:.92rem;margin:0}
+.step .who{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:.6rem 0 .2rem}
+.pill{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:.1rem .5rem;border-radius:4px;background:var(--surface-2);color:var(--muted)}
+/* decisions */
+.summary{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;margin-bottom:1.2rem;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.summary .count{font-family:var(--display);font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.summary .bar{flex:1 1 160px;height:6px;border-radius:999px;background:var(--surface-2);overflow:hidden;min-width:120px}
+.summary .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s ease}
+.summary .store{font-size:.82rem;color:var(--muted)}
+.btn{font:inherit;font-family:var(--body);font-weight:500;font-size:.9rem;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:.45rem .9rem;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible,.opt:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.block{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.block > h3{margin-top:.5rem}
+.decision{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.8rem}
+.decision.is-decided{border-color:var(--ok)}
+.decision .head{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:baseline;justify-content:space-between}
+.decision .head h4{font-size:1.08rem}
+.decision .key{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--accent)}
+.decision .why{color:var(--muted);font-size:.93rem;margin:0}
+.opts{display:grid;gap:.6rem;grid-template-columns:1fr}
+@media (min-width:760px){.opts{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}
+.opt{font:inherit;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:.7rem .85rem;cursor:pointer;color:var(--fg);display:flex;flex-direction:column;gap:.3rem;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opt .letter{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--muted);display:flex;gap:.5rem;align-items:center}
+.opt .rec{color:var(--ok);background:var(--ok-soft);padding:.05rem .45rem;border-radius:999px;font-size:.66rem}
+.opt .label{font-weight:500;font-size:.95rem}
+.opt .sub{font-size:.85rem;color:var(--muted)}
+.decision textarea,.question textarea{font:inherit;font-size:.93rem;width:100%;min-height:3.2rem;resize:vertical;border:1px solid var(--line);border-radius:8px;padding:.55rem .7rem;background:var(--bg);color:var(--fg)}
+.decision .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.4rem 1rem;align-items:center}
+.saved{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--muted)}
+.saved.is-set{color:var(--ok)}
+.question{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.6rem}
+.question h4{font-size:1.02rem}
+.question .hint{font-size:.88rem;color:var(--muted);margin:0}
+.question textarea{min-height:4.2rem}
+.exportbox{margin-top:1rem}
+.exportbox pre{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:.8rem;max-height:18rem;overflow:auto}
+footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){.summary .bar i{transition:none}}
+</style>
+
+<div class="shell">
+  <header class="masthead">
+    <div class="brandline">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Scutoria</span>
+      <span>Neustart-Dossier</span>
+      <span>Stand 18. Oktober 2026</span>
+      <span>Für Stefan · intern</span>
+    </div>
+    <h1>Scutoria Neustart</h1>
+    <p class="lede">Was heute ist, warum es nicht verkauft, wie das neue Konstrukt aussieht, und welche Entscheidungen jetzt anstehen. Jede Entscheidung unten wird gespeichert; ich lese sie aus und setze sie um.</p>
+  </header>
+
+  <div class="grid">
+    <nav class="toc" aria-label="Abschnitte">
+      <ol>
+        <li><a href="#s0"><span>00</span>Kurzfassung</a></li>
+        <li><a href="#s1"><span>01</span>Lage heute</a></li>
+        <li><a href="#s2"><span>02</span>Diagnose</a></li>
+        <li><a href="#s3"><span>03</span>Das neue Konstrukt</a></li>
+        <li><a href="#s4"><span>04</span>Abo und Preise</a></li>
+        <li><a href="#s5"><span>05</span>Tools neu</a></li>
+        <li><a href="#s6"><span>06</span>Vertrieb und Vermarktung</a></li>
+        <li><a href="#s7"><span>07</span>Systeme und Konnektoren</a></li>
+        <li><a href="#s8"><span>08</span>Neues Projekt, Betriebsmodell</a></li>
+        <li><a href="#s9"><span>09</span>Fahrplan 90 Tage</a></li>
+        <li><a href="#s10"><span>10</span>Entscheidungen</a></li>
+        <li><a href="#s11"><span>11</span>Fragenkatalog</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <!-- 00 -->
+      <section id="s0">
+        <div class="sechead"><span class="eyebrow">00 · Kurzfassung</span><h2>Fünf Sätze, drei Dinge, die nur du tun kannst</h2></div>
+        <div class="kurz">
+          <div class="box">
+            <ol>
+              <li>Die Website ist technisch fertig und gut gebaut. Seit dem Live-Gang am 9. September hat sie keinen einzigen Kunden gesehen, weil niemand sie gesehen hat.</li>
+              <li>Das Angebot ist zu breit (zehn Titel, siebzehn Tools) und liefert Lesestoff statt Ergebnis. Käufer von Compliance-Produkten wollen das ausgefüllte Dokument, nicht 54 Seiten.</li>
+              <li>Das Fundament war unfertig: Gewerbe, Steuerstatus, Platzhalter im Impressum, verschwundenes Code-Repository. Seit heute ist das Gewerbe angemeldet; offen bleiben Steuernummer, Steuerfrage und Impressum. Das Repository hast du gelöscht, der Neustart kommt ohne GitHub aus.</li>
+              <li>Neu: Scutoria wird die Nachweis-Werkstatt für Betriebe ohne IT-Abteilung. Drei Werkstätten statt zehn Titel, Jahreslizenz statt Einmalkauf, Tools, die ein datiertes Dokument erzeugen statt einer Leseempfehlung.</li>
+              <li>Du entscheidest in Abschnitt 10. Ich baue. Alles andere, Code, Texte, Design, Recherche, Deploys, ist meine Arbeit.</li>
+            </ol>
+          </div>
+          <div class="box accent">
+            <h3>Nur du kannst das</h3>
+            <ul class="only-you" style="list-style:none;padding:0;margin:0">
+              <li><b>1</b><span>Eine Frage an deinen Steuerberater: Verkauf EU-weit an Firmen und Privatpersonen, englisch zuerst. Umsatzsteuer selbst über Stripe und das OSS-Verfahren abwickeln, oder ein Zahlungsabwickler, der die Steuer übernimmt? Daran hängt E19.</span></li>
+              <li><b>2</b><span>Zugänge anlegen, die ich brauche: Kasse (Stripe oder Abwickler), Render, eine Registry für den Deploy-Weg (E18). Ich sage dir jeweils, welche Klicks.</span></li>
+              <li><b>3</b><span>Jedes Produkt vor dem Live-Gang als Herausgeber lesen und freigeben. Das ist dein Tagesbudget: Qualität, keine Kundengespräche.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="box" style="margin-top:1rem;border-color:var(--accent)">
+          <h3>Nachtrag 18. Oktober, nach deinen 16 Entscheidungen und 8 Antworten</h3>
+          <ul>
+            <li><strong>Gewerbe ist angemeldet</strong> (deine Notiz zu E1). Die Sperre „Fundament“ schrumpft auf Steuernummer, Steuerfrage und Impressum. Bauen und Formalitäten laufen parallel (E1 B).</li>
+            <li><strong>Englisch zuerst, EU-weit</strong> (E13 C, F8). Produkte, Website, Tools und Beiträge entstehen englisch, deutsch folgt im selben Lauf. Rechtsgrundlage ist EU-Recht; Landesregeln wie das NISG 2026 werden Ländernotizen. Damit stellt sich die Steuerfrage neu: E19.</li>
+            <li><strong>Ohne Gesicht, ohne Namen</strong> (E8 B, F7). Keine Beiträge mit deinem Namen, kein Foto, Über-Seite ohne Namen (E20). Ausnahme, die das Gesetz verlangt: Im Impressum eines Einzelunternehmens stehen Name und Anschrift (E-Commerce-Gesetz, Mediengesetz). Nur eine Gesellschaft änderte das, und auch dann steht der Geschäftsführer im öffentlichen Firmenbuch. Keine Rechtsberatung, Stand prüfen.</li>
+            <li><strong>Keine Gespräche, kein Kundenkontakt</strong> (F3, F4). Piloten sind Käufer zum Gründerpreis mit zwei schriftlichen Fragen, keine Beratung; E14 gilt so. Partner werden per Mail unter Markennamen angesprochen; ich entwerfe, du gibst frei. Support läuft schriftlich nach demselben Muster.</li>
+            <li><strong>Kein GitHub, alles lokal, Code komplett neu</strong> (E2, E3). Neuer Ordner mit lokaler Git-Historie und automatischer Sicherung. Render braucht trotzdem eine Quelle für den Deploy: E18. Der alte Code bleibt als Archiv liegen, die Texte und Quellen der neun Titel werden Rohmaterial.</li>
+            <li><strong>Gewinn bis Dezember 2026, vier bis sechs Stunden am Tag</strong> (F1, F2). Der Fahrplan in Abschnitt 9 ist auf den 31. Dezember verdichtet. Deine Stunden fließen in Lesen, Prüfen und Entscheiden, nicht in Programmieren oder Gespräche.</li>
+            <li><strong>„Werkstatt“ fällt</strong> (deine Notizen zu E7 und E9). Der Name wird in E17 entschieden; bis dahin steht er als Platzhalter.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 01 -->
+      <section id="s1">
+        <div class="sechead"><span class="eyebrow">01 · Lage am 18. Oktober 2026</span><h2>Ist-Stand, heute aus den Systemen gelesen</h2></div>
+        <p class="prose">Alle Angaben stammen aus den heute angebundenen Systemen oder aus deinen Notizen mit Datum. Was ich nicht prüfen konnte, steht als „nicht prüfbar“, nach deiner eigenen Regel: nichts wird plausibel aufgefüllt.</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Bereich</th><th>Befund</th><th>Quelle</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Website</strong></td><td>scutoria.com läuft, Deutsch und Englisch, Startseite in fünf Stationen, 10 Titel, 8 kostenlose Tools, 9 Premium-Tools, Premium 9 €/Monat, Stripe-Kasse, Zugang per Link, Leseproben, Newsletter-Formular, Seite „Über Scutoria“. Sicherheitskopf (CSP, HSTS) sauber gesetzt.<span class="src">scutoria.com, heute gelesen</span></td><td>Website</td><td><span class="chip ok">läuft</span></td></tr>
+              <tr><td><strong>Verkäufe</strong></td><td>0 Kundenverkäufe, 0 Abos. Stripe live, nur zwei erstattete Testkäufe vom 9. September.<span class="src">Notiz Scutoria.md, Stand 27.09.2026. Stripe heute nicht prüfbar: kein Zugang aus dieser Sitzung.</span></td><td>Notizen</td><td><span class="chip crit">null</span></td></tr>
+              <tr><td><strong>Newsletter</strong></td><td>1 Liste, 1 Kontakt (du), 3 Willkommensmails als Vorlagen angelegt, 0 Kampagnen versendet, Absender kontakt@scutoria.com verifiziert, Free-Plan.<span class="src">Brevo-API, heute</span></td><td>Brevo</td><td><span class="chip crit">null</span></td></tr>
+              <tr><td><strong>Reichweite</strong></td><td>Seitenaufrufe nicht ermittelbar: keine Analytics, keine Search Console, keine Social-Profile hinterlegt.<span class="src">Notizen 27.09. (Nr. 119, 123), Website heute</span></td><td>Notizen</td><td><span class="chip nb">nicht messbar</span></td></tr>
+              <tr><td><strong>Hosting</strong></td><td>Render, Dienst „swk-shop“, Docker, Frankfurt, Starter-Plan, 1-GB-Platte, Auto-Deploy von GitHub. Letzter Deploy 3. Oktober (PR #168, Vermarktungsplan), Status live.<span class="src">Render-API, heute</span></td><td>Render</td><td><span class="chip ok">läuft</span></td></tr>
+              <tr><td><strong>Code</strong></td><td>GitHub-Repository <code>Luxdinary/scutoria</code> antwortet mit 404; das Konto Luxdinary zeigt null Repositories, obwohl der Token Repository-Rechte hat. Ursache nicht ermittelbar (gelöscht oder übertragen). Lokale Kopie reicht bis PR #130 (25. September). Die Änderungen #131 bis #168 (Premium live, Über-Seite, Impressum, Kaufknopf, Vermarktungsplan) existieren nur noch im laufenden Render-Build.<span class="src">GitHub-API, lokale Git-Kopie C:\Users\Stefa\Claude, heute</span></td><td>GitHub</td><td><span class="chip crit">kritisch</span></td></tr>
+              <tr><td><strong>Domain</strong></td><td>scutoria.com bei GoDaddy, Nameserver domaincontrol.com, zeigt auf Render.<span class="src">DNS-Abfrage, heute</span></td><td>GoDaddy</td><td><span class="chip ok">läuft</span></td></tr>
+              <tr><td><strong>Recht und Steuer</strong></td><td>Gewerbe nicht angemeldet („in Abwicklung“, 22.09.). Keine UID. Impressum trägt zwei sichtbare „Stand prüfen“-Sätze und „Stand der rechtlichen Prüfung: 2026-09-09“. Preise „inkl. USt.“ ohne geklärten Steuerstatus. Nebenbeschäftigung nur mündlich gedeckt (22.09.).<span class="src">Notizen 22.09., Impressum heute</span></td><td>Notizen, Website</td><td><span class="chip crit">Sperre</span></td></tr>
+              <tr><td><strong>Produkte</strong></td><td>9 Titel als PDF deutsch und englisch fertig, 3 Kits mit Beilagen (Vorlagen als Zip). Band 2 fehlt im OneDrive-Ordner. Methodik: Quelle und Abrufdatum unter jeder Aussage, „nicht ermittelbar“ statt Schätzung, eigener Abschnitt „Unsicherheiten“.<span class="src">OneDrive/Dokumente/Shopify/Scutoria, heute</span></td><td>OneDrive</td><td><span class="chip ok">vorhanden</span></td></tr>
+              <tr><td><strong>Projektbetrieb</strong></td><td>168 Pull Requests, Prozesspapiere docs/00 bis docs/29, Vault-Notizen, Cowork-Projekt mit veralteter Anweisung, Cloud-Sitzungen, zwei lokale Klone, elf eingestellte Titel. Der Betrieb des Projekts hat mehr Zeit gekostet als das Geschäft.<span class="src">Notizen, lokale Ordner, heute</span></td><td>Notizen</td><td><span class="chip warn">Altlast</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="margin:1.6rem 0 .6rem">Die zehn Titel heute</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Code</th><th>Titel</th><th>Linie</th><th>Seiten DE / EN</th><th>Preis</th></tr></thead>
+            <tbody>
+              <tr><td>A1</td><td>KI im Unternehmen (Band 1)</td><td>Handbuch</td><td class="num">54 / 52</td><td class="num">49 €</td></tr>
+              <tr><td>A2</td><td>KI-Richtlinien für die Belegschaft (Band 2)</td><td>Handbuch</td><td class="num">41 / 39 (laut Notiz)</td><td class="num">39 €</td></tr>
+              <tr><td>A3</td><td>Was Ihr Großkunde von Ihnen verlangen wird (Band 3)</td><td>Handbuch</td><td class="num">51 / 49</td><td class="num">49 €</td></tr>
+              <tr><td>A5</td><td>Sicher ohne IT-Abteilung (Band 4)</td><td>Handbuch</td><td class="num">50 / 48</td><td class="num">39 €</td></tr>
+              <tr><td>B1</td><td>Claude im Betrieb einrichten</td><td>Anwendungshilfe</td><td class="num">37 / 36</td><td class="num">39 €</td></tr>
+              <tr><td>B2</td><td>ChatGPT im Betrieb einrichten</td><td>Anwendungshilfe</td><td class="num">40 / 39</td><td class="num">39 €</td></tr>
+              <tr><td>B5</td><td>Microsoft 365 Copilot im Betrieb einrichten</td><td>Anwendungshilfe</td><td class="num">40 / 39</td><td class="num">49 €</td></tr>
+              <tr><td>C1</td><td>KI-Nachweis-Kit</td><td>Kit</td><td class="num">26 / 26 + Beilagen</td><td class="num">69 €</td></tr>
+              <tr><td>C4</td><td>Lieferanten-Antwortkit</td><td>Kit</td><td class="num">36 / 34 + Beilagen</td><td class="num">69 €</td></tr>
+              <tr><td>C6</td><td>KI-Nachweis-Kit: Kanzlei, Steuerberatung, Ordination</td><td>Kit</td><td class="num">36 / 33 + Beilagen</td><td class="num">79 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section id="s2">
+        <div class="sechead"><span class="eyebrow">02 · Diagnose</span><h2>Warum null Verkäufe, und was trotzdem gut ist</h2></div>
+        <div class="cards two">
+          <div class="box crit">
+            <h3>Fünf Gründe für null</h3>
+            <ol>
+              <li><strong>Keine Reichweite.</strong> Kein Kanal, kein Messwerkzeug, ein Newsletter-Kontakt. Niemand konnte kaufen, weil niemand da war.</li>
+              <li><strong>Zu viel Sortiment vor dem ersten Kunden.</strong> Drei Linien, zehn Titel, siebzehn Tools. Für den Erstkontakt ein Regal, kein Angebot.</li>
+              <li><strong>Lesen statt Erledigen.</strong> Die Titel sind Berichte: dicht, sauber belegt, textlastig. Der Käufer hat aber einen Fragebogen auf dem Tisch oder eine Belegschaft, die ChatGPT nutzt. Er will das fertige Dokument.</li>
+              <li><strong>Werbung zu Recht gesperrt.</strong> Gewerbe, Steuer, Impressum. Solange das offen ist, darf nichts beworben werden; das steht so in deinem Vermarktungsplan.</li>
+              <li><strong>Projekt-Overhead.</strong> Repository, Vault, Cowork, Cloud-Sitzungen, Prüfberichte, Aufgabenlisten. Die Verwaltung hat das Geschäft verdrängt.</li>
+            </ol>
+          </div>
+          <div class="box">
+            <h3>Drei Dinge, die bleiben sollen</h3>
+            <ol>
+              <li><strong>Die Methode.</strong> Quelle und Datum unter jeder Aussage, „nicht ermittelbar“ statt Schätzung, Unsicherheiten gesammelt. Das hat kein Mitbewerber im Preissegment. Es wird zum sichtbaren Markenkern.</li>
+              <li><strong>Die Technik.</strong> Kasse, Zugangslinks, Konto, Premium, Tests, Sicherheitskopf, zwei Sprachen. Das neu zu bauen wäre verschwendetes Geld.</li>
+              <li><strong>Die Gestaltung.</strong> Dunkles, ruhiges Erscheinungsbild, klare Typografie, Cover-System. Das trägt die neue Marke, die Produkt-PDFs müssen nachziehen.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section id="s3">
+        <div class="sechead"><span class="eyebrow">03 · Das neue Konstrukt</span><h2>Scutoria, die Nachweis-Werkstatt</h2></div>
+        <p class="prose"><span class="pill">Arbeitstitel</span> „Werkstatt“ steht hier als Platzhalter für ein Produkt, das ein Ergebnis herstellt. Du hast zu Recht angemerkt, dass viele an die Autowerkstatt denken; auf Englisch wäre „workshop“ zudem ein Seminar. Der Name wird in E17 entschieden, zum Beispiel „Toolkit“: AI Policy Toolkit, Security Evidence Toolkit, AI Setup Toolkit.</p>
+        <div class="box accent" style="margin-bottom:1.2rem">
+          <p class="lead" style="margin:0 0 .4rem"><strong>Für Betriebe ohne IT-Abteilung, die von außen nach Sicherheit und KI gefragt werden: vom Großkunden, vom Versicherer, von der Kammer, von der eigenen Belegschaft.</strong></p>
+          <p style="margin:0">Scutoria liefert in einer Stunde eine belegte, datierte, vorzeigbare Antwort. Nicht Lesestoff, sondern das fertige Dokument, plus das Wissen dahinter mit Quelle.</p>
+          <p style="margin:.6rem 0 0"><span class="pill">Claim-Vorschlag</span> &nbsp;Belegt. Datiert. Vorzeigbar.</p>
+        </div>
+        <div class="prose">
+          <h3 style="margin-bottom:.5rem">Der Auslöser-Moment statt der Zielgruppe</h3>
+          <p>Die alte Zielgruppe war „Betriebe ohne IT-Abteilung“. Das ist richtig, aber niemand kauft, weil er zu einer Zielgruppe gehört. Gekauft wird in einem Moment: Der Fragebogen des Großkunden liegt im Postfach. Die Versicherung fragt nach dem zweiten Faktor. Die Mitarbeiterin fragt, ob sie Kundendaten in ChatGPT kopieren darf. Der neue Copilot soll eingeführt werden, ohne dass etwas abfließt. Jede Werkstatt gehört zu genau einem solchen Moment.</p>
+          <h3 style="margin-bottom:.5rem">Jede Werkstatt besteht aus vier Teilen</h3>
+          <ul>
+            <li><strong>Generator im Browser.</strong> Zwanzig bis dreißig Fragen, am Ende die ausgefüllten Dokumente als DOCX und PDF.</li>
+            <li><strong>Kurzhandbuch.</strong> Zwölf bis zwanzig Seiten, visuell gesetzt: zu jeder Entscheidung das Warum, mit Quelle und Datum. Die bisherigen Titel liefern den Stoff.</li>
+            <li><strong>Nachweisseite.</strong> Eine datierte Seite, die zusammenfasst, was geregelt ist und was offen bleibt. Das ist, was der Geschäftsführer auf den Tisch legt.</li>
+            <li><strong>Aktualisierung.</strong> Zwölf Monate: ändert sich eine Frist, ein Werkzeug oder eine Vorschrift, meldet das Cockpit, welches Dokument betroffen ist.</li>
+          </ul>
+        </div>
+        <div class="cards three" style="margin-top:1rem">
+          <article class="ws">
+            <span class="eyebrow">Werkstatt 1 · Empfehlung für den Start</span>
+            <h3>KI-Regel-Werkstatt</h3>
+            <dl>
+              <dt>Auslöser</dt><dd>„Unsere Leute nutzen ChatGPT. Wir brauchen eine Regel, und wir müssen Schulung nachweisen.“</dd>
+              <dt>Ergebnis in der Hand</dt><dd>Nutzungsrichtlinie, Tool-Register, Schulungsnachweis (Art. 4 KI-Verordnung, KI-Kompetenz), Kennzeichnungs-Check (Art. 50), Inkraftsetzung, Nachweisseite.</dd>
+              <dt>Module</dt><dd>Kanzlei · Steuerberatung · Ordination · Handwerk und Zulieferer.</dd>
+              <dt>Rohmaterial, fertig</dt><dd>C1, C6, A2, Band 1 Teil II und III.</dd>
+            </dl>
+            <div class="price"><span>199 €</span><small>pro Jahr · Hypothese</small></div>
+          </article>
+          <article class="ws">
+            <span class="eyebrow">Werkstatt 2</span>
+            <h3>Sicherheits-Nachweis-Werkstatt</h3>
+            <dl>
+              <dt>Auslöser</dt><dd>„Der Großkunde schickt einen Sicherheitsfragebogen.“ Oder: „Die Versicherung fragt nach zweitem Faktor, Sicherung und Notfall.“</dd>
+              <dt>Ergebnis in der Hand</dt><dd>Selbstauskunft (ehrlich, datiert), Maßnahmenplan mit Terminen, Notfallkarte, Nachweisliste für Kunde und Versicherer.</dd>
+              <dt>Module</dt><dd>Fragebogen Großkunde (NIS2-Lieferkette) · Cyberversicherung · Grundschutz.</dd>
+              <dt>Rohmaterial, fertig</dt><dd>C4, A3, A5, Tools Anmeldung und Sicherung.</dd>
+            </dl>
+            <div class="price"><span>249 €</span><small>pro Jahr · Hypothese</small></div>
+          </article>
+          <article class="ws">
+            <span class="eyebrow">Werkstatt 3</span>
+            <h3>KI-Einrichtungs-Werkstatt</h3>
+            <dl>
+              <dt>Auslöser</dt><dd>„Wir wollen Claude, ChatGPT oder Copilot im Betrieb, ohne dass Kundendaten abfließen.“</dd>
+              <dt>Ergebnis in der Hand</dt><dd>Einrichtungsprotokoll je Werkzeug mit Datum der Oberfläche, Datenfluss-Register, Karte „Was nie hinein darf“, Freigabeformular.</dd>
+              <dt>Module</dt><dd>Claude · ChatGPT · Microsoft 365 Copilot.</dd>
+              <dt>Rohmaterial, fertig</dt><dd>B1, B2, B5.</dd>
+            </dl>
+            <div class="price"><span>149 €</span><small>pro Jahr · Hypothese</small></div>
+          </article>
+        </div>
+        <div class="prose" style="margin-top:1.4rem">
+          <h3 style="margin-bottom:.5rem">Was aus Band 1 wird</h3>
+          <p>„KI im Unternehmen“ ist das beste Stück Wissen im Haus, aber als Hauptprodukt zu 49 € konkurriert es mit kostenlosen Leitfäden von Kammer und Behörden. Vorschlag: Band 1 wird „Scutoria Grundlagen“ zu 29 €, ist in jeder Werkstatt enthalten und bleibt mit Abschnitt 1 frei lesbar. Es baut Vertrauen auf, es verkauft nicht allein.</p>
+          <h3 style="margin-bottom:.5rem">Was das von Mitbewerbern unterscheidet</h3>
+          <p>Bücher zum Thema kosten um 40 € und liefern Text. Compliance-Kits von Beratungen kosten 150 € bis 600 € und liefern Vorlagen ohne Quellen. Die Kammer liefert eine Muster-Richtlinie kostenlos, aber ohne Register, ohne Schulungsnachweis und ohne Aktualisierung. Scutoria steht dazwischen: das fertige Dokument, belegt, datiert, jährlich nachgezogen, zum Preis eines halben Beratertags. Preise der Mitbewerber laut deiner Recherche vom September; vor dem Start erneut prüfen.</p>
+        </div>
+      </section>
+
+      <!-- 04 -->
+      <section id="s4">
+        <div class="sechead"><span class="eyebrow">04 · Abo und Preise</span><h2>Jahreslizenz statt Einmalkauf</h2></div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Modell</th><th>So funktioniert es</th><th>Für dich</th><th>Für den Kunden</th><th>Einschätzung</th></tr></thead>
+            <tbody>
+              <tr><td><strong>A · Jahreslizenz je Werkstatt</strong><br><span class="chip acc" style="margin-top:.3rem">Empfehlung</span></td><td>149 bis 249 € pro Jahr und Werkstatt, Bundle „Alle drei“ 399 € pro Jahr. Generator, Handbuch, Vorlagen, Cockpit und Aktualisierungen enthalten. Verlängerung jährlich.</td><td>Wiederkehrender Umsatz ohne Monats-Kündigungen. Eine Rechnung, ein Preis je Werkstatt.</td><td>Betriebe kaufen Jahreslizenzen gewohnt, mit Rechnung. Kein Monatsabo für Dokumente.</td><td>Einfach, üblich bei Compliance-Software, passt zur Aktualisierungs-Pflicht.</td></tr>
+              <tr><td><strong>B · Ein Abo, alles drin</strong></td><td>29 € pro Monat oder 290 € pro Jahr, alle Werkstätten und das Cockpit.</td><td>Ein Produkt, ein Preis. Hoher Druck, dauernd neuen Wert zu liefern.</td><td>Günstig zum Einstieg, aber „Abo für Dokumente“ wird gekündigt, sobald das Dokument steht.</td><td>Sauber, aber Kündigungsrisiko nach dem ersten Ergebnis.</td></tr>
+              <tr><td><strong>C · Einmalkauf plus Abo</strong><br><span class="pill">heute</span></td><td>Titel einzeln 39 bis 79 €, Premium 9 € pro Monat für Konto und Tools.</td><td>Zwei Kaufentscheidungen, zwei Erklärungen, zwei Systeme.</td><td>Unklar, was Premium zusätzlich bringt, wenn das Buch schon gekauft ist.</td><td>Hat nicht funktioniert; die Trennung Buch gegen Konto ist für den Kunden nicht einleuchtend.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose" style="margin-top:1.2rem">
+          <h3 style="margin-bottom:.5rem">Das Cockpit ist in jeder Lizenz enthalten</h3>
+          <p>Nachweisordner (alle erzeugten Dokumente, versioniert), Jahreskalender mit Fristen, Aktualisierungs-Alarm, Export. Kein eigenes Abo mehr, kein „Premium“. Was heute Premium ist, wird Teil des Produkts.</p>
+          <h3 style="margin-bottom:.5rem">Preise sind Hypothesen</h3>
+          <p>Kein Preis wird festgelegt, bevor zehn Gespräche geführt sind. Die Pilotkunden zahlen einen Gründerpreis und sagen, was ihnen das Ergebnis wert ist. Danach wird entschieden, nicht vorher.</p>
+        </div>
+      </section>
+
+      <!-- 05 -->
+      <section id="s5">
+        <div class="sechead"><span class="eyebrow">05 · Tools neu</span><h2>Vom Check zum Memo</h2></div>
+        <div class="prose">
+          <p>Die acht Checks sind gut gemacht und enden mit einer Einordnung plus Leseempfehlung. Das ist der falsche Schluss: Wer drei Minuten investiert, will etwas mitnehmen. Jeder bleibende Check endet künftig mit einem <strong>Memo als PDF</strong>: eine Seite, datiert, mit Fundstellen, auf den Betrieb bezogen. Das Memo kommt per E-Mail. So wächst die Liste, und das Memo verweist auf die passende Werkstatt.</p>
+        </div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Tool heute</th><th>Künftig</th><th>Ergebnis</th></tr></thead>
+            <tbody>
+              <tr><td>Fällt mein Betrieb unter NIS2?</td><td>bleibt, wird Memo-Generator</td><td>NIS2-Betroffenheits-Memo mit Fundstellen, datiert</td></tr>
+              <tr><td>Muss ich das kennzeichnen?</td><td>bleibt, wird Memo-Generator</td><td>Kennzeichnungs-Memo nach Art. 50 KI-Verordnung</td></tr>
+              <tr><td>Wie sicher ist unsere Anmeldung?</td><td>bleibt, wird Memo-Generator</td><td>Anmelde-Memo mit drei Schritten, Grundlage für Werkstatt 2</td></tr>
+              <tr><td>Was passt zu meinem Betrieb?</td><td>bleibt, wird Memo-Generator</td><td>Start-Memo: Lage, erster Schritt, passende Werkstatt</td></tr>
+              <tr><td>Darf das hinein? (Ampel)</td><td>bleibt frei, ohne E-Mail</td><td>Teilbares Mini-Tool für Belegschaften, Einstieg in Werkstatt 1</td></tr>
+              <tr><td>Steht da etwas Persönliches drin?</td><td>bleibt frei, ohne E-Mail</td><td>Teilbares Mini-Tool, läuft im Browser, sendet nichts</td></tr>
+              <tr><td>Wo steht mein Betrieb bei KI?</td><td>geht in Werkstatt 1 auf</td><td>Wird die Eingangsfrage des Generators</td></tr>
+              <tr><td>Was wäre morgen weg?</td><td>geht in Werkstatt 2 auf</td><td>Wird Teil der Selbstauskunft</td></tr>
+              <tr><td>9 Premium-Tools (Notfallkontakte, Zuständigkeiten, Tool-Register, Lieferanten-Selbstauskunft, Anbieterfragen, Prompt-Ersteller, Maßnahmenplan, Nachweisordner, Jahreskalender)</td><td>werden Bausteine der Werkstätten und des Cockpits</td><td>Nichts geht verloren, nichts steht mehr allein im Regal</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 06 -->
+      <section id="s6">
+        <div class="sechead"><span class="eyebrow">06 · Vertrieb und Vermarktung</span><h2>Erst Fundament, dann zehn Gespräche, dann Reichweite</h2></div>
+        <div class="cards two">
+          <div class="box">
+            <h3>Sperren vor dem ersten Beitrag</h3>
+            <p style="font-size:.92rem;color:var(--muted)">Aus deinem Vermarktungsplan vom 3. Oktober (docs/29), ergänzt um den heutigen Befund.</p>
+            <ol>
+              <li>Gewerbe angemeldet (erledigt, 18.10.). Offen: Steuernummer, Steuerfrage für EU-weiten Verkauf (E19), Preis-Text korrekt.</li>
+              <li>Impressum ohne „Stand prüfen“, Rechtstexte als geprüft markiert.</li>
+              <li>Stripe-Kundenportal aktiv (Rechnungen, Kündigung, Zahlungsmittel).</li>
+              <li>Messung ohne Cookies live, Search Console eingerichtet.</li>
+              <li>Willkommensstrecke in Brevo geprüft und aktiv.</li>
+              <li>Social-Profile angelegt, Impressum darauf verlinkt.</li>
+              <li>Code gesichert (Repository wiederhergestellt oder neu).</li>
+            </ol>
+          </div>
+          <div class="box">
+            <h3>Zehn Pilotkäufer statt zehn Gespräche</h3>
+            <p>Du willst keinen Kundenkontakt, und du kennst keine möglichen Kunden. Die Validierung läuft deshalb schriftlich und über die Kasse: Die ersten zehn Käufer des ersten Toolkits zahlen den Gründerpreis von 99 € und bekommen nach vier Wochen zwei Fragen per Mail: Was hat das Ergebnis gebracht? Was hat gefehlt?</p>
+            <p>Dazu misst der Anzeigen-Test, was ein Memo-Kontakt kostet, und die Warteliste auf der neuen Startseite zeigt vor dem Live-Gang, ob das Versprechen zieht.</p>
+            <p style="margin:0">Ich entwerfe Mails, Fragebogen und Auswertung. Du gibst frei. Kein Gespräch, keine Beratung.</p>
+          </div>
+        </div>
+        <h3 style="margin:1.6rem 0 .6rem">Kanäle, ehrlich bewertet</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Kanal</th><th>Was dort passiert</th><th>Kosten</th><th>Deine Zeit</th><th>Erwartung</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Partner: Steuerberater, Buchhalter, IT-Dienstleister</strong></td><td>Sie haben die Kunden und hören die Frage „Dürfen wir ChatGPT nutzen?“ wöchentlich. Ansprache per Mail unter Markennamen, Provision oder Mengenpreis, Partnerseite mit Preisblatt. Zuerst Österreich und Deutschland, dann englischsprachig EU-weit.</td><td>Provision</td><td>Freigabe</td><td>Stärkster Kanal für eine Marke ohne Gesicht. Zehn Partner bringen mehr als tausend Anzeigenklicks.</td></tr>
+              <tr><td><strong>LinkedIn, Markenseite</strong></td><td>Zwei Beiträge pro Woche auf Englisch, ohne Person: ein Befund, eine Fundstelle, eine Grafik, ein Link auf ein Memo-Tool. Ich schreibe vor, du gibst frei.</td><td>0 €</td><td>Freigabe</td><td>Ohne Gesicht schwächer, aber tragfähig, wenn jeder Beitrag etwas Nützliches verlinkt.</td></tr>
+              <tr><td><strong>Suche (SEO)</strong></td><td>Die Memo-Tools sind die Landeseiten: „NIS2 betroffen“, „KI-Richtlinie Muster“, „Lieferantenfragebogen Sicherheit“. Jedes Memo eine Seite mit Fundstellen.</td><td>0 €</td><td>keine</td><td>Langsam, aber dauerhaft. Erste Treffer nach zwei bis vier Monaten.</td></tr>
+              <tr><td><strong>Newsletter „Stand prüfen“</strong></td><td>Alle zwei Wochen: was sich geändert hat, was das für einen Betrieb ohne IT bedeutet. Aus den Aktualisierungen des Cockpits, also ohne Mehrarbeit.</td><td>0 €</td><td>Freigabe</td><td>Hält Kontakte warm, verkauft Verlängerungen.</td></tr>
+              <tr><td><strong>Anzeigen-Test</strong></td><td>Drei Suchbegriffe, vier Wochen, auf die Memo-Tools.</td><td>300 €</td><td>keine</td><td>Nur Messung: Kostet ein Memo-Kontakt 2 € oder 20 €? Danach entscheiden.</td></tr>
+              <tr><td><strong>Marktplätze (Digistore, Gumroad)</strong></td><td>Fremde Kasse, fremde Kunden, eigene Marke verschwindet.</td><td>Gebühr</td><td>gering</td><td>Nicht empfohlen; am 6. September bereits verworfen.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose" style="margin-top:1.2rem">
+          <h3 style="margin-bottom:.5rem">Möglichkeiten, die im Konstrukt angelegt sind</h3>
+          <ul>
+            <li><strong>Branchenmodule statt neuer Titel:</strong> Kanzlei, Steuerberatung, Ordination, Handwerk, Zulieferer als Zusatzmodule einer Werkstatt, nicht als eigene Bücher.</li>
+            <li><strong>KI-Kompetenz-Nachweis:</strong> Kurzschulung mit Test im Cockpit, Nachweis per Klick. Art. 4 der KI-Verordnung verlangt KI-Kompetenz seit Februar 2025; der Nachweis ist das, was gefragt wird.</li>
+            <li><strong>Versicherungsmakler:</strong> der Sicherheitsnachweis aus Werkstatt 2 als Beilage zum Antrag auf Cyberversicherung.</li>
+            <li><strong>IT-Dienstleister als Wiederverkäufer:</strong> Nachweisordner unter ihrem Namen für ihre Kunden.</li>
+            <li><strong>Englisch später:</strong> EU-Recht ist identisch; die Werkstätten laufen zweisprachig, sobald die deutsche Fassung verkauft.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 07 -->
+      <section id="s7">
+        <div class="sechead"><span class="eyebrow">07 · Systeme und Konnektoren</span><h2>Was angebunden ist, was fehlt, was weg kann</h2></div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>System</th><th>Heute</th><th>Empfehlung</th><th>Zugriff für mich</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Render</strong></td><td>Dienst läuft, Starter-Plan, Frankfurt, Auto-Deploy von einem Repository, das gelöscht ist.</td><td>Behalten. Neuer Dienst für den Neustart mit Deploy-Weg nach E18, Vorschau-Dienst für Freigaben; der alte Dienst bleibt, bis der neue live ist.</td><td><span class="chip ok">angebunden</span></td></tr>
+              <tr><td><strong>Stripe</strong></td><td>Live. Kundenportal fehlt, Jahrespreis fehlt, UID-Abfrage am 2. Oktober entfernt.</td><td>E4 sagt behalten. Mit E13 (EU-weit, englisch zuerst) sitzt der Großteil der Kunden außerhalb Österreichs; die Steuerfrage stellt sich damit sofort, nicht später. Siehe E19.</td><td><span class="chip nb">nicht angebunden</span></td></tr>
+              <tr><td><strong>Brevo</strong></td><td>Free-Plan, 1 Kontakt, 3 Willkommensmails, 0 Kampagnen. Ob die Willkommensstrecke als Automation läuft, ist per API nicht sichtbar.</td><td>Behalten. Neue Liste „Memo-Kontakte“, Willkommensstrecke prüfen, Newsletter-Vorlage im neuen Design.</td><td><span class="chip ok">angebunden</span></td></tr>
+              <tr><td><strong>GoDaddy</strong></td><td>Domain und DNS.</td><td>Behalten. Konnektor hier kann nur Domains suchen, nicht DNS ändern; DNS-Änderungen machst du oder wir ziehen DNS zu Cloudflare (kostenlos, mit Analytics).</td><td><span class="chip nb">nur Domainsuche</span></td></tr>
+              <tr><td><strong>GitHub</strong></td><td>Repository von dir gelöscht (18.10.). Lokale Kopie bis 25. September bleibt als Archiv.</td><td>Kein GitHub mehr (E2). Neues Projekt lokal mit Git-Historie; Deploy-Weg nach E18.</td><td><span class="chip nb">nicht mehr genutzt</span></td></tr>
+              <tr><td><strong>Messung</strong></td><td>Keine.</td><td>Cookie-freie Analytics (Cloudflare Web Analytics oder Umami) plus Google Search Console. Ohne Messung ist jede Vermarktung Blindflug.</td><td><span class="chip crit">fehlt</span></td></tr>
+              <tr><td><strong>Claude-Projekt „Scutoria“, Vault, Cowork</strong></td><td>Anweisung vom 5. September, inhaltlich überholt; Vault-Notiz Archiv.</td><td>Stilllegen. Der neue Projektordner und diese Seite sind der einzige Ort.</td><td><span class="chip warn">Altlast</span></td></tr>
+              <tr><td><strong>Shopify, Notion, Dropbox, Zapier, Lovable</strong></td><td>Konnektoren verbunden, für Scutoria ungenutzt.</td><td>Nicht verwenden. Canva oder Adobe Express können für Produktgrafiken helfen.</td><td><span class="chip nb">ungenutzt</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 08 -->
+      <section id="s8">
+        <div class="sechead"><span class="eyebrow">08 · Neues Projekt und Betriebsmodell</span><h2>Du entscheidest, ich baue</h2></div>
+        <div class="cards two">
+          <div class="box">
+            <h3>Das neue Projekt</h3>
+            <ul>
+              <li><strong>Ein Ordner, lokales Git, kein GitHub.</strong> Neuer Projektordner auf dem Laptop mit Git-Historie und automatischer Sicherung nach OneDrive. Kein Vault-Spiegel, kein Cowork-Projekt, keine parallelen Cloud-Sitzungen.</li>
+              <li><strong>Drei Dokumente, nicht dreißig.</strong> ENTSCHEIDUNGEN (diese Seite, exportiert), STAND (eine Seite, was live ist), AUFGABEN (was als Nächstes kommt). Keine Prüfberichte, keine Nachtragslisten.</li>
+              <li><strong>Übernommen wird als Rohmaterial, nicht als Produkt:</strong> Texte und Quellen der neun Titel in beiden Sprachen, Logo, Farben, Domain. Der Code wird komplett neu geschrieben (E3).</li>
+              <li><strong>Zurück bleibt:</strong> docs/00 bis docs/29, Archivzweige, elf eingestellte Titel, das Regal mit zehn Titeln, Premium als eigenes Abo, die Fünf-Stationen-Startseite.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Der Takt</h3>
+            <ul>
+              <li><strong>Ein Entscheidungstermin pro Woche, dreißig Minuten.</strong> Ich lege höchstens fünf Entscheidungen mit Empfehlung vor. Du klickst. Dazu Freigaben, sobald etwas fertig ist; du antwortest, wann es dir passt. Alles andere läuft ohne dich.</li>
+              <li><strong>Drei Tore, bei denen ich immer frage:</strong> Geld (Preise, Abos, Ausgaben), Recht (Texte, die live gehen), Veröffentlichen (Beiträge, Mails an Kunden, Deploys mit sichtbarer Änderung).</li>
+              <li><strong>Staging vor Live.</strong> Jede Änderung ist auf einer Vorschau-Adresse zu sehen, bevor sie live geht. Du schaust, ich schalte.</li>
+              <li><strong>Dein Teil:</strong> Steuerfrage, Konto-Aktionen bei Kasse, Render und Registry, Freigaben, Lesen als Herausgeber. Keine Gespräche, keine Beiträge mit Namen.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 -->
+      <section id="s9">
+        <div class="sechead"><span class="eyebrow">09 · Fahrplan</span><h2>Bis 31. Dezember in vier Phasen</h2></div>
+        <p class="prose">Verdichtet am 18. Oktober auf dein Ziel: Gewinn bis Dezember 2026. Deine Stunden fließen in Lesen, Prüfen und Entscheiden. Alles mit Kundenkontakt entfällt.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="eyebrow">Phase 0 · bis 25. Oktober</div>
+            <h3>Fundament</h3>
+            <div class="who">Du</div>
+            <ul><li>E17 bis E20 entscheiden</li><li>Steuerfrage mit dem Steuerberater</li><li>Zugänge: Kasse, Render, Registry</li></ul>
+            <div class="who">Ich</div>
+            <ul><li>Projektordner, Git, Sicherung</li><li>Designsystem, Cover- und Seitensystem</li><li>Impressum, AGB, Widerruf englisch und deutsch</li><li>Über-Seite ohne Namen, Messung, Search Console</li></ul>
+          </div>
+          <div class="step">
+            <div class="eyebrow">Phase 1 · bis 15. November</div>
+            <h3>Toolkit 1 und neue Website</h3>
+            <div class="who">Du</div>
+            <ul><li>Handbuch, Vorlagen, Nachweisseite lesen und freigeben</li><li>Website-Texte freigeben</li></ul>
+            <div class="who">Ich</div>
+            <ul><li>Generator, Handbuch, Vorlagen, Nachweisseite, englisch und deutsch</li><li>Neue Startseite: ein Angebot, ein Versprechen, Warteliste</li><li>Kasse, Zugang, Konto, Deploy</li></ul>
+          </div>
+          <div class="step">
+            <div class="eyebrow">Phase 2 · bis 30. November</div>
+            <h3>Live und Reichweite</h3>
+            <div class="who">Du</div>
+            <ul><li>Live-Freigabe</li><li>Anzeigen-Budget freigeben</li><li>Partner-Mails und Beiträge freigeben</li></ul>
+            <div class="who">Ich</div>
+            <ul><li>Memo-Tools englisch, deutsch folgt</li><li>Anzeigen-Test, LinkedIn-Markenseite, Newsletter Nr. 1</li><li>Zehn Partner-Mails, Pilot-Fragebogen</li></ul>
+          </div>
+          <div class="step">
+            <div class="eyebrow">Phase 3 · bis 31. Dezember</div>
+            <h3>Toolkit 2 und Lizenz</h3>
+            <div class="who">Du</div>
+            <ul><li>Preise bestätigen</li><li>Auswertung lesen, Kurs setzen</li></ul>
+            <div class="who">Ich</div>
+            <ul><li>Security Evidence Toolkit</li><li>Jahreslizenz und Bundle in der Kasse</li><li>Cockpit mit Aktualisierungs-Alarm</li><li>Auswertung Anzeigen und Piloten</li></ul>
+          </div>
+        </div>
+        <div class="cards two" style="margin-top:1rem">
+          <div class="box">
+            <h3>Ziele am 31. Dezember</h3>
+            <p style="font-size:.92rem;color:var(--muted)">Ziele, die ich vorschlage. Keine Prognose, kein Marktmodell; die Nachfrage ist belegt, die Käuferzahl nicht. Gewinn heißt bei diesem Budget: mehr Jahreslizenzen, als Render, Domain, Anzeigen und Gebühren kosten.</p>
+            <div class="tablewrap" style="border:none"><table>
+              <tbody>
+                <tr><td>Pilotkäufer zum Gründerpreis</td><td class="num">10</td></tr>
+                <tr><td>Umsatz im Dezember über laufenden Kosten</td><td class="num">ja</td></tr>
+                <tr><td>Newsletter-Kontakte</td><td class="num">100</td></tr>
+                <tr><td>Partner mit Zusage</td><td class="num">3</td></tr>
+                <tr><td>Messung läuft seit</td><td class="num">Woche 1</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+          <div class="box">
+            <h3>Kurskorrektur statt Abbruch</h3>
+            <p>Scheitern ist für dich keine Option (F5). Dann gilt die Regel so: Bleiben nach dem Anzeigen-Test und vier Wochen Live-Betrieb die Pilotkäufe aus, ändern wir Versprechen, Startseite und Preis, nicht das Ziel. Kein Toolkit 2, bevor Toolkit 1 Käufer hat.</p>
+            <p style="margin:0">Das ist die Regel, die beim ersten Anlauf gefehlt hat.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 -->
+      <section id="s10">
+        <div class="sechead"><span class="eyebrow">10 · Entscheidungen</span><h2>Jetzt entscheiden</h2></div>
+        <div class="summary" id="summary">
+          <span class="count"><span id="sum-count">0 von 20</span> entschieden</span>
+          <span class="bar"><i id="sum-bar"></i></span>
+          <span class="store" id="store-note">Speicher wird verbunden …</span>
+          <button class="btn" id="btn-export" type="button">Zusammenfassung kopieren</button>
+        </div>
+        <p class="prose">Klick auf eine Option speichert sie. Die Empfehlung ist markiert und begründet; du kannst anders entscheiden. Eine Notiz je Entscheidung ist möglich. Block A braucht es, bevor ich mit dem Bauen beginne; Block B kann in den ersten zwei Wochen folgen. Block C kam am 18. Oktober nach deinen Antworten dazu und folgt aus ihnen.</p>
+
+        <div class="block">
+          <h3>Block A · Vor dem ersten Handgriff</h3>
+
+          <article class="decision" data-key="E1" data-title="Fundament vor Werbung">
+            <div class="head"><h4>Fundament vor Werbung?</h4><span class="key">E1</span></div>
+            <p class="why">Gewerbe, Steuerstatus und Impressum sind offen. Dein Vermarktungsplan sperrt bis dahin jeden Beitrag. Ohne diese Reihenfolge wiederholt sich der erste Anlauf.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Ja, Fundament zuerst"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Ja, Fundament zuerst</span><span class="sub">Gewerbe, Steuer, Impressum in Woche 1 bis 2, parallel baue ich im Stillen.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Parallel"><span class="letter">B</span><span class="label">Parallel</span><span class="sub">Fundament und Werkstatt 1 gleichzeitig; Werbung erst, wenn beides steht.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Später"><span class="letter">C</span><span class="label">Später</span><span class="sub">Erst Produkt und Gespräche, Formalitäten vor dem ersten Verkauf.</span></button>
+            </div>
+            <textarea id="note-E1" placeholder="Notiz (optional)" aria-label="Notiz zu E1"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E2" data-title="Code sichern">
+            <div class="head"><h4>Wie sichern wir den Code?</h4><span class="key">E2</span></div>
+            <p class="why">Das Repository ist auf GitHub nicht mehr erreichbar. Lokal liegt der Stand bis 25. September; die letzten 38 Pull Requests laufen nur noch bei Render. Ein gelöschtes Repository kann der Eigentümer 90 Tage lang selbst wiederherstellen.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Wiederherstellen und archivieren"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Wiederherstellen und archivieren</span><span class="sub">Du stellst es her (GitHub: Settings, Repositories, Deleted repositories). Ich sichere es als Archiv und ziehe Rohmaterial ins neue Projekt.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Nur lokale Kopie sichern"><span class="letter">B</span><span class="label">Nur lokale Kopie sichern</span><span class="sub">Stand bis #130 reicht; die Änderungen danach baue ich im neuen Projekt neu.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Ich weiß, wo es ist"><span class="letter">C</span><span class="label">Ich weiß, wo es ist</span><span class="sub">Das Repository wurde übertragen oder umbenannt; Adresse in die Notiz.</span></button>
+            </div>
+            <textarea id="note-E2" placeholder="Notiz (optional)" aria-label="Notiz zu E2"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E3" data-title="Neues Projekt">
+            <div class="head"><h4>Neues Projekt: was kommt mit?</h4><span class="key">E3</span></div>
+            <p class="why">Du willst keine Altlasten. Der Shop-Kern (Kasse, Zugang, Konto) funktioniert aber und ist getestet; ihn neu zu bauen kostet Wochen ohne Nutzen für den Kunden.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Neu, Shop-Kern portieren"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Neues Repository, Shop-Kern portieren</span><span class="sub">Kasse, Zugang, Konto übernehmen; Texte und Quellen als Rohmaterial; alles Prozesspapier bleibt im Archiv.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Komplett neu"><span class="letter">B</span><span class="label">Komplett neu</span><span class="sub">Nichts übernehmen, auch nicht den Shop-Kern. Längste Variante.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Im alten Projekt weiter"><span class="letter">C</span><span class="label">Im alten Projekt weiter</span><span class="sub">Nur aufräumen, Struktur behalten.</span></button>
+            </div>
+            <textarea id="note-E3" placeholder="Notiz (optional)" aria-label="Notiz zu E3"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E4" data-title="Plattform">
+            <div class="head"><h4>Plattform für Shop und Kasse</h4><span class="key">E4</span></div>
+            <p class="why">Der eigene Shop auf Render mit Stripe läuft. Ein Zahlungsabwickler mit Steuerübernahme würde EU-Umsatzsteuer, Rechnungen und Kundenportal abnehmen, kostet aber einen Umbau und eine höhere Gebühr. Mit null Umsatz ist der Umbau nicht zu rechtfertigen.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Render + Stripe behalten"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Render und Stripe behalten</span><span class="sub">Kundenportal, Jahreslizenz, Messung nachrüsten. Steuerübernahme später prüfen.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Zahlungsabwickler mit Steuerübernahme"><span class="letter">B</span><span class="label">Zahlungsabwickler mit Steuerübernahme</span><span class="sub">Paddle oder Lemon Squeezy übernehmen Kasse, USt., Rechnung, Portal. Umbau zwei bis drei Wochen.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Shopify"><span class="letter">C</span><span class="label">Shopify</span><span class="sub">Monatsgebühr, Apps für digitale Lieferung, vier gescheiterte Anläufe laut deiner Notiz.</span></button>
+            </div>
+            <textarea id="note-E4" placeholder="Notiz (optional)" aria-label="Notiz zu E4"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E5" data-title="Sortiment">
+            <div class="head"><h4>Sortiment</h4><span class="key">E5</span></div>
+            <p class="why">Zehn Titel ohne Kunden sind ein Regal. Drei Werkstätten sind ein Angebot, das sich in einem Satz erklären lässt. Die Titel bleiben als Rohmaterial erhalten.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Drei Werkstätten"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Drei Werkstätten</span><span class="sub">KI-Regeln, Sicherheits-Nachweis, KI-Einrichtung. Die zehn Titel gehen darin auf.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Zwei Werkstätten"><span class="letter">B</span><span class="label">Zwei Werkstätten</span><span class="sub">KI-Regeln und Sicherheits-Nachweis; Einrichtung als Modul von Werkstatt 1.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Zehn Titel behalten plus Werkstätten"><span class="letter">C</span><span class="label">Zehn Titel behalten, Werkstätten dazu</span><span class="sub">Breitestes Angebot, schwerste Erklärung.</span></button>
+            </div>
+            <textarea id="note-E5" placeholder="Notiz (optional)" aria-label="Notiz zu E5"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E6" data-title="Erste Werkstatt">
+            <div class="head"><h4>Welche Werkstatt zuerst?</h4><span class="key">E6</span></div>
+            <p class="why">Die KI-Regel-Werkstatt hat das reifste Rohmaterial (zwei Kits, zwei Bände), einen gesetzlichen Druck (KI-Kompetenz seit Februar 2025, Kennzeichnung seit August 2026) und eine klare Nische über die Branchenmodule.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="KI-Regel-Werkstatt"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">KI-Regel-Werkstatt</span><span class="sub">Richtlinie, Register, Schulungsnachweis, Kennzeichnung.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Sicherheits-Nachweis-Werkstatt"><span class="letter">B</span><span class="label">Sicherheits-Nachweis-Werkstatt</span><span class="sub">Fragebogen des Großkunden, Versicherer. Höchster Preis, stärkster Termindruck beim Kunden.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="KI-Einrichtungs-Werkstatt"><span class="letter">C</span><span class="label">KI-Einrichtungs-Werkstatt</span><span class="sub">Claude, ChatGPT, Copilot. Veraltet am schnellsten, braucht laufende Pflege.</span></button>
+            </div>
+            <textarea id="note-E6" placeholder="Notiz (optional)" aria-label="Notiz zu E6"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E7" data-title="Preismodell">
+            <div class="head"><h4>Preismodell</h4><span class="key">E7</span></div>
+            <p class="why">Siehe Abschnitt 4. Die Jahreslizenz passt zur Aktualisierungspflicht und zur Kaufgewohnheit von Betrieben.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Jahreslizenz je Werkstatt plus Bundle"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Jahreslizenz je Werkstatt, plus Bundle</span><span class="sub">Cockpit und Aktualisierungen enthalten; Premium als eigenes Abo entfällt.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Ein Abo, alles drin"><span class="letter">B</span><span class="label">Ein Abo, alles drin</span><span class="sub">Monatlich oder jährlich, alle Werkstätten.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Einmalkauf plus Abo wie heute"><span class="letter">C</span><span class="label">Einmalkauf plus Abo, wie heute</span><span class="sub">Titel einzeln, Premium daneben.</span></button>
+            </div>
+            <textarea id="note-E7" placeholder="Notiz (optional)" aria-label="Notiz zu E7"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E8" data-title="Marke mit Gesicht">
+            <div class="head"><h4>Marke mit Gesicht?</h4><span class="key">E8</span></div>
+            <p class="why">Am 6. September hast du „Marke im Vordergrund“ beschlossen. Für ein Ein-Personen-Unternehmen im B2B-Vertrauensgeschäft ist eine Marke ohne Gesicht schwer zu verkaufen. Die Über-Seite nennt dich bereits mit Namen. Zu prüfen: ob deine Nebenbeschäftigung öffentliche Sichtbarkeit zulässt (Fragenkatalog F7).</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Marke mit Gesicht"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Marke mit Gesicht</span><span class="sub">Scutoria vorn, du als Autor sichtbar: Name, Foto, LinkedIn-Beiträge unter deinem Namen.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Nur Marke"><span class="letter">B</span><span class="label">Nur Marke</span><span class="sub">Kein Foto, keine Beiträge mit Namen. Vertrieb dann vor allem über Partner und Suche.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Gesicht ohne Social"><span class="letter">C</span><span class="label">Gesicht ohne Social</span><span class="sub">Name und Foto auf der Website, keine Beiträge in sozialen Netzen.</span></button>
+            </div>
+            <textarea id="note-E8" placeholder="Notiz (optional)" aria-label="Notiz zu E8"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+        </div>
+
+        <div class="block">
+          <h3>Block B · In den ersten zwei Wochen</h3>
+
+          <article class="decision" data-key="E9" data-title="Rolle von Band 1">
+            <div class="head"><h4>Rolle von Band 1</h4><span class="key">E9</span></div>
+            <p class="why">Band 1 ist das Vertrauensstück, nicht das Verkaufsstück.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="29 € Grundlagen, in jeder Werkstatt enthalten"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">29 € „Grundlagen“, in jeder Werkstatt enthalten</span><span class="sub">Abschnitt 1 bleibt frei.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Kostenlos gegen E-Mail"><span class="letter">B</span><span class="label">Kostenlos gegen E-Mail</span><span class="sub">Stärkster Listenaufbau, Wert des Inhalts sinkt in der Wahrnehmung.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="49 € behalten"><span class="letter">C</span><span class="label">49 € behalten</span><span class="sub">Wie heute.</span></button>
+            </div>
+            <textarea id="note-E9" placeholder="Notiz (optional)" aria-label="Notiz zu E9"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E10" data-title="Preisniveau">
+            <div class="head"><h4>Preisniveau (Hypothese bis zu den Gesprächen)</h4><span class="key">E10</span></div>
+            <p class="why">Reihenfolge: Einrichtung, KI-Regeln, Sicherheits-Nachweis. Alles pro Jahr. Wird nach zehn Gesprächen bestätigt oder geändert.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="149 / 199 / 249 €"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">149 / 199 / 249 €</span><span class="sub">Bundle 399 €.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="99 / 149 / 199 €"><span class="letter">B</span><span class="label">99 / 149 / 199 €</span><span class="sub">Bundle 299 €.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="249 / 349 / 449 €"><span class="letter">C</span><span class="label">249 / 349 / 449 €</span><span class="sub">Bundle 699 €.</span></button>
+            </div>
+            <textarea id="note-E10" placeholder="Notiz (optional)" aria-label="Notiz zu E10"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E11" data-title="Tools">
+            <div class="head"><h4>Tools</h4><span class="key">E11</span></div>
+            <p class="why">Siehe Abschnitt 5.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Vier Memo-Generatoren, zwei freie Mini-Tools, Rest in Werkstätten"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Vier Memo-Generatoren, zwei freie Mini-Tools</span><span class="sub">Der Rest geht in Werkstätten und Cockpit auf.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Alle acht behalten, Memo ergänzen"><span class="letter">B</span><span class="label">Alle acht behalten, Memo ergänzen</span><span class="sub">Mehr Pflege, mehr Landeseiten.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Tools einfrieren"><span class="letter">C</span><span class="label">Tools vorerst einfrieren</span><span class="sub">Erst Werkstatt 1, Tools danach.</span></button>
+            </div>
+            <textarea id="note-E11" placeholder="Notiz (optional)" aria-label="Notiz zu E11"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E12" data-title="Markierungen">
+            <div class="head"><h4>Fakt, Auslegung, Unsicher, Lücke: sichtbar machen?</h4><span class="key">E12</span></div>
+            <p class="why">Die vier Markierungen waren das Produktmerkmal des Entwurfs und wurden in den Endfassungen aufgelöst. Als sichtbare Marker in Handbuch und Nachweisseite wären sie das, was kein Mitbewerber hat.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Sichtbar als Marker"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Sichtbar als Marker</span><span class="sub">Vier Symbole, eine Legende, auf jeder Seite.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Nur Quellenzeilen wie heute"><span class="letter">B</span><span class="label">Nur Quellenzeilen, wie heute</span><span class="sub">Unsicherheiten gesammelt am Ende.</span></button>
+            </div>
+            <textarea id="note-E12" placeholder="Notiz (optional)" aria-label="Notiz zu E12"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E13" data-title="Markt und Sprache">
+            <div class="head"><h4>Markt und Sprache zum Start</h4><span class="key">E13</span></div>
+            <p class="why">Zwei Sprachen verdoppeln jede Änderung. Die Gespräche und Partner sitzen in Österreich und Deutschland.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Deutsch zuerst, Englisch nach Werkstatt 2"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Deutsch zuerst</span><span class="sub">Österreich und Deutschland; Englisch nach Werkstatt 2.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Deutsch und Englisch gleichzeitig"><span class="letter">B</span><span class="label">Deutsch und Englisch gleichzeitig</span><span class="sub">Wie heute.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="EU-weit ab Start"><span class="letter">C</span><span class="label">EU-weit ab Start</span><span class="sub">Englisch vorn, Steuerübernahme nötig (E4 B).</span></button>
+            </div>
+            <textarea id="note-E13" placeholder="Notiz (optional)" aria-label="Notiz zu E13"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E14" data-title="Pilotkunden">
+            <div class="head"><h4>Pilotkunden</h4><span class="key">E14</span></div>
+            <p class="why">Zehn Piloten mit Gespräch sind die Preis- und Produktvalidierung. Ein kleiner Preis trennt Interesse von Höflichkeit.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Zehn Piloten zu 99 € mit Gespräch"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Zehn Piloten zu 99 €, mit Gespräch</span><span class="sub">Zweites Gespräch nach vier Wochen ist Teil des Preises.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Zehn Piloten kostenlos gegen Feedback"><span class="letter">B</span><span class="label">Kostenlos gegen Feedback</span><span class="sub">Mehr Zusagen, weniger Aussagekraft.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Kein Pilot, regulärer Preis"><span class="letter">C</span><span class="label">Kein Pilot, regulärer Preis</span><span class="sub">Keine Validierung vor dem Start.</span></button>
+            </div>
+            <textarea id="note-E14" placeholder="Notiz (optional)" aria-label="Notiz zu E14"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E15" data-title="Budget">
+            <div class="head"><h4>Einsatz des Startbudgets (1.000 €)</h4><span class="key">E15</span></div>
+            <p class="why">Laufende Kosten: Render, Domain, Stripe-Gebühren. Der Rest ist frei.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="300 € Anzeigen-Test, Rest Reserve"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">300 € Anzeigen-Test, Rest Reserve</span><span class="sub">Reserve für Steuerberatung, Bildmaterial, Werkzeuge.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="0 € Anzeigen, nur organisch"><span class="letter">B</span><span class="label">Keine Anzeigen</span><span class="sub">Nur Partner, Suche, LinkedIn.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="600 € Anzeigen"><span class="letter">C</span><span class="label">600 € Anzeigen</span><span class="sub">Größerer Test, kleinere Reserve.</span></button>
+            </div>
+            <textarea id="note-E15" placeholder="Notiz (optional)" aria-label="Notiz zu E15"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E16" data-title="Takt">
+            <div class="head"><h4>Takt der Zusammenarbeit</h4><span class="key">E16</span></div>
+            <p class="why">Du willst entscheiden, nicht verwalten. Ein fester Termin verhindert, dass Entscheidungen in Chats versickern.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Ein Termin pro Woche, 30 Minuten"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Ein Termin pro Woche, dreißig Minuten</span><span class="sub">Höchstens fünf Entscheidungen, jede mit Empfehlung.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Zwei Termine pro Woche"><span class="letter">B</span><span class="label">Zwei pro Woche</span><span class="sub">Schneller, mehr Unterbrechungen.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Nach Bedarf"><span class="letter">C</span><span class="label">Nach Bedarf</span><span class="sub">Ich melde mich, wenn etwas ansteht.</span></button>
+            </div>
+            <textarea id="note-E16" placeholder="Notiz (optional)" aria-label="Notiz zu E16"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+        </div>
+
+        <div class="block">
+          <h3>Block C · Folgt aus deinen Antworten vom 18. Oktober</h3>
+
+          <article class="decision" data-key="E17" data-title="Name der Produktlinie">
+            <div class="head"><h4>Name der Produktlinie</h4><span class="key">E17</span></div>
+            <p class="why">Du hast „Werkstatt“ zweimal angemerkt: Autowerkstatt-Assoziation, und auf Englisch heißt „workshop“ Seminar. Der Name muss zuerst englisch funktionieren (E13) und sagen, dass ein Ergebnis entsteht, nicht nur Lesestoff.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Toolkit"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Toolkit</span><span class="sub">AI Policy Toolkit · Security Evidence Toolkit · AI Setup Toolkit. Deutsch: KI-Richtlinien-Toolkit usw. Sagt: Werkzeug plus Anleitung plus Vorlagen.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Kit"><span class="letter">B</span><span class="label">Kit</span><span class="sub">AI Policy Kit · Security Evidence Kit · AI Setup Kit. Kürzer, knüpft an die bestehende Kit-Linie an, klingt eher nach Vorlagen.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Pack"><span class="letter">C</span><span class="label">Pack</span><span class="sub">AI Policy Pack · Security Evidence Pack · AI Setup Pack. Klingt nach Download, weniger nach Werkzeug.</span></button>
+            </div>
+            <textarea id="note-E17" placeholder="Notiz (optional), auch ein eigener Namensvorschlag" aria-label="Notiz zu E17"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E18" data-title="Deploy-Weg ohne GitHub">
+            <div class="head"><h4>Deploy-Weg ohne GitHub</h4><span class="key">E18</span></div>
+            <p class="why">Render baut entweder aus einem Git-Repository bei einem Anbieter oder zieht ein fertiges Docker-Image aus einer Registry. Ohne GitHub bleiben zwei Wege. Docker Desktop ist auf deinem Laptop installiert.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Docker-Image aus privater Registry"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Docker-Image aus privater Registry</span><span class="sub">Der Code bleibt lokal. Ein Skript baut das Image, lädt es in ein privates Docker-Hub-Repository, Render zieht es. Du brauchst ein Docker-Hub-Konto; ein privates Repository ist dort kostenlos, Stand prüfen.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="GitLab statt GitHub"><span class="letter">B</span><span class="label">GitLab statt GitHub</span><span class="sub">Privates Repository bei GitLab, Render baut automatisch bei jeder Änderung. Der Code liegt wieder bei einem Anbieter, nur nicht bei GitHub.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Doch GitHub, neu und privat"><span class="letter">C</span><span class="label">Doch GitHub, neu und privat</span><span class="sub">Technisch der einfachste Weg; widerspricht deiner Notiz zu E2.</span></button>
+            </div>
+            <textarea id="note-E18" placeholder="Notiz (optional)" aria-label="Notiz zu E18"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E19" data-title="Kasse bei EU-weitem Verkauf">
+            <div class="head"><h4>Kasse und Umsatzsteuer bei EU-weitem Verkauf (ergänzt E4)</h4><span class="key">E19</span></div>
+            <p class="why">E4 fiel unter der Annahme „Deutsch zuerst, Österreich und Deutschland“. Mit E13 sitzt der Großteil der Kunden in anderen EU-Staaten. Für digitale Leistungen an Privatpersonen gilt oberhalb der EU-weiten Schwelle die Umsatzsteuer des Kundenlandes, gemeldet über das OSS-Verfahren; Firmenkunden mit UID laufen über Reverse Charge. Mit Stripe ist das machbar (Stripe Tax, UID-Abfrage, OSS-Meldung durch den Steuerberater), oder ein Abwickler übernimmt es als Verkäufer. Keine Steuerberatung; die Frage gehört zu deinem Steuerberater. Stand prüfen.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Abwickler mit Steuerübernahme (Paddle oder Lemon Squeezy)"><span class="letter">A <span class="rec">Empfehlung, geändert wegen E13</span></span><span class="label">Abwickler mit Steuerübernahme</span><span class="sub">Paddle oder Lemon Squeezy sind Verkäufer gegenüber dem Kunden, rechnen Umsatzsteuer in jedem EU-Land ab, stellen Rechnungen, Kundenportal und Abos. Gebühr rund fünf Prozent plus Fixbetrag je Verkauf, Stand prüfen. Für „ein Nebenverdienst, der ohne dich läuft“ der kürzeste Weg.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Stripe behalten plus Stripe Tax"><span class="letter">B</span><span class="label">Stripe behalten plus Stripe Tax</span><span class="sub">Stripe rechnet die Steuer aus, UID-Abfrage für Firmen, der Steuerberater meldet OSS vierteljährlich. Niedrigere Gebühren, mehr laufende Arbeit beim Steuerberater.</span></button>
+              <button class="opt" type="button" data-opt="C" data-label="Stripe jetzt, Abwickler später"><span class="letter">C</span><span class="label">Stripe jetzt, Abwickler später</span><span class="sub">Start mit Stripe, Wechsel ab zehn Verkäufen pro Monat. Zwei Umbauten statt einem.</span></button>
+            </div>
+            <textarea id="note-E19" placeholder="Notiz (optional), zum Beispiel die Antwort deines Steuerberaters" aria-label="Notiz zu E19"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+
+          <article class="decision" data-key="E20" data-title="Über-Seite und Name">
+            <div class="head"><h4>Über-Seite und Name</h4><span class="key">E20</span></div>
+            <p class="why">F7: nicht namentlich, kein Gesicht. Die Über-Seite nennt dich heute mit Namen und Studium. Das Impressum muss den Namen weiter tragen; siehe Nachtrag in Abschnitt 0.</p>
+            <div class="opts">
+              <button class="opt" type="button" data-opt="A" data-label="Über-Seite ohne Namen"><span class="letter">A <span class="rec">Empfehlung</span></span><span class="label">Über-Seite ohne Namen</span><span class="sub">Methodik und Arbeitsweise, kein Name, kein Foto. Name nur im Impressum, wie das Gesetz es verlangt. Newsletter und Support zeichnen „Scutoria“.</span></button>
+              <button class="opt" type="button" data-opt="B" data-label="Name bleibt auf der Über-Seite"><span class="letter">B</span><span class="label">Name bleibt auf der Über-Seite</span><span class="sub">Methodik plus ein Absatz zum Anbieter ohne Foto, wie heute.</span></button>
+            </div>
+            <textarea id="note-E20" placeholder="Notiz (optional)" aria-label="Notiz zu E20"></textarea>
+            <div class="foot"><span class="saved">Noch offen</span></div>
+          </article>
+        </div>
+
+        <div class="exportbox" id="exportbox" hidden>
+          <p class="eyebrow" style="margin-bottom:.4rem">Zusammenfassung zum Kopieren</p>
+          <pre id="export-text"></pre>
+        </div>
+      </section>
+
+      <!-- 11 -->
+      <section id="s11">
+        <div class="sechead"><span class="eyebrow">11 · Fragenkatalog</span><h2>Was willst du mit diesem Shop erreichen?</h2></div>
+        <p class="prose">Acht Fragen, frei zu beantworten. Sie bestimmen, wie ehrgeizig Fahrplan und Preise sein dürfen. Keine Namen Dritter eintragen.</p>
+        <div class="block">
+          <article class="question" data-key="F1"><h4>F1 · Was soll Scutoria dir in zwölf Monaten bringen?</h4><p class="hint">Ein Betrag pro Monat, Reputation im Studienfeld, ein Weg in die Selbständigkeit, oder etwas anderes. Eine Zahl hilft mir mehr als ein Adjektiv.</p><textarea id="q-F1" aria-label="Antwort F1"></textarea></article>
+          <article class="question" data-key="F2"><h4>F2 · Wie viele Stunden pro Woche sind wirklich da, und an welchen Tagen?</h4><p class="hint">Scutoria steht laut deiner Notiz an vierter Stelle hinter Geld, Körper und Studium. Der Fahrplan rechnet mit zwei bis drei Stunden Entscheidungs- und Gesprächszeit pro Woche; alles andere mache ich.</p><textarea id="q-F2" aria-label="Antwort F2"></textarea></article>
+          <article class="question" data-key="F3"><h4>F3 · Was willst du nie selbst machen, und was gern?</h4><p class="hint">Zum Beispiel: nie Texte korrigieren, gern Gespräche führen. Oder umgekehrt.</p><textarea id="q-F3" aria-label="Antwort F3"></textarea></article>
+          <article class="question" data-key="F4"><h4>F4 · Wen kennst du persönlich, der ein möglicher Kunde oder Partner ist?</h4><p class="hint">Nur Anzahl und Art (zwei Steuerberater, ein Zulieferer, eine Ordination). Keine Namen hier eintragen.</p><textarea id="q-F4" aria-label="Antwort F4"></textarea></article>
+          <article class="question" data-key="F5"><h4>F5 · Wann gilt das Projekt als gescheitert?</h4><p class="hint">Eine Zahl und ein Datum. Zum Beispiel: weniger als fünf zahlende Kunden bis Ende Januar 2027.</p><textarea id="q-F5" aria-label="Antwort F5"></textarea></article>
+          <article class="question" data-key="F6"><h4>F6 · Was heißt „fertig“ für dich?</h4><p class="hint">Ein Angebot, das sich allein verkauft? Ein Nebenverdienst, der ohne dich läuft? Ein Unternehmen, das wächst?</p><textarea id="q-F6" aria-label="Antwort F6"></textarea></article>
+          <article class="question" data-key="F7"><h4>F7 · Darfst du mit Namen und Gesicht öffentlich verkaufen?</h4><p class="hint">Die Nebenbeschäftigung ist laut Notiz nur mündlich gedeckt. Vor dem ersten Beitrag mit Namen gehört das schriftlich geklärt. Das ist keine Rechtsberatung, nur die Reihenfolge.</p><textarea id="q-F7" aria-label="Antwort F7"></textarea></article>
+          <article class="question" data-key="F8"><h4>F8 · Welche Rolle soll Englisch spielen?</h4><p class="hint">Heute ist alles zweisprachig. Jede Änderung kostet doppelt. Welchen Anteil der Kunden erwartest du außerhalb des deutschen Sprachraums?</p><textarea id="q-F8" aria-label="Antwort F8"></textarea></article>
+        </div>
+      </section>
+
+      <footer>
+        <p>Scutoria Neustart-Dossier, erstellt am 18. Oktober 2026 von Claude für Stefan Dallinger. Quellen: scutoria.com, Render-API, Brevo-API, GitHub-API, lokale Git-Kopie, OneDrive-Produktordner, Notizen „Scutoria.md“ und „Gesamtprompt 2026-09-27“. Rechtliche und steuerliche Aussagen sind Hinweise zur Reihenfolge, keine Beratung; Fristen der KI-Verordnung und des NISG 2026 vor dem Produktstart erneut prüfen.</p>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var state = { e: {}, f: {} };
+  var decisions = Array.prototype.slice.call(document.querySelectorAll('.decision'));
+  var questions = Array.prototype.slice.call(document.querySelectorAll('.question'));
+  var TOTAL = decisions.length;
+  var db = null, canWrite = true, chains = {}, timers = {};
+  var storeNote = document.getElementById('store-note');
+
+  var local = {
+    get: function(k){ try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch(e){ return null; } },
+    set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+  };
+  function fmt(iso){ try { return new Date(iso).toLocaleString('de-AT', { dateStyle:'medium', timeStyle:'short' }); } catch(e){ return ''; } }
+  function setNote(kind){
+    var map = {
+      connecting: 'Speicher wird verbunden …',
+      db: 'Gespeichert in deinem Konto; ich kann die Antworten auslesen.',
+      local: 'Nicht angemeldet: Auswahl wird nur in diesem Browser gespeichert.',
+      readonly: 'Nur Lesen: dieses Konto darf hier nicht speichern.',
+      error: 'Speichern fehlgeschlagen; Auswahl bleibt in diesem Browser.'
+    };
+    storeNote.textContent = map[kind] || map.connecting;
+  }
+
+  function renderDecision(key){
+    var card = document.querySelector('.decision[data-key="' + key + '"]'); if(!card) return;
+    var s = state.e[key] || {};
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-opt') === s.wahl)); });
+    var ta = card.querySelector('textarea');
+    if(ta && document.activeElement !== ta && (s.notiz || '') !== ta.value) ta.value = s.notiz || '';
+    var st = card.querySelector('.saved');
+    if(st){
+      st.textContent = s.wahl ? ('Entschieden: ' + s.wahl + (s.zeit ? ' · ' + fmt(s.zeit) : '')) : 'Noch offen';
+      st.classList.toggle('is-set', !!s.wahl);
+    }
+    card.classList.toggle('is-decided', !!s.wahl);
+  }
+  function renderQuestion(key){
+    var ta = document.getElementById('q-' + key); if(!ta) return;
+    var s = state.f[key] || {};
+    if(document.activeElement !== ta && (s.antwort || '') !== ta.value) ta.value = s.antwort || '';
+  }
+  function renderSummary(){
+    var n = 0; decisions.forEach(function(c){ var s = state.e[c.getAttribute('data-key')]; if(s && s.wahl) n++; });
+    document.getElementById('sum-count').textContent = n + ' von ' + TOTAL;
+    document.getElementById('sum-bar').style.width = (TOTAL ? Math.round(100 * n / TOTAL) : 0) + '%';
+  }
+  function renderAll(){ decisions.forEach(function(c){ renderDecision(c.getAttribute('data-key')); }); questions.forEach(function(q){ renderQuestion(q.getAttribute('data-key')); }); renderSummary(); }
+
+  function queue(path, fn){ chains[path] = (chains[path] || Promise.resolve()).then(fn).catch(function(){}); return chains[path]; }
+  function persist(coll, key, data){
+    local.set(coll + ':' + key, data);
+    if(!db || !canWrite) return;
+    queue(coll + '/' + key, function(){
+      return db.doc(coll + '/' + key).set(data).then(function(){ setNote('db'); }, function(err){
+        if(err && err.code === 'invalid_argument'){ canWrite = false; setNote('readonly'); } else { setNote('error'); }
+      });
+    });
+  }
+  function choose(key, opt, label){
+    var prev = state.e[key] || {};
+    if(prev.wahl === opt) return;
+    var data = { wahl: opt, label: label, notiz: prev.notiz || '', zeit: new Date().toISOString() };
+    state.e[key] = data; renderDecision(key); renderSummary(); persist('entscheidungen', key, data);
+  }
+  function noteChanged(key, text){
+    var prev = state.e[key] || {};
+    if((prev.notiz || '') === text) return;
+    var data = { wahl: prev.wahl || '', label: prev.label || '', notiz: text, zeit: new Date().toISOString() };
+    state.e[key] = data; renderDecision(key); persist('entscheidungen', key, data);
+  }
+  function answerChanged(key, text){
+    var prev = state.f[key] || {};
+    if((prev.antwort || '') === text) return;
+    var data = { antwort: text, zeit: new Date().toISOString() };
+    state.f[key] = data; persist('fragen', key, data);
+  }
+  function debounced(id, fn){ clearTimeout(timers[id]); timers[id] = setTimeout(fn, 800); }
+
+  // wiring
+  decisions.forEach(function(card){
+    var key = card.getAttribute('data-key');
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function(b){
+      b.addEventListener('click', function(){ choose(key, b.getAttribute('data-opt'), b.getAttribute('data-label') || ''); });
+    });
+    var ta = card.querySelector('textarea');
+    if(ta){
+      ta.addEventListener('input', function(){ debounced('n' + key, function(){ noteChanged(key, ta.value.trim()); }); });
+      ta.addEventListener('blur', function(){ clearTimeout(timers['n' + key]); noteChanged(key, ta.value.trim()); });
+    }
+  });
+  questions.forEach(function(q){
+    var key = q.getAttribute('data-key'); var ta = document.getElementById('q-' + key); if(!ta) return;
+    ta.addEventListener('input', function(){ debounced('q' + key, function(){ answerChanged(key, ta.value.trim()); }); });
+    ta.addEventListener('blur', function(){ clearTimeout(timers['q' + key]); answerChanged(key, ta.value.trim()); });
+  });
+
+  document.getElementById('btn-export').addEventListener('click', function(){
+    var lines = ['Scutoria Neustart · Entscheidungen · Stand ' + new Date().toLocaleDateString('de-AT')];
+    decisions.forEach(function(c){
+      var key = c.getAttribute('data-key'), s = state.e[key] || {};
+      lines.push(key + ' ' + c.getAttribute('data-title') + ': ' + (s.wahl ? (s.wahl + ' · ' + (s.label || '')) : 'offen') + (s.notiz ? ' · Notiz: ' + s.notiz : ''));
+    });
+    lines.push('');
+    questions.forEach(function(q){
+      var key = q.getAttribute('data-key'), s = state.f[key] || {};
+      lines.push(key + ': ' + (s.antwort ? s.antwort : 'offen'));
+    });
+    var text = lines.join('\n');
+    var box = document.getElementById('exportbox'), pre = document.getElementById('export-text');
+    pre.textContent = text; box.hidden = false;
+    var btn = this;
+    function done(ok){ btn.textContent = ok ? 'Kopiert' : 'Text unten markieren'; setTimeout(function(){ btn.textContent = 'Zusammenfassung kopieren'; }, 2500); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(false); }); } else { done(false); }
+  });
+
+  // section highlight
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  if('IntersectionObserver' in window && links.length){
+    var byId = {}; links.forEach(function(a){ byId[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(a){ a.classList.remove('is-active'); }); var a = byId[en.target.id]; if(a) a.classList.add('is-active'); } });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('main section'), function(s){ io.observe(s); });
+  }
+
+  // load: local first, then the store
+  decisions.forEach(function(c){ var k = c.getAttribute('data-key'); state.e[k] = local.get('entscheidungen:' + k) || {}; });
+  questions.forEach(function(q){ var k = q.getAttribute('data-key'); state.f[k] = local.get('fragen:' + k) || {}; });
+  renderAll();
+
+  var use = (window.claude && typeof window.claude.use === 'function') ? window.claude.use.bind(window.claude) : null;
+  if(!use){ setNote('local'); return; }
+  use('db').then(function(d){
+    db = d;
+    if(!db){ setNote('local'); return; }
+    use('user').then(function(u){
+      var p = u && typeof u.can === 'function' ? u.can('data.write') : Promise.resolve(null);
+      Promise.resolve(p).then(function(w){ if(w === false){ canWrite = false; setNote('readonly'); } }, function(){});
+    }, function(){});
+    var first = true;
+    db.collection('entscheidungen').onSnapshot(function(snap){
+      if(first){ first = false; decisions.forEach(function(c){ state.e[c.getAttribute('data-key')] = {}; }); }
+      snap.docs.forEach(function(doc){ if(doc.exists){ state.e[doc.id] = doc.data(); local.set('entscheidungen:' + doc.id, doc.data()); } });
+      renderAll();
+      if(canWrite) setNote('db');
+    }, function(){ setNote('error'); });
+    var firstQ = true;
+    db.collection('fragen').onSnapshot(function(snap){
+      if(firstQ){ firstQ = false; questions.forEach(function(q){ state.f[q.getAttribute('data-key')] = {}; }); }
+      snap.docs.forEach(function(doc){ if(doc.exists){ state.f[doc.id] = doc.data(); local.set('fragen:' + doc.id, doc.data()); } });
+      questions.forEach(function(q){ renderQuestion(q.getAttribute('data-key')); });
+    }, function(){ setNote('error'); });
+  }, function(){ setNote('local'); });
+})();
+</script>

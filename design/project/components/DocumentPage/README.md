@@ -1,0 +1,5 @@
+DocumentPage (Dokumentseite) ist das Seitensystem jedes Handbuchs und Memos: Kopfzeile, Abschnittstitel, eine Aussage je Absatz mit ihrem Marker, darunter die Quellenzeile, Unsicherheitsboxen, Fußzeile.
+
+Immer auf Papier: `surface`-Seite auf `ground`, A4 im Druck mit 20 mm Rand, 640 px breit am Bildschirm. Kopfzeile in `stamp` und `ink-muted` mit Produkt und Version links, Datum rechts, unter einer `hairline`. Kicker in `label`, Abschnittstitel in `doc-title`, Zwischentitel in `doc-heading`, Text in `doc-body` bis `measure`. Jeder Absatz mit einer Aussage beginnt mit seinem Marker und endet mit einer SourceLine; offene Fragen stehen in einer UncertaintyBox. Fußzeile in `doc-caption`: Produkt links, „Page 14 of 20“ rechts. Abbildungen sind Strichzeichnungen in `accent` und `ink-muted`, beschriftet in `doc-caption`; keine Fotos, keine Stockbilder.
+
+Ein Memo ist eine DocumentPage mit dem Kicker „Memo“, Betriebsname und Datum im Kopf und einem Quellenblock am Ende. Der Verwender liefert den Inhalt; das Seitensystem liefert den Rhythmus.

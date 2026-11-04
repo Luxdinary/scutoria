@@ -1,0 +1,18 @@
+{
+  "_zweck": "Fassung 2 von Video 01 (Stefan, 30.10.2026): neuer Einstieg als Frage (eigene Aufnahme), Rest aus der Flash-Spur, der Block „Hier ist Scutoria … keine Rechtsberatung“ wandert vom Anfang an die Stelle des bisherigen Schlusssatzes. Für ton-fassung.py.",
+  "de": [
+    { "datei": "C:/Users/Stefa/Videos/scutoria/fassung-2/01-ai-rules-start/stimme/01-de.wav", "woerter": "C:/Users/Stefa/Videos/scutoria/fassung-2/01-ai-rules-start/stimme/whisper-de/woerter-de.json", "bis_s": 11.6, "_bis": "ab 12,0 s spricht die Stimme die Pausenmarke mit" },
+    { "von": "Nehmen Sie eine typische Lage", "bis_s": 123.6, "_bis": "Ende Abschnitt 2: die Stimme spricht die Pausenmarke als „Pause“ mit (124,5 bis 125,1 s)" },
+    { "von_s": 125.6, "bis_s": 397.0, "_bis": "Ende 01-03: „Eine kurze Pause“ (397,1 bis 398,0 s)" },
+    { "von_s": 398.44, "bis": "Die Stimme war synthetisch" },
+    { "von": "Hier ist", "bis": "Dieses Video zeigt" },
+    { "von": "Als Nächstes Ihr Kunde schickt", "bis_s": 817.6, "_bis": "Pausenmarke am Ende von 04-07 (817,9 bis 818,4 s)" }
+  ],
+  "en": [
+    { "datei": "C:/Users/Stefa/Videos/scutoria/fassung-2/01-ai-rules-start/stimme/01-en.wav", "woerter": "C:/Users/Stefa/Videos/scutoria/fassung-2/01-ai-rules-start/stimme/whisper-en/woerter-en.json", "bis_s": 12.1, "_bis": "Stille nach dem letzten Wort gekürzt" },
+    { "von_s": 28.4, "bis_s": 124.75, "_von": "vor „Take a typical situation“; „Short pause“ bei 27,4 bis 28,0 s bleibt draußen", "_bis": "Ende Abschnitt 2: „Short pause“ (124,8 bis 125,4 s)" },
+    { "von_s": 125.55, "bis": "The voice was synthetic" },
+    { "von": "This is", "bis": "This video shows" },
+    { "von": "Next your customer sends", "bis": "ENDE" }
+  ]
+}

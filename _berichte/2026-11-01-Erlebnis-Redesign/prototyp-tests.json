@@ -1,0 +1,151 @@
+{
+  "interactions": [
+    {
+      "test": "A Situation Kundenanfrage",
+      "pass": true
+    },
+    {
+      "test": "A Frageansicht",
+      "pass": true
+    },
+    {
+      "test": "Quellen-Erklärung",
+      "pass": true
+    },
+    {
+      "test": "Tooldemo",
+      "pass": true
+    },
+    {
+      "test": "B Zusammenhang Zugänge",
+      "pass": true
+    },
+    {
+      "test": "B Muster-Dialog",
+      "pass": true
+    },
+    {
+      "test": "C Kapitel Kundenfrage",
+      "pass": true
+    },
+    {
+      "test": "Erklärsequenz Start",
+      "pass": true
+    },
+    {
+      "test": "Bewegung aus liefert Endinhalt",
+      "pass": true
+    },
+    {
+      "test": "EN Sprachwechsel",
+      "pass": true
+    },
+    {
+      "test": "Mobilmenü A",
+      "pass": true
+    },
+    {
+      "test": "Mobilmenü B",
+      "pass": true
+    },
+    {
+      "test": "Mobilmenü C",
+      "pass": true
+    },
+    {
+      "test": "C Kapitel führt zur Erklärung",
+      "pass": true
+    },
+    {
+      "test": "Erklärsequenz endet vollständig",
+      "pass": true
+    },
+    {
+      "test": "Direkte Schrittwahl während Sequenz",
+      "pass": true
+    },
+    {
+      "test": "Produktdetail-Dialog",
+      "pass": true
+    },
+    {
+      "test": "Dialog per Escape schließen",
+      "pass": true
+    }
+  ],
+  "responsive": [
+    {
+      "variant": "a",
+      "scrollWidth": 345,
+      "viewport": 360,
+      "pass": true
+    },
+    {
+      "variant": "b",
+      "scrollWidth": 345,
+      "viewport": 360,
+      "pass": true
+    },
+    {
+      "variant": "c",
+      "scrollWidth": 345,
+      "viewport": 360,
+      "pass": true
+    },
+    {
+      "variant": "a",
+      "scrollWidth": 375,
+      "viewport": 390,
+      "pass": true
+    },
+    {
+      "variant": "b",
+      "scrollWidth": 375,
+      "viewport": 390,
+      "pass": true
+    },
+    {
+      "variant": "c",
+      "scrollWidth": 375,
+      "viewport": 390,
+      "pass": true
+    },
+    {
+      "variant": "a",
+      "scrollWidth": 753,
+      "viewport": 768,
+      "pass": true
+    },
+    {
+      "variant": "b",
+      "scrollWidth": 753,
+      "viewport": 768,
+      "pass": true
+    },
+    {
+      "variant": "c",
+      "scrollWidth": 753,
+      "viewport": 768,
+      "pass": true
+    },
+    {
+      "variant": "a",
+      "scrollWidth": 1425,
+      "viewport": 1440,
+      "pass": true
+    },
+    {
+      "variant": "b",
+      "scrollWidth": 1425,
+      "viewport": 1440,
+      "pass": true
+    },
+    {
+      "variant": "c",
+      "scrollWidth": 1425,
+      "viewport": 1440,
+      "pass": true
+    }
+  ],
+  "reducedMotion": "Manueller Schalter getestet; Betriebssystempräferenz nicht emuliert, CSS-Regel vorhanden."
+}

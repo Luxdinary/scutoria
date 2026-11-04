@@ -1,0 +1,17 @@
+SCUTORIA: DREI NEUE ATLAS-STUDIO-VARIANTEN
+
+1. index.html im Browser öffnen und die drei Varianten ausprobieren.
+2. Eine Grundrichtung wählen:
+   Variante 1 Atlas Studio: ausgewogen, mein Favorit für Stefans gewünschte Mischung.
+   Variante 2 Signal Journey: stärker filmisch und medienorientiert.
+   Variante 3 Open Campus: heller Wissensraum, dunkle Medienbühnen.
+3. Für Claude das gesamte ZIP zusammen mit der gewählten vorlage-0N.jpg übergeben.
+4. Claude zuerst CLAUDE-UMSETZUNGSBRIEF.md lesen lassen. Am Ende steht der direkt verwendbare Arbeitsauftrag.
+
+Jede Variante hat fünf Seitentypen, Desktop/Mobil und EN/DE.
+Die vollständigen Startseiten liegen in screenshots/0N-home-full.jpg.
+Die drei neuen Bilder sind in assets/hybrid-N.webp (optimiert) und .png (Master).
+BILD-PROMPTS.json enthält die exakten Prompts des integrierten Bildgenerators.
+
+Neue Titel, Toolplätze und Storyboards sind Gestaltungskonzepte.
+Die Originalwebsite wurde nicht verändert.

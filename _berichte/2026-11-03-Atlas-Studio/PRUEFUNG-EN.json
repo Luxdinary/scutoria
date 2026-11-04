@@ -1,0 +1,77 @@
+[
+  {
+    "variant": 1,
+    "page": "home",
+    "title": "Turn everyday work into understanding."
+  },
+  {
+    "variant": 1,
+    "page": "library",
+    "title": "Knowledge that moves you forward."
+  },
+  {
+    "variant": 1,
+    "page": "product",
+    "title": "AI Policy Toolkit"
+  },
+  {
+    "variant": 1,
+    "page": "tools",
+    "title": "Understand first.\nThen try it."
+  },
+  {
+    "variant": 1,
+    "page": "studio",
+    "title": "One topic.\nMore ways to understand."
+  },
+  {
+    "variant": 2,
+    "page": "home",
+    "title": "One question. A clear next step."
+  },
+  {
+    "variant": 2,
+    "page": "library",
+    "title": "Knowledge that moves you forward."
+  },
+  {
+    "variant": 2,
+    "page": "product",
+    "title": "AI Policy Toolkit"
+  },
+  {
+    "variant": 2,
+    "page": "tools",
+    "title": "Understand first.\nThen try it."
+  },
+  {
+    "variant": 2,
+    "page": "studio",
+    "title": "One topic.\nMore ways to understand."
+  },
+  {
+    "variant": 3,
+    "page": "home",
+    "title": "Explore knowledge. Act with confidence."
+  },
+  {
+    "variant": 3,
+    "page": "library",
+    "title": "Knowledge that moves you forward."
+  },
+  {
+    "variant": 3,
+    "page": "product",
+    "title": "AI Policy Toolkit"
+  },
+  {
+    "variant": 3,
+    "page": "tools",
+    "title": "Understand first.\nThen try it."
+  },
+  {
+    "variant": 3,
+    "page": "studio",
+    "title": "One topic.\nMore ways to understand."
+  }
+]

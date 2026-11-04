@@ -1,0 +1,241 @@
+{
+  "pages": 60,
+  "assets": 10,
+  "errors": [
+    {
+      "url": "https://scutoria.com/audit-missing-page-20261101",
+      "status": 404,
+      "error": null
+    }
+  ],
+  "html": [
+    {
+      "url": "https://scutoria.com/",
+      "title": "Sourced. Dated. Ready to show. \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 46792
+    },
+    {
+      "url": "https://scutoria.com/tools",
+      "title": "Tools \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 19562
+    },
+    {
+      "url": "https://scutoria.com/account",
+      "title": "Your account \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 14193
+    },
+    {
+      "url": "https://scutoria.com/de/",
+      "title": "Belegt. Datiert. Vorzeigbar. \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 47856
+    },
+    {
+      "url": "https://scutoria.com/toolkits/ai-policy",
+      "title": "AI Policy Toolkit \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 38878
+    },
+    {
+      "url": "https://scutoria.com/toolkits/security-evidence",
+      "title": "Security Evidence Toolkit \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 41697
+    },
+    {
+      "url": "https://scutoria.com/toolkits/ai-policy/handbook",
+      "title": "AI Policy Toolkit \u00b7 Handbook \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 92484
+    },
+    {
+      "url": "https://scutoria.com/toolkits/security-evidence/handbook",
+      "title": "Security Evidence Toolkit \u00b7 Handbook \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 124348
+    },
+    {
+      "url": "https://scutoria.com/tools/may-this-go-in",
+      "title": "May this go in? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 24074
+    },
+    {
+      "url": "https://scutoria.com/tools/anything-personal",
+      "title": "Is there anything personal in it? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 19744
+    },
+    {
+      "url": "https://scutoria.com/memos/nis2",
+      "title": "Does NIS2 apply to us? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 27442
+    },
+    {
+      "url": "https://scutoria.com/memos/ai-labelling",
+      "title": "Must we label what our AI produces? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 22493
+    },
+    {
+      "url": "https://scutoria.com/memos/sign-in-security",
+      "title": "Where does our sign-in stand? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 23228
+    },
+    {
+      "url": "https://scutoria.com/memos/where-to-start",
+      "title": "Where do we start with AI rules? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 21445
+    },
+    {
+      "url": "https://scutoria.com/about",
+      "title": "About Scutoria \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 16715
+    },
+    {
+      "url": "https://scutoria.com/legal",
+      "title": "Legal notice \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 15580
+    },
+    {
+      "url": "https://scutoria.com/privacy",
+      "title": "Privacy \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 20500
+    },
+    {
+      "url": "https://scutoria.com/terms",
+      "title": "Terms \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 19004
+    },
+    {
+      "url": "https://scutoria.com/withdrawal",
+      "title": "Withdrawal \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 16099
+    },
+    {
+      "url": "https://scutoria.com/de/tools",
+      "title": "Tools \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 19923
+    },
+    {
+      "url": "https://scutoria.com/memos",
+      "title": "Memo generators \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 16692
+    },
+    {
+      "url": "https://scutoria.com/de/konto",
+      "title": "Ihr Konto \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 14243
+    },
+    {
+      "url": "https://scutoria.com/de/toolkits/ki-richtlinien",
+      "title": "KI-Richtlinien-Toolkit \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 40066
+    },
+    {
+      "url": "https://scutoria.com/de/toolkits/sicherheitsnachweis",
+      "title": "Sicherheitsnachweis-Toolkit \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 42727
+    },
+    {
+      "url": "https://scutoria.com/de/toolkits/ki-richtlinien/handbuch",
+      "title": "KI-Richtlinien-Toolkit \u00b7 Handbuch \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 99664
+    },
+    {
+      "url": "https://scutoria.com/de/toolkits/sicherheitsnachweis/handbuch",
+      "title": "Sicherheitsnachweis-Toolkit \u00b7 Handbuch \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 133277
+    },
+    {
+      "url": "https://scutoria.com/de/tools/darf-das-hinein",
+      "title": "Darf das hinein? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 24825
+    },
+    {
+      "url": "https://scutoria.com/de/tools/etwas-persoenliches",
+      "title": "Steht da etwas Pers\u00f6nliches drin? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 20111
+    },
+    {
+      "url": "https://scutoria.com/de/memos/nis2",
+      "title": "Sind wir von NIS2 betroffen? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 27940
+    },
+    {
+      "url": "https://scutoria.com/de/memos/ki-kennzeichnung",
+      "title": "M\u00fcssen wir kennzeichnen, was unsere KI erzeugt? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 22980
+    },
+    {
+      "url": "https://scutoria.com/de/memos/anmeldesicherheit",
+      "title": "Wo steht unsere Anmeldung? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 23512
+    },
+    {
+      "url": "https://scutoria.com/de/memos/wo-anfangen",
+      "title": "Womit fangen wir bei KI-Regeln an? \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 21665
+    },
+    {
+      "url": "https://scutoria.com/de/ueber",
+      "title": "\u00dcber Scutoria \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 17123
+    },
+    {
+      "url": "https://scutoria.com/de/impressum",
+      "title": "Impressum \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 15546
+    },
+    {
+      "url": "https://scutoria.com/de/datenschutz",
+      "title": "Datenschutz \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 21137
+    },
+    {
+      "url": "https://scutoria.com/de/agb",
+      "title": "AGB \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 19374
+    },
+    {
+      "url": "https://scutoria.com/de/widerruf",
+      "title": "Widerruf \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 16274
+    },
+    {
+      "url": "https://scutoria.com/de/memos",
+      "title": "Memo-Generatoren \u00b7 Scutoria",
+      "robots": "noindex, nofollow",
+      "bytes": 16929
+    }
+  ]
+}

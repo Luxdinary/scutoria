@@ -1,0 +1,11 @@
+SAPPHIRE CINEMA IST MEINE AUSGEWÄHLTE GESTALTUNGSRICHTUNG.
+
+Ich möchte meine bestehende Scutoria-Website anhand des beigefügten Pakets umsetzen lassen. Lies zuerst ANLEITUNG-FUER-CLAUDE.md vollständig. Sieh dir dann referenzen/home.jpg, home-full.jpg, die korrigierten Mobilbilder und die vier Unterseiten an. Der isolierte Prototyp liegt in prototyp/sapphire-cinema.html.
+
+Wichtig: ausschließlich Sapphire Cinema umsetzen. Die filmische Signal-Studio-Bildwelt mit der dunklen Navy-/Saphirpalette ist die Grundlage. Keine neue Büroatlas-Architektur, keine Sidebar und keine sehr hellen Grundflächen. Bewahre die große zusammenhängende Bildbühne mit Text links, klaren Medienframes rechts, das Studiomodul vor der Produktauswahl und die hochwertigen digitalen Cover.
+
+Prüfe die echte bestehende Codebasis und übertrage die Gestaltung in deren Komponenten, Routing und Designsystem. Erhalte reale Produkte, Originaltools, Datenverarbeitung, Quellen, Konto, Sprachen und Kaufwege. Die vereinfachte Tooldemo, neuen Katalogtitel und Storyboards sind keine Produktionsfunktionen oder verfügbaren neuen Angebote.
+
+Implementiere die komplette zusammenhängende Seitenfamilie: Startseite, Bibliothek, Produktdetail, Tools und Studio. Übertrage das System auch auf weitere vorhandene Seiten. Verwende die korrigierten Mobilreferenzen dieses Pakets; die alte schmale mobile Textspalte der Fünfergalerie soll nicht übernommen werden.
+
+Arbeite innerhalb dieser gewählten Richtung selbstständig und frage nicht bei jeder Routineentscheidung erneut nach. Führe die in der Anleitung beschriebene visuelle und funktionale Abnahme durch. Zeige mir einen reviewbaren lokalen/privaten Stand mit Desktop-/Mobilbildern, geprüften Funktionen und konkreten offenen Punkten. Veröffentliche erst nach meiner ausdrücklichen Freigabe.

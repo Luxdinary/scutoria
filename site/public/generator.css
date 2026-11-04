@@ -1,0 +1,2 @@
+/* Question and review navigation remains immediate, including without JavaScript. */
+@view-transition { navigation: none; }

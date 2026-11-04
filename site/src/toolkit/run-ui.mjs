@@ -1,0 +1,20 @@
+import { esc } from '../layout.mjs';
+import { optionLabel, isComplete } from './engine.mjs';
+export const RUN_TEXT = {
+ en: { own:'Start with your business', example:'Look at the example first', explain:'With your business, the fields start empty and show the example only as a hint. The example fills in an invented business so you can see the result first.', notice:'You are looking at the invented example business. For your own documents, start with your business.', hint:'Example:', sections:'All sections', section:'Section', answered:(x,y)=>`answered ${x} of ${y}`, review:'Check your answers', change:'Change', from:'From the example, please check', open:'Open', saved:'Saved after every step. You can come back with the address of this page.', account:'You also find it in your account.' },
+ de: { own:'Mit Ihrem Betrieb beginnen', example:'Zuerst das Beispiel ansehen', explain:'Mit Ihrem Betrieb beginnen die Felder leer und zeigen das Beispiel nur als Hinweis. Das Beispiel füllt einen erfundenen Betrieb aus, damit Sie das Ergebnis zuerst sehen.', notice:'Sie sehen den erfundenen Beispielbetrieb. Für Ihre eigenen Dokumente beginnen Sie mit Ihrem Betrieb.', hint:'Beispiel:', sections:'Alle Abschnitte', section:'Abschnitt', answered:(x,y)=>`beantwortet ${x} von ${y}`, review:'Antworten prüfen', change:'Ändern', from:'Aus dem Beispiel, bitte prüfen', open:'Offen', saved:'Nach jedem Schritt gespeichert. Sie kommen über die Adresse dieser Seite zurück.', account:'Sie finden ihn auch in Ihrem Konto.' },
+};
+export function startChoices(base,lang) { const x=RUN_TEXT[lang]; return `<div class="run-start"><form method="post" action="${base}/start"><div class="sc-row"><button class="sc-btn" type="submit" name="kind" value="own">${x.own}</button><button class="sc-btn sc-btn--secondary" type="submit" name="kind" value="example">${x.example}</button></div></form><p class="small muted">${x.explain}</p></div>`; }
+export function exampleNotice(run,base,lang) { const x=RUN_TEXT[lang]; return run.label==='example'?`<div class="notice run-example"><p>${x.notice}</p><form method="post" action="${base}/start"><button class="sc-btn sc-btn--secondary sc-btn--small" name="kind" value="own" type="submit">${x.own}</button></form></div>`:''; }
+export function answerText(q,a,lang) {
+ if (!a) return '';
+ if (q.type==='text'||q.type==='textarea') return a.text??'';
+ if (q.type==='date') return a.date??'';
+ if (q.type==='select') return [a.value?optionLabel(q,a.value,lang):'',a.text].filter(Boolean).join(' · ');
+ if (q.type==='multi') return [...(a.values??[]).map(v=>optionLabel(q,v,lang)),a.text].filter(Boolean).join(' · ');
+ if (q.type==='role') return [a.text,a.contact,a.deputy].filter(Boolean).join(' · ');
+ if (q.type==='tools') return Object.entries(a.rows??{}).map(([kind,row])=>[optionLabel(q._kindQuestion??q,kind,lang),row.name,optionLabel(q,row.account,lang)].filter(Boolean).join(' · ')).join('; ');
+ return '';
+}
+export function sameAnswer(a,b) { const sorted=v=>Array.isArray(v)?v.map(sorted).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b))):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,sorted(v[k])])):v; return JSON.stringify(sorted(a))===JSON.stringify(sorted(b)); }
+export function sectionsList(def,list,run,base,lang) { const x=RUN_TEXT[lang]; return `<details class="run-sections"><summary>${x.sections}</summary><ul>${def.blocks.map(block=>{const qs=list.filter(q=>q.block.id===block.id);if(!qs.length)return '';const n=list.findIndex(q=>q.id===qs[0].id)+1;const answered=qs.filter(q=>run.answers[q.id]&&isComplete(q,run.answers[q.id])&&answerText(q,run.answers[q.id],lang)).length;return `<li><a href="${base}/run/${esc(run.id)}/${n}">${esc(block.id)} · ${esc(block.title[lang]??block.title.en)}</a> <span class="small mono">${x.answered(answered,qs.length)}</span></li>`;}).join('')}</ul></details>`; }

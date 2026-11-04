@@ -1,0 +1,34 @@
+{
+  "stand": "2026-11-03",
+  "note": "Programm laut marketing/youtube/THEMEN.md und SHORTS.md (Stand 29.10.2026). status: production = in Produktion, planned = geplant, published = veröffentlicht (dann url und duration setzen). Nichts ist veröffentlicht.",
+  "target": {
+    "shorts": 40,
+    "source": "marketing/youtube/SHORTS.md und PLAN.md (Stand 29.10.2026): Ziel des Programms, kein Bestand; die Seite nennt es als Ziel"
+  },
+  "videos": [
+    { "no": "01", "status": "production", "line": "policy", "title": { "de": "Ihre Belegschaft nutzt schon KI. Womit die Regeln anfangen.", "en": "Your staff already use AI. Where the rules start." }, "product": "ai-policy", "tool": "start" },
+    { "no": "02", "status": "production", "line": "security", "title": { "de": "Ihr Kunde schickt einen Sicherheitsfragebogen. So antworten Sie ehrlich.", "en": "Your customer sent a security questionnaire. How to answer honestly." }, "product": "security-evidence" },
+    { "no": "03", "status": "planned", "line": "foundations", "title": { "de": "Belegt. Datiert. Vorzeigbar. Ein Rundgang durch beide Toolkits.", "en": "Sourced. Dated. Ready to show. A walk through both toolkits." }, "product": "ai-policy" },
+    { "no": "04", "status": "planned", "line": "policy", "title": { "de": "Was nie in ein KI-Tool darf. Fünf Datenarten und die Zweifelsregel.", "en": "What never goes into an AI tool. Five kinds of data and the rule of doubt." }, "product": "ai-policy", "tool": "may-this-go-in" },
+    { "no": "05", "status": "planned", "line": "policy", "title": { "de": "Artikel 4 der KI-Verordnung: die Einweisung, die Sie halten, und der Nachweis, den Sie führen.", "en": "Article 4 of the AI Act: the briefing you hold and the record you keep." }, "product": "ai-policy" },
+    { "no": "06", "status": "planned", "line": "security", "title": { "de": "MFA, Sicherung, Updates: wonach jeder Fragebogen und jeder Versicherer zuerst fragt.", "en": "MFA, backups, updates: what every questionnaire and insurer asks first." }, "product": "security-evidence", "tool": "login" },
+    { "no": "07", "status": "planned", "line": "policy", "title": { "de": "Müssen Sie kennzeichnen, was Ihre KI erzeugt? Artikel 50 für kleine Betriebe.", "en": "Must you label what your AI makes? Article 50 for small businesses." }, "product": "ai-policy", "tool": "labelling" },
+    { "no": "08", "status": "planned", "line": "security", "title": { "de": "Die erste Stunde nach einem Cybervorfall, und die 72-Stunden-Uhr.", "en": "The first hour after a cyber incident, and the 72-hour clock." }, "product": "security-evidence" },
+    { "no": "09", "status": "planned", "line": "policy", "title": { "de": "Sieben Fragen, bevor Sie ein KI-Tool freigeben.", "en": "Seven questions before you approve an AI tool." }, "product": "ai-policy" },
+    { "no": "10", "status": "planned", "line": "security", "title": { "de": "Sind wir von NIS2 betroffen? Und warum Ihre Kunden trotzdem fragen.", "en": "Does NIS2 apply to us? And why your customers ask anyway." }, "product": "security-evidence", "tool": "nis2" }
+  ],
+  "shorts": [
+    { "id": "S-01-1", "video": "01", "status": "planned", "hook": { "de": "Ein Papier in der Schublade ist keine Regel.", "en": "A paper in a drawer is not a rule." } },
+    { "id": "S-01-2", "video": "01", "status": "planned", "hook": { "de": "Kein Gesetz verlangt eine KI-Richtlinie.", "en": "No law says you need an AI policy." } },
+    { "id": "S-01-3", "video": "01", "status": "planned", "hook": { "de": "Zwei Ihrer Leute haben eine KI-App auf dem privaten Telefon.", "en": "Two of your staff have an AI app on their private phones." } },
+    { "id": "S-01-4", "video": "01", "status": "planned", "hook": { "de": "Womit fangen Sie bei KI-Regeln an? Sieben Fragen.", "en": "Where do you start with AI rules? Seven questions." } },
+    { "id": "S-02-1", "video": "02", "status": "planned", "hook": { "de": "„Noch nicht“ ist eine vollständige Antwort im Sicherheitsfragebogen.", "en": "“Not yet” is a complete answer on a security questionnaire." } },
+    { "id": "S-02-2", "video": "02", "status": "planned", "hook": { "de": "Warum fragt Ihr Kunde plötzlich nach Ihrer Datensicherung?", "en": "Why does your customer suddenly ask about your backups?" } },
+    { "id": "S-02-3", "video": "02", "status": "planned", "hook": { "de": "Die Sicherheitsklauseln in Ihrem Vertrag stammen aus einem Anhang.", "en": "The security clauses in your contract come from one Annex." } },
+    { "id": "S-02-4", "video": "02", "status": "planned", "hook": { "de": "Welche Nachweise nimmt ein Sicherheitsfragebogen wirklich an?", "en": "Which evidence does a security questionnaire actually accept?" } },
+    { "id": "S-03-1", "video": "03", "status": "planned", "hook": { "de": "Vier Formen sagen Ihnen, was ein Satz wert ist.", "en": "Four shapes tell you how much a sentence is worth." } },
+    { "id": "S-03-2", "video": "03", "status": "planned", "hook": { "de": "Ein Handbuch, das aufführt, was es nicht weiß.", "en": "A handbook that lists what it does not know." } },
+    { "id": "S-03-3", "video": "03", "status": "planned", "hook": { "de": "Vierunddreißig Fragen hinein, sieben datierte Dokumente heraus.", "en": "Thirty-four questions in, seven dated documents out." } },
+    { "id": "S-03-4", "video": "03", "status": "planned", "hook": { "de": "Warum der Betrieb im Generator nicht echt ist.", "en": "Why the business in the generator is not real." } }
+  ]
+}

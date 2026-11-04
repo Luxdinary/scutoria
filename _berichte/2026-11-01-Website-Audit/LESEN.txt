@@ -1,0 +1,10 @@
+Scutoria Website-Audit, 01.11.2026
+
+Öffne index.html im Browser.
+Analysebericht: analysebericht.html
+Verbesserungsbericht: verbesserungsbericht.html
+Designs: variante-a.html, variante-b.html, variante-c.html
+
+Alle Berichte sind deutsch. Designs starten englisch und lassen sich auf Deutsch umschalten. Die Dateien funktionieren lokal ohne Installation. Keine Live-Änderung vorgenommen.
+
+Rohbelege enthalten technische Bestandsdaten und ausschließlich eigene fiktive Testläufe. Keine echte Zahlung oder E-Mail-Zustellung ausgeführt.

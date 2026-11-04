@@ -1,0 +1,23 @@
+{
+  "_zweck": "Fassung 2 von Video 02 (Stefan, 1.11.2026, „Ja, für alle“): neuer Einstieg als Frage (eigene Aufnahme), Rest aus der Flash-Spur der ersten Fassung, der Block „Hier ist Scutoria … keine Rechtsberatung“ wandert vom Anfang an die Stelle des bisherigen Schlusssatzes. Im Englischen sind die mitgesprochenen Pausenmarken („Short pause“, „Long pause“) herausgeschnitten und durch 0,8 s Stille ersetzt. Quelle: ton-de.wav und ton-en.wav der ersten Fassung (unbearbeitete Flash-Spuren), --woerter woerter-de/en.json; Stimmlage in einem Durchgang von ton-fassung.py angeglichen. Für ton-fassung.py.",
+  "de": [
+    { "datei": "C:/Users/Stefa/Videos/scutoria/fassung-2/02-security-questionnaire/stimme/01-de.wav", "woerter": "C:/Users/Stefa/Videos/scutoria/fassung-2/02-security-questionnaire/stimme/whisper-de/woerter-de.json", "bis_s": 14.3 },
+    { "von": "Die Lage ist in", "bis": "Die Stimme war synthetisch" },
+    { "von": "Hier ist", "bis": "Warum er kommt" },
+    { "von": "Als Nächstes auf diesem", "bis": "ENDE" }
+  ],
+  "en": [
+    { "datei": "C:/Users/Stefa/Videos/scutoria/fassung-2/02-security-questionnaire/stimme/01-en.wav", "woerter": "C:/Users/Stefa/Videos/scutoria/fassung-2/02-security-questionnaire/stimme/whisper-en/woerter-en.json", "bis_s": 14.3, "_bis": "ab 15,06 s spricht die Stimme „Short pause“ mit" },
+    { "von": "The situation is the", "bis_s": 114.08, "_bis": "„Short pause“ 114,25 bis 115,09 s" },
+    { "datei": "C:/Users/Stefa/Videos/scutoria/fassung-2/02-security-questionnaire/stimme/stille-0.8.wav" },
+    { "von_s": 115.34, "bis_s": 522.83, "_bis": "„Short pause“ 523,16 bis 523,94 s" },
+    { "datei": "C:/Users/Stefa/Videos/scutoria/fassung-2/02-security-questionnaire/stimme/stille-0.8.wav" },
+    { "von_s": 524.22, "bis_s": 617.52, "_bis": "„Short pause“ 617,61 bis 618,33 s; bei 617,44 klingt „promise“ noch mit −48 dB aus (Hinweis der Sitzung „Video 02: mitgesprochene Pausenmarken entfernen“)" },
+    { "datei": "C:/Users/Stefa/Videos/scutoria/fassung-2/02-security-questionnaire/stimme/stille-0.8.wav" },
+    { "von_s": 619.0, "bis_s": 682.76, "_bis": "„Short pause“ und „Long pause“ 683,02 bis 685,35 s" },
+    { "datei": "C:/Users/Stefa/Videos/scutoria/fassung-2/02-security-questionnaire/stimme/stille-0.8.wav" },
+    { "von_s": 685.9, "bis": "The voice was synthetic" },
+    { "von": "This is", "bis": "Why it comes" },
+    { "von": "Next on this channel", "bis": "ENDE" }
+  ]
+}

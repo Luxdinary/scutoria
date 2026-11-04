@@ -1,0 +1,3 @@
+Browser tab: 2, Title: "Belegt. Datiert. Vorzeigbar. · Scutoria", URL: "https://scutoria.com/de/".
+There has been no change in the accessibility tree.
+The focused UI element is 1 AXWebArea Belegt. Datiert. Vorzeigbar. · Scutoria, URL: scutoria.com/de/

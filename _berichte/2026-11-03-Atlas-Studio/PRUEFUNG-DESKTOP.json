@@ -1,0 +1,122 @@
+[
+  {
+    "variant": 1,
+    "page": "home",
+    "h1": "Der Betrieb wird zum Wissensraum.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 1,
+    "page": "library",
+    "h1": "Wissen, das weiterhilft.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 1,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 1,
+    "page": "tools",
+    "h1": "Erst verstehen.Dann ausprobieren.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 1,
+    "page": "studio",
+    "h1": "Ein Thema.Mehrere Wege zum Verstehen.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "home",
+    "h1": "Eine Frage. Ein klarer nächster Schritt.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "library",
+    "h1": "Wissen, das weiterhilft.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "tools",
+    "h1": "Erst verstehen.Dann ausprobieren.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "studio",
+    "h1": "Ein Thema.Mehrere Wege zum Verstehen.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "home",
+    "h1": "Wissen entdecken. Sicherer handeln.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "library",
+    "h1": "Wissen, das weiterhilft.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "tools",
+    "h1": "Erst verstehen.Dann ausprobieren.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "studio",
+    "h1": "Ein Thema.Mehrere Wege zum Verstehen.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  }
+]

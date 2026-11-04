@@ -1,0 +1,29 @@
+// PDF through a Chromium-based browser (Playwright). One browser per process, launched on first use.
+// PDF_CHANNEL selects the browser: empty uses Playwright's own Chromium (the Docker image), "msedge" or "chrome" use the installed browser.
+import { chromium } from 'playwright';
+
+let browserPromise = null;
+async function browser() {
+  if (!browserPromise) {
+    // On Windows (the laptop) the installed Edge is the default; on Linux (the Docker image) Playwright's Chromium.
+    const channel = process.env.PDF_CHANNEL || (process.platform === 'win32' ? 'msedge' : undefined);
+    browserPromise = chromium.launch({ headless: true, channel, args: ['--no-sandbox', '--disable-dev-shm-usage'] }).catch((e) => { browserPromise = null; throw e; });
+  }
+  return browserPromise;
+}
+
+export async function htmlToPdf(html) {
+  const b = await browser();
+  const page = await b.newPage();
+  try {
+    await page.setContent(html, { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+    return await page.pdf({ format: 'A4', printBackground: true, preferCSSPageSize: true });
+  } finally {
+    await page.close();
+  }
+}
+
+export async function closeBrowser() {
+  if (browserPromise) { const b = await browserPromise; browserPromise = null; await b.close(); }
+}

@@ -1,0 +1,84 @@
+DNS-Sicherung scutoria.com, abgefragt 2026-10-30 17:08 MON über dns.google (Google Public DNS, JSON-API)
+scutoria.com A:
+  scutoria.com.	3600	A	216.24.57.1
+scutoria.com MX:
+  scutoria.com.	3600	MX	0 scutoria-com.mail.protection.outlook.com.
+scutoria.com TXT:
+  scutoria.com.	3600	TXT	brevo-code:fe292ffdd44e84c1f986f9197de27d17
+  scutoria.com.	3600	TXT	NETORGFT21105009.onmicrosoft.com
+  scutoria.com.	3600	TXT	v=spf1 include:secureserver.net -all
+scutoria.com NS:
+  scutoria.com.	3600	NS	ns04.domaincontrol.com.
+  scutoria.com.	3600	NS	ns03.domaincontrol.com.
+www.scutoria.com A:
+  www.scutoria.com.	3600	CNAME	swk-shop.onrender.com.
+  swk-shop.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.
+  gcp-us-west1-1.origin.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.cdn.cloudflare.net.
+  gcp-us-west1-1.origin.onrender.com.cdn.cloudflare.net.	300	A	216.24.57.16
+  gcp-us-west1-1.origin.onrender.com.cdn.cloudflare.net.	300	A	216.24.57.18
+www.scutoria.com AAAA:
+  www.scutoria.com.	3600	CNAME	swk-shop.onrender.com.
+  swk-shop.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.
+  gcp-us-west1-1.origin.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.cdn.cloudflare.net.
+www.scutoria.com CNAME:
+  www.scutoria.com.	3600	CNAME	swk-shop.onrender.com.
+www.scutoria.com MX:
+  www.scutoria.com.	3600	CNAME	swk-shop.onrender.com.
+  swk-shop.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.
+  gcp-us-west1-1.origin.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.cdn.cloudflare.net.
+www.scutoria.com TXT:
+  www.scutoria.com.	3600	CNAME	swk-shop.onrender.com.
+  swk-shop.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.
+  gcp-us-west1-1.origin.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.cdn.cloudflare.net.
+www.scutoria.com NS:
+  www.scutoria.com.	3595	CNAME	swk-shop.onrender.com.
+  swk-shop.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.
+  gcp-us-west1-1.origin.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.cdn.cloudflare.net.
+www.scutoria.com CAA:
+  www.scutoria.com.	3597	CNAME	swk-shop.onrender.com.
+  swk-shop.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.
+  gcp-us-west1-1.origin.onrender.com.	300	CNAME	gcp-us-west1-1.origin.onrender.com.cdn.cloudflare.net.
+_dmarc.scutoria.com TXT:
+  _dmarc.scutoria.com.	3600	TXT	v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com
+brevo1._domainkey.scutoria.com A:
+  brevo1._domainkey.scutoria.com.	3600	CNAME	b1.scutoria-com.dkim.brevo.com.
+  b1.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo19.dkim.brevo.com.
+brevo1._domainkey.scutoria.com AAAA:
+  brevo1._domainkey.scutoria.com.	3600	CNAME	b1.scutoria-com.dkim.brevo.com.
+  b1.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo19.dkim.brevo.com.
+brevo1._domainkey.scutoria.com CNAME:
+  brevo1._domainkey.scutoria.com.	3600	CNAME	b1.scutoria-com.dkim.brevo.com.
+brevo1._domainkey.scutoria.com MX:
+  brevo1._domainkey.scutoria.com.	3600	CNAME	b1.scutoria-com.dkim.brevo.com.
+  b1.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo19.dkim.brevo.com.
+brevo1._domainkey.scutoria.com TXT:
+  brevo1._domainkey.scutoria.com.	3600	CNAME	b1.scutoria-com.dkim.brevo.com.
+  b1.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo19.dkim.brevo.com.
+  brevo19.dkim.brevo.com.	3600	TXT	k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwbRNmMHLd8i105CxWYpX+XCJTey4NtvAthzQD1f9671rRbyaW3iP8uY5YZVJrMvix70u+txW8S30U+wBkFHy84fBRIi0OGNt+Ma6a62AsIsV4mjX7rmaNGhLBY2jodQjxqi5debZLAEWGuIeoQxFdIHhYZE8x8ZZRSI8HSaYshQLbKTL17eub7Q4AWh46C0bDfWdhtCMHLUC8m3asxG/BwTUi3jZmmzCuf/1kf2zxW/96ctkyRPi5gaUo9VHoOu08tyiuI46OsXKS5XJD64VsTsx5xbpbOadpeddJGbFxEYSFZwklRmikoudmrXiVppK5RQh0jlImJ+HME1Bx1aIjwIDAQAB
+brevo1._domainkey.scutoria.com NS:
+  brevo1._domainkey.scutoria.com.	3600	CNAME	b1.scutoria-com.dkim.brevo.com.
+  b1.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo19.dkim.brevo.com.
+brevo1._domainkey.scutoria.com CAA:
+  brevo1._domainkey.scutoria.com.	3600	CNAME	b1.scutoria-com.dkim.brevo.com.
+  b1.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo19.dkim.brevo.com.
+brevo2._domainkey.scutoria.com A:
+  brevo2._domainkey.scutoria.com.	3600	CNAME	b2.scutoria-com.dkim.brevo.com.
+  b2.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo20.dkim.brevo.com.
+brevo2._domainkey.scutoria.com AAAA:
+  brevo2._domainkey.scutoria.com.	3600	CNAME	b2.scutoria-com.dkim.brevo.com.
+  b2.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo20.dkim.brevo.com.
+brevo2._domainkey.scutoria.com CNAME:
+  brevo2._domainkey.scutoria.com.	3600	CNAME	b2.scutoria-com.dkim.brevo.com.
+brevo2._domainkey.scutoria.com MX:
+  brevo2._domainkey.scutoria.com.	3600	CNAME	b2.scutoria-com.dkim.brevo.com.
+  b2.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo20.dkim.brevo.com.
+brevo2._domainkey.scutoria.com TXT:
+  brevo2._domainkey.scutoria.com.	3600	CNAME	b2.scutoria-com.dkim.brevo.com.
+  b2.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo20.dkim.brevo.com.
+  brevo20.dkim.brevo.com.	3600	TXT	k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArykoimnRxhxyB+d1IluDsq+TictYrEptknqQoptFoAaGo9jG3+9xIVpjRlHl3AH8bPTtafP+DlPvtaHU7FdettiP3PgBiSR8qcosL0vEMPoew02lf98SwSh7otjRKFaBiORsLk/lgxEY+tvRSVqB+m/RVynrOtE6IaqBXouz1dcQQVobj0PhDT9yXHR7tgSh+CH3toYuVOpi6sXj/Ma07S7csxppVCFPoLS37fj4yfhf4xv8n0HSJ6mr0xn+ZbBhHrxZsLvE+0YZRUZtTRcDO7M3+6R3/3Ys5bs5gOir5ABQS9XUSYJe0EU981ghx4TY+FAvgqATaRJ1QZh70Lm/2wIDAQAB
+brevo2._domainkey.scutoria.com NS:
+  brevo2._domainkey.scutoria.com.	3597	CNAME	b2.scutoria-com.dkim.brevo.com.
+  b2.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo20.dkim.brevo.com.
+brevo2._domainkey.scutoria.com CAA:
+  brevo2._domainkey.scutoria.com.	3600	CNAME	b2.scutoria-com.dkim.brevo.com.
+  b2.scutoria-com.dkim.brevo.com.	3600	CNAME	brevo20.dkim.brevo.com.

@@ -1,0 +1,849 @@
+<title>Scutoria Variante Saphir</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:dark;
+--ground:#080f20;--surface:#111d34;--raised:#172a49;--ink:#edf3ff;--muted:#a8b9d2;--accent:#4f8cff;--accent-strong:#6a9dff;--accent-tint:rgba(79,140,255,.12);--glass:rgba(79,140,255,.07);--glass-strong:rgba(79,140,255,.12);
+--button:#2f6be6;--button-hover:#2a63d9;--button-active:#2459c4;--hairline:rgba(226,232,246,.12);--control:rgba(226,232,246,.34);--silver:#cfd6e3;--edge:rgba(255,255,255,.09);
+--paper:#fbfbfd;--paper-ink:#141a24;--paper-muted:#5a6472;--paper-hair:rgba(20,26,36,.12);--paper-accent:#1f5fd1;
+--fact:#4f8cff;--interp:#b07cff;--uncertain:#ffd166;--gap:#ff6b6b;--amber:#f2b544;--teal:#2ec4b6;
+--cover-a:#11151d;--cover-b:#090b10;--cover-soft:#cfd6e3;--cover-brand:#7aa2ff;
+--sans:"Manrope","Segoe UI",Helvetica,Arial,sans-serif;--mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+--wrap:1240px;--r-card:20px;--r-field:12px;
+--sh-card:0 1px 2px rgba(0,0,0,.3),0 20px 50px rgba(0,0,0,.35);
+--sh-paper:0 1px 1px rgba(0,0,0,.22),0 6px 14px rgba(0,0,0,.24),0 24px 48px rgba(0,0,0,.36);
+--sh-lift:0 2px 2px rgba(0,0,0,.22),0 12px 24px rgba(0,0,0,.28),0 40px 72px rgba(0,0,0,.42);
+--t-fb:180ms;--t-card:260ms;--t-in:600ms;--ease:cubic-bezier(.2,.7,.2,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+.app{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(70% 34% at 72% -4%,rgba(79,140,255,.16),transparent 72%)}
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+.display{font-size:clamp(2.5rem,1.9rem + 2.6vw,3.9rem);line-height:1.02;letter-spacing:-.035em}
+.title{font-size:clamp(1.75rem,1.5rem + 1vw,2.25rem);line-height:1.1}
+.heading{font-size:clamp(1.25rem,1.15rem + .4vw,1.45rem);line-height:1.25;font-weight:700;letter-spacing:-.01em}
+.lead{font-size:clamp(1.1rem,1.02rem + .45vw,1.35rem);line-height:1.45;color:var(--muted);max-width:62ch}
+.kicker{font:700 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.mono{font-family:var(--mono)}
+.small{font-size:.9375rem;line-height:1.5}
+.muted{color:var(--muted)}
+.measure{max-width:62ch}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-strong);text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+img{max-width:100%;display:block}
+button{font:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--button);color:#fff;font:600 1rem var(--sans);border:1px solid transparent;cursor:pointer;transition:background var(--t-fb),border-color var(--t-fb);text-decoration:none;text-align:center}
+.btn:hover{background:var(--button-hover);color:#fff;text-decoration:none}
+.btn:active{background:var(--button-active)}
+.btn-ghost{background:transparent;border-color:var(--control);color:var(--ink)}
+.btn-ghost:hover{background:var(--accent-tint);color:var(--ink)}
+.btn-sm{min-height:40px;padding:0 14px;font-size:.9rem}
+.link-btn{background:none;border:0;padding:0;color:var(--accent);font:inherit;cursor:pointer;text-decoration:underline}
+.link-btn:hover{color:var(--accent-strong)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:24px;padding:3px 10px;border-radius:999px;font:700 11px/1.1 var(--mono);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--control);color:var(--muted);white-space:nowrap}
+.pill-available{border-color:transparent;background:var(--accent-tint);color:var(--accent)}
+.pill-preparing{border-color:transparent;background:rgba(242,181,68,.14);color:var(--amber)}
+.pill-production{border-color:transparent;background:rgba(46,196,182,.14);color:var(--teal)}
+.chip{font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--control);border-radius:999px;padding:8px 10px;color:var(--muted);white-space:nowrap}
+.card{background:var(--glass);border:1px solid var(--hairline);border-radius:var(--r-card);box-shadow:inset 0 1px 0 var(--edge);padding:24px;transition:transform var(--t-card) var(--ease),border-color var(--t-fb);min-width:0}
+.card:hover{border-color:rgba(207,214,227,.28)}
+.field{width:100%;min-height:48px;padding:0 14px;border-radius:var(--r-field);border:1px solid var(--control);background:rgba(8,15,32,.55);color:var(--ink);font:inherit}
+.field::placeholder{color:var(--muted)}
+label{display:block;font:600 .9rem var(--sans);margin-bottom:6px}
+/* Kopfleiste */
+.bar{position:sticky;top:0;z-index:20;background:rgba(8,15,32,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline)}
+.bar-in{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap}
+.brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink);min-height:44px}
+.brand:hover{text-decoration:none;color:var(--ink)}
+.brand svg{width:26px;height:26px;color:var(--accent)}
+.wordmark{font:800 .95rem var(--sans);letter-spacing:.14em}
+.nav-toggle{display:none;margin-left:auto;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--control);background:transparent;color:var(--ink);cursor:pointer}
+.bar-nav{display:flex;align-items:center;gap:16px;margin-left:auto;flex:1}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-links a{color:var(--muted);padding:0 12px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center;font-weight:600}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.nav-links a[aria-current=page]{color:var(--ink);background:var(--accent-tint)}
+.bar-tools{display:flex;gap:8px;align-items:center}
+.bar-tools .btn-sm{border:1px solid var(--control);background:transparent;color:var(--ink);border-radius:999px;cursor:pointer}
+.bar-tools .btn-sm:hover{background:var(--accent-tint)}
+@media (max-width:900px){.nav-toggle{display:inline-flex;align-items:center}.bar-nav{display:none;width:100%;flex-direction:column;align-items:stretch;padding-bottom:12px}.bar-nav.open{display:flex}.nav-links{flex-direction:column;margin-left:0}.bar-tools{flex-wrap:wrap}}
+/* Hero */
+.hero{padding-block:40px 24px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:center}
+.hero-copy{display:grid;gap:20px;min-width:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pillbtn{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--control);background:transparent;color:var(--ink);font:600 .95rem var(--sans);cursor:pointer;transition:background var(--t-fb),border-color var(--t-fb)}
+.pillbtn[aria-pressed=true]{background:var(--accent-tint);border-color:var(--accent)}
+.sit{display:grid;gap:12px;padding-top:8px;border-top:1px solid var(--hairline)}
+.steps{list-style:none;margin:0;padding:0 0 0 16px;display:grid;gap:10px;border-left:1px solid var(--hairline)}
+.stepk{display:block;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.steps li p{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+.steps li:first-child p{color:var(--ink)}
+.swap{transition:opacity 240ms var(--ease),transform 240ms var(--ease)}
+.swap.is-out{opacity:0;transform:translateY(12px)}
+@media (max-width:980px){.hero-grid{grid-template-columns:1fr}}
+/* Bühne */
+.stage-fig{margin:0;display:grid;gap:8px;min-width:0}
+.stage{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3.3;background:#0a1324;border:1px solid var(--edge);box-shadow:var(--sh-card);transition:transform 200ms var(--ease);isolation:isolate}
+.stage-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+.stage-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,15,32,0) 30%,rgba(8,15,32,.88) 100%)}
+.stage-edge{position:absolute;inset:0;border-radius:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(207,214,227,.08);pointer-events:none}
+.stage-label{position:absolute;left:18px;top:16px;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--silver);background:rgba(8,15,32,.55);border:1px solid rgba(207,214,227,.18);border-radius:999px;padding:7px 11px}
+.stage-books{position:absolute;right:5%;bottom:7%;display:flex;gap:14px;align-items:flex-end}
+.stage-sheet{position:absolute;left:5%;bottom:7%;width:min(58%,360px)}
+.stage-big{position:absolute;right:10%;bottom:9%}
+@media (max-width:700px){.stage{aspect-ratio:4/3.9}.stage-books{display:none}.stage-sheet{width:72%;left:6%}.stage-big{right:8%}}
+/* Blatt */
+.sheet-wrap{position:relative}
+.sheet-back{position:absolute;inset:0;transform:translate(14px,10px) rotate(2deg);background:#e9ecf3;border-radius:6px;box-shadow:var(--sh-paper)}
+.sheet{position:relative;background:var(--paper);color:var(--paper-ink);border-radius:6px;padding:18px 20px 16px;box-shadow:var(--sh-paper);transform:rotate(2deg);font-size:.875rem;line-height:1.5}
+.sheet-wrap.flat .sheet,.sheet-wrap.flat .sheet-back{transform:none}
+.sheet-head{display:flex;justify-content:space-between;gap:10px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--paper-muted);border-bottom:1px solid var(--paper-hair);padding-bottom:8px;margin-bottom:10px}
+.sheet-title{font:800 1.05rem/1.2 var(--sans);letter-spacing:-.01em;display:block}
+.sheet-biz{color:var(--paper-muted);font-size:.8rem;margin:2px 0 10px}
+.sheet-line{margin:0 0 8px;padding-left:12px;border-left:2px solid var(--paper-accent)}
+.sheet-src{font:400 11px/1.45 var(--mono);color:var(--paper-muted);border-top:1px solid var(--paper-hair);padding-top:8px;margin-top:10px}
+.settle{animation:settle 700ms var(--ease) both}
+@keyframes settle{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* Buchobjekt */
+.book{position:relative;width:var(--bw,150px);aspect-ratio:3/4.3;flex:none;font-size:calc(var(--bw,150px)/12);transform:perspective(800px) rotateY(-12deg);transform-origin:left center;transition:transform var(--t-card) var(--ease)}
+.book-face{position:absolute;inset:0;border-radius:3px 9px 9px 3px;background:linear-gradient(180deg,var(--cover-a),var(--cover-b));border:1px solid rgba(207,214,227,.2);border-left:4px solid rgba(207,214,227,.12);box-shadow:var(--sh-card),inset 1px 0 0 rgba(255,255,255,.08);display:flex;flex-direction:column;padding:11% 9% 9% 12%;color:#fff;overflow:hidden}
+.book-pages{position:absolute;right:-5px;top:5px;bottom:5px;width:5px;background:var(--silver);opacity:.7;border-radius:0 2px 2px 0}
+.book-stripe{display:block;height:.35em;width:40%;background:var(--line);border-radius:2px;margin-bottom:9%}
+.book-no{font:500 .72em var(--mono);letter-spacing:.1em;color:var(--cover-brand);text-transform:uppercase}
+.book-title{display:block;font:800 1.15em/1.15 var(--sans);letter-spacing:-.01em;margin:6% 0 auto}
+.book-series{font:400 .62em var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--cover-soft)}
+.book-cpill{position:absolute;right:8%;top:8%;font:700 .6em var(--mono);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--control);border-radius:999px;padding:.3em .6em;color:var(--muted)}
+.book.is-concept .book-face{background:rgba(8,15,32,.35);border:1px dashed rgba(207,214,227,.4);border-left-width:4px;box-shadow:none;color:var(--muted)}
+.book.is-concept .book-pages{opacity:.25}
+.book.is-concept .book-stripe{opacity:.45}
+.book.is-concept .book-no{color:var(--muted)}
+a:hover .book,a:focus-visible .book,button:hover .book,button:focus-visible .book,.lift:hover .book{transform:perspective(800px) rotateY(-12deg) translateY(-8px)}
+/* Abschnitte */
+.section{padding-block:72px}
+.section+.section{border-top:1px solid var(--hairline)}
+@media (min-width:900px){.section{padding-block:96px}}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:32px;flex-wrap:wrap}
+.section-head>div{display:grid;gap:10px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+@media (max-width:900px){.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+.path{cursor:pointer;text-align:left;color:var(--ink);display:grid;gap:8px;align-content:start}
+.path[aria-pressed=true]{border-color:var(--accent);background:var(--glass-strong)}
+.path-ico{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;background:var(--accent-tint);color:var(--accent);margin-bottom:6px}
+.path-feedback{margin-top:20px;padding:14px 18px;border-left:2px solid var(--accent);color:var(--muted);display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.products{display:grid;gap:24px}
+.product{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;align-items:center}
+.product-cover{display:flex;justify-content:center;align-items:center;padding:30px 10px;background:rgba(8,15,32,.55);border-radius:16px;border:1px solid var(--hairline);min-height:100%}
+.product-cover:hover{text-decoration:none}
+.product-body{display:grid;gap:14px;min-width:0}
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;font:400 .85rem var(--mono);color:var(--muted)}
+.facts li::before{content:"";display:inline-block;width:6px;height:6px;background:var(--accent);margin-right:8px;vertical-align:middle}
+.price-line{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.price{font:500 2rem/1 var(--mono);letter-spacing:-.02em}
+.prep-in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center}
+.prep-in>div{display:grid;gap:10px;justify-items:start}
+@media (max-width:700px){.product{grid-template-columns:1fr}.prep-in{grid-template-columns:1fr}}
+.how{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;padding-top:28px}
+.how-line{position:absolute;left:0;right:0;top:0;height:2px;background:var(--hairline);overflow:hidden}
+.how-line::after{content:"";position:absolute;inset:0;background:var(--accent);transform:scaleX(var(--fill,0));transform-origin:left;transition:transform 200ms linear}
+.how-step{display:grid;gap:8px;align-content:start}
+.how-step .num{font:500 12px var(--mono);color:var(--accent);letter-spacing:.14em}
+@media (max-width:800px){.how{grid-template-columns:1fr;padding-top:0;padding-left:24px}.how-line{right:auto;width:2px;height:100%}.how-line::after{transform:scaleY(var(--fill,0));transform-origin:top}}
+.markers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.marker{display:grid;gap:10px;align-content:start}
+.marker svg{width:56px;height:56px}
+.mk-stroke{stroke-dasharray:80;stroke-dashoffset:80;transition:stroke-dashoffset 500ms var(--ease)}
+.drawn .mk-stroke{stroke-dashoffset:0}
+.mk-fill{opacity:0;transition:opacity 300ms 300ms}
+.drawn .mk-fill{opacity:1}
+.mk-pop{opacity:0;transform:scale(.6);transform-origin:center;transition:opacity 500ms var(--ease),transform 500ms var(--ease)}
+.drawn .mk-pop{opacity:1;transform:none}
+.mk-row{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.mk-row span{display:inline-flex;align-items:center;gap:8px;font:500 .85rem var(--mono);color:var(--muted)}
+.mk-row svg{width:18px;height:18px}
+@media (max-width:900px){.markers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.before-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center}
+.before-card>div{display:grid;gap:8px;justify-items:start}
+.tool-card{display:grid;gap:8px;align-content:start;justify-items:start}
+.studio-teaser{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px;align-items:stretch}
+.studio-side{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:800px){.studio-teaser{grid-template-columns:1fr}}
+.wait-form{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-top:16px}
+.wait-form>div{flex:1 1 260px}
+/* Poster */
+.poster{position:relative;display:grid;align-content:end;gap:8px;padding:20px;aspect-ratio:16/9;width:100%;border-radius:16px;background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--sh-card);color:var(--ink);text-align:left;cursor:pointer;overflow:hidden;transition:transform var(--t-card) var(--ease),border-color var(--t-fb);min-width:0}
+.poster::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--line)}
+.poster-bg{position:absolute;right:12px;top:-6px;font:800 7rem/1 var(--sans);letter-spacing:-.06em;color:rgba(237,243,255,.06);pointer-events:none}
+.poster:hover,.poster:focus-visible{transform:translateY(-8px);border-color:rgba(207,214,227,.3)}
+.poster-no{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);position:relative}
+.poster-title{font:800 clamp(1.05rem,.95rem + .6vw,1.5rem)/1.15 var(--sans);letter-spacing:-.02em;position:relative}
+.poster-foot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;position:relative}
+.poster.v{aspect-ratio:9/16;padding:16px}
+.poster.v .poster-title{font-size:1rem}
+.poster.v .poster-bg{font-size:4rem}
+.studio-feature{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px;margin-bottom:56px}
+.feature-side{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:800px){.studio-feature{grid-template-columns:1fr}}
+.row-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.row-arrows{display:flex;gap:8px}
+.row-arrows button{min-width:44px;min-height:44px;border-radius:999px;border:1px solid var(--control);background:transparent;color:var(--ink);cursor:pointer}
+.row-arrows button:hover{background:var(--accent-tint)}
+.shorts-row{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 18px;scrollbar-width:thin;scrollbar-color:var(--control) transparent}
+.shorts-row>*{flex:0 0 190px;scroll-snap-align:start}
+.programme{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.prog-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;padding:18px 20px;border:1px solid var(--hairline);border-left:4px solid var(--line);border-radius:14px;background:var(--glass)}
+.prog-row .num{font:500 1.4rem/1 var(--mono);color:var(--muted);padding-top:4px}
+.prog-row>div{display:grid;gap:8px;min-width:0}
+.related{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.9rem;align-items:center}
+.related .k{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+/* Bibliothek */
+.page-head{padding-block:40px 32px;display:grid;gap:14px}
+.lib-grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;align-items:start;padding-bottom:80px}
+.lib-rail{position:sticky;top:84px;display:grid;gap:16px}
+.rail-filters{display:grid;gap:4px}
+.rail-filters button{text-align:left;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid transparent;background:transparent;color:var(--muted);font:600 1rem var(--sans);cursor:pointer}
+.rail-filters button:hover{color:var(--ink)}
+.rail-filters button[aria-pressed=true]{background:var(--accent-tint);color:var(--ink);border-color:var(--hairline)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.card-hit{display:block;width:100%;text-align:left;background:none;border:0;padding:0;color:inherit;cursor:pointer;font:inherit}
+.card-hit:hover{text-decoration:none;color:inherit}
+.cover-stage{display:flex;justify-content:center;padding:30px 10px 22px;background:rgba(8,15,32,.55);border-radius:14px;border:1px solid var(--hairline)}
+.card-meta{display:grid;gap:8px;padding-top:16px;justify-items:start}
+.card-meta h3{font-size:1.1rem;line-height:1.25;font-weight:700;letter-spacing:-.01em}
+.card.is-concept{background:transparent;border-style:dashed}
+@media (max-width:900px){.lib-grid{grid-template-columns:1fr}.lib-rail{position:static}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}}
+/* Produkt */
+.prod-hero{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:40px;align-items:center;padding-block:40px 24px}
+.prod-copy{display:grid;gap:18px;min-width:0}
+@media (max-width:980px){.prod-hero{grid-template-columns:1fr}}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--hairline);margin-bottom:24px;overflow-x:auto}
+.tabs button{min-height:48px;padding:0 16px;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);font:600 1rem var(--sans);cursor:pointer;white-space:nowrap;margin-bottom:-1px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabpanel{display:grid;gap:16px}
+.tabpanel ol{margin:0;padding-left:0;list-style:none;display:grid;gap:8px}
+.tabpanel ol li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--hairline)}
+.tabpanel ol li .mono{color:var(--accent);font-size:.85rem;padding-top:3px}
+.prod-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:start;padding-block:24px 72px}
+.price-card{position:sticky;top:84px;display:grid;gap:12px;justify-items:start}
+.price-big{font:500 3rem/1 var(--mono);letter-spacing:-.03em}
+@media (max-width:980px){.prod-body{grid-template-columns:1fr}.price-card{position:static}}
+/* Tools */
+.tool-layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:32px;align-items:start;padding-bottom:80px}
+.tool-list{display:grid;gap:8px}
+.tool-sel{text-align:left;display:grid;gap:4px;min-height:56px;padding:12px 14px;border-radius:12px;border:1px solid var(--hairline);background:var(--glass);color:var(--ink);cursor:pointer;transition:border-color var(--t-fb),background var(--t-fb)}
+.tool-sel:hover{border-color:rgba(207,214,227,.3)}
+.tool-sel[aria-pressed=true]{border-color:var(--accent);background:var(--accent-tint)}
+.tool-sel.is-concept{color:var(--muted);background:transparent;border-style:dashed}
+.tool-sel small{font:400 .8rem var(--mono);color:var(--muted)}
+.workspace{background:var(--glass);border:1px solid var(--hairline);border-radius:20px;padding:28px;display:grid;gap:18px;box-shadow:inset 0 1px 0 var(--edge)}
+.ws-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+textarea.field{min-height:150px;padding:12px 14px;resize:vertical;font:400 .9rem/1.5 var(--mono)}
+.ws-out{min-height:150px;padding:12px 14px;border-radius:12px;background:rgba(8,15,32,.55);border:1px solid var(--hairline);font:400 .9rem/1.5 var(--mono);white-space:pre-wrap;word-break:break-word}
+@media (max-width:900px){.tool-layout{grid-template-columns:1fr}.ws-grid{grid-template-columns:1fr}}
+/* Fuß, Dialog, Bewegung */
+.foot{border-top:1px solid var(--hairline);padding-block:40px 48px;margin-top:auto;background:rgba(8,15,32,.6)}
+.foot-in{display:grid;gap:16px}
+.foot-brand{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.foot-brand svg{width:22px;height:22px;color:var(--accent)}
+.foot-links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.foot-links a{min-height:44px;display:inline-flex;align-items:center}
+.dlg{border:0;padding:0;background:transparent;max-width:min(680px,calc(100% - 32px));width:100%;margin:auto}
+.dlg::backdrop{background:rgba(8,15,32,.78)}
+.dlg-in{background:var(--surface);border:1px solid var(--hairline);border-radius:20px;padding:28px;display:grid;gap:16px;color:var(--ink);box-shadow:var(--sh-card);max-height:85vh;overflow:auto;justify-items:start}
+.dlg-in .sheet-wrap{width:100%;justify-self:stretch}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity var(--t-in) var(--ease),transform var(--t-in) var(--ease);transition-delay:calc(var(--i,0)*40ms)}
+.reveal.in{opacity:1;transform:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.settle{animation:none}*{transition-duration:0ms!important;animation-duration:0ms!important}}
+html.no-motion{scroll-behavior:auto}
+.no-motion .reveal{opacity:1;transform:none;transition:none}
+.no-motion .settle{animation:none}
+.no-motion *{transition-duration:0ms!important;animation-duration:0ms!important}
+.no-motion .stage{transform:none!important}
+</style>
+<div class="app" id="app" lang="de">
+  <header class="bar" id="hdr"></header>
+  <main id="main"></main>
+  <footer class="foot" id="foot"></footer>
+</div>
+<dialog class="dlg" id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg-in">
+    <div id="dlgBody" style="display:grid;gap:14px;justify-items:start;width:100%"></div>
+    <button class="btn btn-ghost dlg-close" type="button" id="dlgClose">Schließen</button>
+  </div>
+</dialog>
+<script>
+window.SC = {
+  meta: { stand: { de: "2. November 2026", en: "2 November 2026" }, live: "https://scutoria.com" },
+
+  ui: {
+    de: {
+      start: "Start", library: "Bibliothek", product: "Produkt", tools: "Tools", studio: "Studio", account: "Konto",
+      language: "English", motionOn: "Bewegung: an", motionOff: "Bewegung: aus", draft: "Entwurf",
+      available: "Verfügbar", preparing: "In Vorbereitung", concept: "Konzept", inProduction: "In Produktion", planned: "Geplant",
+      search: "Titel oder Thema suchen", filters: ["Alle", "KI", "Sicherheit", "Praxis"], entries: "Einträge",
+      open: "Öffnen", viewAll: "Alles ansehen", toLive: "Auf scutoria.com öffnen", sample: "Muster ansehen", samplePdf: "Muster-PDF öffnen",
+      choose: "Wählen Sie eine Situation", flow: "Von der Frage zum vorzeigbaren Dokument",
+      steps: ["1 · Die Frage", "2 · Ihre Entscheidung", "3 · Der Nachweis"], play: "Ablauf zeigen",
+      exampleNote: "Erfundener Beispielbetrieb. Das Dokument hält eine Entscheidung fest; es bescheinigt nichts.",
+      noLegal: "Quellenbasiert. Keine Rechtsberatung.",
+      forWhom: "Für Betriebe ohne IT-Abteilung. Quellen mit Abrufdatum, offene Punkte markiert.",
+      draftNote: "Designentwurf vom 2. November 2026, nicht veröffentlicht. Symbolbilder sind KI-generierte Platzhalter. Titel und Tools mit der Kennzeichnung „Konzept“ gibt es nicht; nichts in diesem Entwurf kann gekauft werden.",
+      conceptNote: "Konzepttitel aus der Designstudie. Nicht verfügbar, kein Termin.",
+      conceptToolNote: "Konzept aus der Designstudie. Dieses Tool gibt es nicht.",
+      pathsTitle: "Drei Wege hinein", libraryTitle: "Die Scutoria Bibliothek.",
+      libraryIntro: "Zwei Toolkits sind verfügbar, eines ist in Vorbereitung. Die übrigen Titel sind Konzepte und als solche gekennzeichnet.",
+      countLine: "2 verfügbar · 1 in Vorbereitung · 18 Konzepte",
+      whyTitle: "Warum es im Alltag zählt",
+      howTitle: "So läuft es",
+      markersTitle: "Belegt, datiert, vorzeigbar",
+      markersIntro: "Vier Marker sagen in jedem Dokument, was ein Satz wert ist. Immer mit Form, nie nur mit Farbe.",
+      beforeTitle: "Vorher ansehen",
+      beforeIntro: "Handbuch, Beispielbetrieb und Muster-PDF sind offen, bevor Sie kaufen.",
+      productsTitle: "Zwei Toolkits, ein drittes in Vorbereitung",
+      toolsTitle: "Tools für Ihre Belegschaft",
+      toolsIntro: "Zwei Prüfungen im Browser und vier Memo-Generatoren. Jedes Tool erklärt auf seiner Seite, was mit Ihren Daten passiert und wo seine Grenzen liegen.",
+      toolsPageTitle: "Wissen, das Sie ausprobieren können.",
+      demoKicker: "Design-Demo · läuft nur in dieser Seite",
+      demoInput: "Fiktiven Beispieltext bearbeiten",
+      demoSample: "Bitte Alex Beispiel unter alex@example.com zurückrufen, Angebot 2026-118.",
+      demoRun: "E-Mail-Muster ersetzen",
+      demoOutput: "Ergebnis der Design-Demo",
+      demoLimit: "Diese Demo ersetzt nur E-Mail-Muster und zeigt die Bedienung. Sie ist nicht der Scutoria-Prüfer und bewertet keine Weitergabe.",
+      demoLive: "Echtes Tool auf scutoria.com öffnen",
+      studioTitle: "Studio: zehn Erklärvideos, vierzig Shorts, zwei Sprachen.",
+      studioIntro: "Jedes Video gehört zu einem Toolkit oder Tool. Die ersten sind in Produktion; Termine folgen. Veröffentlicht wird nach dem Live-Gang der Website.",
+      studioFeatured: "Langvideo 01", studioShorts: "Shorts und Reels, 65 bis 90 Sekunden", studioProgramme: "Das Programm",
+      previewSoon: "Vorschau folgt", noVideoNote: "Noch kein Video veröffentlicht. Poster und Titel sind echt, der Player kommt mit dem ersten Upload.",
+      related: "Dazu passt", relatedVideo: "Video", relatedTool: "Tool", relatedHandbook: "Handbuch",
+      waitlistTitle: "Vom nächsten Toolkit erfahren",
+      waitlistText: "Eine Mail, wenn das KI-Einrichtungs-Toolkit erscheint. Keine Werbung dazwischen.",
+      waitlistButton: "Eintragen", email: "E-Mail-Adresse",
+      waitlistDraft: "Im Entwurf ohne Funktion. Die Eintragung gibt es auf scutoria.com.",
+      price: "Preis und Lizenz", founder: "Gründerpreis für die ersten zehn Käufer", regular: "danach 199 € im Jahr",
+      perYear: "im Jahr", licence: "Jahreslizenz, zwölf Monate, keine automatische Verlängerung. Umsatzsteuer laut Kasse; UID kann eingegeben werden.",
+      buy: "Jahreslizenz kaufen", buyNote: "Führt zur echten Produktseite. Im Entwurf kein Kauf.",
+      whatYouGet: "Was Sie bekommen", questions: "Fragen", documents: "Sieben datierte Dokumente", formats: "PDF · DOCX · XLSX",
+      productTabs: ["Überblick", "Inhalt", "Ablauf", "Grenzen"],
+      isNot: "Was es ist, und was es nicht ist",
+      isNotText: "Ein Toolkit belegt, was Ihr Betrieb geregelt hat, seit wann, für welche Tools und wer davon weiß. Es behauptet nirgends, dass der Betrieb damit eine Vorschrift erfüllt. Keine Rechtsberatung.",
+      switchProduct: "Anderes Toolkit", handbook: "Handbuch lesen", close: "Schließen",
+      legal: [["Impressum", "/de/impressum"], ["Datenschutz", "/de/datenschutz"], ["AGB", "/de/agb"], ["Widerruf", "/de/widerruf"], ["Vertrag widerrufen", "/de/vertrag-widerrufen"], ["Über Scutoria", "/de/ueber"]]
+    },
+    en: {
+      start: "Home", library: "Library", product: "Product", tools: "Tools", studio: "Studio", account: "Account",
+      language: "Deutsch", motionOn: "Motion: on", motionOff: "Motion: off", draft: "Draft",
+      available: "Available", preparing: "In preparation", concept: "Concept", inProduction: "In production", planned: "Planned",
+      search: "Search a title or topic", filters: ["All", "AI", "Security", "Practice"], entries: "items",
+      open: "Open", viewAll: "View all", toLive: "Open on scutoria.com", sample: "See the sample", samplePdf: "Open the sample PDF",
+      choose: "Choose a situation", flow: "From a question to a document you can show",
+      steps: ["1 · The question", "2 · Your decision", "3 · The evidence"], play: "Play the steps",
+      exampleNote: "Example business, invented. The document records a decision; it does not certify anything.",
+      noLegal: "Source-based. No legal advice.",
+      forWhom: "For businesses without an IT department. Sources with retrieval dates, open points marked.",
+      draftNote: "Design draft of 2 November 2026, not published. Artwork is AI-generated placeholder imagery. Titles and tools marked “Concept” do not exist; nothing in this draft can be bought.",
+      conceptNote: "Concept title from the design study. Not available, no date.",
+      conceptToolNote: "Concept from the design study. This tool does not exist.",
+      pathsTitle: "Three ways in", libraryTitle: "The Scutoria library.",
+      libraryIntro: "Two toolkits are available, one is in preparation. The remaining titles are concepts and marked as such.",
+      countLine: "2 available · 1 in preparation · 18 concepts",
+      whyTitle: "Why it matters at work",
+      howTitle: "How it works",
+      markersTitle: "Sourced, dated, ready to show",
+      markersIntro: "Four markers say in every document how much a sentence is worth. Always with a shape, never colour alone.",
+      beforeTitle: "See it before you buy",
+      beforeIntro: "Handbook, example business and sample PDF are open before you pay.",
+      productsTitle: "Two toolkits, a third in preparation",
+      toolsTitle: "Tools for your staff",
+      toolsIntro: "Two checks in the browser and four memo generators. Each tool explains on its page what happens to your data and where its limits are.",
+      toolsPageTitle: "Knowledge you can try.",
+      demoKicker: "Design demo · runs only in this page",
+      demoInput: "Edit the fictional sample text",
+      demoSample: "Please call Alex Example at alex@example.com about quote 2026-118.",
+      demoRun: "Replace email patterns",
+      demoOutput: "Design demo result",
+      demoLimit: "This demo replaces email patterns only and shows the interaction. It is not the Scutoria checker and does not assess disclosure.",
+      demoLive: "Open the real tool on scutoria.com",
+      studioTitle: "Studio: ten explainers, forty shorts, two languages.",
+      studioIntro: "Every video belongs to a toolkit or a tool. The first ones are in production; dates follow. Publication starts once the website goes live.",
+      studioFeatured: "Explainer 01", studioShorts: "Shorts and reels, 65 to 90 seconds", studioProgramme: "The programme",
+      previewSoon: "Preview to follow", noVideoNote: "No video published yet. Posters and titles are real; the player arrives with the first upload.",
+      related: "Goes with", relatedVideo: "Video", relatedTool: "Tool", relatedHandbook: "Handbook",
+      waitlistTitle: "Hear about the next toolkit",
+      waitlistText: "One email when the AI Setup Toolkit is released. No advertising in between.",
+      waitlistButton: "Sign up", email: "Email address",
+      waitlistDraft: "No function in this draft. Sign up on scutoria.com.",
+      price: "Price and licence", founder: "Founder price for the first ten buyers", regular: "then €199 per year",
+      perYear: "per year", licence: "Annual licence, twelve months, no automatic renewal. VAT according to the checkout; VAT ID can be entered.",
+      buy: "Buy annual licence", buyNote: "Leads to the real product page. No purchase in this draft.",
+      whatYouGet: "What you get", questions: "questions", documents: "Seven dated documents", formats: "PDF · DOCX · XLSX",
+      productTabs: ["Overview", "Contents", "Process", "Limits"],
+      isNot: "What it is, and what it is not",
+      isNotText: "A toolkit shows what your business has regulated, since when, for which tools and who knows about it. It never claims that the business thereby meets a regulation. No legal advice.",
+      switchProduct: "Other toolkit", handbook: "Read the handbook", close: "Close",
+      legal: [["Legal notice", "/legal"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Withdrawal", "/withdrawal"], ["Withdraw from contract", "/withdraw"], ["About Scutoria", "/about"]]
+    }
+  },
+
+  claim: { de: "Belegt. Datiert. Vorzeigbar.", en: "Sourced. Dated. Ready to show." },
+  eyebrow: { de: "Sicherheit · Wirtschaft · KI", en: "Security · Business · AI" },
+  hero: {
+    de: { h1: "Jemand fragt. Was zeigen Sie?", lead: "Eine Kollegin fragt, ob ein Text in ein KI-Tool darf. Ein Kunde schickt einen Sicherheitsfragebogen. An einem Rechner passiert etwas. Wählen Sie eine Situation und sehen Sie, wie aus der Frage eine Entscheidung und ein datiertes Dokument wird.", primary: "Beispiel ansehen", secondary: "Toolkits ansehen" },
+    en: { h1: "Someone asks. What do you show?", lead: "A colleague asks whether a text may go into an AI tool. A customer sends a security questionnaire. Something happens on a computer. Choose a situation and see the question become a decision and a dated document.", primary: "Show the example", secondary: "See the toolkits" }
+  },
+
+  /* Die drei Situationen der Startseite mit den echten Musterdokumenten (Beispielbetrieb, 23.10.2026). */
+  situations: [
+    { id: "ai", product: "ai-policy", title: { de: "KI im Betrieb", en: "AI at work" },
+      question: { de: "Darf unsere Belegschaft Angebote mit einem KI-Tool entwerfen?", en: "May our staff draft quotes with an AI tool?" },
+      doc: { code: "D1", date: "23.10.2026", name: { de: "KI-Nutzungsrichtlinie", en: "AI usage policy" }, business: { de: "Muster Elektrotechnik e.U.", en: "Example Electrical Ltd" },
+        lines: [{ de: "„Entwürfe für Angebote (nur Text; Preise, Kalkulation und Kundenangaben werden außerhalb des Tools eingesetzt).“", en: "“Drafts of quotes and offers (text only; prices, calculations and customer details are added outside the tool).”" },
+                { de: "„Im Zweifel wird nichts eingegeben, sondern Büroleitung gefragt.“", en: "“In case of doubt nothing is entered; office management is asked first.”" }],
+        source: { de: "KI-Nutzungsrichtlinie (D1), § 2 und § 3, Fassung 23. Oktober 2026, unterschrieben von Inhaber oder Geschäftsführung", en: "AI usage policy (D1), § 2 and § 3, version 23 October 2026, signed by the owner or management" } } },
+    { id: "evidence", product: "security-evidence", title: { de: "Ein Kunde fragt nach Nachweisen", en: "A customer asks for evidence" },
+      question: { de: "Ihr Kunde schickt einen Sicherheitsfragebogen. Gibt es eine Datensicherung?", en: "Your customer sends a security questionnaire. Is there a backup?" },
+      doc: { code: "D1", date: "23.10.2026", name: { de: "Selbstauskunft Informationssicherheit", en: "Security self-declaration" }, business: { de: "Muster Elektrotechnik e.U.", en: "Example Electrical Ltd" },
+        lines: [{ de: "„Teilweise: täglich auf das NAS im Büro, keine Offline-Kopie · geplant bis 22. November 2026.“", en: "“Partly: daily to the NAS in the office, no offline copy · planned by 22 November 2026.”" },
+                { de: "„Ein ehrliches ‚noch nicht‘ mit Termin ist eine vollständige Antwort.“", en: "“An honest ‘not yet’ with a date is a complete answer.”" }],
+        source: { de: "Selbstauskunft Informationssicherheit (D1), Feld D1, Stand 23. Oktober 2026", en: "Security self-declaration (D1), field D1, as of 23 October 2026" } } },
+    { id: "incident", product: "security-evidence", title: { de: "Ein Vorfall", en: "Something happens" },
+      question: { de: "Auf einem Bildschirm sind Dateien plötzlich verschlüsselt. Was passiert in der ersten Stunde?", en: "Files on a screen are suddenly encrypted. What happens in the first hour?" },
+      doc: { code: "D3", date: "23.10.2026", name: { de: "Notfallkarte", en: "Emergency card" }, business: { de: "Muster Elektrotechnik e.U.", en: "Example Electrical Ltd" },
+        lines: [{ de: "„1. Trennen. 2. Nicht löschen, nicht neu aufsetzen. 3. Anrufen. 4. Aufschreiben.“", en: "“1. Disconnect. 2. Do not delete, do not reinstall. 3. Call. 4. Write down.”" },
+                { de: "„Die Nummern stehen auf dieser Karte, nicht im verschlüsselten Rechner.“", en: "“The numbers are on this card, not in the encrypted computer.”" }],
+        source: { de: "Notfallkarte (D3), gedruckt 23. Oktober 2026, hängt neben dem Feuerlöscher", en: "Emergency card (D3), printed 23 October 2026, hangs next to the fire extinguisher" } } }
+  ],
+
+  paths: [
+    { id: "ai", topic: "KI", shape: "square", title: { de: "KI im Betrieb", en: "AI at work" }, text: { de: "Regeln, Eingaben und Verantwortung zusammen denken.", en: "Connect rules, inputs and responsibility." }, page: "product", product: "ai-policy" },
+    { id: "security", topic: "Sicherheit", shape: "diamond", title: { de: "Sicherheitsnachweise", en: "Security evidence" }, text: { de: "Vorhandenes nachvollziehbar zeigen und Lücken benennen.", en: "Show what exists and name what is still open." }, page: "product", product: "security-evidence" },
+    { id: "practice", topic: "Praxis", shape: "arrow", title: { de: "Wissen anwenden", en: "Put knowledge to work" }, text: { de: "Lesen, ausprobieren und Schritt für Schritt umsetzen.", en: "Read, try and apply one step at a time." }, page: "tools" }
+  ],
+
+  why: [
+    { q: { de: "Wer entscheidet im Zweifel?", en: "Who decides when in doubt?" }, a: { de: "Die Richtlinie nennt die Person und die Regel: im Zweifel nichts eingeben, sondern fragen.", en: "The policy names the person and the rule: when in doubt, enter nothing and ask." } },
+    { q: { de: "Was zeigen Sie einem Kunden oder Versicherer?", en: "What can you show a customer or insurer?" }, a: { de: "Eine datierte Selbstauskunft mit ehrlichen „noch nicht“-Antworten und Terminen.", en: "A dated self-declaration with honest “not yet” answers and dates." } },
+    { q: { de: "Wo steht der Meldeweg?", en: "Where is the reporting path?" }, a: { de: "Auf der Notfallkarte neben dem Feuerlöscher, nicht im verschlüsselten Rechner.", en: "On the emergency card next to the fire extinguisher, not in the encrypted computer." } }
+  ],
+
+  how: [
+    { title: { de: "Beantworten", en: "Answer" }, text: { de: "Bis zu vierunddreißig oder siebenundvierzig Fragen; der Beispielbetrieb ist vorbelegt, Sie ändern nur, was abweicht.", en: "Up to thirty-four or forty-seven questions; the example business is prefilled, you change only what differs." } },
+    { title: { de: "Herunterladen", en: "Download" }, text: { de: "Sieben datierte Dokumente als PDF, DOCX und XLSX, dazu das Handbuch mit Quellen.", en: "Seven dated documents as PDF, DOCX and XLSX, plus the handbook with sources." } },
+    { title: { de: "In Kraft setzen", en: "Enact" }, text: { de: "Unterschreiben, aushängen, einweisen. Zwölf Monate Aktualisierungen im Konto.", en: "Sign, post, brief the team. Twelve months of updates in your account." } }
+  ],
+
+  markers: [
+    { id: "fact", shape: "square", label: { de: "Fakt", en: "Fact" }, text: { de: "Aussage mit prüfbarer Originalquelle und Abrufdatum.", en: "A statement with a checkable original source and retrieval date." } },
+    { id: "interpretation", shape: "diamond", label: { de: "Auslegung", en: "Interpretation" }, text: { de: "Erklärte Schlussfolgerung aus einer Quelle.", en: "An explained conclusion drawn from a source." } },
+    { id: "uncertain", shape: "half", label: { de: "Unsicher", en: "Uncertain" }, text: { de: "Offene oder widersprüchliche Frage, als solche benannt.", en: "An open or conflicting question, named as such." } },
+    { id: "gap", shape: "dashed", label: { de: "Lücke", en: "Gap" }, text: { de: "Mit den verfügbaren Quellen nicht beantwortet.", en: "Not answered by the available sources." } }
+  ],
+
+  lines: { policy: "#4f8cff", security: "#2ec4b6", setup: "#f2b544", foundations: "#cfd6e3" },
+
+  products: [
+    { id: "ai-policy", no: "01", line: "policy", topic: "KI", status: "available",
+      name: { de: "KI-Richtlinien-Toolkit", en: "AI Policy Toolkit" },
+      short: { de: "Gemeinsame Regeln dafür, welche KI-Tools Ihr Betrieb nutzt, was hinein darf und wer das Ergebnis prüft.", en: "Shared rules for which AI tools your business uses, what may go in and who checks the result." },
+      lead: { de: "Bis zu vierunddreißig Fragen, davon 29 Pflichtfragen: eine KI-Nutzungsrichtlinie, ein Tool-Register, ein Schulungsnachweis, ein Kennzeichnungs-Check und eine Nachweisseite für Ihren Betrieb. Beginnen Sie mit Ihrem Betrieb oder sehen Sie zuerst den Beispielbetrieb an. Aus Ihren Antworten erzeugt, belegt und datiert.", en: "Up to thirty-four questions, 29 of them required: an AI usage policy, a tool register, training evidence, a labelling check and an evidence page for your business. Start with your business, or look at the example business first. Generated from your answers, sourced and dated." },
+      questions: { de: "Bis zu vierunddreißig Fragen, davon 29 Pflichtfragen", en: "Up to thirty-four questions, 29 of them required", n: "34" },
+      docs: { de: ["KI-Nutzungsrichtlinie", "Die eine Seite zum Aushängen", "Tool-Register und Freigabeformular", "Schulungsnachweis", "Kennzeichnungs-Checkliste, Artikel 50", "Plan der Inkraftsetzung", "Nachweisseite", "Handbuch"], en: ["AI usage policy", "The one page to post", "Tool register and approval form", "Briefing record", "Labelling checklist, Article 50", "Enactment plan", "Evidence summary", "Handbook"] },
+      limits: { de: "Das Toolkit belegt, was Ihr Betrieb geregelt hat. Es prüft keine Einzelfälle, ersetzt keine Rechtsberatung und bescheinigt keine Konformität. Vierzehn benannte Unsicherheiten stehen im Handbuch.", en: "The toolkit shows what your business has regulated. It does not assess individual cases, does not replace legal advice and certifies nothing. Fourteen named uncertainties are listed in the handbook." },
+      price: { founder: "99", regular: "199", seats: "10" }, formats: "PDF · DOCX · XLSX",
+      url: { de: "/de/toolkits/ki-richtlinien", en: "/toolkits/ai-policy" }, handbook: { de: "/de/toolkits/ki-richtlinien/handbuch", en: "/toolkits/ai-policy/handbook" } },
+    { id: "security-evidence", no: "02", line: "security", topic: "Sicherheit", status: "available",
+      name: { de: "Sicherheitsnachweis-Toolkit", en: "Security Evidence Toolkit" },
+      short: { de: "Der Sicherheitsfragebogen Ihres Großkunden oder Versicherers, ehrlich beantwortet, mit Terminen für das, was noch fehlt.", en: "The security questionnaire from your major customer or insurer, answered honestly, with dates for what is still missing." },
+      lead: { de: "Siebenundvierzig Fragen, davon 40 Pflichtfragen: der Sicherheitsfragebogen Ihres Großkunden oder Versicherers, ehrlich beantwortet. Eine datierte Selbstauskunft, ein Maßnahmenplan mit Terminen, eine Notfallkarte, eine Nachweisliste, ein Antwortschreiben und eine Klausel-Prüfliste für Ihren Betrieb. Beginnen Sie mit Ihrem Betrieb oder sehen Sie zuerst den Beispielbetrieb an. Aus Ihren Antworten erzeugt, belegt und datiert.", en: "Forty-seven questions, 40 of them required: the security questionnaire from your major customer or insurer, answered honestly. A dated self-declaration, an action plan with dates, an emergency card, an evidence list, a cover letter and a clause checklist for your business. Start with your business, or look at the example business first. Generated from your answers, sourced and dated." },
+      questions: { de: "Siebenundvierzig Fragen, davon 40 Pflichtfragen", en: "Forty-seven questions, 40 of them required", n: "47" },
+      docs: { de: ["Selbstauskunft Informationssicherheit", "Maßnahmenplan", "Notfallkarte", "Nachweisliste", "Antwortschreiben und Fragebogen-Abgleich", "Klausel-Prüfliste", "Nachweisseite", "Handbuch"], en: ["Security self-declaration", "Action plan", "Emergency card", "Evidence list", "Cover letter and questionnaire mapping", "Clause checklist", "Evidence summary", "Handbook"] },
+      limits: { de: "Die Selbstauskunft beschreibt den Stand Ihres Betriebs und benennt, was fehlt. Sie ist keine Prüfung durch Dritte und kein Zertifikat. Das Handbuch nennt 38 am Original gelesene Quellen.", en: "The self-declaration describes the state of your business and names what is missing. It is not a third-party audit and not a certificate. The handbook lists 38 sources read in the original." },
+      price: { founder: "99", regular: "199", seats: "10" }, formats: "PDF · DOCX · XLSX",
+      url: { de: "/de/toolkits/sicherheitsnachweis", en: "/toolkits/security-evidence" }, handbook: { de: "/de/toolkits/sicherheitsnachweis/handbuch", en: "/toolkits/security-evidence/handbook" } },
+    { id: "ai-setup", no: "03", line: "setup", topic: "Praxis", status: "preparing",
+      name: { de: "KI-Einrichtungs-Toolkit", en: "AI Setup Toolkit" },
+      short: { de: "In Vorbereitung. Termin folgt.", en: "In preparation. Date to follow." },
+      lead: { de: "In Vorbereitung. Wer Bescheid wissen will, trägt sich unten ein.", en: "In preparation. Sign up below to hear about it." },
+      docs: { de: [], en: [] }, url: { de: "/de/#products", en: "/#products" } }
+  ],
+
+  /* 18 Konzepttitel aus der ChatGPT-Studie vom 2.11.2026. Erfunden; nur mit Kennzeichnung „Konzept“ zeigen. */
+  concepts: [
+    { no: "04", topic: "KI", line: "foundations", name: { de: "KI verstehen und einordnen", en: "Understanding AI" } },
+    { no: "05", topic: "Sicherheit", line: "security", name: { de: "Daten bewusst verwenden", en: "Using data with care" } },
+    { no: "06", topic: "Praxis", line: "policy", name: { de: "Prompts im Arbeitsalltag", en: "Prompts in everyday work" } },
+    { no: "07", topic: "KI", line: "policy", name: { de: "KI-Ergebnisse prüfen", en: "Checking AI results" } },
+    { no: "08", topic: "Praxis", line: "foundations", name: { de: "Verantwortung im Team", en: "Responsibility in the team" } },
+    { no: "09", topic: "KI", line: "setup", name: { de: "KI-Tools auswählen", en: "Choosing AI tools" } },
+    { no: "10", topic: "Sicherheit", line: "security", name: { de: "Zugänge und Konten", en: "Accounts and access" } },
+    { no: "11", topic: "Praxis", line: "security", name: { de: "Kundenfragen beantworten", en: "Answering customer questions" } },
+    { no: "12", topic: "Sicherheit", line: "security", name: { de: "Die erste Notfallkarte", en: "The first emergency card" } },
+    { no: "13", topic: "Sicherheit", line: "security", name: { de: "Datensicherung verstehen", en: "Understanding backups" } },
+    { no: "14", topic: "Praxis", line: "policy", name: { de: "Einweisungen gestalten", en: "Designing briefings" } },
+    { no: "15", topic: "KI", line: "setup", name: { de: "KI für Büro und Verwaltung", en: "AI for office work" } },
+    { no: "16", topic: "KI", line: "setup", name: { de: "KI im Handwerksbetrieb", en: "AI in a trade business" } },
+    { no: "17", topic: "Praxis", line: "foundations", name: { de: "Quellen richtig prüfen", en: "Checking original sources" } },
+    { no: "18", topic: "Praxis", line: "foundations", name: { de: "Dokumentation im Alltag", en: "Everyday documentation" } },
+    { no: "19", topic: "KI", line: "policy", name: { de: "Veröffentlichungen mit KI", en: "Publishing with AI" } },
+    { no: "20", topic: "Praxis", line: "foundations", name: { de: "Digitale Zusammenarbeit", en: "Digital collaboration" } },
+    { no: "21", topic: "Praxis", line: "foundations", name: { de: "Veränderungen nachvollziehen", en: "Keeping track of change" } }
+  ],
+
+  tools: [
+    { id: "may-go-in", kind: "check", status: "available", name: { de: "Darf das hinein?", en: "May this go in?" }, text: { de: "Prüfung im Browser: Ein Text, eine Antwort nach der Zweifelsregel Ihrer Richtlinie.", en: "A check in the browser: one text, one answer following your policy’s rule of doubt." }, url: { de: "/de/tools/darf-das-hinein", en: "/tools/may-this-go-in" } },
+    { id: "anything-personal", kind: "check", status: "available", name: { de: "Steht da etwas Persönliches drin?", en: "Is there anything personal in it?" }, text: { de: "Prüfung im Browser: findet Namen, Adressen und Nummern, bevor ein Text ein KI-Tool erreicht.", en: "A check in the browser: finds names, addresses and numbers before a text reaches an AI tool." }, url: { de: "/de/tools/etwas-persoenliches", en: "/tools/anything-personal" } },
+    { id: "nis2", kind: "memo", status: "available", name: { de: "Sind wir von NIS2 betroffen?", en: "Does NIS2 apply to us?" }, text: { de: "Memo mit Begründung und Quellen für Ihren Betrieb.", en: "A memo with reasoning and sources for your business." }, url: { de: "/de/memos/nis2", en: "/memos/nis2" } },
+    { id: "labelling", kind: "memo", status: "available", name: { de: "Müssen wir kennzeichnen, was unsere KI erzeugt?", en: "Must we label what our AI produces?" }, text: { de: "Artikel 50 der KI-Verordnung, auf Ihren Betrieb angewandt.", en: "Article 50 of the AI Act, applied to your business." }, url: { de: "/de/memos/ki-kennzeichnung", en: "/memos/ai-labelling" } },
+    { id: "sign-in", kind: "memo", status: "available", name: { de: "Wo steht unsere Anmeldung?", en: "Where does our sign-in stand?" }, text: { de: "MFA, Passwörter, Konten: ein Memo mit Stand und nächsten Schritten.", en: "MFA, passwords, accounts: a memo with the current state and next steps." }, url: { de: "/de/memos/anmeldesicherheit", en: "/memos/sign-in-security" } },
+    { id: "where-to-start", kind: "memo", status: "available", name: { de: "Womit fangen wir bei KI-Regeln an?", en: "Where do we start with AI rules?" }, text: { de: "Sieben Fragen, ein Memo mit dem ersten Schritt.", en: "Seven questions, one memo with the first step." }, url: { de: "/de/memos/wo-anfangen", en: "/memos/where-to-start" } },
+    { id: "c-approval", kind: "concept", status: "concept", name: { de: "Tool-Freigabe planen", en: "Plan tool approval" }, text: { de: "Konzept aus der Designstudie.", en: "Concept from the design study." } },
+    { id: "c-dataflow", kind: "concept", status: "concept", name: { de: "Datenfluss skizzieren", en: "Sketch a data flow" }, text: { de: "Konzept aus der Designstudie.", en: "Concept from the design study." } },
+    { id: "c-briefing", kind: "concept", status: "concept", name: { de: "Einweisung vorbereiten", en: "Prepare a briefing" }, text: { de: "Konzept aus der Designstudie.", en: "Concept from the design study." } },
+    { id: "c-evidence", kind: "concept", status: "concept", name: { de: "Nachweise ordnen", en: "Organise evidence" }, text: { de: "Konzept aus der Designstudie.", en: "Concept from the design study." } }
+  ],
+  toolKinds: { de: { check: "Browserprüfung", memo: "Memo-Generator", concept: "Konzept" }, en: { check: "Browser check", memo: "Memo generator", concept: "Concept" } },
+
+  /* Zehn Langvideos, je EN und DE (THEMEN.md, 29.10.2026). 01 und 02 in Produktion, Rest geplant. Nichts veröffentlicht. */
+  videos: [
+    { no: "01", status: "production", line: "policy", title: { de: "Ihre Belegschaft nutzt schon KI. Womit die Regeln anfangen.", en: "Your staff already use AI. Where the rules start." }, product: "ai-policy", tool: "where-to-start" },
+    { no: "02", status: "production", line: "security", title: { de: "Ihr Kunde schickt einen Sicherheitsfragebogen. So antworten Sie ehrlich.", en: "Your customer sent a security questionnaire. How to answer honestly." }, product: "security-evidence" },
+    { no: "03", status: "planned", line: "foundations", title: { de: "Belegt. Datiert. Vorzeigbar. Ein Rundgang durch beide Toolkits.", en: "Sourced. Dated. Ready to show. A walk through both toolkits." }, product: "ai-policy" },
+    { no: "04", status: "planned", line: "policy", title: { de: "Was nie in ein KI-Tool darf. Fünf Datenarten und die Zweifelsregel.", en: "What never goes into an AI tool. Five kinds of data and the rule of doubt." }, product: "ai-policy", tool: "may-go-in" },
+    { no: "05", status: "planned", line: "policy", title: { de: "Artikel 4 der KI-Verordnung: die Einweisung, die Sie halten, und der Nachweis, den Sie führen.", en: "Article 4 of the AI Act: the briefing you hold and the record you keep." }, product: "ai-policy" },
+    { no: "06", status: "planned", line: "security", title: { de: "MFA, Sicherung, Updates: wonach jeder Fragebogen und jeder Versicherer zuerst fragt.", en: "MFA, backups, updates: what every questionnaire and insurer asks first." }, product: "security-evidence", tool: "sign-in" },
+    { no: "07", status: "planned", line: "policy", title: { de: "Müssen Sie kennzeichnen, was Ihre KI erzeugt? Artikel 50 für kleine Betriebe.", en: "Must you label what your AI makes? Article 50 for small businesses." }, product: "ai-policy", tool: "labelling" },
+    { no: "08", status: "planned", line: "security", title: { de: "Die erste Stunde nach einem Cybervorfall, und die 72-Stunden-Uhr.", en: "The first hour after a cyber incident, and the 72-hour clock." }, product: "security-evidence" },
+    { no: "09", status: "planned", line: "policy", title: { de: "Sieben Fragen, bevor Sie ein KI-Tool freigeben.", en: "Seven questions before you approve an AI tool." }, product: "ai-policy" },
+    { no: "10", status: "planned", line: "security", title: { de: "Sind wir von NIS2 betroffen? Und warum Ihre Kunden trotzdem fragen.", en: "Does NIS2 apply to us? And why your customers ask anyway." }, product: "security-evidence", tool: "nis2" }
+  ],
+
+  /* Zwölf der vierzig Shorts (SHORTS.md, 29.10.2026), Hook EN und DE. Alle geplant, keiner veröffentlicht. */
+  shorts: [
+    { id: "S-01-1", video: "01", hook: { de: "Ein Papier in der Schublade ist keine Regel.", en: "A paper in a drawer is not a rule." } },
+    { id: "S-01-2", video: "01", hook: { de: "Kein Gesetz verlangt eine KI-Richtlinie.", en: "No law says you need an AI policy." } },
+    { id: "S-01-3", video: "01", hook: { de: "Zwei Ihrer Leute haben eine KI-App auf dem privaten Telefon.", en: "Two of your staff have an AI app on their private phones." } },
+    { id: "S-01-4", video: "01", hook: { de: "Womit fangen Sie bei KI-Regeln an? Sieben Fragen.", en: "Where do you start with AI rules? Seven questions." } },
+    { id: "S-02-1", video: "02", hook: { de: "„Noch nicht“ ist eine vollständige Antwort im Sicherheitsfragebogen.", en: "“Not yet” is a complete answer on a security questionnaire." } },
+    { id: "S-02-2", video: "02", hook: { de: "Warum fragt Ihr Kunde plötzlich nach Ihrer Datensicherung?", en: "Why does your customer suddenly ask about your backups?" } },
+    { id: "S-02-3", video: "02", hook: { de: "Die Sicherheitsklauseln in Ihrem Vertrag stammen aus einem Anhang.", en: "The security clauses in your contract come from one Annex." } },
+    { id: "S-02-4", video: "02", hook: { de: "Welche Nachweise nimmt ein Sicherheitsfragebogen wirklich an?", en: "Which evidence does a security questionnaire actually accept?" } },
+    { id: "S-03-1", video: "03", hook: { de: "Vier Formen sagen Ihnen, was ein Satz wert ist.", en: "Four shapes tell you how much a sentence is worth." } },
+    { id: "S-03-2", video: "03", hook: { de: "Ein Handbuch, das aufführt, was es nicht weiß.", en: "A handbook that lists what it does not know." } },
+    { id: "S-03-3", video: "03", hook: { de: "Vierunddreißig Fragen hinein, sieben datierte Dokumente heraus.", en: "Thirty-four questions in, seven dated documents out." } },
+    { id: "S-03-4", video: "03", hook: { de: "Warum der Betrieb im Generator nicht echt ist.", en: "Why the business in the generator is not real." } }
+  ]
+};
+</script>
+<script>
+/* Variante A „Saphir“: Zustand, Hilfen, Bausteine, Startseite */
+const S = window.SC;
+const SLUG = { de: { start: "start", library: "bibliothek", product: "produkt", tools: "tools", studio: "studio" },
+               en: { start: "start", library: "library", product: "product", tools: "tools", studio: "studio" } };
+const state = { lang: "de", page: "start", product: "ai-policy", situation: 0, tool: 1, tab: 0, path: 0, filter: 0, search: "",
+                motion: !matchMedia("(prefers-reduced-motion: reduce)").matches, pending: null };
+const X = {
+  de: { menu: "Menü", series: "KI · Wirtschaft · Sicherheit", imgCap: "Symbolbild, KI-generiert, Platzhalter", nav: "Hauptnavigation", topic: "Thema",
+        chooseTool: "Tool auswählen", emailRemoved: "[E-Mail entfernt]", back: "Zurück", next: "Weiter", video: "Langvideo", short: "Short",
+        kPaths: "Drei Wege", kProducts: "Toolkits", kHow: "Ablauf", kWhy: "Im Alltag", kMarkers: "Methode", kBefore: "Offen vor dem Kauf", kTools: "Tools",
+        kStudio: "Studio", kWait: "Warteliste", libK: "Scutoria / Bibliothek", toolsK: "Scutoria / Tools", studioK: "Scutoria / Studio",
+        legalNav: "Rechtliches", stand: "Stand", account: "/de/konto", both: "DE · EN", sampleOf: "Muster aus", docs: "Dokumente", toProduct: "Zur Produktseite" },
+  en: { menu: "Menu", series: "AI · Business · Security", imgCap: "Symbolic image, AI-generated, placeholder", nav: "Main navigation", topic: "Topic",
+        chooseTool: "Choose a tool", emailRemoved: "[email removed]", back: "Back", next: "Next", video: "Explainer", short: "Short",
+        kPaths: "Three ways", kProducts: "Toolkits", kHow: "Process", kWhy: "At work", kMarkers: "Method", kBefore: "Open before you buy", kTools: "Tools",
+        kStudio: "Studio", kWait: "Waiting list", libK: "Scutoria / Library", toolsK: "Scutoria / Tools", studioK: "Scutoria / Studio",
+        legalNav: "Legal", stand: "As of", account: "/account", both: "EN · DE", sampleOf: "Sample from", docs: "Documents", toProduct: "To the product page" }
+};
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const t = () => S.ui[state.lang];
+const x = () => X[state.lang];
+const L = (o) => (o && typeof o === "object" && !Array.isArray(o) && state.lang in o) ? o[state.lang] : o;
+const live = (p) => S.meta.live + p;
+const EXT = ' target="_blank" rel="noopener"';
+const hashFor = (page, lang) => "#" + (lang || state.lang) + "-" + SLUG[lang || state.lang][page];
+const prod = (id) => S.products.find(p => p.id === (id || state.product));
+const price = (n) => state.lang === "de" ? n + " €" : "€" + n;
+
+function mark() {
+  return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2.5 18.5 5.7 18.5 17.3 12 21.5 5.5 17.3 5.5 5.7Z"/><path d="M12 6v12M8.5 12h7"/></svg>';
+}
+function markerSvg(id, size) {
+  const c = { fact: "var(--fact)", interpretation: "var(--interp)", uncertain: "var(--uncertain)", gap: "var(--gap)" }[id];
+  let b = "";
+  if (id === "fact") b = `<rect class="mk-stroke" x="4" y="4" width="16" height="16" rx="1.5" stroke="${c}" stroke-width="2"/><rect class="mk-fill" x="4" y="4" width="16" height="16" rx="1.5" fill="${c}"/>`;
+  if (id === "interpretation") b = `<path class="mk-stroke" d="M12 3 21 12 12 21 3 12Z" stroke="${c}" stroke-width="2" stroke-linejoin="round"/>`;
+  if (id === "uncertain") b = `<path class="mk-stroke" d="M4 12a8 8 0 0 1 16 0Z" stroke="${c}" stroke-width="2" stroke-linejoin="round"/><path class="mk-fill" d="M4 12a8 8 0 0 1 16 0Z" fill="${c}"/>`;
+  if (id === "gap") b = `<circle class="mk-pop" cx="12" cy="12" r="8" stroke="${c}" stroke-width="2" stroke-dasharray="3.2 3"/>`;
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" fill="none">${b}</svg>`;
+}
+function shapeIcon(shape) {
+  if (shape === "square") return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1.5" fill="currentColor"/></svg>';
+  if (shape === "diamond") return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 21 12 12 21 3 12Z"/></svg>';
+  return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6M9 6h9v9"/></svg>';
+}
+function pill(status, extra) {
+  const u = t();
+  const label = { available: u.available, preparing: u.preparing, concept: u.concept, production: u.inProduction, planned: u.planned }[status];
+  return `<span class="pill pill-${status}">${label}${extra ? " · " + extra : ""}</span>`;
+}
+function book(item, o) {
+  o = o || {};
+  const isC = !item.status;
+  const line = S.lines[item.line] || S.lines.foundations;
+  const bw = o.bw || 150;
+  return `<div class="book${isC ? " is-concept" : ""}" style="--line:${line};--bw:${bw}px" aria-hidden="true"><div class="book-face"><span class="book-stripe"></span><span class="book-no">Scutoria · ${item.no}</span><strong class="book-title">${L(item.name)}</strong><span class="book-series">${x().series}</span>${isC ? `<span class="book-cpill">${t().concept}</span>` : ""}</div><span class="book-pages"></span></div>`;
+}
+function sheet(sit, cls) {
+  const d = sit.doc;
+  return `<div class="sheet-wrap ${cls || ""}"><div class="sheet-back" aria-hidden="true"></div><article class="sheet" aria-label="${L(d.name)}"><header class="sheet-head"><span>${d.code} · ${d.date}</span><span>Scutoria</span></header><strong class="sheet-title">${L(d.name)}</strong><p class="sheet-biz">${L(d.business)}</p>${d.lines.map(l => `<p class="sheet-line">${L(l)}</p>`).join("")}<p class="sheet-src">${L(d.source)}</p></article></div>`;
+}
+function stage(o) {
+  o = o || {};
+  const sit = S.situations[state.situation];
+  return `<figure class="stage-fig"><div class="stage" id="stage"><img class="stage-img" src="assets/01-sapphire-vault.webp" alt="" width="1536" height="1024"${o.lazy ? ' loading="lazy"' : ' fetchpriority="high"'}><div class="stage-scrim"></div><div class="stage-edge"></div><span class="stage-label">${S.claim[state.lang]}</span>${o.books !== false ? `<div class="stage-books" aria-hidden="true">${S.products.map(p => book(p, { bw: 86 })).join("")}</div>` : ""}${o.big ? `<div class="stage-big">${book(o.big, { bw: 230 })}</div>` : ""}${o.sheet !== false ? `<div class="stage-sheet swap" id="stageSheet">${sheet(sit, "settle")}</div>` : ""}</div><figcaption class="mono small muted">${x().imgCap}</figcaption></figure>`;
+}
+function steps() {
+  const u = t(), s = S.situations[state.situation];
+  return `<li><span class="stepk">${u.steps[0]}</span><p>${L(s.question)}</p></li><li><span class="stepk">${u.steps[1]}</span><p>${L(s.doc.name)}</p></li><li><span class="stepk">${u.steps[2]}</span><p>${s.doc.code} · ${s.doc.date} · ${L(s.doc.business)}</p></li>`;
+}
+function related(v) {
+  const u = t(), p = prod(v.product), tool = v.tool ? S.tools.find(z => z.id === v.tool) : null;
+  const items = [];
+  if (p) items.push(`<a href="${live(L(p.url))}"${EXT}>${L(p.name)} ↗</a>`);
+  if (tool) items.push(`<a href="${live(L(tool.url))}"${EXT}>${L(tool.name)} ↗</a>`);
+  if (p && p.handbook) items.push(`<a href="${live(L(p.handbook))}"${EXT}>${u.relatedHandbook} ↗</a>`);
+  return `<p class="related"><span class="k">${u.related}</span>${items.join("")}</p>`;
+}
+function poster(v, cls) {
+  const u = t();
+  return `<button type="button" class="poster ${cls || ""}" style="--line:${S.lines[v.line]}" onclick="A.openVideo('${v.no}')"><span class="poster-bg" aria-hidden="true">${v.no}</span><span class="poster-no">${x().video} ${v.no} · ${x().both}</span><span class="poster-title">${L(v.title)}</span><span class="poster-foot">${pill(v.status)}<span class="small muted">${u.previewSoon}</span></span></button>`;
+}
+function shortPoster(s) {
+  const v = S.videos.find(z => z.no === s.video);
+  return `<button type="button" class="poster v" style="--line:${S.lines[v.line]}" onclick="A.openShort('${s.id}')"><span class="poster-bg" aria-hidden="true">${s.video}</span><span class="poster-no">${x().short} ${s.id}</span><span class="poster-title">${L(s.hook)}</span><span class="poster-foot">${pill("planned")}</span></button>`;
+}
+function markerRow() {
+  return `<div class="mk-row">${S.markers.map(m => `<span>${markerSvg(m.id, 18).replace(/class="mk-[a-z]+"/g, "")}${L(m.label)}</span>`).join("")}</div>`;
+}
+function waitlist() {
+  const u = t();
+  return `<section class="section" id="waitlist"><div class="wrap"><div class="section-head"><div><p class="kicker">${x().kWait}</p><h2 class="title">${u.waitlistTitle}</h2><p class="lead">${u.waitlistText}</p></div></div><form class="wait-form" onsubmit="A.wait(event)"><div><label for="waitMail">${u.email}</label><input class="field" id="waitMail" type="email" autocomplete="email" required></div><button class="btn" type="submit">${u.waitlistButton}</button><p class="small muted" id="waitNote" aria-live="polite" style="flex-basis:100%"></p></form></div></section>`;
+}
+
+/* Startseite */
+function pageStart() {
+  const u = t(), xx = x();
+  const sit = S.situations[state.situation];
+  const real = S.products.filter(p => p.status === "available"), prep = S.products.find(p => p.status === "preparing");
+  const hero = `<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><p class="kicker">${S.eyebrow[state.lang]}</p><h1 class="display reveal">${S.hero[state.lang].h1}</h1><p class="lead reveal" style="--i:1">${S.hero[state.lang].lead}</p><div class="actions reveal" style="--i:2"><button class="btn" type="button" onclick="A.openSample()">${S.hero[state.lang].primary}</button><a class="btn btn-ghost" href="${hashFor("start")}" onclick="A.scrollTo('products');return false">${S.hero[state.lang].secondary}</a></div><p class="small muted">${u.forWhom}</p><div class="sit"><p class="kicker">${u.choose}</p><div class="pills" role="group" aria-label="${u.choose}">${S.situations.map((s, i) => `<button type="button" class="pillbtn" aria-pressed="${state.situation === i}" onclick="A.setSit(${i})">${L(s.title)}</button>`).join("")}</div><ol class="steps swap" id="steps" aria-live="polite">${steps()}</ol></div></div><div class="hero-stage">${stage()}</div></div></section>`;
+  const paths = `<section class="section" id="paths"><div class="wrap"><div class="section-head"><div><p class="kicker">${xx.kPaths}</p><h2 class="title">${u.pathsTitle}</h2></div></div><div class="grid-3" role="group" aria-label="${u.pathsTitle}">${S.paths.map((p, i) => `<button type="button" class="card path reveal" style="--i:${i}" aria-pressed="${state.path === i}" onclick="A.setPath(${i})"><span class="path-ico">${shapeIcon(p.shape)}</span><span class="heading">${L(p.title)}</span><span class="muted">${L(p.text)}</span></button>`).join("")}</div><div class="path-feedback" id="pathFeedback" aria-live="polite">${pathFeedback()}</div></div></section>`;
+  const products = `<section class="section" id="products"><div class="wrap"><div class="section-head"><div><p class="kicker">${xx.kProducts}</p><h2 class="title">${u.productsTitle}</h2></div><a href="${hashFor("library")}">${u.viewAll} →</a></div><div class="products">${real.map((p, i) => `<article class="card product reveal" style="--i:${i}"><a class="product-cover" href="${hashFor("product")}" onclick="A.setProduct('${p.id}')" aria-label="${L(p.name)}">${book(p, { bw: 160 })}</a><div class="product-body"><p class="kicker">Scutoria · ${p.no} · ${u.available}</p><h3 class="title">${L(p.name)}</h3><p class="muted measure">${L(p.short)}</p><ul class="facts"><li>${L(p.questions)}</li><li>${u.documents}</li><li>${p.formats}</li></ul><div class="price-line"><span class="price">${price(p.price.founder)}</span><span class="small muted">${u.founder}, ${u.regular}</span></div><div class="actions"><button class="btn" type="button" onclick="A.openSample('${p.id}')">${u.sample}</button><a class="btn btn-ghost" href="${hashFor("product")}" onclick="A.setProduct('${p.id}')">${xx.toProduct}</a><a href="${live(L(p.url))}"${EXT}>${u.toLive} ↗</a></div></div></article>`).join("")}<article class="card reveal" style="--i:2"><div class="prep-in">${book(prep, { bw: 110 })}<div><p class="kicker">Scutoria · ${prep.no}</p><h3 class="heading">${L(prep.name)}</h3><p class="muted">${L(prep.lead)}</p>${pill("preparing")}<a href="${hashFor("start")}" onclick="A.scrollTo('waitlist');return false">${u.waitlistTitle} →</a></div></div></article></div></div></section>`;
+  const how = `<section class="section" id="how"><div class="wrap"><div class="section-head"><div><p class="kicker">${xx.kHow}</p><h2 class="title">${u.howTitle}</h2></div></div><div class="how" id="howGrid"><div class="how-line" aria-hidden="true"></div>${S.how.map((h, i) => `<div class="how-step reveal" style="--i:${i}"><span class="num">0${i + 1}</span><h3 class="heading">${L(h.title)}</h3><p class="muted">${L(h.text)}</p></div>`).join("")}</div></div></section>`;
+  const why = `<section class="section" id="why"><div class="wrap"><div class="section-head"><div><p class="kicker">${xx.kWhy}</p><h2 class="title">${u.whyTitle}</h2></div></div><div class="grid-3">${S.why.map((w, i) => `<div class="card reveal" style="--i:${i}"><h3 class="heading">${L(w.q)}</h3><p class="muted" style="margin-top:8px">${L(w.a)}</p></div>`).join("")}</div></div></section>`;
+  const markers = `<section class="section" id="markers"><div class="wrap"><div class="section-head"><div><p class="kicker">${xx.kMarkers}</p><h2 class="title">${u.markersTitle}</h2><p class="lead">${u.markersIntro}</p></div></div><div class="markers">${S.markers.map((m, i) => `<div class="marker" style="--i:${i}">${markerSvg(m.id, 56)}<h3 class="heading">${L(m.label)}</h3><p class="muted small">${L(m.text)}</p></div>`).join("")}</div></div></section>`;
+  const before = `<section class="section" id="before"><div class="wrap"><div class="section-head"><div><p class="kicker">${xx.kBefore}</p><h2 class="title">${u.beforeTitle}</h2><p class="lead">${u.beforeIntro}</p></div></div><div class="grid-2">${real.map((p, i) => `<div class="card before-card reveal" style="--i:${i}">${book(p, { bw: 96 })}<div><h3 class="heading">${L(p.name)}</h3><p class="muted small">${L(p.questions)} · ${u.documents}</p><div class="actions"><a class="btn btn-ghost btn-sm" href="${live(L(p.handbook))}"${EXT}>${u.handbook} ↗</a><button class="link-btn" type="button" onclick="A.openSample('${p.id}')">${u.sample}</button></div></div></div>`).join("")}</div></div></section>`;
+  const tools = `<section class="section" id="tools"><div class="wrap"><div class="section-head"><div><p class="kicker">${xx.kTools}</p><h2 class="title">${u.toolsTitle}</h2><p class="lead">${u.toolsIntro}</p></div><a href="${hashFor("tools")}">${u.viewAll} →</a></div><div class="grid-3">${S.tools.filter(z => z.status === "available").map((z, i) => `<div class="card tool-card reveal" style="--i:${i}"><span class="pill">${S.toolKinds[state.lang][z.kind]}</span><h3 class="heading">${L(z.name)}</h3><p class="muted small">${L(z.text)}</p><a href="${live(L(z.url))}"${EXT}>${u.open} ↗</a></div>`).join("")}</div></div></section>`;
+  const studio = `<section class="section" id="studio"><div class="wrap"><div class="section-head"><div><p class="kicker">${xx.kStudio}</p><h2 class="title">${u.studioTitle}</h2><p class="lead">${u.studioIntro}</p></div><a href="${hashFor("studio")}">${u.viewAll} →</a></div><div class="studio-teaser"><div class="reveal">${poster(S.videos[0])}</div><div class="studio-side reveal" style="--i:1">${shortPoster(S.shorts[0])}${shortPoster(S.shorts[4])}</div></div><p class="small muted" style="margin-top:16px">${u.noVideoNote}</p></div></section>`;
+  return hero + paths + products + how + why + markers + before + tools + studio + waitlist();
+}
+function pathFeedback() {
+  const p = S.paths[state.path], u = t();
+  return `<span>${L(p.text)}</span><a href="${hashFor(p.page)}" onclick="${p.product ? `A.setProduct('${p.product}')` : ""}">${u.open} →</a>`;
+}
+
+/* Bibliothek */
+function libItems() {
+  const q = state.search.trim().toLowerCase(), f = t().filters[state.filter];
+  const topicOf = (it) => ({ KI: t().filters[1], Sicherheit: t().filters[2], Praxis: t().filters[3] })[it.topic];
+  const all = S.products.concat(S.concepts);
+  return all.filter(it => (state.filter === 0 || topicOf(it) === f) && (!q || L(it.name).toLowerCase().includes(q)));
+}
+function libCards() {
+  const u = t(), items = libItems();
+  const topicLabel = (it) => ({ KI: u.filters[1], Sicherheit: u.filters[2], Praxis: u.filters[3] })[it.topic];
+  if (!items.length) return `<p class="muted">${state.lang === "de" ? "Kein passender Titel." : "No matching title."}</p>`;
+  return items.map((it, i) => {
+    const isC = !it.status;
+    const inner = `<div class="cover-stage">${book(it, { bw: 128 })}</div><div class="card-meta">${isC ? pill("concept", topicLabel(it)) : pill(it.status, topicLabel(it))}<h3>${L(it.name)}</h3><p class="muted small">${isC ? u.conceptNote : (it.status === "available" ? L(it.questions) + " · " + u.documents + " · " + it.formats : L(it.short))}</p></div>`;
+    return `<article class="card book-card${isC ? " is-concept" : ""} reveal" style="--i:${i % 3}">${isC ? `<button type="button" class="card-hit" onclick="A.openConcept('${it.no}')">${inner}</button>` : `<a class="card-hit" href="${hashFor("product")}" onclick="A.setProduct('${it.id}')">${inner}</a>`}</article>`;
+  }).join("");
+}
+function pageLibrary() {
+  const u = t();
+  return `<section class="wrap page-head"><p class="kicker">${x().libK}</p><h1 class="display">${u.libraryTitle}</h1><p class="lead">${u.libraryIntro}</p></section><section class="wrap lib-grid"><aside class="lib-rail"><div><label for="libSearch">${u.search}</label><input class="field" id="libSearch" type="search" value="${state.search}" oninput="A.setSearch(this.value)"></div><p class="kicker">${x().topic}</p><div class="rail-filters">${u.filters.map((f, i) => `<button type="button" aria-pressed="${state.filter === i}" onclick="A.setFilter(${i})">${f}</button>`).join("")}</div><p class="small muted">${u.countLine}</p></aside><div class="lib-main"><p class="mono small muted" id="libCount" aria-live="polite" style="margin-bottom:16px">${libItems().length} ${u.entries}</p><div class="cards" id="libCards">${libCards()}</div></div></section>`;
+}
+
+/* Produktseite */
+function tabPanel(p) {
+  const u = t(), i = state.tab;
+  if (i === 0) return `<p class="lead">${L(p.short)}</p><ul class="facts"><li>${L(p.questions)}</li><li>${u.documents}</li><li>${p.formats}</li></ul><p class="muted measure">${L(p.lead)}</p>`;
+  if (i === 1) return `<p class="kicker">${u.whatYouGet}</p><ol>${L(p.docs).map((d, k) => `<li><span class="mono">${k < 7 ? "D" + (k + 1) : "HB"}</span><span>${d}</span></li>`).join("")}</ol>`;
+  if (i === 2) return `<div class="how" style="padding-top:0">${S.how.map((h, k) => `<div class="how-step"><span class="num">0${k + 1}</span><h3 class="heading">${L(h.title)}</h3><p class="muted">${L(h.text)}</p></div>`).join("")}</div>`;
+  return `<p class="muted measure">${L(p.limits)}</p><h3 class="heading">${u.isNot}</h3><p class="muted measure">${u.isNotText}</p>`;
+}
+function pageProduct() {
+  const u = t(), p = prod();
+  const other = S.products.find(z => z.status === "available" && z.id !== p.id);
+  const statusKey = p.status;
+  const head = `<section class="wrap prod-hero"><div class="prod-copy"><p class="kicker">Scutoria · ${p.no} · ${u[statusKey === "available" ? "available" : "preparing"]}</p><h1 class="display reveal">${L(p.name)}</h1><p class="lead reveal" style="--i:1">${L(p.lead)}</p>${statusKey === "available" ? `<div class="actions reveal" style="--i:2"><button class="btn" type="button" onclick="A.openSample('${p.id}')">${u.sample}</button><a class="btn btn-ghost" href="${live(L(p.url))}"${EXT}>${u.toLive} ↗</a><a href="${live(L(p.handbook))}"${EXT}>${u.handbook} ↗</a></div><p class="facts mono small"><span>${L(p.questions)}</span> · <span>${u.documents}</span> · <span>${p.formats}</span></p>` : `<div class="actions">${pill("preparing")}<a class="btn btn-ghost" href="${hashFor("start")}" onclick="A.scrollTo('waitlist');return false">${u.waitlistTitle}</a></div>`}${other ? `<p><button class="link-btn" type="button" onclick="A.setProduct('${other.id}',true)">${u.switchProduct}: ${L(other.name)} →</button></p>` : ""}</div>${stage({ big: p, sheet: false, books: false, lazy: true })}</section>`;
+  if (statusKey !== "available") return head + waitlist();
+  const body = `<section class="wrap prod-body"><div><div class="tabs" role="tablist" aria-label="${L(p.name)}">${u.productTabs.map((tb, i) => `<button type="button" role="tab" id="tab${i}" aria-selected="${state.tab === i}" aria-controls="tabpanel" onclick="A.setTab(${i})">${tb}</button>`).join("")}</div><div class="tabpanel" id="tabpanel" role="tabpanel" aria-labelledby="tab${state.tab}">${tabPanel(p)}</div><div style="margin-top:32px">${markerRow()}</div></div><aside class="card price-card"><p class="kicker">${u.price}</p><p class="price-big">${price(p.price.founder)}</p><p>${u.founder}, ${u.regular}</p><p class="small muted">${u.licence}</p><a class="btn" href="${live(L(p.url))}"${EXT}>${u.buy} ↗</a><p class="small muted">${u.buyNote}</p></aside></section>`;
+  return head + body;
+}
+
+/* Tools */
+function workspace() {
+  const u = t(), z = S.tools[state.tool], kind = S.toolKinds[state.lang][z.kind];
+  if (z.status === "concept") return `<p class="kicker">${u.concept}</p><h2 class="title" id="toolTitle">${L(z.name)}</h2>${pill("concept", kind)}<p class="muted measure">${u.conceptToolNote}</p><div class="actions"><button class="btn btn-ghost" type="button" onclick="A.openConceptTool('${z.id}')">${u.concept}</button></div>`;
+  return `<p class="kicker">${u.demoKicker}</p><h2 class="title" id="toolTitle">${L(z.name)}</h2>${pill("available", kind)}<p class="muted measure">${L(z.text)}</p><div class="ws-grid"><div><label for="demoIn">${u.demoInput}</label><textarea class="field" id="demoIn">${u.demoSample}</textarea></div><div><p class="kicker" style="margin-bottom:6px;color:var(--muted)">${u.demoOutput}</p><div class="ws-out" id="demoOut" aria-live="polite">${u.demoSample}</div></div></div><div class="actions"><button class="btn" type="button" onclick="A.runDemo()">${u.demoRun}</button><a class="btn btn-ghost" href="${live(L(z.url))}"${EXT}>${u.demoLive} ↗</a></div><p class="small muted">${u.demoLimit}</p>`;
+}
+function pageTools() {
+  const u = t();
+  return `<section class="wrap page-head"><p class="kicker">${x().toolsK}</p><h1 class="display">${u.toolsPageTitle}</h1><p class="lead">${u.toolsIntro}</p></section><section class="wrap tool-layout"><aside class="tool-list" aria-label="${x().chooseTool}">${S.tools.map((z, i) => `<button type="button" class="tool-sel${z.status === "concept" ? " is-concept" : ""}" aria-pressed="${state.tool === i}" onclick="A.setTool(${i})"><strong>${String(i + 1).padStart(2, "0")} · ${L(z.name)}</strong><small>${S.toolKinds[state.lang][z.kind]}</small></button>`).join("")}</aside><div class="workspace" id="workspace">${workspace()}</div></section>`;
+}
+
+/* Studio */
+function pageStudio() {
+  const u = t();
+  return `<section class="wrap page-head"><p class="kicker">${x().studioK}</p><h1 class="display">${u.studioTitle}</h1><p class="lead">${u.studioIntro}</p><p class="small muted">${u.noVideoNote}</p></section><section class="wrap"><div class="studio-feature"><div class="reveal"><p class="kicker" style="margin-bottom:12px">${u.studioFeatured}</p>${poster(S.videos[0])}</div><div class="feature-side reveal" style="--i:1">${shortPoster(S.shorts[0])}${shortPoster(S.shorts[4])}</div></div></section><section class="wrap" style="padding-bottom:56px"><div class="row-head"><h2 class="title">${u.studioShorts}</h2><div class="row-arrows"><button type="button" aria-label="${x().back}" onclick="A.rowScroll(-1)">←</button><button type="button" aria-label="${x().next}" onclick="A.rowScroll(1)">→</button></div></div><div class="shorts-row" id="shortsRow">${S.shorts.map(shortPoster).join("")}</div></section><section class="wrap" style="padding-bottom:80px"><h2 class="title" style="margin-bottom:20px">${u.studioProgramme}</h2><ol class="programme">${S.videos.map(v => `<li class="prog-row" style="--line:${S.lines[v.line]}"><span class="num">${v.no}</span><div><div class="actions" style="gap:8px">${pill(v.status)}<span class="mono small muted">${x().both}</span></div><h3 class="heading"><button class="link-btn" type="button" style="text-decoration:none;color:inherit;text-align:left" onclick="A.openVideo('${v.no}')">${L(v.title)}</button></h3>${related(v)}</div></li>`).join("")}</ol></section>`;
+}
+
+/* Kopf, Fuß */
+function header() {
+  const u = t(), xx = x();
+  const link = (page, label) => `<a href="${hashFor(page)}"${state.page === page ? ' aria-current="page"' : ""}>${label}</a>`;
+  return `<div class="wrap bar-in"><a class="brand" href="${hashFor("start")}" aria-label="Scutoria">${mark()}<span class="wordmark">SCUTORIA</span></a><button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" onclick="A.toggleNav()">${xx.menu}</button><nav class="bar-nav" id="nav" aria-label="${xx.nav}"><div class="nav-links">${link("start", u.start)}${link("library", u.library)}${link("tools", u.tools)}${link("studio", u.studio)}<a href="${live(xx.account)}"${EXT}>${u.account} ↗</a></div><div class="bar-tools"><span class="chip">${u.draft}</span><button type="button" class="btn-sm" id="motionBtn" aria-pressed="${state.motion}" onclick="A.toggleMotion()">${state.motion ? u.motionOn : u.motionOff}</button><button type="button" class="btn-sm" lang="${state.lang === "de" ? "en" : "de"}" onclick="A.toggleLang()">${u.language}</button></div></nav></div>`;
+}
+function footer() {
+  const u = t(), xx = x();
+  return `<div class="wrap foot-in"><div class="foot-brand">${mark()}<span class="wordmark">SCUTORIA</span><span class="mono small muted">${S.claim[state.lang]}</span></div><nav class="foot-links" aria-label="${xx.legalNav}">${u.legal.map(l => `<a href="${live(l[1])}"${EXT}>${l[0]}</a>`).join("")}</nav><p class="small">${u.noLegal}</p><p class="small muted measure">${u.draftNote}</p><p class="mono small muted">${xx.stand}: ${S.meta.stand[state.lang]}</p></div>`;
+}
+
+/* Dialoge */
+let lastFocus = null;
+function openDlg(html) {
+  lastFocus = document.activeElement;
+  const d = $("#dlg");
+  $("#dlgBody").innerHTML = html;
+  $("#dlgClose").textContent = t().close;
+  if (!d.open) d.showModal();
+  $("#dlgClose").focus();
+}
+function openSample(pid) {
+  const u = t();
+  const sit = pid ? S.situations.find(s => s.product === pid) : S.situations[state.situation];
+  const p = prod(sit.product);
+  openDlg(`<p class="kicker">${x().sampleOf} ${L(p.name)}</p><h2 class="title" id="dlgTitle">${L(sit.doc.name)}</h2><p class="muted">${L(sit.question)}</p>${sheet(sit, "flat")}<p class="small muted">${u.exampleNote}</p><div class="actions"><a class="btn btn-ghost" href="${hashFor("product")}" onclick="A.setProduct('${p.id}');A.closeDlg()">${x().toProduct}</a><a href="${live(L(p.url))}"${EXT}>${u.toLive} ↗</a></div>`);
+}
+function openConcept(no) {
+  const u = t(), c = S.concepts.find(z => z.no === no);
+  openDlg(`<p class="kicker">${u.concept}</p><h2 class="title" id="dlgTitle">${L(c.name)}</h2>${pill("concept")}<p class="muted">${u.conceptNote}</p><p class="small muted">${u.draftNote}</p>`);
+}
+function openConceptTool(id) {
+  const u = t(), z = S.tools.find(q => q.id === id);
+  openDlg(`<p class="kicker">${u.concept}</p><h2 class="title" id="dlgTitle">${L(z.name)}</h2>${pill("concept")}<p class="muted">${u.conceptToolNote}</p>`);
+}
+function openVideo(no) {
+  const u = t(), v = S.videos.find(z => z.no === no);
+  openDlg(`<p class="kicker">${x().video} ${v.no} · ${x().both}</p><h2 class="title" id="dlgTitle">${L(v.title)}</h2>${pill(v.status)}<p class="muted">${u.noVideoNote}</p>${related(v)}`);
+}
+function openShort(id) {
+  const u = t(), s = S.shorts.find(z => z.id === id), v = S.videos.find(z => z.no === s.video);
+  openDlg(`<p class="kicker">${x().short} ${s.id} · ${x().both}</p><h2 class="title" id="dlgTitle">${L(s.hook)}</h2>${pill("planned")}<p class="muted">${x().video} ${v.no}: ${L(v.title)}</p><p class="muted">${u.noVideoNote}</p>${related(v)}`);
+}
+
+/* Routing, Rendern, Verhalten */
+const PAGES = { start: pageStart, library: pageLibrary, product: pageProduct, tools: pageTools, studio: pageStudio };
+function parseHash() {
+  const m = (location.hash || "").slice(1).match(/^(de|en)-([a-z]+)$/);
+  if (!m) return { lang: "de", page: "start" };
+  const page = Object.keys(SLUG[m[1]]).find(k => SLUG[m[1]][k] === m[2]) || "start";
+  return { lang: m[1], page };
+}
+function render() {
+  const u = t();
+  document.documentElement.lang = state.lang;
+  $("#app").setAttribute("lang", state.lang);
+  $("#hdr").innerHTML = header();
+  $("#main").innerHTML = PAGES[state.page]();
+  $("#foot").innerHTML = footer();
+  const names = { start: u.start, library: u.library, product: L(prod().name), tools: u.tools, studio: u.studio };
+  document.title = "Scutoria · " + names[state.page];
+  window.scrollTo({ top: 0, behavior: "auto" });
+  after();
+  if (state.pending) { const id = state.pending; state.pending = null; setTimeout(() => jumpTo(id), 60); }
+}
+function after() {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.12 });
+  $$(".reveal").forEach(el => io.observe(el));
+  requestAnimationFrame(() => $$(".reveal:not(.in)").forEach(el => { if (el.getBoundingClientRect().top < innerHeight) el.classList.add("in"); }));
+  setTimeout(() => $$(".reveal:not(.in)").forEach(el => el.classList.add("in")), 2500);
+  const mo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("drawn"); mo.unobserve(e.target); } }), { threshold: 0.3 });
+  $$(".marker").forEach(el => mo.observe(el));
+  const st = $("#stage");
+  if (st && matchMedia("(pointer:fine)").matches) {
+    st.addEventListener("mousemove", e => {
+      if (!state.motion) return;
+      const r = st.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width * 2 - 1, dy = (e.clientY - r.top) / r.height * 2 - 1;
+      st.style.transform = `perspective(1200px) rotateX(${(-dy * 2).toFixed(2)}deg) rotateY(${(dx * 2).toFixed(2)}deg)`;
+    });
+    st.addEventListener("mouseleave", () => { st.style.transform = ""; });
+  }
+  fillLine();
+}
+function fillLine() {
+  const g = $("#howGrid");
+  if (!g) return;
+  const r = g.getBoundingClientRect(), vh = window.innerHeight;
+  const p = state.motion ? Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.7))) : 1;
+  g.style.setProperty("--fill", p.toFixed(3));
+}
+function jumpTo(id) {
+  if (state.page !== "start") { state.pending = id; location.hash = hashFor("start"); return; }
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: state.motion ? "smooth" : "auto", block: "start" });
+}
+function swap(el, fn) {
+  if (!el || !state.motion) { fn(); return; }
+  el.classList.add("is-out");
+  setTimeout(() => { fn(); el.classList.remove("is-out"); }, 240);
+}
+window.A = {
+  setSit(i) {
+    state.situation = i;
+    $$(".pillbtn").forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+    swap($("#steps"), () => { $("#steps").innerHTML = steps(); });
+    swap($("#stageSheet"), () => { $("#stageSheet").innerHTML = sheet(S.situations[i]); });
+  },
+  setPath(i) { state.path = i; $$(".path").forEach((b, j) => b.setAttribute("aria-pressed", String(i === j))); $("#pathFeedback").innerHTML = pathFeedback(); },
+  setProduct(id, now) { state.product = id; state.tab = 0; if (now || state.page === "product") render(); },
+  setTab(i) { state.tab = i; $$(".tabs button").forEach((b, j) => b.setAttribute("aria-selected", String(i === j))); const p = $("#tabpanel"); p.setAttribute("aria-labelledby", "tab" + i); p.innerHTML = tabPanel(prod()); },
+  setFilter(i) { state.filter = i; $$(".rail-filters button").forEach((b, j) => b.setAttribute("aria-pressed", String(i === j))); $("#libCards").innerHTML = libCards(); $("#libCount").textContent = libItems().length + " " + t().entries; after(); },
+  setSearch(v) { state.search = v; $("#libCards").innerHTML = libCards(); $("#libCount").textContent = libItems().length + " " + t().entries; after(); },
+  setTool(i) { state.tool = i; $$(".tool-sel").forEach((b, j) => b.setAttribute("aria-pressed", String(i === j))); $("#workspace").innerHTML = workspace(); },
+  runDemo() { const v = $("#demoIn").value; $("#demoOut").textContent = v.replace(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g, x().emailRemoved); },
+  rowScroll(d) { const r = $("#shortsRow"); r.scrollBy({ left: d * r.clientWidth * 0.8, behavior: state.motion ? "smooth" : "auto" }); },
+  wait(e) { e.preventDefault(); $("#waitNote").textContent = t().waitlistDraft; },
+  toggleNav() { const n = $("#nav"), b = $("#navToggle"); const open = !n.classList.contains("open"); n.classList.toggle("open", open); b.setAttribute("aria-expanded", String(open)); },
+  toggleMotion() { state.motion = !state.motion; document.documentElement.classList.toggle("no-motion", !state.motion); const b = $("#motionBtn"); b.setAttribute("aria-pressed", String(state.motion)); b.textContent = state.motion ? t().motionOn : t().motionOff; fillLine(); },
+  toggleLang() { location.hash = hashFor(state.page, state.lang === "de" ? "en" : "de"); },
+  scrollTo: jumpTo, openSample, openConcept, openConceptTool, openVideo, openShort,
+  closeDlg() { $("#dlg").close(); }
+};
+window.addEventListener("hashchange", () => { const h = parseHash(); state.lang = h.lang; state.page = h.page; render(); });
+window.addEventListener("scroll", fillLine, { passive: true });
+window.addEventListener("resize", fillLine);
+$("#dlg").addEventListener("close", () => { if (lastFocus && lastFocus.focus) lastFocus.focus(); });
+$("#dlg").addEventListener("click", e => { if (e.target === $("#dlg")) $("#dlg").close(); });
+$("#dlgClose").addEventListener("click", () => $("#dlg").close());
+document.documentElement.classList.toggle("no-motion", !state.motion);
+if (!location.hash) history.replaceState(null, "", hashFor("start"));
+(function () { const h = parseHash(); state.lang = h.lang; state.page = h.page; render(); })();
+</script>

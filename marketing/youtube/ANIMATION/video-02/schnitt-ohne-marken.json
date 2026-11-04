@@ -1,0 +1,15 @@
+{
+  "_zweck": "Video 02 ohne mitgesprochene Pausenmarken (1.11.2026). Die Flash-Stimme sprach in EN die Marke <short pause> fünfmal als „Short pause“ und <long pause> einmal als „Long pause“ mit. Geschnitten wird nur der Laut samt Rand in der Stille davor und danach; die Pause selbst bleibt etwa so lang wie in DE. DE: an allen sieben Marken still (höchstens −41 dB, Sprache um −15 dB), daher kein Schnitt, nur neu angeglichen. Zeiten der Ausgangsspur ton-<sprache>.wav. Für ton-fassung.py.",
+  "de": [
+    { "von": "ANFANG", "bis": "ENDE" }
+  ],
+  "en": [
+    { "von": "ANFANG", "bis_s": 29.10, "_bis": "„Short pause“ nach Abschnitt 1 (29,26 bis 29,75 s)" },
+    { "von_s": 29.83, "bis_s": 114.50, "_bis": "„Short pause“ nach Abschnitt 2 (114,77 bis 115,26 s)" },
+    { "von_s": 115.34, "bis_s": 523.40, "_bis": "„Short pause“ nach Abschnitt 4 (523,64 bis 524,09 s); nach Abschnitt 3 (342,4 s, Dateigrenze) still" },
+    { "von_s": 524.17, "bis_s": 617.85, "_bis": "„Short pause“ nach Abschnitt 5 (618,01 bis 618,49 s)" },
+    { "von_s": 618.57, "bis_s": 683.25, "_bis": "„Short pause“ nach Abschnitt 6 (683,42 bis 683,90 s)" },
+    { "von_s": 683.98, "bis_s": 684.80, "_bis": "„Long pause“ am Anfang von Abschnitt 7 (685,01 bis 685,55 s)" },
+    { "von_s": 685.63, "bis": "ENDE" }
+  ]
+}

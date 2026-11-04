@@ -1,0 +1,33 @@
+SAPPHIRE CINEMA: FERTIGE ÜBERGABE AN CLAUDE
+
+1. ANLEITUNG-FUER-CLAUDE.md ist die ausführliche Umsetzungsanleitung.
+   anleitung.html zeigt denselben Inhalt gut lesbar mit Inhaltsverzeichnis.
+2. STARTPROMPT-FUER-CLAUDE.txt als Nachricht an Claude einfügen.
+3. Das gesamte Paket bereitstellen, damit Claude die Anleitung, Referenzbilder,
+   Assets und den isolierten Prototyp zusammen verwenden kann.
+
+Wenn Claude Code lokalen Dateizugriff auf diesen Ordner hat, genügt der
+Ordnerpfad zusammen mit dem Startprompt. Bei einer Chat-Oberfläche das ZIP
+anhängen, sofern diese ZIP-Inhalte lesen kann; andernfalls entpackte Dateien
+oder einen zugänglichen Projektordner bereitstellen.
+
+Ausgewählte Richtung: ausschließlich Sapphire Cinema.
+Die Alternativen aus der früheren Fünfergalerie sind nicht Teil dieser Übergabe.
+
+Enthalten:
+- 23 Kapitel mit Layout, Farbrollen, Typografie, Seitentypen und Motion.
+- Produktionszustände für Laden, Fehler, keine Treffer und fehlende Inhalte.
+- Responsive Regeln, Tastaturbedienung und konkrete Abnahmekriterien.
+- STARTPROMPT-FUER-CLAUDE.txt für den direkten Beginn.
+- DESIGN-TOKENS.css als Übertragungshilfe, nicht als blindes Globalstylesheet.
+- referenzen: Desktop, vollständige Startseite und korrigierte Mobilbilder.
+- prototyp: isolierte Cinema-Demo in EN/DE, ohne Build-Schritt aufrufbar.
+- Prüfprotokolle und Dateimanifest.
+
+Mobile Präzisierung: volle Breite des Hero-Textblocks und einspaltiges Studio.
+Desktop bleibt in der ausgewählten Gestaltung. Die neue mobile Referenz
+ersetzt die schmale ältere Mobilansicht aus der Fünfergalerie.
+
+Wichtig: Die Prototyp-Tooldemo, zusätzlichen Titel und Storyboards sind keine
+Originalfunktionen oder verfügbaren neuen Angebote. Claude soll echte
+Bestandsfunktionen und Kaufwege erhalten. Keine Liveänderung erfolgt.

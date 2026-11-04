@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markenpaket Scutoria</title>
+<style>
+@font-face { font-family: Manrope; src: url("../project/fonts/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ground: #0b1120; --surface: #121b2f; --line: rgba(226,232,246,0.12); --ink: #e9eef8; --muted: #a1adc4; --accent: #4f8cff; --paper: #f6f7fa; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 15px/1.5 Manrope, system-ui, sans-serif; padding: 40px max(16px, 4vw); }
+h1 { font-size: 28px; margin: 0 0 4px; }
+h2 { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 40px 0 12px; font-weight: 600; }
+p { color: var(--muted); max-width: 70ch; margin: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.wide { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+figure .box { display: grid; place-items: center; min-height: 120px; border-radius: 6px; }
+figure .box.paper { background: var(--paper); }
+figure img { max-width: 100%; height: auto; display: block; }
+figcaption { font-size: 12px; color: var(--muted); word-break: break-all; }
+a { color: var(--accent); }
+.word { font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<h1><span class="word">Scutoria</span> · Markenpaket</h1>
+<p>Stand 2. November 2026. Regeln, Farben und Herkunft der Dateien stehen in <a href="README.md">README.md</a>. Quelle der Wahrheit ist das Designsystem in <code>design/project/</code>.</p>
+
+<h2>Marke</h2>
+<div class="grid">
+  <figure><div class="box"><img src="logo/svg/scutum-mark.svg" width="96" height="96" alt="Scutum-Marke blau"></div><figcaption>logo/svg/scutum-mark.svg · auf Dunkel</figcaption></figure>
+  <figure><div class="box paper"><img src="logo/svg/scutum-mark-ink.svg" width="96" height="96" alt="Scutum-Marke Tinte"></div><figcaption>logo/svg/scutum-mark-ink.svg · auf Papier</figcaption></figure>
+  <figure><div class="box"><img src="logo/svg/favicon.svg" width="96" height="96" alt="Kachel"></div><figcaption>logo/svg/favicon.svg · Kachel</figcaption></figure>
+  <figure><div class="box"><img src="logo/png/scutum-mark-256.png" width="128" height="128" alt="Marke PNG"></div><figcaption>logo/png/scutum-mark-64 … 1024.png</figcaption></figure>
+  <figure><div class="box paper"><img src="logo/png/scutum-mark-ink-256.png" width="128" height="128" alt="Marke Tinte PNG"></div><figcaption>logo/png/scutum-mark-ink-64 … 1024.png</figcaption></figure>
+</div>
+
+<h2>Favicon und Profilbild</h2>
+<div class="grid">
+  <figure><div class="box"><img src="favicon/favicon-192.png" width="96" height="96" alt="Favicon"></div><figcaption>favicon/favicon-16, 32, 48, 192, 512.png · favicon.ico</figcaption></figure>
+  <figure><div class="box"><img src="favicon/apple-touch-icon-180.png" width="96" height="96" alt="Apple-Touch-Icon"></div><figcaption>favicon/apple-touch-icon-180.png</figcaption></figure>
+  <figure><div class="box"><img src="profilbild/profilbild-400.png" width="160" height="160" alt="Profilbild"></div><figcaption>profilbild/profilbild-400, 800, 1080.png</figcaption></figure>
+</div>
+
+<h2>Vorschaubilder für geteilte Links</h2>
+<div class="grid wide">
+  <figure><img src="vorschaubilder/scutoria-de.png" alt="Vorschau Startseite DE"><figcaption>vorschaubilder/scutoria-de.png</figcaption></figure>
+  <figure><img src="vorschaubilder/scutoria-en.png" alt="Vorschau Startseite EN"><figcaption>vorschaubilder/scutoria-en.png</figcaption></figure>
+  <figure><img src="vorschaubilder/ai-policy-de.png" alt="Vorschau KI-Richtlinien DE"><figcaption>vorschaubilder/ai-policy-de.png</figcaption></figure>
+  <figure><img src="vorschaubilder/ai-policy-en.png" alt="Vorschau KI-Richtlinien EN"><figcaption>vorschaubilder/ai-policy-en.png</figcaption></figure>
+  <figure><img src="vorschaubilder/security-evidence-de.png" alt="Vorschau Sicherheitsnachweis DE"><figcaption>vorschaubilder/security-evidence-de.png</figcaption></figure>
+  <figure><img src="vorschaubilder/security-evidence-en.png" alt="Vorschau Sicherheitsnachweis EN"><figcaption>vorschaubilder/security-evidence-en.png</figcaption></figure>
+</div>
+
+<h2>YouTube</h2>
+<div class="grid wide">
+  <figure><img src="youtube/banner.png" alt="YouTube-Banner"><figcaption>youtube/banner.png · 2560 × 1440</figcaption></figure>
+  <figure><img src="youtube/endscreen-de.png" alt="Endscreen DE"><figcaption>youtube/endscreen-de.png · 1920 × 1080</figcaption></figure>
+  <figure><img src="youtube/endscreen.png" alt="Endscreen EN"><figcaption>youtube/endscreen.png · 1920 × 1080</figcaption></figure>
+  <figure><img src="youtube/thumbnail-vorlage.png" alt="Thumbnail-Vorlage"><figcaption>youtube/thumbnail-vorlage.png · 2560 × 1440</figcaption></figure>
+  <figure><img src="youtube/profil.png" alt="YouTube-Profil"><figcaption>youtube/profil.png · 800 × 800</figcaption></figure>
+</div>
+</body>
+</html>

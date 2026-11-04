@@ -1,0 +1,127 @@
+[
+  {
+    "variant": 1,
+    "page": "home",
+    "h1": "Knowledge, made tangible."
+  },
+  {
+    "variant": 1,
+    "page": "library",
+    "h1": "The Scutoria library."
+  },
+  {
+    "variant": 1,
+    "page": "product",
+    "h1": "AI Policy Toolkit"
+  },
+  {
+    "variant": 1,
+    "page": "tools",
+    "h1": "Knowledge you can try."
+  },
+  {
+    "variant": 1,
+    "page": "media",
+    "h1": "Understand. Watch. Think further."
+  },
+  {
+    "variant": 2,
+    "page": "home",
+    "h1": "Good decisions start with good knowledge."
+  },
+  {
+    "variant": 2,
+    "page": "library",
+    "h1": "The Scutoria library."
+  },
+  {
+    "variant": 2,
+    "page": "product",
+    "h1": "AI Policy Toolkit"
+  },
+  {
+    "variant": 2,
+    "page": "tools",
+    "h1": "Knowledge you can try."
+  },
+  {
+    "variant": 2,
+    "page": "media",
+    "h1": "Understand. Watch. Think further."
+  },
+  {
+    "variant": 3,
+    "page": "home",
+    "h1": "Understand what connects your business."
+  },
+  {
+    "variant": 3,
+    "page": "library",
+    "h1": "The Scutoria library."
+  },
+  {
+    "variant": 3,
+    "page": "product",
+    "h1": "AI Policy Toolkit"
+  },
+  {
+    "variant": 3,
+    "page": "tools",
+    "h1": "Knowledge you can try."
+  },
+  {
+    "variant": 3,
+    "page": "media",
+    "h1": "Understand. Watch. Think further."
+  },
+  {
+    "variant": 4,
+    "page": "home",
+    "h1": "Understand AI. Put knowledge to work."
+  },
+  {
+    "variant": 4,
+    "page": "library",
+    "h1": "The Scutoria library."
+  },
+  {
+    "variant": 4,
+    "page": "product",
+    "h1": "AI Policy Toolkit"
+  },
+  {
+    "variant": 4,
+    "page": "tools",
+    "h1": "Knowledge you can try."
+  },
+  {
+    "variant": 4,
+    "page": "media",
+    "h1": "Understand. Watch. Think further."
+  },
+  {
+    "variant": 5,
+    "page": "home",
+    "h1": "Clarity is a working tool."
+  },
+  {
+    "variant": 5,
+    "page": "library",
+    "h1": "The Scutoria library."
+  },
+  {
+    "variant": 5,
+    "page": "product",
+    "h1": "AI Policy Toolkit"
+  },
+  {
+    "variant": 5,
+    "page": "tools",
+    "h1": "Knowledge you can try."
+  },
+  {
+    "variant": 5,
+    "page": "media",
+    "h1": "Understand. Watch. Think further."
+  }
+]

@@ -1,0 +1,317 @@
+{
+  "product": "ai-policy",
+  "version": "2026-10-19",
+  "name": { "en": "AI Policy Toolkit", "de": "KI-Richtlinien-Toolkit" },
+  "blocks": [
+    {
+      "id": "A",
+      "title": { "en": "Your business", "de": "Der Betrieb" },
+      "questions": [
+        { "id": "A1", "type": "text", "required": true,
+          "label": { "en": "What is the name of the business as it should appear on the documents?", "de": "Wie heißt der Betrieb, so wie er auf den Dokumenten stehen soll?" },
+          "hint": { "en": "The legal name or the name on your letterhead. It appears on every document.", "de": "Der Firmenname oder der Name auf dem Briefpapier. Er steht auf jedem Dokument." },
+          "default": { "en": "Example Electrical Ltd", "de": "Muster Elektrotechnik e.U." }, "ref": "handbook 0" },
+        { "id": "A2", "type": "select", "required": true,
+          "label": { "en": "In which country is the business based?", "de": "In welchem Land sitzt der Betrieb?" },
+          "hint": { "en": "Decides which chamber and authority notes the handbook shows.", "de": "Bestimmt, welche Kammer- und Behördenhinweise das Handbuch zeigt." },
+          "options": [
+            { "v": "AT", "en": "Austria", "de": "Österreich" },
+            { "v": "DE", "en": "Germany", "de": "Deutschland" },
+            { "v": "EU", "en": "Another EU member state", "de": "Anderes EU-Land", "text": { "en": "Which country?", "de": "Welches Land?" } }
+          ], "default": "AT", "ref": "handbook 7" },
+        { "id": "A3", "type": "select", "required": true,
+          "label": { "en": "How many people work in the business?", "de": "Wie viele Menschen arbeiten im Betrieb?" },
+          "hint": { "en": "Everyone counts, including part-time and apprentices.", "de": "Alle zählen, auch Teilzeit und Lehrlinge." },
+          "options": [
+            { "v": "1", "en": "Just me", "de": "Ich allein" },
+            { "v": "2-9", "en": "2 to 9", "de": "2 bis 9" },
+            { "v": "10-49", "en": "10 to 49", "de": "10 bis 49" },
+            { "v": "50-249", "en": "50 to 249", "de": "50 bis 249" },
+            { "v": "250+", "en": "250 or more", "de": "250 oder mehr" }
+          ], "default": "10-49", "ref": "handbook 0" },
+        { "id": "A4", "type": "role", "required": true,
+          "label": { "en": "Who is responsible for the policy?", "de": "Wer ist für die Regelung verantwortlich?" },
+          "hint": { "en": "A role or a named function, never a department. This person signs the policy and owns the plan.", "de": "Eine Rolle oder benannte Funktion, keine Abteilung. Diese Person unterschreibt die Richtlinie und führt den Plan." },
+          "roles": [
+            { "v": "owner", "en": "Owner or managing director", "de": "Inhaber oder Geschäftsführung" },
+            { "v": "office", "en": "Office management", "de": "Büroleitung" },
+            { "v": "other", "en": "Another function", "de": "Andere Funktion" }
+          ], "default": { "role": "owner" }, "ref": "handbook 2, 6" },
+        { "id": "A5", "type": "role", "required": true,
+          "label": { "en": "Who keeps the tool register?", "de": "Wer führt das Tool-Register?" },
+          "hint": { "en": "The register lists every tool in use with its review date. One person keeps it current.", "de": "Das Register führt jedes benutzte Tool mit Prüfdatum. Eine Person hält es aktuell." },
+          "roles": [
+            { "v": "owner", "en": "Owner or managing director", "de": "Inhaber oder Geschäftsführung" },
+            { "v": "office", "en": "Office management", "de": "Büroleitung" },
+            { "v": "other", "en": "Another function", "de": "Andere Funktion" }
+          ], "default": { "role": "office" }, "ref": "handbook 3" },
+        { "id": "A6", "type": "role", "required": true,
+          "label": { "en": "Who decides whether AI content gets labelled?", "de": "Wer entscheidet, ob KI-Inhalte gekennzeichnet werden?" },
+          "hint": { "en": "Using the labelling checklist. A sentence like \"where required by law\" is not a rule.", "de": "Anhand der Kennzeichnungs-Checkliste. Ein Satz wie „soweit gesetzlich vorgeschrieben“ ist keine Regel." },
+          "roles": [
+            { "v": "owner", "en": "Owner or managing director", "de": "Inhaber oder Geschäftsführung" },
+            { "v": "office", "en": "Office management", "de": "Büroleitung" },
+            { "v": "other", "en": "Another function", "de": "Andere Funktion" }
+          ], "default": { "role": "owner" }, "ref": "handbook 5" },
+        { "id": "A7", "type": "role", "required": true, "contact": true,
+          "label": { "en": "Who receives reports of incidents, and how can they be reached?", "de": "An wen werden Vorfälle gemeldet, und wie ist die Person erreichbar?" },
+          "hint": { "en": "Something confidential went into a tool, or a faulty result went out. The report itself never has consequences for the person reporting. Personal data may have to be reported to the authority within 72 hours.", "de": "Etwas Vertrauliches ist in ein Tool geraten, oder ein Fehler ist nach außen gegangen. Die Meldung selbst hat nie Folgen für die meldende Person. Personenbezogene Daten können binnen 72 Stunden meldepflichtig sein." },
+          "roles": [
+            { "v": "owner", "en": "Owner or managing director", "de": "Inhaber oder Geschäftsführung" },
+            { "v": "office", "en": "Office management", "de": "Büroleitung" },
+            { "v": "other", "en": "Another function", "de": "Andere Funktion" }
+          ], "default": { "role": "office", "contact": { "en": "in person or by phone, ext. 12, same day", "de": "persönlich oder telefonisch, Durchwahl 12, am selben Tag" } }, "ref": "handbook 2" },
+        { "id": "A8", "type": "role", "required": true, "contact": true,
+          "label": { "en": "Who is asked in case of doubt?", "de": "Wer wird im Zweifel gefragt?" },
+          "hint": { "en": "The rule of doubt: in doubt, nothing is entered, this person is asked first.", "de": "Die Zweifelsregel: Im Zweifel wird nichts eingegeben, sondern diese Person gefragt." },
+          "roles": [
+            { "v": "owner", "en": "Owner or managing director", "de": "Inhaber oder Geschäftsführung" },
+            { "v": "office", "en": "Office management", "de": "Büroleitung" },
+            { "v": "other", "en": "Another function", "de": "Andere Funktion" }
+          ], "default": { "role": "office", "contact": { "en": "in person or by phone, ext. 12", "de": "persönlich oder telefonisch, Durchwahl 12" } }, "ref": "handbook 2" },
+        { "id": "A9", "type": "role", "required": true, "deputy": true,
+          "label": { "en": "Who releases documents that leave the business, and who stands in?", "de": "Wer gibt Schriftstücke frei, die den Betrieb verlassen, und wer vertritt?" },
+          "hint": { "en": "Quotes, letters, reports written or edited with an AI tool. A person or function, not a department.", "de": "Angebote, Schreiben, Berichte, die mit einem KI-Tool erstellt oder überarbeitet wurden. Eine Person oder Funktion, keine Abteilung." },
+          "roles": [
+            { "v": "owner", "en": "Owner or managing director", "de": "Inhaber oder Geschäftsführung" },
+            { "v": "office", "en": "Office management", "de": "Büroleitung" },
+            { "v": "other", "en": "Another function", "de": "Andere Funktion" }
+          ], "default": { "role": "office", "deputy": { "en": "the owner", "de": "die Inhaberin" } }, "ref": "handbook 2" },
+        { "id": "A10", "type": "select", "required": true,
+          "label": { "en": "Is there a works council or a data protection officer?", "de": "Gibt es eine Belegschaftsvertretung oder Datenschutzbeauftragte?" },
+          "hint": { "en": "Both are involved before new tools are procured, not after. Whether a tool triggers co-determination is national law.", "de": "Beide werden vor der Beschaffung neuer Tools eingebunden, nicht danach. Ob ein Tool die Mitbestimmung auslöst, ist nationales Recht." },
+          "options": [
+            { "v": "none", "en": "Neither", "de": "Keines von beiden" },
+            { "v": "council", "en": "Works council", "de": "Betriebsrat" },
+            { "v": "dpo", "en": "Data protection officer", "de": "Datenschutzbeauftragte" },
+            { "v": "both", "en": "Both", "de": "Beides" }
+          ], "default": "none", "ref": "handbook 6" },
+        { "id": "A11", "type": "multi",
+          "label": { "en": "Who else works with your tools besides employees?", "de": "Wer arbeitet außer den Angestellten noch mit den Tools?" },
+          "hint": { "en": "The AI literacy duty also covers people acting on behalf of the business. How a policy binds them is a matter of contract.", "de": "Die Pflicht zur KI-Kompetenz erfasst auch Personen, die im Auftrag des Betriebs handeln. Wie eine Richtlinie sie bindet, ist Vertragssache." },
+          "options": [
+            { "v": "none", "en": "Nobody", "de": "Niemand" },
+            { "v": "freelancers", "en": "Freelancers", "de": "Freie Mitarbeitende" },
+            { "v": "agency", "en": "Agency workers", "de": "Überlassene Arbeitskräfte" },
+            { "v": "contractors", "en": "Contracted service providers", "de": "Beauftragte Dienstleister" }
+          ], "default": ["freelancers"], "ref": "handbook 4" }
+      ]
+    },
+    {
+      "id": "B",
+      "title": { "en": "Tools in use today", "de": "Tools, die heute benutzt werden" },
+      "questions": [
+        { "id": "B1", "type": "multi", "required": true,
+          "label": { "en": "Which kinds of AI tools are used in the business today?", "de": "Welche Arten von KI-Tools werden im Betrieb heute benutzt?" },
+          "hint": { "en": "Including tools people set up themselves on their phones. Every kind you tick becomes a row in the register.", "de": "Auch Tools, die sich jemand selbst auf dem Telefon eingerichtet hat. Jede angekreuzte Art wird eine Zeile im Register." },
+          "options": [
+            { "v": "text", "en": "Text assistant (chat)", "de": "Textassistent (Chat)" },
+            { "v": "translation", "en": "Translation service", "de": "Übersetzungsdienst" },
+            { "v": "image", "en": "Image generator", "de": "Bildgenerator" },
+            { "v": "transcription", "en": "Transcription or meeting notes", "de": "Transkription oder Besprechungsnotizen" },
+            { "v": "office", "en": "Assistant inside office software", "de": "Assistent in der Bürosoftware" },
+            { "v": "search", "en": "Search with AI answers", "de": "Suche mit KI-Antworten" },
+            { "v": "other", "en": "Something else", "de": "Etwas anderes", "text": { "en": "What?", "de": "Was?" } },
+            { "v": "none", "en": "None yet", "de": "Noch keine" }
+          ], "default": ["text", "translation", "office"], "ref": "handbook 3" },
+        { "id": "B2", "type": "tools", "dependsOn": "B1",
+          "label": { "en": "For each kind: name and provider, and what kind of account is used?", "de": "Je Art: Bezeichnung und Anbieter, und welche Kontoart wird benutzt?" },
+          "hint": { "en": "The name is optional and goes into the register with today's date. Account kind: business (set up by the business), shared (one account for several people), private (set up by the person), unknown.", "de": "Die Bezeichnung ist freiwillig und kommt mit heutigem Datum ins Register. Kontoart: betrieblich (vom Betrieb eingerichtet), geteilt (ein Konto für mehrere), privat (von der Person selbst), unbekannt." },
+          "accounts": [
+            { "v": "business", "en": "Business account", "de": "Betriebliches Konto" },
+            { "v": "shared", "en": "Shared account", "de": "Geteiltes Konto" },
+            { "v": "private", "en": "Private account", "de": "Privates Konto" },
+            { "v": "unknown", "en": "Unknown", "de": "Unbekannt" }
+          ], "default": { "text": { "name": "", "account": "business" }, "translation": { "name": "", "account": "unknown" }, "office": { "name": "", "account": "shared" } }, "ref": "handbook 3" },
+        { "id": "B3", "type": "select", "required": true,
+          "label": { "en": "Are tools used for work on private phones or through private accounts?", "de": "Werden Tools auf privaten Telefonen oder über private Konten dienstlich benutzt?" },
+          "hint": { "en": "Private accounts can build profiles of individual employees. The German data protection authorities recommend business devices and accounts.", "de": "Über private Konten können Profile zu einzelnen Beschäftigten entstehen. Die deutsche Datenschutzaufsicht empfiehlt betriebliche Geräte und Konten." },
+          "options": [
+            { "v": "yes", "en": "Yes", "de": "Ja" },
+            { "v": "no", "en": "No", "de": "Nein" },
+            { "v": "unknown", "en": "We do not know", "de": "Wissen wir nicht" }
+          ], "default": "yes", "ref": "handbook 2, 3" },
+        { "id": "B4", "type": "select", "required": true,
+          "label": { "en": "Private accounts for work tasks: what is the rule from now on?", "de": "Private Konten für dienstliche Aufgaben: Was gilt ab jetzt?" },
+          "hint": { "en": "Naming only the tool and not the access path allows use through private accounts as well.", "de": "Wer nur das Tool nennt und nicht den Zugangsweg, erlaubt die Nutzung über private Konten mit." },
+          "options": [
+            { "v": "forbidden", "en": "Not permitted", "de": "Nicht zulässig" },
+            { "v": "limited", "en": "Permitted only for certain tasks", "de": "Zulässig nur für bestimmte Aufgaben", "text": { "en": "Which tasks?", "de": "Welche Aufgaben?" } }
+          ], "default": "forbidden", "ref": "handbook 2" },
+        { "id": "B5", "type": "text", "required": true,
+          "label": { "en": "Who manages the business accounts?", "de": "Wer verwaltet die betrieblichen Konten?" },
+          "hint": { "en": "Business accounts carry no personal names and use a functional email address of the business.", "de": "Betriebliche Konten tragen keine Personennamen und nutzen eine Funktionsadresse des Betriebs." },
+          "default": { "en": "Office management", "de": "Büroleitung" }, "ref": "handbook 3" }
+      ]
+    },
+    {
+      "id": "C",
+      "title": { "en": "Permitted uses", "de": "Zulässige Verwendungen" },
+      "questions": [
+        { "id": "C1", "type": "multi", "required": true,
+          "label": { "en": "What are AI tools used for in the business?", "de": "Wofür werden die KI-Tools im Betrieb eingesetzt?" },
+          "hint": { "en": "Name tasks that actually occur, not categories from a template. A policy that only contains prohibitions is read as a prohibition.", "de": "Tätigkeiten, die tatsächlich vorkommen, keine Kategorien aus einer Vorlage. Eine Regelung nur mit Verboten wird als Verbot gelesen." },
+          "options": [
+            { "v": "quotes", "en": "Drafts of quotes and offers (text only; prices, calculations and customer details are added outside the tool)", "de": "Entwürfe für Angebote (nur Text; Preise, Kalkulation und Kundenangaben werden außerhalb des Tools eingesetzt)" },
+            { "v": "summaries", "en": "Summaries of documents", "de": "Zusammenfassungen von Unterlagen" },
+            { "v": "translations", "en": "Translations", "de": "Übersetzungen" },
+            { "v": "correspondence", "en": "Wording help in customer correspondence", "de": "Formulierungshilfe in der Kundenkorrespondenz" },
+            { "v": "meetings", "en": "Meeting notes", "de": "Besprechungsnotizen" },
+            { "v": "research", "en": "Research and first drafts", "de": "Recherche und erste Entwürfe" },
+            { "v": "images", "en": "Images and graphics", "de": "Bilder und Grafiken" },
+            { "v": "code", "en": "Program code", "de": "Programmcode" },
+            { "v": "other", "en": "Something else", "de": "Etwas anderes", "text": { "en": "What?", "de": "Was?" } }
+          ], "default": ["quotes", "summaries", "translations", "correspondence"], "ref": "handbook 2" },
+        { "id": "C2", "type": "textarea",
+          "label": { "en": "Are there further uses you want to rule out?", "de": "Gibt es weitere Verwendungen, die ausgeschlossen werden sollen?" },
+          "hint": { "en": "Fixed in any case: AI tools are not used to select, filter, rank or assess applicants or staff, nor to prepare or make decisions about them. Leave empty for none.", "de": "Fest in jedem Fall: KI-Tools werden nicht eingesetzt, um Bewerbungen oder Beschäftigte auszuwählen, zu sichten, zu reihen oder zu bewerten, und nicht, um Entscheidungen über sie vorzubereiten oder zu treffen. Leer lassen für keine." },
+          "default": { "en": "", "de": "" }, "ref": "handbook 2" }
+      ]
+    },
+    {
+      "id": "D",
+      "title": { "en": "What never goes into a tool", "de": "Was nie hinein darf" },
+      "questions": [
+        { "id": "D1", "type": "multi",
+          "label": { "en": "Which other kinds of data exist in your business that must never go into a tool?", "de": "Welche weiteren Datenarten gibt es im Betrieb, die nie in ein Tool dürfen?" },
+          "hint": { "en": "Fixed for every business: data about customers, staff and applicants; access data and keys; calculations, prices, contracts, customer lists; health data; confidential documents of third parties. Add what is specific to you.", "de": "Fest für jeden Betrieb: Angaben zu Kunden, Beschäftigten und Bewerbern; Zugangsdaten und Schlüssel; Kalkulationen, Preise, Verträge, Kundenlisten; Gesundheitsangaben; vertrauliche Unterlagen Dritter. Ergänzen Sie, was bei Ihnen dazukommt." },
+          "options": [
+            { "v": "calc", "en": "Calculation sheets per job", "de": "Kalkulationsblätter je Auftrag" },
+            { "v": "access", "en": "Access codes to customer sites", "de": "Zutrittscodes zu Kundenobjekten" },
+            { "v": "files", "en": "Case files and client records", "de": "Akten und Fallunterlagen" },
+            { "v": "patients", "en": "Patient data", "de": "Patientendaten" },
+            { "v": "recipes", "en": "Recipes, formulas and processes", "de": "Rezepturen und Verfahren" },
+            { "v": "code", "en": "Source code", "de": "Quellcode" },
+            { "v": "contracts", "en": "Contract drafts", "de": "Vertragsentwürfe" },
+            { "v": "other", "en": "Something else", "de": "Etwas anderes", "text": { "en": "What?", "de": "Was?" } }
+          ], "default": ["calc", "access"], "ref": "handbook 2" }
+      ]
+    },
+    {
+      "id": "E",
+      "title": { "en": "Unavoidable personal data", "de": "Unvermeidbarer Personenbezug" },
+      "questions": [
+        { "id": "E1", "type": "select", "required": true,
+          "label": { "en": "When a task cannot avoid personal data, what is the rule?", "de": "Wenn sich ein Personenbezug in einer Aufgabe nicht vermeiden lässt, was gilt?" },
+          "hint": { "en": "Removing names and addresses is not enough when the context brings the person back. The rule must say when a task does not belong in an outside system at all.", "de": "Namen und Anschriften zu entfernen genügt nicht, wenn der Zusammenhang die Person wieder erkennbar macht. Die Regel muss sagen, wann ein Vorgang gar nicht in ein fremdes System gehört." },
+          "options": [
+            { "v": "never", "en": "Never: personal data does not go into a tool at all", "de": "Nie: Personenbezug kommt gar nicht in ein Tool" },
+            { "v": "placeholders", "en": "Placeholders: the text is drafted with placeholders, details are inserted afterwards", "de": "Platzhalter: Der Text wird mit Platzhaltern formuliert, die Angaben werden nachher eingesetzt", "text": { "en": "Example from your business (optional)", "de": "Beispiel aus dem Betrieb (optional)" } },
+            { "v": "approved", "en": "Only in tools approved for personal data in the register", "de": "Nur in Tools, die im Register für personenbezogene Daten freigegeben sind" }
+          ], "default": "placeholders", "defaultText": { "en": "complaint letters are drafted with placeholders; office management inserts the details", "de": "Mängelrügen werden mit Platzhaltern formuliert; die Büroleitung setzt die Angaben nachher ein" }, "ref": "handbook 2" }
+      ]
+    },
+    {
+      "id": "F",
+      "title": { "en": "Checking before use", "de": "Prüfung vor Verwendung" },
+      "questions": [
+        { "id": "F1", "type": "multi",
+          "label": { "en": "What must always be checked in your business before an AI result is used?", "de": "Was wird im Betrieb immer geprüft, bevor ein KI-Ergebnis verwendet wird?" },
+          "hint": { "en": "Fixed: figures, names, deadlines, references. AI tools invent them in the correct format. Add what matters in your trade.", "de": "Fest: Zahlen, Namen, Fristen, Fundstellen. KI-Tools erfinden sie in korrektem Format. Ergänzen Sie, was in Ihrem Gewerbe zählt." },
+          "options": [
+            { "v": "standards", "en": "Standard and norm numbers", "de": "Normbezeichnungen" },
+            { "v": "articles", "en": "Article numbers", "de": "Artikelnummern" },
+            { "v": "prices", "en": "Prices", "de": "Preise" },
+            { "v": "legal", "en": "Legal citations", "de": "Rechtszitate" },
+            { "v": "terms", "en": "Technical terms", "de": "Fachbegriffe" },
+            { "v": "specs", "en": "Technical data", "de": "Technische Daten" },
+            { "v": "other", "en": "Something else", "de": "Etwas anderes", "text": { "en": "What?", "de": "Was?" } }
+          ], "default": ["standards"], "ref": "handbook 2" }
+      ]
+    },
+    {
+      "id": "G",
+      "title": { "en": "Labelling: what the business does", "de": "Kennzeichnung: Was der Betrieb tut" },
+      "questions": [
+        { "id": "G1", "type": "select", "required": true,
+          "label": { "en": "Does an AI system talk directly to customers or other people (chat, voice, avatar)?", "de": "Spricht ein KI-System direkt mit Kunden oder anderen Personen (Chat, Sprache, Avatar)?" },
+          "hint": { "en": "Article 50(1) of the AI Act: the provider must build in the notice; the business checks that it appears at the first interaction, before the first answer.", "de": "Art. 50 Abs. 1 KI-Verordnung: Der Anbieter baut den Hinweis ein; der Betrieb prüft, dass er bei der ersten Interaktion erscheint, vor der ersten Antwort." },
+          "options": [ { "v": "yes", "en": "Yes", "de": "Ja" }, { "v": "no", "en": "No", "de": "Nein" } ], "default": "no", "ref": "handbook 5" },
+        { "id": "G2", "type": "select", "required": true,
+          "label": { "en": "Does the business create or edit images, audio or video with AI that get published?", "de": "Erzeugt oder verändert der Betrieb mit KI Bilder, Ton oder Video, die veröffentlicht werden?" },
+          "hint": { "en": "A realistic AI image of a scene that never happened is usually a deepfake and is disclosed; a stylised graphic is not.", "de": "Ein realistisches KI-Bild einer Szene, die es nicht gab, ist in der Regel ein Deepfake und wird offengelegt; eine stilisierte Grafik nicht." },
+          "options": [ { "v": "yes", "en": "Yes", "de": "Ja" }, { "v": "no", "en": "No", "de": "Nein" } ], "default": "yes", "ref": "handbook 5" },
+        { "id": "G3", "type": "select", "required": true,
+          "label": { "en": "Does the business publish AI-generated or AI-edited text?", "de": "Veröffentlicht der Betrieb KI-erzeugten oder KI-veränderten Text?" },
+          "hint": { "en": "Website, blog, social media, open mailing lists. Internal drafts and individual correspondence a person checks and sends are not published.", "de": "Website, Blog, soziale Medien, offene Verteiler. Interne Entwürfe und Einzelkorrespondenz, die eine Person prüft und selbst versendet, sind nicht veröffentlicht." },
+          "options": [
+            { "v": "no", "en": "No", "de": "Nein" },
+            { "v": "yes-products", "en": "Yes, product and offer texts only", "de": "Ja, nur Angebots- und Produkttexte" },
+            { "v": "yes-public", "en": "Yes, also on matters of public interest (law, health, safety, environment, subsidies)", "de": "Ja, auch zu Themen von öffentlichem Interesse (Recht, Gesundheit, Sicherheit, Umwelt, Förderungen)" },
+            { "v": "unsure", "en": "Yes, but unsure which", "de": "Ja, aber unsicher welche" }
+          ], "default": "yes-public", "ref": "handbook 5" },
+        { "id": "G4", "type": "select", "required": true,
+          "label": { "en": "Does the business use emotion recognition or biometric categorisation?", "de": "Setzt der Betrieb Emotionserkennung oder biometrische Kategorisierung ein?" },
+          "hint": { "en": "Almost always no. If yes, further duties apply outside this toolkit; ask a specialist.", "de": "Fast immer nein. Bei ja gelten weitere Pflichten außerhalb dieses Toolkits; Fachperson fragen." },
+          "options": [ { "v": "no", "en": "No", "de": "Nein" }, { "v": "yes", "en": "Yes", "de": "Ja" } ], "default": "no", "ref": "handbook 5" }
+      ]
+    },
+    {
+      "id": "H",
+      "title": { "en": "The briefing", "de": "Die Einweisung" },
+      "questions": [
+        { "id": "H1", "type": "text", "required": true,
+          "label": { "en": "Who conducts the briefing?", "de": "Wer führt die Einweisung durch?" },
+          "hint": { "en": "The policy is walked through with the staff; date, participants and contents are recorded. No certificate is required.", "de": "Die Richtlinie wird mit der Belegschaft durchgegangen; Datum, Teilnehmende und Inhalte werden festgehalten. Ein Zertifikat ist nicht erforderlich." },
+          "default": { "en": "The owner", "de": "Die Inhaberin" }, "ref": "handbook 4" },
+        { "id": "H2", "type": "select", "required": true,
+          "label": { "en": "One briefing for everyone, or separate briefings per group?", "de": "Eine Einweisung für alle, oder getrennt nach Gruppen?" },
+          "hint": { "en": "The duty asks to consider prior knowledge and context. A briefing that is the same for everyone fits only if everyone does the same.", "de": "Die Pflicht verlangt, Vorkenntnisse und Einsatzzusammenhang zu berücksichtigen. Eine Einweisung, die für alle dieselbe ist, passt nur, wenn alle dasselbe tun." },
+          "options": [
+            { "v": "one", "en": "One briefing for everyone", "de": "Eine Einweisung für alle" },
+            { "v": "groups", "en": "Separate briefings per group", "de": "Getrennt nach Gruppen", "text": { "en": "Which groups? Separate with semicolons", "de": "Welche Gruppen? Mit Strichpunkt trennen" } }
+          ], "default": "groups", "defaultText": { "en": "Office; Field staff", "de": "Büro; Montage" }, "ref": "handbook 4" },
+        { "id": "H3", "type": "date", "required": true,
+          "label": { "en": "When is the briefing planned?", "de": "Wann ist die Einweisung geplant?" },
+          "hint": { "en": "The policy should take effect after the briefing, because a rule nobody knows pretends safety.", "de": "Die Richtlinie sollte nach der Einweisung gelten, weil eine Regel, die niemand kennt, Sicherheit vortäuscht." },
+          "default": "+14", "ref": "handbook 6" },
+        { "id": "H4", "type": "select", "required": true,
+          "label": { "en": "How often is the briefing repeated?", "de": "Wie oft wird die Einweisung wiederholt?" },
+          "hint": { "en": "No source states a duty to repeat; a new or changed tool is an obvious occasion.", "de": "Keine Quelle nennt eine Wiederholungspflicht; ein neues oder geändertes Tool ist ein naheliegender Anlass." },
+          "options": [
+            { "v": "tool-yearly", "en": "On every new tool and once a year", "de": "Bei jedem neuen Tool und jährlich" },
+            { "v": "half", "en": "Every six months", "de": "Halbjährlich" },
+            { "v": "later", "en": "The business decides later", "de": "Legt der Betrieb später fest" }
+          ], "default": "tool-yearly", "ref": "handbook 4" },
+        { "id": "H5", "type": "select", "required": true,
+          "label": { "en": "How long are the briefing records kept?", "de": "Wie lange wird der Schulungsnachweis aufbewahrt?" },
+          "hint": { "en": "No source states a minimum. The business sets it.", "de": "Keine Quelle nennt ein Mindestmaß. Der Betrieb legt es fest." },
+          "options": [
+            { "v": "3y", "en": "Three years", "de": "Drei Jahre" },
+            { "v": "5y", "en": "Five years", "de": "Fünf Jahre" },
+            { "v": "employment", "en": "For the duration of employment plus one year", "de": "Dauer der Beschäftigung plus ein Jahr" },
+            { "v": "other", "en": "Something else", "de": "Anders", "text": { "en": "How long?", "de": "Wie lange?" } }
+          ], "default": "5y", "ref": "handbook 4" }
+      ]
+    },
+    {
+      "id": "I",
+      "title": { "en": "Putting it in force", "de": "In Kraft setzen" },
+      "questions": [
+        { "id": "I1", "type": "date", "required": true,
+          "label": { "en": "From which date does the policy apply?", "de": "Ab welchem Datum gilt die Richtlinie?" },
+          "hint": { "en": "Suggested: two weeks after the briefing.", "de": "Vorschlag: zwei Wochen nach der Einweisung." },
+          "default": "+28", "ref": "handbook 6" },
+        { "id": "I2", "type": "select", "required": true,
+          "label": { "en": "When is the policy reviewed?", "de": "Wann wird die Richtlinie überprüft?" },
+          "hint": { "en": "Fixed occasions in any case: a new or changed tool, changed provider terms, a changed legal situation, a practice that deviates from the rule.", "de": "Feste Anlässe in jedem Fall: ein neues oder geändertes Tool, geänderte Anbieterbedingungen, geänderte Rechtslage, eine Praxis, die von der Regel abweicht." },
+          "options": [
+            { "v": "6", "en": "After six months", "de": "Nach sechs Monaten" },
+            { "v": "12", "en": "After twelve months", "de": "Nach zwölf Monaten" }
+          ], "default": "12", "ref": "handbook 6" },
+        { "id": "I3", "type": "text", "required": true,
+          "label": { "en": "Where is the evidence folder kept?", "de": "Wo liegt der Nachweisordner?" },
+          "hint": { "en": "A folder with the documents, on paper or as files. The poster names it.", "de": "Ein Ordner mit den Nachweisen, auf Papier oder als Dateiablage. Der Aushang nennt ihn." },
+          "default": { "en": "Shared drive, folder \"AI policy\"", "de": "Gemeinsames Laufwerk, Ordner „KI-Richtlinie“" }, "ref": "handbook 6" },
+        { "id": "I4", "type": "select", "required": true,
+          "label": { "en": "What is the standard for approving a tool?", "de": "Was ist der Maßstab für die Freigabe eines Tools?" },
+          "hint": { "en": "Set once, then applied to every tool alike. The handbook gives the range of possible answers, not a recommended one.", "de": "Einmal festlegen, dann für alle Tools gleich. Das Handbuch nennt die Bandbreite möglicher Antworten, keine empfohlene." },
+          "options": [
+            { "v": "no-dpa-no-personal", "en": "Without a data processing agreement, no approval for personal data", "de": "Ohne Auftragsverarbeitungsvertrag keine Freigabe für personenbezogene Daten" },
+            { "v": "no-training", "en": "Without an opt-out from training on our inputs, no approval at all", "de": "Ohne Ausschluss des Trainings mit unseren Eingaben keine Freigabe" },
+            { "v": "per-tool", "en": "Decided per tool", "de": "Wird je Tool entschieden" }
+          ], "default": "no-dpa-no-personal", "ref": "handbook 3" }
+      ]
+    }
+  ]
+}

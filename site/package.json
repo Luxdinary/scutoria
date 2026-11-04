@@ -1,0 +1,33 @@
+{
+  "name": "scutoria-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Scutoria website and shop. English first, German second. Node 22, Express 5, SQLite built into Node.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "local": "node --disable-warning=ExperimentalWarning --import ./scripts/local/register.mjs scripts/local/serve.mjs",
+    "start": "node --disable-warning=ExperimentalWarning --env-file-if-exists=.env src/server.mjs",
+    "dev": "node --disable-warning=ExperimentalWarning --env-file-if-exists=.env --watch src/server.mjs",
+    "build:assets": "node scripts/build-assets.mjs",
+    "build:og": "node --disable-warning=ExperimentalWarning scripts/build-og.mjs",
+    "preflight": "node --disable-warning=ExperimentalWarning --env-file-if-exists=.env scripts/preflight.mjs",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/*.test.mjs\""
+  },
+  "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
+    "docx": "^9.12.0",
+    "exceljs": "^4.4.0",
+    "express": "5.2.1",
+    "jszip": "^3.10.2",
+    "markdown-it": "15.0.1",
+    "pdf-lib": "^1.17.1",
+    "playwright": "^1.64.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0"
+  }
+}

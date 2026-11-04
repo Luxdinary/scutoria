@@ -1,0 +1,169 @@
+{
+  "date": "2026-11-01",
+  "html": 6,
+  "interaction_checks": 18,
+  "responsive_checks": 12,
+  "missing_local_targets": [],
+  "files": [
+    {
+      "path": "aktuelle-header.json",
+      "bytes": 769,
+      "sha256": "9bddca57024406770e9f8151e55b34612c18a1d90f43f5938eee93054a9a89cd"
+    },
+    {
+      "path": "ANALYSE-UND-REDESIGN.md",
+      "bytes": 58170,
+      "sha256": "aef594a7f5b81ab14ee7a0e83935455065aafe3dfc47668f6cf9ea958e191076"
+    },
+    {
+      "path": "analyse.html",
+      "bytes": 67651,
+      "sha256": "4f50770e3e7a780293498729bd75582bc36f8bee3efbefc9484ca120acf8b171"
+    },
+    {
+      "path": "claude.html",
+      "bytes": 10668,
+      "sha256": "18b39f8ddc60be0284b79b2f27e284936dccfca45db469d04e14821ab0c426aa"
+    },
+    {
+      "path": "crawl-results.json",
+      "bytes": 915558,
+      "sha256": "ef468b9c108eab35e63bec93103d0d43c0b8465ee9932b007bebbe8c80c96ad1"
+    },
+    {
+      "path": "erlebnis-a-desktop.jpg",
+      "bytes": 104603,
+      "sha256": "3d37dc2806a51b9fd314f89154772fc912d560f3be1c8f47232bab74b4c5c053"
+    },
+    {
+      "path": "erlebnis-a-mobil.jpg",
+      "bytes": 45013,
+      "sha256": "9fe5f2672685ed8275d0535a93ebdedb07b41a83042cc404c0615eb9467e35c7"
+    },
+    {
+      "path": "erlebnis-a.html",
+      "bytes": 52593,
+      "sha256": "f5c4f3ab29cbcf308bfbfc8571b1a69e50f1c87c0df9f64d11813cbc23563594"
+    },
+    {
+      "path": "erlebnis-b-desktop.jpg",
+      "bytes": 94206,
+      "sha256": "f97adfa796a7d79984cdf3818f202d7427b5ad2f29fce97af5b0eb9fe189e67b"
+    },
+    {
+      "path": "erlebnis-b-mobil.jpg",
+      "bytes": 41238,
+      "sha256": "f1b54e374d92e08010b058d7dac2489b73379c35c5dce3ad7dcfeeae100e34b0"
+    },
+    {
+      "path": "erlebnis-b.html",
+      "bytes": 52593,
+      "sha256": "3a4a2bfbacdd4990479b5068b1ab36168ba4afe9be9af6d5ddefc98c802f8aec"
+    },
+    {
+      "path": "erlebnis-c-desktop.jpg",
+      "bytes": 98308,
+      "sha256": "822f6afd0f691a51c30b1722875fdc7fc87766d12310eece6880013c7c282793"
+    },
+    {
+      "path": "erlebnis-c-mobil.jpg",
+      "bytes": 41339,
+      "sha256": "c18997e33785fbbec89680757237e746dfe00704534ac320b15ec4a68d9f6ed9"
+    },
+    {
+      "path": "erlebnis-c.html",
+      "bytes": 52593,
+      "sha256": "f37f03723303324bf672074e53fd4399ae904758b52442ce7b990353c0a729ee"
+    },
+    {
+      "path": "erneute-browserpruefung.json",
+      "bytes": 429,
+      "sha256": "e28cf03525f66dc9d10229d99e98688038460d63d768979a175f915fbec5a71a"
+    },
+    {
+      "path": "index.html",
+      "bytes": 9931,
+      "sha256": "ff17f9903564506e579e7f635f3072e810a3c7e7203172a126c12f97380af528"
+    },
+    {
+      "path": "kauf-de-ki.jpg",
+      "bytes": 109183,
+      "sha256": "c24afcfb0374e963fe219877aa003dcf89884e70a983754b616a9f4b2c876aeb"
+    },
+    {
+      "path": "kauf-de-sicherheit.jpg",
+      "bytes": 112647,
+      "sha256": "44beaa85200db918e42e75ced758f7afb74678ee57b3b47ac229ed601458a2b0"
+    },
+    {
+      "path": "LESEN.txt",
+      "bytes": 616,
+      "sha256": "6ef886f851d4071bba6a5c6ce2ec0fb34a99dcf0d0a2841eb60a2dfa40107b04"
+    },
+    {
+      "path": "live-desktop.jpg",
+      "bytes": 97636,
+      "sha256": "db502df720b7f05b61528614aca2e311aeb314e6807fdbdc3137bbef6a674765"
+    },
+    {
+      "path": "live-mobil.jpg",
+      "bytes": 32999,
+      "sha256": "c655e4efa6b17a23b7628150f0dd1b4c10fddd525a35bd7e7f616663c09a8786"
+    },
+    {
+      "path": "prototyp-tests.json",
+      "bytes": 2677,
+      "sha256": "f98fa1f093e2ebc0fd42e44789a2ecf4d1f9e483c92e5281f19b2419202e3029"
+    },
+    {
+      "path": "START-FUER-CLAUDE.md",
+      "bytes": 5911,
+      "sha256": "b086e1dca29e8fc1bcea854f15a9efc58bd3953f40d5f3a2fa624e02036c79ea"
+    },
+    {
+      "path": "tool-demo.jpg",
+      "bytes": 101579,
+      "sha256": "60f5b50b92c90c2652664cde010ccac2b71ec9116cca0345d50e2fa372d3678b"
+    },
+    {
+      "path": "belege-basis/ai-document-links.json",
+      "bytes": 2896,
+      "sha256": "c40930ae87ea54ae167ba527c4b7041dc870a93d03d12436c5b12a2f730fe44e"
+    },
+    {
+      "path": "belege-basis/document-checks.json",
+      "bytes": 25102,
+      "sha256": "c4252a18f7ed174f62ab18f48541c3178fdf9753efe4f75fbde45ecced0938e0"
+    },
+    {
+      "path": "belege-basis/extra-assets.json",
+      "bytes": 394,
+      "sha256": "b4e10145f43b232886b04cf6b22e839a95c7b74573fb9f9f90c4ebf3cc82b903"
+    },
+    {
+      "path": "belege-basis/HINWEIS.txt",
+      "bytes": 237,
+      "sha256": "c8b5fad4159cc3063935bc881795ee61824b68bfb9303fdfebb29b56780b0d1f"
+    },
+    {
+      "path": "belege-basis/memo-forms.json",
+      "bytes": 16907,
+      "sha256": "fe07493138fccac93f0cdfaf352fededf912b2afeeaad0956c889efa154983e2"
+    },
+    {
+      "path": "belege-basis/memo-results.json",
+      "bytes": 29745,
+      "sha256": "3de538d0b2565ebbcf7341d6da59fa80b573ccc897e8f05ff232df7a83299b21"
+    },
+    {
+      "path": "belege-basis/security-document-links.json",
+      "bytes": 3493,
+      "sha256": "8b0a9251755397a1448004dd8106047d179fa19dd450c4254981e7138e53bf6b"
+    },
+    {
+      "path": "belege-basis/security-walkthrough.json",
+      "bytes": 44240,
+      "sha256": "c9371362b039aa31381c32b025a37410022883b1544db436b4be21712fb9d994"
+    }
+  ]
+}

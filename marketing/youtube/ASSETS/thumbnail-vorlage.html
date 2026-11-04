@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scutoria · thumbnail template 2560 × 1440</title>
+<style>
+  @font-face { font-family: "Manrope"; src: url("../../../site/public/fonts/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800; }
+  @font-face { font-family: "IBM Plex Mono"; src: url("../../../site/public/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  /* Je Video anpassen: --line (Blau #4f8cff für Toolkit 01, Türkis #2ec4b6 für Toolkit 02), der Text in .title, der Blatttitel und die Laufzeile. */
+  :root { --ground:#0b1120; --ink:#e9eef8; --muted:#a1adc4; --line:#4f8cff; --paper:#fbfbfd; --paper-ink:#141a24; }
+  html, body { margin:0; width:2560px; height:1440px; background:var(--ground); overflow:hidden; font-family:"Manrope", sans-serif; color:var(--ink); }
+  .mark { position:absolute; left:120px; top:110px; display:flex; align-items:center; gap:22px; }
+  .mark svg { width:56px; height:56px; }
+  .word { font-weight:700; font-size:36px; letter-spacing:0.18em; text-transform:uppercase; }
+  .title { position:absolute; left:120px; top:420px; width:1360px; font-size:150px; font-weight:800; letter-spacing:-0.035em; line-height:1.02; text-wrap:balance; }
+  .stamp { position:absolute; left:120px; top:1010px; font-family:"IBM Plex Mono", monospace; font-size:34px; letter-spacing:0.08em; color:var(--muted); text-transform:uppercase; }
+  .bar { position:absolute; left:0; bottom:0; width:100%; height:18px; background:var(--line); }
+  .sheet { position:absolute; right:200px; top:170px; width:760px; height:1076px; }
+  .sheet .back { position:absolute; left:28px; top:20px; width:720px; height:1020px; background:#e8ebf2; transform:rotate(2deg); }
+  .sheet .front { position:absolute; left:0; top:0; width:720px; height:1020px; background:var(--paper); color:var(--paper-ink); transform:rotate(2deg); padding:56px 64px; box-sizing:border-box; box-shadow:0 2px 2px rgba(0,0,0,.22), 0 12px 24px rgba(0,0,0,.28), 0 40px 72px rgba(0,0,0,.42); }
+  .front .run { font-family:"IBM Plex Mono", monospace; font-size:24px; letter-spacing:0.08em; color:#5a6472; text-transform:uppercase; display:flex; justify-content:space-between; }
+  .front h1 { font-size:56px; font-weight:800; letter-spacing:-0.02em; margin:40px 0 20px; line-height:1.1; }
+  .front .rule { height:2px; background:rgba(20,26,36,0.12); margin:20px 0; }
+  .front p { font-size:26px; line-height:1.5; margin:0 0 16px; }
+  .front .sig { margin-top:70px; height:2px; background:#141a24; width:60%; }
+  .front .foot { font-family:"IBM Plex Mono", monospace; font-size:20px; color:#5a6472; margin-top:16px; }
+  .tabs { position:absolute; right:-26px; top:120px; display:flex; flex-direction:column; gap:14px; }
+  .tabs i { display:block; width:26px; height:120px; }
+  .tabs .f { background:#4f8cff; } .tabs .i { background:#b07cff; } .tabs .u { background:#ffd166; } .tabs .g { background:repeating-linear-gradient(180deg,#ff6b6b 0 14px, transparent 14px 22px); }
+</style>
+</head>
+<body>
+  <div class="mark">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l6.5 3.2v11.6L12 21.5l-6.5-4.2V5.7L12 2.5z"/><path d="M12 6v12"/><path d="M8.5 12h7"/></svg>
+    <div class="word">Scutoria</div>
+  </div>
+  <div class="title">Where do AI rules start?</div>
+  <div class="stamp">As of 2026-10-23 · Sourced. No legal advice.</div>
+  <div class="sheet">
+    <div class="back"></div>
+    <div class="front">
+      <div class="run"><span>AP-2026-0001</span><span>D1 · v 2026-10-23</span></div>
+      <h1>AI usage policy</h1>
+      <div class="rule"></div>
+      <p>Example Electrical Ltd · effective date after the briefing · responsible: the management</p>
+      <p>§ 1 Permitted tools and access. Only tools listed as approved in the register are used for work.</p>
+      <p>§ 3 What never goes into a tool. In case of doubt nothing is entered; the named person is asked.</p>
+      <div class="sig"></div>
+      <div class="foot">Source-based. No legal advice.</div>
+      <div class="tabs"><i class="f"></i><i class="i"></i><i class="u"></i><i class="g"></i></div>
+    </div>
+  </div>
+  <div class="bar"></div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Scutoria: Erlebnis-Redesign, 01.11.2026
+
+Öffne index.html für Übersicht und Designs.
+Für Claude: START-FUER-CLAUDE.md und ANALYSE-UND-REDESIGN.md, dazu die drei erlebnis-*.html.
+Die Prototypen sind eigenständige HTML-Dateien und funktionieren lokal ohne Installation. Sie starten Englisch; über den Sprachschalter auf Deutsch wechseln.
+
+Keine Live-Änderung. Beispiele sind fiktiv; kein Checkout im Prototyp. Die Tooldemo ist eine vorbereitete Vorher-/Nachher-Demonstration.
+
+Aktuelle Tests: erneute-browserpruefung.json und crawl-results.json. Frühere Funktionsbelege desselben Tages: belege-basis.

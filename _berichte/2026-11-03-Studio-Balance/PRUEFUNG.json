@@ -1,0 +1,60 @@
+[
+  {
+    "page": "library",
+    "device": "desktop",
+    "h1": "Die Scutoria Bibliothek.",
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "page": "product",
+    "device": "desktop",
+    "h1": "KI-Richtlinien-Toolkit",
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "page": "tools",
+    "device": "desktop",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "page": "media",
+    "device": "desktop",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "page": "home",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "page": "library",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "page": "product",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "page": "tools",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "page": "media",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  }
+]

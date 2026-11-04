@@ -1,0 +1,202 @@
+[
+  {
+    "viewport": 360,
+    "page": "home",
+    "h1": "KI verstehen. Wissen im Alltag nutzen.",
+    "images": true,
+    "scroll": 345,
+    "width": 360
+  },
+  {
+    "viewport": 360,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 345,
+    "width": 360
+  },
+  {
+    "viewport": 360,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 345,
+    "width": 360
+  },
+  {
+    "viewport": 360,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 345,
+    "width": 360
+  },
+  {
+    "viewport": 360,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 345,
+    "width": 360
+  },
+  {
+    "viewport": 390,
+    "page": "home",
+    "h1": "KI verstehen. Wissen im Alltag nutzen.",
+    "images": true,
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "viewport": 390,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "viewport": 390,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "viewport": 390,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "viewport": 390,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "viewport": 768,
+    "page": "home",
+    "h1": "KI verstehen. Wissen im Alltag nutzen.",
+    "images": true,
+    "scroll": 753,
+    "width": 768
+  },
+  {
+    "viewport": 768,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 753,
+    "width": 768
+  },
+  {
+    "viewport": 768,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 753,
+    "width": 768
+  },
+  {
+    "viewport": 768,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 753,
+    "width": 768
+  },
+  {
+    "viewport": 768,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 753,
+    "width": 768
+  },
+  {
+    "viewport": 1024,
+    "page": "home",
+    "h1": "KI verstehen. Wissen im Alltag nutzen.",
+    "images": true,
+    "scroll": 1009,
+    "width": 1024
+  },
+  {
+    "viewport": 1024,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 1009,
+    "width": 1024
+  },
+  {
+    "viewport": 1024,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1009,
+    "width": 1024
+  },
+  {
+    "viewport": 1024,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 1009,
+    "width": 1024
+  },
+  {
+    "viewport": 1024,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 1009,
+    "width": 1024
+  },
+  {
+    "viewport": 1440,
+    "page": "home",
+    "h1": "KI verstehen. Wissen im Alltag nutzen.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "viewport": 1440,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "viewport": 1440,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "viewport": 1440,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "viewport": 1440,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  }
+]

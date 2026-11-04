@@ -1,0 +1,225 @@
+/* Motion and graphics pass (owner decision E23, 23 Oct 2026). Additive on tokens.css, bundle.css and site.css; every
+   existing class name stays. Transform and opacity only, no layout shift. Everything here needs html.js and
+   prefers-reduced-motion: no-preference to animate at all; without them every element shows its final state. */
+
+/* Soft page changes between the server-rendered pages. */
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; } }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 220ms; }
+/* The product cover glides from the home offer card to the product page hero. */
+.offer--policy .book { view-transition-name: book-policy; }
+.offer--security .book { view-transition-name: book-security; }
+.main--policy .stage .book { view-transition-name: book-policy; }
+.main--security .stage .book { view-transition-name: book-security; }
+
+/* Reading progress: a thin rule under the top bar, in the product line's colour where the page has one. */
+.readbar { position: fixed; top: var(--bar); left: 0; right: 0; height: 2px; z-index: 9; pointer-events: none; }
+.readbar i { display: block; height: 100%; background: var(--line, var(--accent)); transform-origin: left center; transform: scaleX(var(--rp, 0)); }
+.main--policy { --line: var(--line-policy); }
+.main--security { --line: var(--line-security); }
+.main--setup { --line: var(--line-setup); }
+
+/* Reveal variants via data attributes: rise (default), fade, wipe (paper unveils top to bottom), stagger for children. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] { opacity: 0; transition: opacity var(--dur-2) var(--ease-out-quint), translate var(--dur-2) var(--ease-out-quint), clip-path var(--dur-3) var(--ease-out-quint); transition-delay: var(--d, 0ms); }
+  html.js [data-reveal="rise"] { translate: 0 24px; }
+  html.js [data-reveal="wipe"] { clip-path: inset(0 0 100% 0); }
+  html.js [data-reveal].is-in { opacity: 1; translate: 0 0; clip-path: inset(0 0 0 0); }
+  html.js [data-reveal-stagger] > * { opacity: 0; translate: 0 18px; transition: opacity var(--dur-2) var(--ease-out-quint), translate var(--dur-2) var(--ease-out-quint); transition-delay: calc(var(--si, 0) * 70ms); }
+  html.js [data-reveal-stagger].is-in > * { opacity: 1; translate: 0 0; }
+}
+
+/* The hero shield draws its outline once, then stays faint behind the paper. */
+.hero__shield { position: absolute; top: -5%; right: -9%; width: min(58vw, 600px); aspect-ratio: 1; color: var(--ink); opacity: 0.05; pointer-events: none; }
+.hero__shield path { stroke-dasharray: 100; stroke-dashoffset: 0; transition: stroke-dashoffset 1.8s var(--ease-out-quint); }
+html.js .hero__shield:not(.is-in) path { stroke-dashoffset: 100; }
+.hero__shield path:nth-child(2) { transition-delay: 500ms; }
+.hero__shield path:nth-child(3) { transition-delay: 900ms; }
+.hero::before { content: none; } /* the drawn shield replaces the static one */
+
+/* The date stamp: the existing date line of a sheet as a rubber stamp near the sheet's top right: a rectangle with a double
+   rule, uppercase mono, ink in the line colour at about 80 percent with an uneven ink texture (a self-hosted noise mask),
+   rotated -6 degrees. It presses in once (scale 1.4 to 1, opacity 0 to 1) when the sheet comes into view. */
+.paper__run .paper__stamp { display: inline-block; position: relative; margin: 0.3em 0.2em 0 0.6em; padding: 0.45em 0.75em 0.4em; border: 4px double currentColor; font-size: 1.3em; font-weight: 600; border-radius: 3px; color: color-mix(in srgb, var(--line, var(--line-policy)) 80%, transparent); font-family: var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.1; white-space: nowrap; transform-origin: center; rotate: -6deg; -webkit-mask-image: url("/stamp-ink.svg"); mask-image: url("/stamp-ink.svg"); -webkit-mask-size: 160px 54px; mask-size: 160px 54px; }
+@media (prefers-reduced-motion: no-preference) {
+  html.js .paper__stamp { opacity: 0; }
+  html.js .paper__stamp.is-in { animation: stamp-press var(--dur-3) var(--ease-paper) both; }
+}
+@keyframes stamp-press {
+  0% { opacity: 0; scale: 1.4; }
+  100% { opacity: 1; scale: 1; }
+}
+
+/* The hero slide stack: four sample sheets; the top sheet slides off to the side and settles at the back. --i is the
+   position in the stack (0 = top); motion.js sets it. */
+.stack { position: relative; width: min(400px, 80%); aspect-ratio: 1 / 1.414; margin-inline: auto; isolation: isolate; }
+/* The four marker tabs sit on the right edge of whichever sheet is on top and slide in again for each new top sheet. */
+.stack__tabs { position: absolute; inset: 0; z-index: 30; pointer-events: none; rotate: 2deg; container-type: inline-size; }
+.stack__tabs .paper__tabs { left: 99%; top: 20%; }
+@media (prefers-reduced-motion: no-preference) {
+  html.js .stack__tabs.is-new .paper__tab { animation: tab-in var(--dur-2) var(--ease-out-quint) both; animation-delay: calc(var(--ti, 0) * 90ms + 200ms); }
+}
+.stack__tabs .paper__tab:nth-child(2) { --ti: 1; }
+.stack__tabs .paper__tab:nth-child(3) { --ti: 2; }
+.stack__tabs .paper__tab:nth-child(4) { --ti: 3; }
+@keyframes tab-in { from { opacity: 0; translate: -70% 0; } }
+.stack__sheet { position: absolute; inset: 0; margin: 0; width: 100%; z-index: calc(10 - var(--i, 0)); transition: translate var(--dur-3) var(--ease-paper), rotate var(--dur-3) var(--ease-paper), scale var(--dur-3) var(--ease-paper), opacity var(--dur-2) var(--ease-out-quint); translate: calc(var(--i, 0) * 12px) calc(var(--i, 0) * -9px); rotate: calc(2deg - var(--i, 0) * 1.1deg); scale: calc(1 - var(--i, 0) * 0.032); }
+.stack__sheet::before { inset: 0; box-shadow: var(--shadow-paper); }
+.stack__sheet.is-leaving { translate: 118% -3%; rotate: 10deg; opacity: 0; z-index: 20; }
+.stack__sheet.is-returning { transition: opacity var(--dur-2) var(--ease-out-quint); }
+.stack .paperset--hero { rotate: none; animation: none; }
+.stack .paper--hero { height: 100%; aspect-ratio: auto; }
+
+/* Carousel controls: index tabs with the document numbers, pause and previous/next. Server-rendered, motion.js wires them. */
+.carousel__ui { display: flex; align-items: center; justify-content: center; gap: var(--space-3); margin-top: var(--space-6); flex-wrap: nowrap; }
+.carousel__tabs { display: flex; gap: 6px; flex-wrap: nowrap; min-width: 0; }
+.carousel__ui > .carousel__btn { flex: none; }
+@media (max-width: 380px) { .carousel__ui { gap: 6px; } .carousel__tabs { gap: 4px; } .carousel__ui .carousel__tab { padding: 0 7px; } }
+.carousel__tab, .carousel__btn { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; color: var(--ink-muted); background: transparent; border: 1px solid var(--hairline); border-radius: var(--radius-sm); min-height: 34px; min-width: 34px; padding: 0 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: color var(--dur-1), border-color var(--dur-1); }
+.carousel__tab:hover, .carousel__btn:hover { color: var(--ink); border-color: var(--border-control); }
+.carousel__tab[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+.carousel__btn svg { width: 14px; height: 14px; }
+.carousel__btn .carousel__play { display: none; }
+.carousel__btn[data-pause][aria-pressed="true"] .carousel__play { display: block; }
+.carousel__btn[data-pause][aria-pressed="true"] .carousel__pause { display: none; }
+
+/* Scroll carousels (samples, documents on phones): snap points, hidden scrollbar, drag on the desktop. */
+.carousel__track { display: flex; gap: var(--space-8); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: var(--space-2) var(--space-1) var(--space-4); align-items: flex-end; }
+.carousel__track::-webkit-scrollbar { display: none; }
+.carousel__track > * { scroll-snap-align: start; flex: none; }
+.carousel__track.is-drag { cursor: grabbing; scroll-snap-type: none; }
+
+/* Offer books: turn from about 18 degrees to rest as the card scrolls in (scroll-linked, CSS only). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .offer__book .book__body { animation: book-turn linear both; animation-timeline: view(); animation-range: entry 0% entry 85%; }
+  }
+}
+@keyframes book-turn { from { transform: rotateY(42deg) rotateX(-6deg); } to { transform: rotateY(24deg) rotateX(-6deg); } }
+
+/* The price filing line draws in once. */
+.price { position: relative; }
+.price::before { content: ""; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: var(--accent); transform-origin: left center; }
+@media (prefers-reduced-motion: no-preference) {
+  html.js .draw-line::before { transform: scaleX(0); transition: transform var(--dur-4) var(--ease-out-quint); }
+  html.js .draw-line.is-in::before { transform: scaleX(1); }
+}
+
+/* Founder seats: ten small seat marks next to the existing "10 left" line; filled ones are taken. */
+.seats { display: flex; gap: 5px; margin-top: 2px; }
+.seats i { width: 12px; height: 12px; border-radius: 3px; border: 1.5px solid var(--signal-amber-text); display: block; }
+.seats i.seats__taken { background: var(--signal-amber-text); }
+
+/* How it works as scrollytelling: a sticky picture column on the desktop, a swipe slider with dots on phones. */
+.scrolly__pics { display: none; }
+.scrolly__dots { display: flex; gap: 8px; justify-content: center; margin-top: var(--space-4); }
+/* Reduced motion: the original band, each step with its own picture, no sticky column, no dots. */
+@media (prefers-reduced-motion: reduce) { .scrolly__dots { display: none; } }
+.scrolly__dots .carousel__tab { min-width: 34px; }
+@media (max-width: 899px) and (prefers-reduced-motion: no-preference) {
+  .scrolly .steps--band { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * clamp(20px, 5vw, 88px)); padding-inline: clamp(20px, 5vw, 88px); }
+  .scrolly .steps--band::-webkit-scrollbar { display: none; }
+  .scrolly .steps--band li { flex: 0 0 84%; scroll-snap-align: center; }
+}
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .scrolly { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-12); align-items: start; }
+  .scrolly__pics { display: block; position: sticky; top: calc(var(--bar) + 32px); height: 320px; border-radius: var(--radius-field); background: var(--surface); border: 1px solid var(--hairline); overflow: hidden; }
+  .scrolly__pic { position: absolute; inset: 0; opacity: 0; translate: 0 14px; transition: opacity var(--dur-2) var(--ease-out-quint), translate var(--dur-2) var(--ease-out-quint); }
+  .scrolly__pic.is-active { opacity: 1; translate: 0 0; }
+  .scrolly .steps--band { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .scrolly .steps--band li { min-height: 0; height: 40vh; max-height: 55vh; align-content: center; }
+  .scrolly .steps--band .steps__pic { display: none; }
+  .scrolly .steps--band::before, .scrolly .steps--band::after { content: none; }
+  .scrolly__dots { display: none; }
+}
+
+/* The documents as a filing cabinet: index tabs along the top; the sheets fan out slightly as the section scrolls in on the
+   desktop, and become a swipe slider on phones. */
+.docs__tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+@media (max-width: 759px) {
+  .docs { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * clamp(20px, 5vw, 88px)); padding: var(--space-2) clamp(20px, 5vw, 88px) var(--space-4); }
+  .docs::-webkit-scrollbar { display: none; }
+  .docs > * { flex: 0 0 76%; scroll-snap-align: center; }
+}
+@media (min-width: 760px) {
+  @media (prefers-reduced-motion: no-preference) {
+    html.js .docs .paperset--mini { opacity: 0; translate: 0 30px; rotate: 5deg; transition: opacity var(--dur-3) var(--ease-out-quint), translate var(--dur-3) var(--ease-paper), rotate var(--dur-3) var(--ease-paper); transition-delay: calc(var(--fi, 0) * 65ms); }
+    html.js .docs.is-in .paperset--mini { opacity: 1; translate: 0 0; rotate: 0deg; }
+  }
+}
+
+/* The product hero: the front cover swings open around the spine as the first screen scrolls (motion.js sets --open 0..1).
+   Reduced motion: the cover stays closed and the sheet lies beside it, as before. */
+.stage--open .book__cover { transform-origin: left center; transform: translateZ(calc(var(--t) / 2)) rotateY(calc(var(--open, 0) * -105deg)); transition: none; }
+.stage--open .book__first { position: absolute; inset: 0; border-radius: 2px 6px 6px 2px; transform: translateZ(calc(var(--t) / 2 - 1px)); background: var(--paper); padding: 8% 9%; display: flex; flex-direction: column; gap: 4%; }
+.stage--open .book__first i { display: block; height: 3px; border-radius: 1px; background: color-mix(in srgb, var(--paper-ink) 18%, var(--paper)); }
+.stage--open .book__first i:first-child { height: 5px; width: 64%; background: color-mix(in srgb, var(--paper-ink) 85%, var(--paper)); }
+
+/* Pointer parallax on the hero stage (desktop, fine pointer only; motion.js sets --rx/--ry, max 6 degrees). */
+.stage[data-depth] .book__body { transform: rotateY(calc(24deg + var(--ry, 0deg))) rotateX(calc(-6deg + var(--rx, 0deg))); }
+
+/* The cover sinks slightly on scroll (motion.js sets --sink 0..1 over the first screen). */
+.stage[data-sink] { translate: 0 calc(var(--sink, 0) * 34px); }
+
+/* ---------- Graphics rework: richer hardcovers and paper ---------- */
+/* Cloth texture on the cover: a fine crosshatch over the line colour. */
+.book__cover { background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 3px), linear-gradient(160deg, var(--cover), var(--cover-deep)); }
+/* A blind-embossed shield on the front. */
+.book__emboss { position: absolute; right: 9%; top: 26%; width: 34%; aspect-ratio: 1; color: var(--cover-deep); opacity: 0.5; filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.14)); }
+.book__emboss svg { width: 100%; height: 100%; }
+/* A subtle foil sheen on the title: one linear sheen, not a mesh. */
+.book__title { background: linear-gradient(105deg, var(--cover-text) 38%, rgba(255, 255, 255, 0.95) 50%, var(--cover-text) 62%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+/* The spine carries two bands. */
+.book__spine::before, .book__spine::after { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: var(--stripe); opacity: 0.8; }
+.book__spine::before { top: 12%; }
+.book__spine::after { bottom: 12%; }
+
+/* Paper extras: a folded corner on the one page to post, a paper clip on the evidence summary, ruled lines on the register. */
+.paper--fold::before { content: ""; position: absolute; right: 0; top: 0; width: 7%; aspect-ratio: 1; background: linear-gradient(225deg, var(--ground) 49%, color-mix(in srgb, var(--paper-ink) 12%, var(--paper)) 50%); box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.12); z-index: 2; }
+.paper__clip { position: absolute; top: -3%; left: 9%; width: 4.5cqw; height: 12cqw; border: 0.9cqw solid #a7b0c0; border-bottom: 0; border-radius: 4cqw 4cqw 0 0; z-index: 3; }
+.paper__clip::after { content: ""; position: absolute; left: 50%; top: 30%; translate: -50% 0; width: 45%; height: 55%; border: 0.7cqw solid #a7b0c0; border-bottom: 0; border-radius: 3cqw 3cqw 0 0; }
+.mini--table { background: repeating-linear-gradient(180deg, transparent 0 11cqw, var(--hairline) 11cqw calc(11cqw + 1px)); padding-bottom: 2cqw; }
+
+/* Tool cards lift on hover; the preview replays its short demo (motion.js re-adds .demo). */
+@media (hover: hover) {
+  .sc-card--tool { transition: border-color 150ms, translate var(--dur-2) var(--ease-out-quint), box-shadow var(--dur-2); }
+  .sc-card--tool:hover { translate: 0 -4px; box-shadow: var(--shadow-card); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .preview.demo .preview__rows li { animation: demo-in var(--dur-2) var(--ease-out-quint) both; animation-delay: calc(var(--di, 0) * 380ms); }
+  html.js .preview.demo .preview__verdict, html.js .preview.demo .preview__count { animation: demo-in var(--dur-2) var(--ease-out-quint) both; animation-delay: 1.7s; }
+  html.js .preview.demo .preview__text p { animation: demo-in var(--dur-2) var(--ease-out-quint) both; animation-delay: calc(var(--di, 0) * 380ms); }
+}
+@keyframes demo-in { from { opacity: 0; translate: 0 10px; } }
+
+/* The home hero as a slide stack (E23): the cover behind left, the stack of four sheets right, controls below. */
+.stage--stack { aspect-ratio: 1 / 1.12; }
+.stage--stack .book--hero { --w: 46cqw; position: absolute; left: 0; top: 6%; }
+.stage--stack .carousel { position: absolute; right: 6cqw; bottom: 0; width: 62cqw; z-index: 2; display: flex; flex-direction: column; }
+.stage--stack .stack { width: 100%; }
+.stage--stack .carousel__ui { margin-top: var(--space-4); }
+/* The stack's initial order without the script (the script sets --i on load). */
+.stack__sheet:nth-child(1) { --i: 0; }
+.stack__sheet:nth-child(2) { --i: 1; }
+.stack__sheet:nth-child(3) { --i: 2; }
+.stack__sheet:nth-child(4) { --i: 3; }
+/* The folded corner never covers text: the date line keeps clear of it. */
+.paper--fold .paper__run { padding-right: 8%; }
+.stack__sheet .mini { margin-top: 5cqw; }
+.stack__sheet .mini__st { font-size: 3.4cqw; }
+@media (max-width: 899px) {
+  .stage--stack { aspect-ratio: auto; display: flex; flex-direction: column; gap: var(--space-6); }
+  .stage--stack .book--hero { position: relative; --w: 44vw; top: 0; margin-inline: auto; }
+  .stage--stack .carousel { position: relative; right: 0; width: 100%; }
+}
+
+/* The top bar stays above everything on the page (3D stage, stack sheets while leaving, the reading line). The hero stages
+   are isolated so their z-indices never compete with the bar; the stuck background is near-opaque. */
+.bar { z-index: 100; }
+.readbar { z-index: 99; }
+.stage { isolation: isolate; }
+.bar--stuck, html:not(.js) .bar { background: var(--ground); }
+/* Stack sheets: the footer sits at the bottom of the sheet, the card sentence keeps a little air below the drawn body. */
+.stack .paper--hero { display: flex; flex-direction: column; }
+.stack .paper--hero .paper__foot { margin-top: auto; }
+.stack .paper--hero .mini + .paper__body { margin-top: 4cqw; }

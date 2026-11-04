@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Website im Aufbau · Scutoria</title>
+<meta name="description" content="Scutoria wird gerade neu aufgebaut. Die neue Website folgt in Kürze. Scutoria is being rebuilt; the new website follows shortly.">
+<style>
+  :root { color-scheme: dark; --paper: #0a0c10; --karte: #12151c; --ink: #eceef3; --muted: #9aa3b4; --accent: #4f8cff; --line: rgba(255,255,255,0.1); --gelb: #ffd166; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
+  .notice { background: var(--gelb); color: var(--paper); text-align: center; font-size: 14px; padding: 10px 16px; }
+  .notice strong { font-weight: 700; }
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px 16px; }
+  .card { width: 100%; max-width: 640px; background: var(--karte); border: 1px solid var(--line); border-radius: 20px; padding: 40px 32px; box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 20px 50px rgba(0,0,0,0.35); }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--ink); margin-bottom: 28px; }
+  .brand svg { flex: none; }
+  h1 { font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.6rem); line-height: 1.2; margin: 0 0 10px; }
+  p { margin: 0 0 12px; font-size: 1.0625rem; color: var(--ink); }
+  p.claim { color: var(--muted); font-size: 0.95rem; letter-spacing: .04em; margin-bottom: 24px; }
+  .lang { padding-top: 24px; margin-top: 24px; border-top: 1px solid var(--line); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  footer { padding: 16px; text-align: center; font-size: 12px; color: var(--muted); }
+  footer span { white-space: nowrap; }
+  @media (max-width: 480px) { .card { padding: 28px 20px; border-radius: 16px; } }
+</style>
+</head>
+<body>
+<div class="notice" role="status"><strong>Website im Aufbau.</strong> Die neue Scutoria-Website folgt in Kürze. <strong>Website in progress.</strong> The new Scutoria website follows shortly.</div>
+<main>
+  <div class="card">
+    <div class="brand"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6l7-3z"></path><path d="M12 8v8M8 12h8"></path></svg><span>Scutoria</span></div>
+    <h1>Website im Aufbau</h1>
+    <p class="claim">Belegt. Datiert. Vorzeigbar.</p>
+    <p>Scutoria wird gerade neu aufgebaut. Die neue Website mit den Toolkits für Betriebe ohne IT-Abteilung folgt in Kürze.</p>
+    <p>Fragen in der Zwischenzeit: <a href="mailto:kontakt@scutoria.com">kontakt@scutoria.com</a></p>
+    <div class="lang" lang="en">
+      <h2>Website in progress</h2>
+      <p class="claim">Sourced. Dated. Ready to show.</p>
+      <p>Scutoria is being rebuilt. The new website with the toolkits for businesses without an IT department follows shortly.</p>
+      <p>Questions in the meantime: <a href="mailto:kontakt@scutoria.com">kontakt@scutoria.com</a></p>
+    </div>
+  </div>
+</main>
+<footer>Anbieter nach § 5 ECG: <span>Stefan Dallinger</span> · <span>Kleinpoppen, 3902 Vitis, Österreich</span> · <span>kontakt@scutoria.com</span></footer>
+</body>
+</html>

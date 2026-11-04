@@ -1,0 +1,56 @@
+[
+  {
+    "page": "library",
+    "device": "desktop",
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "page": "product",
+    "device": "desktop",
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "page": "tools",
+    "device": "desktop",
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "page": "media",
+    "device": "desktop",
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "page": "home",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "page": "library",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "page": "product",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "page": "tools",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "page": "media",
+    "device": "mobile",
+    "scroll": 375,
+    "width": 390
+  }
+]

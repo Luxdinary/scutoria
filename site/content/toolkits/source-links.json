@@ -1,0 +1,526 @@
+{
+ "checked": "2026-11-02",
+ "note": "Mapping of handbook source references to original documents. Patterns are plain substrings matched on whole source lines; the link text is the matched pattern without trailing separators (';', '·').",
+ "sources": [
+  {
+   "id": "eu-2024-1689",
+   "patterns": [
+    "Verordnung (EU) 2024/1689",
+    "Regulation (EU) 2024/1689"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27"
+  },
+  {
+   "id": "eu-2026-1744",
+   "patterns": [
+    "Verordnung (EU) 2026/1744",
+    "Regulation (EU) 2026/1744"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/reg/2026/1744/oj"
+  },
+  {
+   "id": "eu-2016-679",
+   "patterns": [
+    "Verordnung (EU) 2016/679",
+    "Regulation (EU) 2016/679"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+  },
+  {
+   "id": "eu-2016-943",
+   "patterns": [
+    "Richtlinie (EU) 2016/943",
+    "Directive (EU) 2016/943"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/dir/2016/943/oj"
+  },
+  {
+   "id": "eu-2022-2555",
+   "patterns": [
+    "Richtlinie (EU) 2022/2555",
+    "Directive (EU) 2022/2555"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj"
+  },
+  {
+   "id": "eu-2003-361",
+   "patterns": [
+    "Empfehlung 2003/361/EG",
+    "Recommendation 2003/361/EC"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/reco/2003/361/oj"
+  },
+  {
+   "id": "eu-2024-2690",
+   "patterns": [
+    "Durchführungsverordnung (EU) 2024/2690",
+    "Implementing Regulation (EU) 2024/2690"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/reg_impl/2024/2690/oj"
+  },
+  {
+   "id": "eu-2022-2554",
+   "patterns": [
+    "Verordnung (EU) 2022/2554",
+    "Regulation (EU) 2022/2554"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/reg/2022/2554/oj"
+  },
+  {
+   "id": "eu-2024-2847",
+   "patterns": [
+    "Verordnung (EU) 2024/2847",
+    "Regulation (EU) 2024/2847"
+   ],
+   "url": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj"
+  },
+  {
+   "id": "ec-guidelines-art50",
+   "patterns": [
+    "C(2026) 5054",
+    "Guidelines on the implementation of the transparency obligations under Article 50 of the AI Act"
+   ],
+   "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+  },
+  {
+   "id": "ec-ai-literacy-qa",
+   "patterns": [
+    "AI literacy, questions and answers"
+   ],
+   "url": "https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers"
+  },
+  {
+   "id": "ec-market-surveillance-ai",
+   "patterns": [
+    "Market surveillance authorities under the AI Act",
+    "market surveillance authorities under the AI Act"
+   ],
+   "url": "https://digital-strategy.ec.europa.eu/en/policies/market-surveillance-authorities-under-ai-act"
+  },
+  {
+   "id": "dsk-oh-ki-2024",
+   "patterns": [
+    "Datenschutzkonferenz, Orientierungshilfe"
+   ],
+   "url": "https://www.datenschutzkonferenz-online.de/media/oh/20240506_DSK_Orientierungshilfe_KI_und_Datenschutz.pdf"
+  },
+  {
+   "id": "bsi-generative-ki",
+   "patterns": [
+    "BSI, Generative KI-Modelle"
+   ],
+   "url": "https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/KI/Generative_KI-Modelle.pdf?__blob=publicationFile&v=7"
+  },
+  {
+   "id": "wko-ki-guidelines",
+   "patterns": [
+    "KI-Guidelines für KMU"
+   ],
+   "url": "https://www.wko.at/noe/digitalisierung/ki-guidelines/ki-guidelines.pdf"
+  },
+  {
+   "id": "rtr-ki-servicestelle",
+   "patterns": [
+    "RTR, KI-Servicestelle"
+   ],
+   "url": "https://www.rtr.at/rtr/service/ki-servicestelle/ki-servicestelle.de.html"
+  },
+  {
+   "id": "rtr-pm-2026-07-02",
+   "patterns": [
+    "Pressemitteilung vom 2. Juli 2026",
+    "press release of 2 July 2026"
+   ],
+   "url": "https://www.rtr.at/TKP/presse/pressemitteilungen/presseinformationen_2026/pinfo02072026tkp.de.html"
+  },
+  {
+   "id": "dsb-ki-datenschutz",
+   "patterns": [
+    "Datenschutzbehörde, Künstliche Intelligenz und Datenschutz"
+   ],
+   "url": "https://dsb.gv.at/kuenstlichebrintelligenz/kuenstliche-intelligenz-datenschutz"
+  },
+  {
+   "id": "parlament-517-a-e",
+   "patterns": [
+    "517/A(E)"
+   ],
+   "url": "https://www.parlament.gv.at/gegenstand/XXVIII/A/517"
+  },
+  {
+   "id": "ris-bgbl-suche",
+   "patterns": [
+    "RIS, Bundesgesetzblatt, Volltextsuche",
+    "RIS, Federal Law Gazette, full-text search"
+   ],
+   "url": "https://www.ris.bka.gv.at/Bgbl-Auth/"
+  },
+  {
+   "id": "de-ki-mig",
+   "patterns": [
+    "KI-MIG",
+    "KI-Marktüberwachungs-und-Innovationsförderungs-Gesetz"
+   ],
+   "url": "https://www.gesetze-im-internet.de/ki-mig/BJNR0DF0B0026.html"
+  },
+  {
+   "id": "bnetza-pm-2026-07-29",
+   "patterns": [
+    "Bundesnetzagentur, Pressemitteilung vom 29. Juli 2026",
+    "Bundesnetzagentur, press release of 29 July 2026"
+   ],
+   "url": "https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20260729_KI_VO.html"
+  },
+  {
+   "id": "bnetza-notruf",
+   "patterns": [
+    "Bundesnetzagentur, Notruf"
+   ],
+   "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/Notruf/start.html"
+  },
+  {
+   "id": "at-uwg-26b",
+   "patterns": [
+    "UWG (Österreich)",
+    "UWG (Austria)"
+   ],
+   "url": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002665&Paragraf=26b"
+  },
+  {
+   "id": "de-geschgehg-2",
+   "patterns": [
+    "GeschGehG"
+   ],
+   "url": "https://www.gesetze-im-internet.de/geschgehg/__2.html"
+  },
+  {
+   "id": "de-bsig-2025",
+   "patterns": [
+    "BSI-Gesetz"
+   ],
+   "url": "https://www.gesetze-im-internet.de/bsig_2025/"
+  },
+  {
+   "id": "at-nisg-2026",
+   "patterns": [
+    "NISG 2026, BGBl.",
+    "NISG 2026, §"
+   ],
+   "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20013065"
+  },
+  {
+   "id": "at-nisv-2026",
+   "patterns": [
+    "NISV 2026"
+   ],
+   "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20013307"
+  },
+  {
+   "id": "at-bacs-registrierung",
+   "patterns": [
+    "Bundesamt für Cybersicherheit, Registrierung"
+   ],
+   "url": "https://www.bundesamt-cybersicherheit.gv.at/303/registrierung.html"
+  },
+  {
+   "id": "at-bacs",
+   "patterns": [
+    "Bundesamt für Cybersicherheit;"
+   ],
+   "url": "https://www.bundesamt-cybersicherheit.gv.at/"
+  },
+  {
+   "id": "cert-at",
+   "patterns": [
+    "CERT.at"
+   ],
+   "url": "https://www.cert.at/"
+  },
+  {
+   "id": "polizei-at-notruf",
+   "patterns": [
+    "polizei.gv.at, Notrufnummern"
+   ],
+   "url": "https://www.polizei.gv.at/alle/notrufe.html"
+  },
+  {
+   "id": "bk-meldestellen",
+   "patterns": [
+    "Bundeskriminalamt, Meldestellen"
+   ],
+   "url": "https://www.bundeskriminalamt.at/602/"
+  },
+  {
+   "id": "bk-ceo-fraud",
+   "patterns": [
+    "Bundeskriminalamt, CEO Fraud"
+   ],
+   "url": "https://www.bundeskriminalamt.at/212/eigentum/betrug/ceo_fraud.html"
+  },
+  {
+   "id": "dsb-data-breach",
+   "patterns": [
+    "Datenschutzbehörde, Meldung Data Breach"
+   ],
+   "url": "https://dsb.gv.at/eingabe-an-die-dsb/-meldung-data-breach"
+  },
+  {
+   "id": "at-sicherheitshandbuch",
+   "patterns": [
+    "Österreichisches Informationssicherheitshandbuch",
+    "sicherheitshandbuch.gv.at"
+   ],
+   "url": "https://www.sicherheitshandbuch.gv.at/"
+  },
+  {
+   "id": "wko-cyber-hotline",
+   "patterns": [
+    "WKO, Cyber-Security-Hotline"
+   ],
+   "url": "https://www.wko.at/it-sicherheit/cyber-security-hotline"
+  },
+  {
+   "id": "wko-nis-faq",
+   "patterns": [
+    "WKO, Fragen und Antworten zu NISG 2026"
+   ],
+   "url": "https://www.wko.at/it-sicherheit/nis-faq"
+  },
+  {
+   "id": "wko-ooe-kontodaten",
+   "patterns": [
+    "Wirtschaftskammer Oberösterreich, Betrug mit geänderten Kontodaten"
+   ],
+   "url": "https://www.wko.at/ooe/wirtschaftsrecht/achtung---betrug-mit-geaenderten-kontodaten-in-e-mails-und-pd"
+  },
+  {
+   "id": "onlinesicherheit-erpressungstrojaner",
+   "patterns": [
+    "Erpressungstrojaner: Was tun bei Infektion?"
+   ],
+   "url": "https://www.onlinesicherheit.gv.at/Services/Technologie-Schwerpunkte/Ransomware/Erpressungstrojaner-Was-tun-bei-Infektion.html"
+  },
+  {
+   "id": "cta-schema-policy-2026",
+   "patterns": [
+    "Cyber Trust Austria"
+   ],
+   "url": "https://www.cyber-trust.at/schema_2026.pdf"
+  },
+  {
+   "id": "cta-labeluebersicht",
+   "patterns": [
+    "cyber-trust.at, Labelübersicht",
+    "cyber-trust.at, label overview"
+   ],
+   "url": "https://www.cyber-trust.at/labeluebersicht/"
+  },
+  {
+   "id": "cta-fragenliste-b",
+   "patterns": [
+    "Fragenliste B",
+    "B questions"
+   ],
+   "url": "https://www.cyber-trust.at/list-question-b/"
+  },
+  {
+   "id": "enisa-12-steps",
+   "patterns": [
+    "ENISA, 12 steps",
+    "ENISA, Cybersecurity guide for SMEs"
+   ],
+   "url": "https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes"
+  },
+  {
+   "id": "enisa-smes-report",
+   "patterns": [
+    "ENISA, Cybersecurity for SMEs"
+   ],
+   "url": "https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes"
+  },
+  {
+   "id": "nist-sp-800-63b-4",
+   "patterns": [
+    "NIST SP 800-63B-4"
+   ],
+   "url": "https://pages.nist.gov/800-63-4/sp800-63b.html"
+  },
+  {
+   "id": "cisa-phishing-resistant-mfa",
+   "patterns": [
+    "CISA, Implementing Phishing-Resistant MFA"
+   ],
+   "url": "https://www.cisa.gov/sites/default/files/publications/fact-sheet-implementing-phishing-resistant-mfa-508c.pdf"
+  },
+  {
+   "id": "iso-iec-27001-2022",
+   "patterns": [
+    "ISO/IEC 27001:2022"
+   ],
+   "url": "https://webstore.iec.ch/en/publication/79694"
+  },
+  {
+   "id": "sc27-journal-2025-1",
+   "patterns": [
+    "SC 27 Journal"
+   ],
+   "url": "https://committee.iso.org/files/live/sites/jtc1sc27/files/resources/Journal%202025.pdf"
+  },
+  {
+   "id": "enx-tisax-handbook",
+   "patterns": [
+    "TISAX-Handbuch",
+    "TISAX handbook"
+   ],
+   "url": "https://www.enx.com/handbook/"
+  },
+  {
+   "id": "enx-nis2-tisax",
+   "patterns": [
+    "NIS2 fulfilment through TISAX"
+   ],
+   "url": "https://www.enx.com/TISAX-NIS2-en.pdf"
+  },
+  {
+   "id": "shared-assessments-sig",
+   "patterns": [
+    "Shared Assessments, SIG"
+   ],
+   "url": "https://sharedassessments.org/sig/"
+  },
+  {
+   "id": "bsi-pm-2025-01-31",
+   "patterns": [
+    "BSI-Pressemitteilungen vom 31.1.2025",
+    "BSI press releases of 31 January 2025"
+   ],
+   "url": "https://www.bsi.bund.de/DE/Service-Navi/Presse/Pressemitteilungen/Presse2025/250131_Passwortwechsel_next-level.html"
+  },
+  {
+   "id": "bsi-pm-2026-01-30",
+   "patterns": [
+    "30.1.2026",
+    "30 January 2026"
+   ],
+   "url": "https://www.bsi.bund.de/DE/Service-Navi/Presse/Pressemitteilungen/Presse2026/260130_Aendere-dein-Passwort-Tag.html"
+  },
+  {
+   "id": "bsi-grundschutz-orp4-2023",
+   "patterns": [
+    "IT-Grundschutz ORP.4"
+   ],
+   "url": "https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/IT-GS-Kompendium_Einzel_PDFs_2023/02_ORP_Organisation_und_Personal/ORP_4_Identitaets_und_Berechtigungsmanagement_Editon_2023.pdf?__blob=publicationFile&v=3"
+  },
+  {
+   "id": "bsi-cyberrisikocheck",
+   "patterns": [
+    "CyberRisikoCheck"
+   ],
+   "url": "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/KMU/CyberRisikoCheck/CyberRisikoCheck_node.html"
+  },
+  {
+   "id": "bsi-pm-2025-06-06",
+   "patterns": [
+    "Pressemitteilung vom 6.6.2025",
+    "press release of 6 June 2025"
+   ],
+   "url": "https://www.bsi.bund.de/DE/Service-Navi/Presse/Pressemitteilungen/Presse2025/250606_1000_IT-Dienstleister_CyberRisikoCheck.html"
+  },
+  {
+   "id": "bsi-lagebericht-kmu",
+   "patterns": [
+    "Die Lage der IT-Sicherheit in Deutschland"
+   ],
+   "url": "https://medien.bsi.bund.de/lagebericht/de/it-sicherheit-fuer-kmus/"
+  },
+  {
+   "id": "bsi-nis2-seiten",
+   "patterns": [
+    "BSI, NIS-2-Seiten",
+    "BSI, NIS-2 pages"
+   ],
+   "url": "https://www.bsi.bund.de/DE/Themen/Regulierte-Wirtschaft/NIS-2-regulierte-Unternehmen/nis-2-regulierte-unternehmen_node.html"
+  },
+  {
+   "id": "bsi-it-notfallkarte",
+   "patterns": [
+    "IT-Notfallkarte"
+   ],
+   "url": "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Empfehlungen-nach-Angriffszielen/Unternehmen-allgemein/IT-Notfallkarte/it-notfallkarte.html"
+  },
+  {
+   "id": "bsi-acs-top12",
+   "patterns": [
+    "TOP 12"
+   ],
+   "url": "https://www.allianz-fuer-cybersicherheit.de/SharedDocs/Downloads/Webs/ACS/DE/Notfallkarte/TOP_12_Massnahmen.pdf?__blob=publicationFile&v=1"
+  },
+  {
+   "id": "din-spec-27076",
+   "patterns": [
+    "DIN SPEC 27076"
+   ],
+   "url": "https://www.dinmedia.de/de/technische-regel/din-spec-27076/365252629"
+  },
+  {
+   "id": "vds-10000",
+   "patterns": [
+    "VdS 10000",
+    "VdS ·"
+   ],
+   "url": "https://vds.de/kompetenzen/cyber-security/zertifizierungen/informationssicherheits-und-datenschutzmanagement/vds-10000-informationssicherheit-fuer-kmu"
+  },
+  {
+   "id": "polizei-de-zac",
+   "patterns": [
+    "polizei.de, ZAC"
+   ],
+   "url": "https://www.polizei.de/Polizei/DE/Einrichtungen/ZAC/zac_node.html"
+  },
+  {
+   "id": "bfdi-landesbehoerden",
+   "patterns": [
+    "BfDI, Landesbehörden"
+   ],
+   "url": "https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html"
+  },
+  {
+   "id": "mannheimer-hf-060-0424",
+   "patterns": [
+    "Mannheimer Versicherung AG",
+    "Mannheimer,"
+   ],
+   "url": "https://makler.mannheimer.de/cms-media/g/makler_portal/cyber/hf_060_0424_fragebogen_cyber_risiken_ausfuellbar.pdf"
+  },
+  {
+   "id": "markel-pro-cyber-v2",
+   "patterns": [
+    "Markel Insurance SE",
+    "Markel,"
+   ],
+   "url": "https://content.markel.com/api/public/content/MARKEL-Cyber-Pro-Cyber-Fragebogen-GER"
+  },
+  {
+   "id": "allianz-fh-0403z0",
+   "patterns": [
+    "Allianz Versicherungs-AG",
+    "Allianz,"
+   ],
+   "url": "https://goa-cdeportale.allianz.de/FH-/--0/FH---0403Z0.pdf.open.pdf"
+  },
+  {
+   "id": "donau-avb-cyber-2025",
+   "patterns": [
+    "Donau Versicherung"
+   ],
+   "url": "https://www.donauversicherung.at/fileadmin/03_service/rechtliches-compliance/klauseln-bedingungen/sach-unfall/1046A_-_Allgemeine_Bedingungen_fuer_die_Cyberversicherung_2025.pdf"
+  },
+  {
+   "id": "goerg-legal-update-2025-04-25",
+   "patterns": [
+    "GÖRG, Legal Update"
+   ],
+   "url": "https://www.goerg.de/de/aktuelles/veroeffentlichungen/25-04-2025/cyber-versicherung-kein-schutz-bei-unsorgfaeltiger-beantwortung-der-risikofragen"
+  }
+ ]
+}

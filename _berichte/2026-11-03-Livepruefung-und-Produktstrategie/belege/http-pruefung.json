@@ -1,0 +1,228 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "url": "https://scutoria.com/",
+    "type": "text/html; charset=utf-8",
+    "bytes": 44607,
+    "redirects": []
+  },
+  {
+    "path": "/de/",
+    "status": 200,
+    "url": "https://scutoria.com/de/",
+    "type": "text/html; charset=utf-8",
+    "bytes": 46164,
+    "redirects": []
+  },
+  {
+    "path": "/de/bibliothek",
+    "status": 200,
+    "url": "https://scutoria.com/de/bibliothek",
+    "type": "text/html; charset=utf-8",
+    "bytes": 14002,
+    "redirects": []
+  },
+  {
+    "path": "/library",
+    "status": 200,
+    "url": "https://scutoria.com/library",
+    "type": "text/html; charset=utf-8",
+    "bytes": 13559,
+    "redirects": []
+  },
+  {
+    "path": "/de/tools",
+    "status": 200,
+    "url": "https://scutoria.com/de/tools",
+    "type": "text/html; charset=utf-8",
+    "bytes": 10952,
+    "redirects": []
+  },
+  {
+    "path": "/de/studio",
+    "status": 200,
+    "url": "https://scutoria.com/de/studio",
+    "type": "text/html; charset=utf-8",
+    "bytes": 19006,
+    "redirects": []
+  },
+  {
+    "path": "/de/konto",
+    "status": 200,
+    "url": "https://scutoria.com/de/konto",
+    "type": "text/html; charset=utf-8",
+    "bytes": 5114,
+    "redirects": []
+  },
+  {
+    "path": "/de/memos",
+    "status": 200,
+    "url": "https://scutoria.com/de/memos",
+    "type": "text/html; charset=utf-8",
+    "bytes": 7736,
+    "redirects": []
+  },
+  {
+    "path": "/de/ueber",
+    "status": 200,
+    "url": "https://scutoria.com/de/ueber",
+    "type": "text/html; charset=utf-8",
+    "bytes": 7951,
+    "redirects": []
+  },
+  {
+    "path": "/de/vertrag-widerrufen",
+    "status": 200,
+    "url": "https://scutoria.com/de/vertrag-widerrufen",
+    "type": "text/html; charset=utf-8",
+    "bytes": 7567,
+    "redirects": []
+  },
+  {
+    "path": "/de/impressum",
+    "status": 200,
+    "url": "https://scutoria.com/de/impressum",
+    "type": "text/html; charset=utf-8",
+    "bytes": 6417,
+    "redirects": []
+  },
+  {
+    "path": "/de/datenschutz",
+    "status": 200,
+    "url": "https://scutoria.com/de/datenschutz",
+    "type": "text/html; charset=utf-8",
+    "bytes": 13985,
+    "redirects": []
+  },
+  {
+    "path": "/de/agb",
+    "status": 200,
+    "url": "https://scutoria.com/de/agb",
+    "type": "text/html; charset=utf-8",
+    "bytes": 10245,
+    "redirects": []
+  },
+  {
+    "path": "/de/widerruf",
+    "status": 200,
+    "url": "https://scutoria.com/de/widerruf",
+    "type": "text/html; charset=utf-8",
+    "bytes": 7364,
+    "redirects": []
+  },
+  {
+    "path": "/de/toolkits/ki-richtlinien",
+    "status": 200,
+    "url": "https://scutoria.com/de/toolkits/ki-richtlinien",
+    "type": "text/html; charset=utf-8",
+    "bytes": 31455,
+    "redirects": []
+  },
+  {
+    "path": "/de/toolkits/sicherheitsnachweis",
+    "status": 200,
+    "url": "https://scutoria.com/de/toolkits/sicherheitsnachweis",
+    "type": "text/html; charset=utf-8",
+    "bytes": 33523,
+    "redirects": []
+  },
+  {
+    "path": "/de/toolkits/ki-richtlinien/handbuch",
+    "status": 200,
+    "url": "https://scutoria.com/de/toolkits/ki-richtlinien/handbuch",
+    "type": "text/html; charset=utf-8",
+    "bytes": 20606,
+    "redirects": []
+  },
+  {
+    "path": "/de/toolkits/sicherheitsnachweis/handbuch",
+    "status": 200,
+    "url": "https://scutoria.com/de/toolkits/sicherheitsnachweis/handbuch",
+    "type": "text/html; charset=utf-8",
+    "bytes": 20490,
+    "redirects": []
+  },
+  {
+    "path": "/de/toolkits/ki-richtlinien/handbuch/pdf",
+    "status": 200,
+    "url": "https://scutoria.com/de/toolkits/ki-richtlinien/handbuch",
+    "type": "text/html; charset=utf-8",
+    "bytes": 20606,
+    "redirects": [
+      303
+    ]
+  },
+  {
+    "path": "/health",
+    "status": 200,
+    "url": "https://scutoria.com/health",
+    "type": "application/json; charset=utf-8",
+    "bytes": 127,
+    "redirects": [],
+    "body": "{\"ok\":true,\"version\":\"dev\",\"mode\":\"live\",\"checkout\":\"stripe\",\"webhook\":true,\"mail\":true,\"memoList\":false,\"legalReviewed\":false}"
+  },
+  {
+    "path": "/robots.txt",
+    "status": 200,
+    "url": "https://scutoria.com/robots.txt",
+    "type": "text/plain; charset=utf-8",
+    "bytes": 383,
+    "redirects": [],
+    "body": "User-agent: *\nAllow: /\nDisallow: /account\nDisallow: /de/konto\nDisallow: /checkout\nDisallow: /de/kasse\nDisallow: /stripe/\nDisallow: /toolkits/ai-policy/run/\nDisallow: /de/toolkits/ki-richtlinien/run/\nDisallow: /toolkits/security-evidence/run/\nDisallow: /de/toolkits/sicherheitsnachweis/run/\nDisallow: /memos/*/memo\nDisallow: /de/memos/*/memo\nSitemap: https://scutoria.com/sitemap.xml\n"
+  },
+  {
+    "path": "/sitemap.xml",
+    "status": 200,
+    "url": "https://scutoria.com/sitemap.xml",
+    "type": "application/xml; charset=utf-8",
+    "bytes": 10883,
+    "redirects": []
+  },
+  {
+    "path": "/agb",
+    "status": 200,
+    "url": "https://scutoria.com/de/agb",
+    "type": "text/html; charset=utf-8",
+    "bytes": 10245,
+    "redirects": [
+      301
+    ]
+  },
+  {
+    "path": "/samples/ai-policy/leseprobe-d1-richtlinie-de.pdf",
+    "status": 200,
+    "url": "https://scutoria.com/samples/ai-policy/leseprobe-d1-richtlinie-de.pdf",
+    "type": "application/pdf",
+    "bytes": 23085,
+    "redirects": [],
+    "pages": 1
+  },
+  {
+    "path": "/samples/ai-policy/leseprobe-d2-aushang-de.pdf",
+    "status": 200,
+    "url": "https://scutoria.com/samples/ai-policy/leseprobe-d2-aushang-de.pdf",
+    "type": "application/pdf",
+    "bytes": 17288,
+    "redirects": [],
+    "pages": 1
+  },
+  {
+    "path": "/samples/ai-policy/leseprobe-d5-kennzeichnung-de.pdf",
+    "status": 200,
+    "url": "https://scutoria.com/samples/ai-policy/leseprobe-d5-kennzeichnung-de.pdf",
+    "type": "application/pdf",
+    "bytes": 23304,
+    "redirects": [],
+    "pages": 1
+  },
+  {
+    "path": "/samples/ai-policy/leseprobe-d7-nachweis-de.pdf",
+    "status": 200,
+    "url": "https://scutoria.com/samples/ai-policy/leseprobe-d7-nachweis-de.pdf",
+    "type": "application/pdf",
+    "bytes": 20667,
+    "redirects": [],
+    "pages": 1
+  }
+]

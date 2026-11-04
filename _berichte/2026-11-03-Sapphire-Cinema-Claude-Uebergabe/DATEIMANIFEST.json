@@ -1,0 +1,142 @@
+[
+  {
+    "path": "ANLEITUNG-FUER-CLAUDE.md",
+    "bytes": 27775,
+    "sha256": "979755d21456113543fa8a0bfabf88056e86b45815d0ac5aa90a107dff9374d3"
+  },
+  {
+    "path": "anleitung.html",
+    "bytes": 34369,
+    "sha256": "21edbec94709664cd638b5773d7e5cec08d3409ac3f47dfbfeb49fafbded26a9"
+  },
+  {
+    "path": "DESIGN-TOKENS.css",
+    "bytes": 1572,
+    "sha256": "4510e70c558c1748fdf3ff27d05993f2adf07b934fe1c77e3dc01d477a9cf2dd"
+  },
+  {
+    "path": "dokument.css",
+    "bytes": 2531,
+    "sha256": "3ae354b1957c7d8081686a826030ba3417291bdcbb23b5a00530cd1357a85af8"
+  },
+  {
+    "path": "index.html",
+    "bytes": 1631,
+    "sha256": "aaf205c2dfca6c86cda77f1a190ff1364b7c5ff79df009472f047b791adff4c6"
+  },
+  {
+    "path": "prototyp/assets/04-signal-studio.webp",
+    "bytes": 197862,
+    "sha256": "6d5bbad5ae79a8bba3e28d5aee2e0723031ec371519da08545c4733f22f44e2c"
+  },
+  {
+    "path": "prototyp/cinema.css",
+    "bytes": 662,
+    "sha256": "b5119718032f240ec51666f4ec7a9eb1c4fefdd56b3d363206ca07f0465c8541"
+  },
+  {
+    "path": "prototyp/config.js",
+    "bytes": 13535,
+    "sha256": "1bc4b01c016feb312248c35c1484d9703e203b496f28310d88d1cbec04e4e9f6"
+  },
+  {
+    "path": "prototyp/sapphire-cinema.html",
+    "bytes": 431,
+    "sha256": "192e96907547667505335e9fc7ea766e6f3d9dfcdd412ef39da71b4547636460"
+  },
+  {
+    "path": "prototyp/sapphire.css",
+    "bytes": 5454,
+    "sha256": "afe9b146737795f83e01dc2d1f2fc7abfdf821191454eebc61300fe4c1ed7959"
+  },
+  {
+    "path": "prototyp/ui.css",
+    "bytes": 27396,
+    "sha256": "d034866c4e2caee4b94e379d3d0b60e189ba90ae5e7bca5682325628e066ba6c"
+  },
+  {
+    "path": "prototyp/ui.js",
+    "bytes": 17702,
+    "sha256": "55eb8817a83120d8096b6ebe089e4ed1d2cba5828ceaf67e6b462438d4d02619"
+  },
+  {
+    "path": "PRUEFUNG-EN.json",
+    "bytes": 365,
+    "sha256": "a3de6ae06698247573283eec591ca99b66b84ee5fe1e5cb5ece3fdf03967eb7d"
+  },
+  {
+    "path": "PRUEFUNG-FARBTOKENS.json",
+    "bytes": 583,
+    "sha256": "b3565dfea2a7a0b470ad6321148608a8d127debc9776a1f75eb13e7a6f0adec4"
+  },
+  {
+    "path": "PRUEFUNG-LAYOUT.json",
+    "bytes": 3832,
+    "sha256": "28fa28aa6765939715b26ad401a3512d5853064a5e0d8387bbef595f2cf6f74a"
+  },
+  {
+    "path": "PRUEFUNG.md",
+    "bytes": 1427,
+    "sha256": "f6dc39729a1f8179f4f2fd281225ddc9a444a8a703ef04ef14db9beed4a01231"
+  },
+  {
+    "path": "referenzen/anleitung-vorschau.jpg",
+    "bytes": 135736,
+    "sha256": "be989faa6db85253f01816958df3373c8483826c19a06b4f1ad5d883a911d1d6"
+  },
+  {
+    "path": "referenzen/home-full.jpg",
+    "bytes": 318885,
+    "sha256": "8b96d4c133f2366a91ddfb690ec0e566e49c8eb19d54bf9dacb4c12def491b48"
+  },
+  {
+    "path": "referenzen/home.jpg",
+    "bytes": 113370,
+    "sha256": "46422dab75d60626619cfcc848c8642ab34783ce6a2fe11b2c0ebe3f15aac377"
+  },
+  {
+    "path": "referenzen/library.jpg",
+    "bytes": 81911,
+    "sha256": "a8ce82d5f62e4e9edc2a733dd894a588eacd9182af744495c2d4ea41b7828158"
+  },
+  {
+    "path": "referenzen/media.jpg",
+    "bytes": 131904,
+    "sha256": "5bca228bd0aecea62340cc5691ed0d380a5877826e2e70d1ffc74d264e9c69f3"
+  },
+  {
+    "path": "referenzen/mobile-home-full.jpg",
+    "bytes": 173923,
+    "sha256": "7809acf0b901b4315984c06f5f2949f8d1949f74cf151bf065cb643b2177da79"
+  },
+  {
+    "path": "referenzen/mobile-home.jpg",
+    "bytes": 42294,
+    "sha256": "b7b80e2b74ad86b4b1d8ccbf70f43654e4baa2608f7154d0759e3d2b7711cc99"
+  },
+  {
+    "path": "referenzen/product.jpg",
+    "bytes": 101619,
+    "sha256": "f7f3bc1fc72ea4378e7830a769719168737967048142cae8960a1c84dce72b26"
+  },
+  {
+    "path": "referenzen/tools.jpg",
+    "bytes": 91602,
+    "sha256": "827f851827c6beed23230f3675dc8bf2037bcb84b693af92ae36a82462ae0ea7"
+  },
+  {
+    "path": "render_anleitung.py",
+    "bytes": 6580,
+    "sha256": "c56fa5d3ee0a1210eee081c7de10053a3aef76d4484202f71e18614c4022b045"
+  },
+  {
+    "path": "START-HIER.txt",
+    "bytes": 1825,
+    "sha256": "568ff10df056654c7c18d4c1dfa2f7486f906c09820bb82a262a5de149ee09b0"
+  },
+  {
+    "path": "STARTPROMPT-FUER-CLAUDE.txt",
+    "bytes": 1830,
+    "sha256": "e1e38f94b564dfe202073157bf94a2c4dd90b55bef094b684324ab0fa7fe41a9"
+  }
+]

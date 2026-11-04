@@ -1,0 +1,110 @@
+/* Paket 2, Mockup 4.11.2026. Overrides on top of tokens.css, bundle.css, site.css, motion.css and cinema.css.
+   Every value marked "Vorschlag" is a proposal for Stefan; implementation moves them into tokens.json and cinema.css. */
+:root {
+  --radius-btn: 8px;                      /* Vorschlag: 6 bis 8 px statt Pille für Aktionsknöpfe */
+  --dur-hero: 560ms;                      /* Vorschlag: Hero-Eintritt 450 bis 650 ms (dur-3), statt dur-4 900 ms für das Bild */
+  --lift-card: -4px;                      /* Vorschlag: Hover höchstens 3 bis 4 px */
+  --lift-poster: -3px;
+  /* Scrims und Bühnenschatten, bisher nur in cinema.css; wandern nach design/project/tokens.json */
+  --cine-scrim-a: #081328; --cine-scrim-b: rgba(12, 27, 52, 0.86); --cine-scrim-c: rgba(12, 27, 52, 0.25);
+  --cine-stage-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+  --paper: #ffffff; --paper-ink: #141a24; --paper-ink-soft: #5a6472; --paper-rule: rgba(20, 26, 36, 0.14);
+  --lamp-amber-bg: #fff7e0; --lamp-amber: #9a5b00; --lamp-green: #1c7c54;
+}
+/* Inhaltsbreite: Variante 1240 px Inhalt (Vorlage) gegen 1160 px Inhalt (heute, 1240 px Rahmen minus 2 x 40 px) */
+html.w1240 .wrap, html.w1240 .bar__inner, html.w1240 .foot__inner { max-width: calc(var(--page-wide) + 2 * var(--cinema-pad)); }
+
+/* Knöpfe: kompaktere Ecken, Kategorie-Pillen bleiben */
+.sc-btn, .btn { border-radius: var(--radius-btn); }
+.sc-btn:hover, .btn:hover { transform: translateY(-1px); }
+
+/* Hero: H1 in zwei ausgewogenen Zeilen ohne festen Umbruch, Bild in 560 ms */
+.cine-h1 { max-width: 21ch; text-wrap: balance; font-size: clamp(2.25rem, 1.35rem + 2.45vw, 3.75rem); line-height: 1.08; }
+.cine-stage { box-shadow: var(--cine-stage-shadow); }
+html.js:not(.motion-off) .cine-stage__img { animation-duration: var(--dur-hero); }
+@media (max-width: 760px) {
+  .cine-stage__copy { padding: 22px 20px 18px; gap: 12px; }
+  .cine-h1 { max-width: none; }
+  .cine-lead { font-size: 15px; line-height: 1.55; }
+  .cine-stage__img { height: 220px; }
+  .cine-claim { margin-top: 0; }
+}
+
+/* Hover-Hub begrenzen */
+.cine-poster:hover, .cine-poster:focus-within { transform: translateY(var(--lift-poster)); }
+.cine-card:hover .cine-card__stage .book, .cine-card:focus-within .cine-card__stage .book { transform: scale(0.82) translateY(var(--lift-card)) rotate(-1deg); }
+
+/* ---------- Dokumenten-Demo: Frage, Entscheidung, Dokument ---------- */
+.cine-demo { background: var(--surface-studio); border: 1px solid var(--border); border-radius: 8px; padding: 32px; display: grid; gap: 22px; }
+.cine-demo__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 32px; align-items: end; }
+.cine-demo__head .title { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); }
+.cine-demo__head .body { max-width: 56ch; }
+.cine-demo__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.cine-demo__step { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 18px 18px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; min-width: 0; }
+.cine-demo__step .kicker { display: flex; align-items: center; gap: 8px; }
+.cine-demo__n { display: inline-flex; width: 22px; height: 22px; align-items: center; justify-content: center; border-radius: 6px; background: var(--button); color: var(--on-accent); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0; }
+.cine-demo__q { font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--ink); }
+.cine-demo__opts { display: grid; gap: 6px; }
+.cine-demo__opt { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; color: var(--ink-muted); }
+.cine-demo__opt i { flex: 0 0 auto; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--ink-muted); }
+.cine-demo__opt--on { border-color: var(--accent); color: var(--ink); background: var(--surface-raised); }
+.cine-demo__opt--on i { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 45%, transparent 50%); }
+.cine-demo__hint { font-size: 13px; line-height: 1.5; color: var(--ink-muted); }
+.cine-demo__rule { padding: 12px 14px; border-left: 3px solid var(--line-policy); background: var(--surface-raised); border-radius: 0 6px 6px 0; font-size: 14px; line-height: 1.5; color: var(--ink); }
+.cine-demo__rule strong { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.cine-demo__paper { background: var(--paper); color: var(--paper-ink); border-radius: 3px; padding: 14px 16px 12px; font-size: 12px; line-height: 1.4; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25); display: grid; gap: 6px; }
+.cine-demo__paper .ph { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper-ink-soft); display: flex; justify-content: space-between; gap: 8px; }
+.cine-demo__paper h4 { font-size: 14px; line-height: 1.25; margin: 2px 0 4px; }
+.cine-demo__row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 7px 0; border-top: 1px solid var(--paper-rule); }
+.cine-demo__row b { font-weight: 600; }
+.cine-demo__row span { grid-column: 1 / -1; color: var(--paper-ink-soft); font-size: 11px; }
+.cine-demo__row--open { background: var(--lamp-amber-bg); outline: 1.5px solid var(--line-setup); outline-offset: -1.5px; border-radius: 3px; padding: 7px 8px; margin: 0 -8px; border-top-color: transparent; }
+.cine-demo__row--open span { color: var(--paper-ink); }
+.cine-demo__status { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; align-self: center; }
+.cine-demo__status--ok { color: var(--lamp-green); }
+.cine-demo__status--open { color: var(--lamp-amber); }
+.cine-demo__gap { display: inline-block; min-width: 74px; border-bottom: 1px dashed var(--lamp-amber); vertical-align: baseline; }
+.cine-demo__foot { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--ink-muted); }
+.cine-demo__foot a { color: var(--accent); }
+@media (max-width: 900px) {
+  .cine-demo { padding: 20px; }
+  .cine-demo__head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .cine-demo__steps { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Studio kompakt mit Poster-Szene ---------- */
+.cine-feature--compact { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); margin-top: 0; }
+.cine-feature--compact .cine-feature__copy { padding: 28px 32px; gap: 10px; }
+.cine-feature--compact .cine-feature__copy .title { font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem); }
+.cine-feature--compact .cine-feature__copy .body { font-size: 15px; }
+.cine-feature__poster { display: flex; align-items: stretch; padding: 20px; min-width: 0; }
+.cine-feature__poster .cine-poster { width: 100%; aspect-ratio: 16 / 9; }
+@media (max-width: 760px) {
+  .cine-feature--compact { grid-template-columns: minmax(0, 1fr); }
+  .cine-feature__poster { order: -1; padding: 14px 14px 0; }
+  .cine-feature__poster .cine-poster { aspect-ratio: 4 / 3; }
+  .cine-feature__poster .cine-poster__title { max-width: 58%; font-size: 1.1rem; }
+  .cine-feature__poster .cine-scene { width: 46%; bottom: 40px; }
+  .cine-feature--compact .cine-feature__copy { padding: 20px; }
+  .cine-demo__paper .ph { flex-direction: column; gap: 2px; }
+}
+
+/* ---------- Poster-Szenen: Dokument oder Ablauf statt großer Zahl ---------- */
+.cine-poster { overflow: hidden; }
+.cine-poster--scene .cine-poster__no { display: none; }
+.cine-poster--scene .cine-poster__title { max-width: 50%; position: relative; z-index: 1; }
+.cine-scene { position: absolute; right: -10px; bottom: -8px; width: 48%; max-width: 250px; pointer-events: none; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.3)); }
+.cine-feature__poster .cine-scene { width: 50%; right: -8px; bottom: -10px; }
+.cine-poster--tall .cine-scene { width: 92%; max-width: none; right: -16px; bottom: 44px; }
+.cine-poster--scene.cine-poster--tall { justify-content: flex-start; }
+.cine-poster--scene.cine-poster--tall .cine-poster__title { max-width: none; margin: 0 0 auto; }
+.cine-poster--scene.cine-poster--tall .cine-poster__foot { margin-top: auto; position: relative; z-index: 1; }
+@media (max-width: 760px) { .cine-scene { width: 50%; } }
+
+/* ---------- Produktkarten: Cover plus Ausschnitt eines erzeugten Dokuments ---------- */
+.cine-card__stage { overflow: hidden; }
+.cine-card__sheet { position: absolute; right: 9%; top: 12%; width: 44%; aspect-ratio: 1 / 1.3; background: var(--paper); color: var(--paper-ink); border-radius: 3px; padding: 10px 11px; font-size: 7.5px; line-height: 1.35; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3); transform: rotate(1.5deg); display: grid; align-content: start; gap: 4px; pointer-events: none; }
+.cine-card__sheet b { font-size: 9px; display: block; }
+.cine-card__sheet em { font-style: normal; color: var(--paper-ink-soft); display: block; }
+.cine-card__sheet mark { background: var(--lamp-amber-bg); color: var(--paper-ink); padding: 1px 3px; border-radius: 2px; }
+.cine-card__stage .book { position: relative; z-index: 1; }

@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>Scutoria Probe 01</title>
+<!--
+  Probe 01 · Video 01, Abschnitt 3 „Womit Sie anfangen“, Absätze 12 bis 16 (deutsche Tonspur, 60,8 s).
+  Zeitpunkte aus der Wortzuordnung (Whisper large-v3, lokal) in woerter-de.json; alle Angaben in Sekunden ab Ausschnittbeginn.
+  render(t) ist eine reine Funktion der Zeit: rendern.mjs ruft sie je Bild auf und nimmt das Bild auf.
+  Farben und Schriften aus dem Scutoria-Designsystem (site/public/tokens.css); Figuren ohne Gesicht (Marke: kein Gesicht).
+-->
+<style>
+@font-face{font-family:"Manrope";src:url("../../../../site/public/fonts/manrope-latin-wght-normal.woff2") format("woff2");font-weight:200 800}
+@font-face{font-family:"Manrope";src:url("../../../../site/public/fonts/manrope-latin-ext-wght-normal.woff2") format("woff2");font-weight:200 800;unicode-range:U+0100-024F,U+1E00-1EFF}
+@font-face{font-family:"IBM Plex Mono";src:url("../../../../site/public/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"IBM Plex Mono";src:url("../../../../site/public/fonts/ibm-plex-mono-latin-ext-400-normal.woff2") format("woff2");font-weight:400;unicode-range:U+0100-024F,U+1E00-1EFF}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#0b1120}
+svg{display:block}
+</style></head><body>
+<svg id="stage" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script>
+// ================= Grundlagen =================
+const W = 1920, H = 1080, NS = 'http://www.w3.org/2000/svg';
+const C = {
+  ground: '#0b1120', surface: '#121b2f', raised: '#19243b', ink: '#e9eef8', muted: '#a1adc4',
+  paper: '#fbfbfd', paperBack: '#d9dfea', pInk: '#141a24', pMuted: '#5a6472',
+  blue: '#4f8cff', blueDeep: '#1f5fd1', amber: '#ffd166', amberDeep: '#c98f00', red: '#ff6b6b', green: '#2ec4b6', purple: '#b07cff',
+  wall: '#0f192c', desk: '#1b2740', edge: '#2e3d5e', lane: '#22314f'
+};
+const SKIN = '#c9d3e6', HAIR = '#26324a', PANTS = '#1d2840', SHOE = '#141c2c';
+const F = { sans: 'Manrope, sans-serif', mono: '"IBM Plex Mono", monospace' };
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const E = {
+  lin: (x) => x,
+  io: (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2),
+  out: (x) => 1 - Math.pow(1 - x, 3),
+  in: (x) => x * x * x,
+  back: (x) => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); },
+  sine: (x) => -(Math.cos(Math.PI * x) - 1) / 2,
+};
+const P = (t, t0, d, e = E.io) => e(clamp((t - t0) / d));
+const win = (t, a, din, b, dout) => Math.min(P(t, a, din, E.out), 1 - P(t, b, dout, E.in));
+const swing = (t, t0) => (t < t0 ? 0 : Math.exp(-3.2 * (t - t0)) * Math.cos(9 * (t - t0)));
+function el(tag, attrs = {}, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function T(parent, x, y, s, o = {}) {
+  const e = el('text', { x, y, 'font-family': o.mono ? F.mono : F.sans, 'font-size': o.size || 28, 'font-weight': o.weight || (o.mono ? 400 : 600), fill: o.fill || C.ink, 'text-anchor': o.anchor || 'start' }, parent);
+  if (o.ls) e.setAttribute('letter-spacing', o.ls);
+  e.textContent = s; return e;
+}
+const tr = (e, x, y, s = 1, r = 0) => e.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(${r.toFixed(3)}) scale(${s.toFixed(4)})`);
+function O(e, o) { o = clamp(o); e.setAttribute('opacity', o.toFixed(3)); e.setAttribute('visibility', o < 0.003 ? 'hidden' : 'visible'); }
+const cam = (e, fx, fy, s, cx = 960, cy = 540) => e.setAttribute('transform', `translate(${cx.toFixed(2)} ${cy.toFixed(2)}) scale(${s.toFixed(5)}) translate(${(-fx).toFixed(2)} ${(-fy).toFixed(2)})`);
+const qb = (p0, p1, p2, k) => [(1 - k) * (1 - k) * p0[0] + 2 * (1 - k) * k * p1[0] + k * k * p2[0], (1 - k) * (1 - k) * p0[1] + 2 * (1 - k) * k * p1[1] + k * k * p2[1]];
+
+// ================= Symbole (Form plus Wort, nie Farbe allein) =================
+function iconBuilding(p, s, col) { const g = el('g', {}, p);
+  el('path', { d: `M${-s * 0.42} ${s * 0.44} V${-s * 0.12} L0 ${-s * 0.44} L${s * 0.42} ${-s * 0.12} V${s * 0.44} Z`, fill: 'none', stroke: col, 'stroke-width': s * 0.1, 'stroke-linejoin': 'round' }, g);
+  el('rect', { x: -s * 0.12, y: s * 0.1, width: s * 0.24, height: s * 0.34, fill: col }, g); return g; }
+function iconPerson(p, s, col) { const g = el('g', {}, p);
+  el('circle', { cx: 0, cy: -s * 0.2, r: s * 0.19, fill: col }, g);
+  el('path', { d: `M${-s * 0.38} ${s * 0.44} Q${-s * 0.38} ${s * 0.04} 0 ${s * 0.04} Q${s * 0.38} ${s * 0.04} ${s * 0.38} ${s * 0.44} Z`, fill: col }, g); return g; }
+function iconUnknown(p, s, col) { const g = el('g', {}, p);
+  el('circle', { r: s * 0.42, fill: 'none', stroke: col, 'stroke-width': s * 0.09, 'stroke-dasharray': `${s * 0.18} ${s * 0.12}` }, g);
+  T(g, 0, s * 0.2, '?', { size: s * 0.58, weight: 800, fill: col, anchor: 'middle' }); return g; }
+function iconSpark(p, s, col) { const r = s * 0.48, k = 0.16;
+  return el('path', { d: `M0 ${-r} C${r * k} ${-r * k} ${r * k} ${-r * k} ${r} 0 C${r * k} ${r * k} ${r * k} ${r * k} 0 ${r} C${-r * k} ${r * k} ${-r * k} ${r * k} ${-r} 0 C${-r * k} ${-r * k} ${-r * k} ${-r * k} 0 ${-r} Z`, fill: col }, p); }
+function iconTranslate(p, s, col) { const g = el('g', {}, p);
+  el('rect', { x: -s * 0.46, y: -s * 0.42, width: s * 0.52, height: s * 0.52, rx: s * 0.1, fill: 'none', stroke: col, 'stroke-width': s * 0.09 }, g);
+  el('rect', { x: -s * 0.06, y: -s * 0.1, width: s * 0.52, height: s * 0.52, rx: s * 0.1, fill: col }, g); return g; }
+function iconChat(p, s, col) { return el('path', { d: `M${-s * 0.44} ${-s * 0.34} h${s * 0.88} a${s * 0.08} ${s * 0.08} 0 0 1 ${s * 0.08} ${s * 0.08} v${s * 0.46} a${s * 0.08} ${s * 0.08} 0 0 1 ${-s * 0.08} ${s * 0.08} h${-s * 0.5} l${-s * 0.24} ${s * 0.2} v${-s * 0.2} h${-s * 0.06} a${s * 0.08} ${s * 0.08} 0 0 1 ${-s * 0.08} ${-s * 0.08} v${-s * 0.46} a${s * 0.08} ${s * 0.08} 0 0 1 ${s * 0.08} ${-s * 0.08} Z`, fill: col }, p); }
+function iconInstitution(p, s, col) { const g = el('g', {}, p);
+  el('path', { d: `M${-s * 0.5} ${-s * 0.2} L0 ${-s * 0.5} L${s * 0.5} ${-s * 0.2} Z`, fill: col }, g);
+  for (let i = 0; i < 4; i++) el('rect', { x: -s * 0.4 + i * s * 0.25, y: -s * 0.14, width: s * 0.1, height: s * 0.5, fill: col }, g);
+  el('rect', { x: -s * 0.52, y: s * 0.4, width: s * 1.04, height: s * 0.1, fill: col }, g); return g; }
+function iconCheck(p, s, col) { return el('path', { d: `M${-s * 0.36} 0 L${-s * 0.1} ${s * 0.26} L${s * 0.38} ${-s * 0.26}`, fill: 'none', stroke: col, 'stroke-width': s * 0.14, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, p); }
+const ICON = { betrieb: iconBuilding, privat: iconPerson, unklar: iconUnknown };
+
+// Kategorie-Marker wie auf der Website: Fakt Quadrat, Auslegung Raute
+function markerShape(p, kind, s) {
+  if (kind === 'fakt') return el('rect', { x: -s / 2, y: -s / 2, width: s, height: s, fill: C.blue }, p);
+  return el('rect', { x: -s * 0.38, y: -s * 0.38, width: s * 0.76, height: s * 0.76, fill: C.purple, transform: 'rotate(45)' }, p);
+}
+
+// ================= Figuren (ohne Gesicht; Rolle über Silhouette, Kleidung, Werkzeug) =================
+function seated(p, x, y, o) {
+  const g = el('g', { transform: `translate(${x} ${y})` }, p);
+  el('rect', { x: -88, y: -150, width: 16, height: 154, rx: 8, fill: '#17223a' }, g);
+  el('rect', { x: -92, y: 2, width: 116, height: 16, rx: 8, fill: '#17223a' }, g);
+  el('rect', { x: -40, y: 18, width: 12, height: 52, fill: '#131c30' }, g);
+  el('rect', { x: -76, y: 66, width: 84, height: 8, rx: 4, fill: '#131c30' }, g);
+  el('rect', { x: -22, y: -16, width: 122, height: 32, rx: 16, fill: PANTS }, g);
+  el('rect', { x: 80, y: -4, width: 30, height: 74, rx: 15, fill: PANTS }, g);
+  el('ellipse', { cx: 106, cy: 70, rx: 24, ry: 9, fill: SHOE }, g);
+  el('path', { d: 'M -50 6 L -45 -122 Q -41 -152 -12 -152 L 14 -152 Q 43 -152 43 -122 L 41 6 Z', fill: o.shirt }, g);
+  el('path', { d: 'M -14 -152 L 0 -132 L 14 -152 Z', fill: o.collar || '#d9e0ee', opacity: 0.85 }, g);
+  const head = el('g', {}, g);
+  el('circle', { cx: 0, cy: 0, r: 33, fill: SKIN }, head);
+  if (o.hair === 'short') el('path', { d: 'M -33 4 A 33 33 0 0 1 31 -10 Q 12 -24 -6 -18 Q -24 -12 -33 4 Z', fill: HAIR }, head);
+  if (o.hair === 'bun') { el('circle', { cx: -26, cy: -28, r: 15, fill: HAIR }, head); el('path', { d: 'M -33 8 A 33 33 0 0 1 29 -14 Q 2 -28 -20 -12 Q -30 -2 -33 8 Z', fill: HAIR }, head); }
+  const arm = el('g', {}, g);
+  el('line', { x1: 0, y1: 0, x2: 26, y2: 52, stroke: o.shirt, 'stroke-width': 26, 'stroke-linecap': 'round' }, arm);
+  const fore = el('g', {}, arm);
+  el('line', { x1: 0, y1: 0, x2: 70, y2: -4, stroke: o.shirt, 'stroke-width': 22, 'stroke-linecap': 'round' }, fore);
+  el('circle', { cx: 77, cy: -4, r: 12, fill: SKIN }, fore);
+  const fig = { g, head, arm, fore, x, y };
+  pose(fig, 0, 0, 0); return fig;
+}
+function pose(fig, armA, foreA, headA) {
+  fig.arm.setAttribute('transform', `translate(16 -124) rotate(${armA.toFixed(2)})`);
+  fig.fore.setAttribute('transform', `translate(26 52) rotate(${foreA.toFixed(2)})`);
+  fig.head.setAttribute('transform', `translate(0 -190) rotate(${headA.toFixed(2)})`);
+}
+function standing(p, x, y, o) {
+  const g = el('g', { transform: `translate(${x} ${y})` }, p);
+  el('rect', { x: -25, y: -154, width: 21, height: 154, rx: 10, fill: PANTS }, g);
+  el('rect', { x: 4, y: -154, width: 21, height: 154, rx: 10, fill: PANTS }, g);
+  el('ellipse', { cx: -22, cy: -3, rx: 21, ry: 8, fill: SHOE }, g); el('ellipse', { cx: 10, cy: -3, rx: 21, ry: 8, fill: SHOE }, g);
+  el('line', { x1: 30, y1: -276, x2: 38, y2: -176, stroke: o.jacket, 'stroke-width': 24, 'stroke-linecap': 'round' }, g);
+  el('circle', { cx: 38, cy: -164, r: 12, fill: SKIN }, g);
+  el('path', { d: 'M -47 -142 L -45 -268 Q -43 -298 -14 -298 L 14 -298 Q 43 -298 45 -268 L 47 -142 Z', fill: o.jacket }, g);
+  el('rect', { x: -46, y: -216, width: 92, height: 9, fill: '#cfd6e3', opacity: 0.7 }, g);
+  el('rect', { x: -46, y: -188, width: 92, height: 9, fill: '#cfd6e3', opacity: 0.7 }, g);
+  const head = el('g', { transform: 'translate(0 -336)' }, g);
+  el('circle', { r: 32, fill: SKIN }, head);
+  el('path', { d: 'M -35 -2 A 35 35 0 0 1 35 -2 Z', fill: '#e9eef8' }, head);
+  el('rect', { x: -52, y: -7, width: 74, height: 9, rx: 4.5, fill: '#e9eef8' }, head);
+  const arm = el('g', { transform: 'translate(-26 -276)' }, g);
+  el('line', { x1: 0, y1: 0, x2: -20, y2: 62, stroke: o.jacket, 'stroke-width': 24, 'stroke-linecap': 'round' }, arm);
+  const fore = el('g', { transform: 'translate(-20 62)' }, arm);
+  el('line', { x1: 0, y1: 0, x2: -34, y2: -56, stroke: o.jacket, 'stroke-width': 20, 'stroke-linecap': 'round' }, fore);
+  el('circle', { cx: -38, cy: -62, r: 11, fill: SKIN }, fore);
+  const phone = el('g', { transform: 'translate(-46 -96)' }, fore);
+  const glow = el('circle', { r: 110, fill: 'url(#gBlue)' }, phone);
+  el('rect', { x: -18, y: -31, width: 36, height: 62, rx: 7, fill: '#0f1626', stroke: '#3a4d75', 'stroke-width': 2.5 }, phone);
+  const scr = el('g', {}, phone);
+  el('rect', { x: -14, y: -26, width: 28, height: 50, rx: 4, fill: '#dfe7f7' }, scr);
+  const ic = el('g', { transform: 'translate(0 -4)' }, scr); iconChat(ic, 18, C.blueDeep);
+  const dim = el('rect', { x: -14, y: -26, width: 28, height: 50, rx: 4, fill: '#0f1626' }, phone);
+  return { g, head, arm, fore, glow, dim, x, y };
+}
+function monitor(p, x, y, w, h, glyph) {
+  const g = el('g', {}, p);
+  const glow = el('ellipse', { cx: x + w / 2, cy: y + h / 2, rx: w * 1.15, ry: h * 1.35, fill: 'url(#gBlue)' }, g);
+  el('rect', { x: x + w / 2 - 6, y: y + h, width: 12, height: 26, fill: '#26344f' }, g);
+  el('rect', { x: x + w / 2 - 36, y: y + h + 22, width: 72, height: 6, rx: 3, fill: '#26344f' }, g);
+  el('rect', { x, y, width: w, height: h, rx: 10, fill: '#0f1626', stroke: C.edge, 'stroke-width': 4 }, g);
+  el('rect', { x: x + 10, y: y + 10, width: w - 20, height: h - 20, rx: 6, fill: '#e3e9f5' }, g);
+  el('rect', { x: x + 10, y: y + 10, width: w - 20, height: 15, rx: 6, fill: '#c6d0e4' }, g);
+  for (let i = 0; i < 3; i++) el('circle', { cx: x + 20 + i * 9, cy: y + 17.5, r: 2.6, fill: '#8d99b2' }, g);
+  const gl = el('g', { transform: `translate(${x + 34} ${y + h / 2 + 8})` }, g); glyph(gl, 30, C.blueDeep);
+  [0.62, 0.48, 0.55].forEach((f, i) => el('rect', { x: x + 58, y: y + h / 2 - 8 + i * 13, width: (w - 76) * f, height: 7, rx: 3.5, fill: '#b8c3d9' }, g));
+  const dim = el('rect', { x: x + 10, y: y + 10, width: w - 20, height: h - 20, rx: 6, fill: '#0f1626' }, g);
+  return { g, glow, dim, x, y, w, h };
+}
+function tagEl(p, kind) {
+  const g = el('g', {}, p);
+  el('line', { x1: 0, y1: 0, x2: 0, y2: 22, stroke: '#3a4d75', 'stroke-width': 2 }, g);
+  const col = kind === 'betrieb' ? C.blue : kind === 'privat' ? C.muted : C.amber;
+  const r = el('rect', { x: -94, y: 22, width: 188, height: 52, rx: 12, fill: C.raised, stroke: col, 'stroke-width': 2.5 }, g);
+  if (kind === 'unklar') r.setAttribute('stroke-dasharray', '9 6');
+  const ic = el('g', { transform: 'translate(-62 48)' }, g); ICON[kind](ic, 28, col);
+  T(g, -38, 56, kind === 'betrieb' ? 'Betrieb' : kind, { mono: 1, size: 22, fill: C.ink });
+  return g;
+}
+function shelves(p, seed) {
+  for (let i = 0; i < 10; i++) {
+    const x = i * 290 - 220, h = 560 + ((i * 137 + seed * 53) % 5) * 46, y = 1080 - h - 20;
+    el('rect', { x, y, width: 236, height: h, rx: 6, fill: '#0d1525' }, p);
+    for (let r = 0; r < Math.floor(h / 124); r++) {
+      const yy = y + 34 + r * 124;
+      el('rect', { x: x + 12, y: yy + 74, width: 212, height: 4, fill: '#131d32' }, p);
+      let xx = x + 20, k = (i * 7 + r * 3 + seed) % 11;
+      while (xx < x + 206) { const w = 10 + ((k * 29) % 9), hh = 42 + ((k * 17) % 28);
+        el('rect', { x: xx, y: yy + 74 - hh, width: w, height: hh, rx: 2, fill: k % 9 === 0 ? '#243049' : '#101a2c' }, p); xx += w + 3; k++; }
+    }
+  }
+}
+
+// ================= Bühne =================
+const svg = document.getElementById('stage');
+const defs = el('defs', {}, svg);
+function radial(id, col, a) { const g = el('radialGradient', { id, cx: '50%', cy: '50%', r: '50%' }, defs); el('stop', { offset: 0, 'stop-color': col, 'stop-opacity': a }, g); el('stop', { offset: 0.55, 'stop-color': col, 'stop-opacity': a * 0.28 }, g); el('stop', { offset: 1, 'stop-color': col, 'stop-opacity': 0 }, g); }
+radial('gBlue', '#4f8cff', 0.5); radial('gPaper', '#ffffff', 0.09); radial('gAmber', '#ffd166', 0.45); radial('gRed', '#ff6b6b', 0.4); radial('gGreen', '#2ec4b6', 0.4);
+{ const sp = el('radialGradient', { id: 'gSpot', gradientUnits: 'userSpaceOnUse', cx: 960, cy: 540, r: 640 }, defs); el('stop', { offset: 0, 'stop-color': '#0b1120', 'stop-opacity': 0 }, sp); el('stop', { offset: 0.55, 'stop-color': '#0b1120', 'stop-opacity': 0 }, sp); el('stop', { offset: 1, 'stop-color': '#0b1120', 'stop-opacity': 0.82 }, sp); }
+{ const v = el('radialGradient', { id: 'gVig', cx: '50%', cy: '46%', r: '72%' }, defs); el('stop', { offset: 0.6, 'stop-color': '#000', 'stop-opacity': 0 }, v); el('stop', { offset: 1, 'stop-color': '#000', 'stop-opacity': 0.5 }, v); }
+{ const f = el('filter', { id: 'shadow', x: '-30%', y: '-30%', width: '160%', height: '170%' }, defs); el('feDropShadow', { dx: 0, dy: 16, stdDeviation: 18, 'flood-color': '#000', 'flood-opacity': 0.5 }, f); }
+{ const f = el('filter', { id: 'shadowS', x: '-40%', y: '-40%', width: '180%', height: '190%' }, defs); el('feDropShadow', { dx: 0, dy: 6, stdDeviation: 7, 'flood-color': '#000', 'flood-opacity': 0.45 }, f); }
+const clipA = el('clipPath', { id: 'clipA', clipPathUnits: 'userSpaceOnUse' }, defs); const clipAc = el('circle', { cx: 960, cy: 540, r: 0 }, clipA);
+const clipB = el('clipPath', { id: 'clipB', clipPathUnits: 'userSpaceOnUse' }, defs); const clipBc = el('circle', { cx: 960, cy: 540, r: 0 }, clipB);
+
+const bg = el('g', {}, svg);
+el('rect', { x: 0, y: 0, width: W, height: H, fill: C.ground }, bg);
+
+// ---------- Szene 1 und 3: Karte mit Memo und Weg ----------
+const map = el('g', {}, svg);
+const mapShelves = el('g', {}, map); shelves(mapShelves, 1);
+const mapCam = el('g', {}, map);
+el('circle', { cx: 560, cy: 560, r: 640, fill: 'url(#gPaper)' }, mapCam);
+const memo = el('g', {}, mapCam);
+el('rect', { x: -240 + 14, y: -340 + 10, width: 480, height: 680, rx: 6, fill: C.paperBack }, memo);
+el('rect', { x: -240, y: -340, width: 480, height: 680, rx: 6, fill: C.paper, filter: 'url(#shadow)' }, memo);
+T(memo, -200, -288, 'MEMO · SCUTORIA', { mono: 1, size: 15, fill: C.pMuted, ls: '0.08em' });
+T(memo, 200, -288, '30. OKTOBER 2026', { mono: 1, size: 15, fill: C.pMuted, anchor: 'end', ls: '0.06em' });
+el('rect', { x: -200, y: -268, width: 400, height: 1.5, fill: '#d7dce6' }, memo);
+T(memo, -200, -216, 'Womit fangen wir', { size: 34, weight: 800, fill: C.pInk });
+T(memo, -200, -176, 'bei KI-Regeln an?', { size: 34, weight: 800, fill: C.pInk });
+const qRows = [];
+for (let i = 0; i < 7; i++) {
+  const y = -122 + i * 44, g = el('g', {}, memo);
+  T(g, -200, y + 5, String(i + 1), { mono: 1, size: 15, fill: C.pMuted });
+  const bar = el('rect', { x: -176, y: y - 5, width: 190 + ((i * 37) % 70), height: 10, rx: 5, fill: '#e1e6ee' }, g);
+  for (let j = 0; j < 3; j++) el('circle', { cx: 116 + j * 30, cy: y, r: 8, fill: 'none', stroke: '#aab3c2', 'stroke-width': 2 }, g);
+  const sel = el('circle', { cx: 116 + ((i * 2 + 1) % 3) * 30, cy: y, r: 8.5, fill: C.pInk }, g);
+  qRows.push({ bar, sel });
+}
+const band = el('g', {}, memo);
+el('rect', { x: -214, y: 200, width: 428, height: 100, rx: 10, fill: '#e6eeff' }, band);
+el('circle', { cx: -180, cy: 250, r: 13, fill: C.red }, band);
+T(band, -152, 238, 'ERSTER SCHRITT', { mono: 1, size: 15, fill: C.blueDeep, ls: '0.08em' });
+el('rect', { x: -152, y: 254, width: 250, height: 10, rx: 5, fill: '#c3d2f6' }, band);
+el('rect', { x: -152, y: 274, width: 176, height: 10, rx: 5, fill: '#c3d2f6' }, band);
+const lab7 = T(mapCam, 880, 300, '7 Fragen', { size: 48, weight: 800 });
+const lab1 = T(mapCam, 880, 830, '1 Schritt zuerst', { size: 48, weight: 800 });
+const lab7sub = T(mapCam, 882, 340, 'ZU IHRER LAGE', { mono: 1, size: 20, fill: C.muted, ls: '0.1em' });
+const lab1sub = T(mapCam, 882, 870, 'DANN DIE REIHENFOLGE', { mono: 1, size: 20, fill: C.muted, ls: '0.1em' });
+
+const slots = [[1200, 660], [1450, 600], [1700, 640], [1950, 585], [2200, 625], [2450, 570]];
+function catmull(pts) {
+  let d = `M ${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+    d += ` C ${(p1[0] + (p2[0] - p0[0]) / 6).toFixed(1)} ${(p1[1] + (p2[1] - p0[1]) / 6).toFixed(1)} ${(p2[0] - (p3[0] - p1[0]) / 6).toFixed(1)} ${(p2[1] - (p3[1] - p1[1]) / 6).toFixed(1)} ${p2[0]} ${p2[1]}`;
+  }
+  return d;
+}
+const roadD = catmull([[1040, 700], ...slots, [2640, 540]]);
+const roadBase = el('path', { d: roadD, fill: 'none', stroke: '#172340', 'stroke-width': 18, 'stroke-linecap': 'round' }, mapCam);
+const road = el('path', { d: roadD, fill: 'none', stroke: '#33466e', 'stroke-width': 6, 'stroke-linecap': 'round' }, mapCam);
+const roadPulse = el('path', { d: roadD, fill: 'none', stroke: C.blue, 'stroke-width': 8, 'stroke-linecap': 'round' }, mapCam);
+const NAMES = ['Bestand', 'Konten', 'Richtlinie', 'Einweisung', 'Kennzeichnung', 'Datum'];
+const nodes = NAMES.map((n, i) => {
+  const g = el('g', {}, mapCam);
+  const glow = el('circle', { r: 150, fill: 'url(#gBlue)' }, g);
+  const c = el('circle', { r: 22, fill: C.surface, stroke: '#3a4d75', 'stroke-width': 3 }, g);
+  const num = T(g, 0, 10, String(i + 1), { mono: 1, size: 28, anchor: 'middle', fill: C.muted });
+  const lab = T(g, 0, 92, n, { size: 28, weight: 700, anchor: 'middle', fill: C.muted });
+  return { g, glow, c, num, lab };
+});
+// Merker über „Bestand“: was die Bestandsaufnahme gefunden hat
+const badges = el('g', {}, nodes[0].g);
+const badgeP = el('g', {}, badges), badgeU = el('g', {}, badges);
+[[badgeP, 'privat', -100], [badgeU, 'unklar', 100]].forEach(([g, kind, dx]) => {
+  const col = kind === 'privat' ? C.muted : C.amber;
+  const r = el('rect', { x: -78, y: -26, width: 156, height: 52, rx: 26, fill: C.raised, stroke: col, 'stroke-width': 2.5 }, g);
+  if (kind === 'unklar') r.setAttribute('stroke-dasharray', '9 6');
+  const ic = el('g', { transform: 'translate(-46 0)' }, g); ICON[kind](ic, 26, col);
+  T(g, -24, 8, kind, { mono: 1, size: 21, fill: C.ink });
+  g.dataset.dx = dx;
+});
+const tile = el('g', {}, mapCam);
+el('rect', { x: -36, y: -36, width: 72, height: 72, rx: 14, fill: C.blue }, tile);
+T(tile, 0, 13, '1', { size: 38, weight: 800, anchor: 'middle', fill: '#fff' });
+
+// ---------- Szene 2: der Betrieb und das Tool-Register ----------
+const office = el('g', { 'clip-path': 'url(#clipA)' }, svg);
+el('rect', { x: 0, y: 0, width: W, height: H, fill: C.ground }, office);
+const offShelves = el('g', {}, office); shelves(offShelves, 2);
+const offCam = el('g', {}, office);
+el('rect', { x: 96, y: 246, width: 1170, height: 610, rx: 22, fill: C.wall }, offCam);
+el('rect', { x: 96, y: 846, width: 1170, height: 14, rx: 5, fill: '#1a2640' }, offCam);
+T(offCam, 126, 290, 'MUSTER ELEKTROTECHNIK E.U. · ERFUNDEN', { mono: 1, size: 18, fill: '#5d6b88', ls: '0.1em' });
+{ // Regal mit Ordnern an der Wand
+  el('rect', { x: 150, y: 400, width: 380, height: 8, rx: 4, fill: '#1c2943' }, offCam);
+  for (let i = 0; i < 11; i++) el('rect', { x: 162 + i * 32, y: 324 + (i % 3) * 6, width: 24, height: 76 - (i % 3) * 6, rx: 3, fill: i === 6 ? '#3a4d75' : (i % 2 ? '#1f2c47' : '#24324f') }, offCam);
+  el('rect', { x: 700, y: 318, width: 250, height: 160, rx: 8, fill: '#0a111f', stroke: '#1f2c47', 'stroke-width': 6 }, offCam);
+  el('rect', { x: 822, y: 318, width: 6, height: 160, fill: '#1f2c47' }, offCam);
+  el('rect', { x: 1062, y: 470, width: 176, height: 378, rx: 6, fill: '#0c1424', stroke: '#1f2c47', 'stroke-width': 6 }, offCam);
+}
+const figA = seated(offCam, 300, 772, { shirt: '#56647f', hair: 'short' });
+const figB = seated(offCam, 718, 772, { shirt: '#7c6c5c', hair: 'bun' });
+function desk(p, x0, x1) { el('rect', { x: x0, y: 700, width: x1 - x0, height: 22, rx: 6, fill: C.desk }, p); el('rect', { x: x0 + 16, y: 722, width: 14, height: 126, fill: '#16203a' }, p); el('rect', { x: x1 - 30, y: 722, width: 14, height: 126, fill: '#16203a' }, p); }
+desk(offCam, 236, 566); desk(offCam, 654, 984);
+el('rect', { x: 386, y: 690, width: 70, height: 10, rx: 3, fill: '#2a3858' }, offCam);
+el('rect', { x: 804, y: 690, width: 70, height: 10, rx: 3, fill: '#2a3858' }, offCam);
+const monA = monitor(offCam, 384, 566, 172, 108, iconSpark);
+const monB = monitor(offCam, 802, 566, 172, 108, iconTranslate);
+const figC = standing(offCam, 1150, 846, { jacket: '#3b4860' });
+const tags = [
+  { g: tagEl(offCam, 'betrieb'), x: 470, y: 438 },
+  { g: tagEl(offCam, 'privat'), x: 888, y: 438 },
+  { g: tagEl(offCam, 'unklar'), x: 1150, y: 372 },
+];
+// Register auf der rechten Seite
+const reg = el('g', {}, offCam);
+el('rect', { x: -240 + 14, y: -262 + 10, width: 480, height: 524, rx: 6, fill: C.paperBack }, reg);
+el('rect', { x: -240, y: -262, width: 480, height: 524, rx: 6, fill: C.paper, filter: 'url(#shadow)' }, reg);
+T(reg, -204, -210, 'TOOL-REGISTER', { mono: 1, size: 17, fill: C.pInk, ls: '0.1em' });
+T(reg, 204, -210, 'STAND 30.10.2026', { mono: 1, size: 14, fill: C.pMuted, anchor: 'end' });
+el('rect', { x: -204, y: -192, width: 408, height: 1.5, fill: '#d7dce6' }, reg);
+T(reg, -204, -160, 'TOOL', { mono: 1, size: 14, fill: C.pMuted, ls: '0.1em' });
+T(reg, 40, -160, 'KONTO', { mono: 1, size: 14, fill: C.pMuted, ls: '0.1em' });
+const ROWY = [-92, -4, 84];
+const ROWS = [
+  { name: 'Textassistent', glyph: iconSpark, kind: 'betrieb', text: 'Betrieb', col: C.blueDeep },
+  { name: 'Übersetzer', glyph: iconTranslate, kind: 'privat', text: 'privat', col: C.pMuted },
+  { name: 'Chat-App', glyph: iconChat, kind: 'unklar', text: 'unklar', col: C.amberDeep },
+];
+const rows = ROWS.map((r, i) => {
+  const y = ROWY[i];
+  el('rect', { x: -204, y: y + 40, width: 408, height: 1, fill: '#e3e7ee' }, reg);
+  const g = el('g', {}, reg);
+  const gg = el('g', { transform: `translate(-184 ${y})` }, g); r.glyph(gg, 30, C.pInk);
+  T(g, -156, y + 9, r.name, { size: 25, weight: 700, fill: C.pInk });
+  const ic = el('g', { transform: `translate(66 ${y})` }, g); ICON[r.kind](ic, 28, r.col);
+  T(g, 92, y + 8, r.text, { mono: 1, size: 21, fill: r.col });
+  return { g, y };
+});
+const frame3 = el('rect', { x: 40, y: ROWY[2] - 30, width: 172, height: 60, rx: 12, fill: 'none', stroke: '#e0a800', 'stroke-width': 3, 'stroke-dasharray': '10 7' }, reg);
+const underline3 = el('rect', { x: -204, y: ROWY[2] + 30, width: 0, height: 4, rx: 2, fill: C.blue }, reg);
+const befund = el('g', {}, reg);
+el('rect', { x: 40, y: ROWY[2] + 44, width: 150, height: 40, rx: 20, fill: C.amber }, befund);
+T(befund, 115, ROWY[2] + 71, 'BEFUND', { mono: 1, size: 19, fill: '#0a0c10', anchor: 'middle', ls: '0.1em' });
+const REG = { x: 1588, y: 572, r: 1.4 };
+const tokens = ROWS.map((r) => {
+  const g = el('g', {}, offCam);
+  el('rect', { x: -60, y: -26, width: 120, height: 52, rx: 14, fill: C.paper, filter: 'url(#shadowS)' }, g);
+  const a = el('g', { transform: 'translate(-28 0)' }, g); r.glyph(a, 26, C.pInk);
+  const b = el('g', { transform: 'translate(24 0)' }, g); ICON[r.kind](b, 26, r.kind === 'unklar' ? '#e0a800' : r.col);
+  return g;
+});
+
+const spotA = el('rect', { x: 0, y: 0, width: W, height: H, fill: 'url(#gSpot)' }, office);
+// ---------- Szene 4: Zugangswege, Anbieter, Regel ----------
+const acc = el('g', { 'clip-path': 'url(#clipB)' }, svg);
+el('rect', { x: 0, y: 0, width: W, height: H, fill: C.ground }, acc);
+const accShelves = el('g', { opacity: 0.8 }, acc); shelves(accShelves, 3);
+const accCam = el('g', {}, acc);
+el('rect', { x: 60, y: 868, width: 1800, height: 6, rx: 3, fill: '#16213a' }, accCam);
+const figB2 = seated(accCam, 252, 792, { shirt: '#7c6c5c', hair: 'bun' });
+el('rect', { x: 180, y: 720, width: 350, height: 22, rx: 6, fill: C.desk }, accCam);
+el('rect', { x: 196, y: 742, width: 14, height: 126, fill: '#16203a' }, accCam); el('rect', { x: 500, y: 742, width: 14, height: 126, fill: '#16203a' }, accCam);
+el('rect', { x: 338, y: 710, width: 70, height: 10, rx: 3, fill: '#2a3858' }, accCam);
+const monB2 = monitor(accCam, 330, 586, 172, 108, iconSpark);
+const LT = 'M 502 640 L 600 640 C 690 640 680 470 770 470 L 1482 470';
+const LB = 'M 502 640 L 600 640 C 690 640 680 790 770 790 L 1482 790';
+const laneTop = el('path', { d: LT, fill: 'none', stroke: C.lane, 'stroke-width': 16, 'stroke-linecap': 'round' }, accCam);
+const laneBot = el('path', { d: LB, fill: 'none', stroke: C.lane, 'stroke-width': 16, 'stroke-linecap': 'round' }, accCam);
+const laneTopHi = el('path', { d: LT, fill: 'none', stroke: C.amber, 'stroke-width': 16, 'stroke-linecap': 'round' }, accCam);
+const laneBotHi = el('path', { d: LB, fill: 'none', stroke: C.blue, 'stroke-width': 16, 'stroke-linecap': 'round' }, accCam);
+const lenT = laneTop.getTotalLength(), lenB = laneBot.getTotalLength();
+const dotLayer = el('g', {}, accCam);
+const pool = (n, fill) => Array.from({ length: n }, () => el('rect', { x: -7, y: -9, width: 14, height: 18, rx: 2.5, fill }, dotLayer));
+const dotsT = pool(30, C.paper), dotsB = pool(40, C.paper), dotsA = pool(12, C.blue);
+// Schranke auf dem privaten Weg
+const gate = el('g', {}, accCam);
+el('rect', { x: 806, y: 380, width: 6, height: 130, rx: 3, fill: '#3a4d75' }, gate);
+el('rect', { x: 850, y: 380, width: 6, height: 130, rx: 3, fill: '#3a4d75' }, gate);
+el('rect', { x: 800, y: 372, width: 62, height: 12, rx: 4, fill: '#3a4d75' }, gate);
+const gateBar = el('g', {}, gate);
+el('rect', { x: 814, y: 0, width: 34, height: 84, rx: 6, fill: C.muted }, gateBar);
+for (let i = 0; i < 3; i++) el('rect', { x: 818, y: 12 + i * 24, width: 26, height: 7, rx: 3, fill: '#5d6b88' }, gateBar);
+const gateLab = T(accCam, 790, 558, 'NICHT FÜR DIE ARBEIT', { mono: 1, size: 19, fill: C.muted, ls: '0.06em' });
+// Konten als Durchgänge auf den Wegen
+function card(p, cx, cy, w, h, stroke) {
+  const g = el('g', {}, p);
+  el('rect', { x: cx - w / 2, y: cy - h / 2, width: w, height: h, rx: 18, fill: C.raised, stroke, 'stroke-width': 3, filter: 'url(#shadowS)' }, g);
+  return g;
+}
+const cardP = card(accCam, 1180, 470, 340, 124, '#4a5878');
+{ const ic = el('g', { transform: 'translate(1046 458)' }, cardP); iconPerson(ic, 36, C.muted);
+  T(cardP, 1078, 468, 'Privates Konto', { size: 28, weight: 800 });
+  T(cardP, 1046, 512, 'anna.k@privat.example', { mono: 1, size: 18, fill: C.muted }); }
+const cardB = card(accCam, 1180, 790, 340, 200, C.blue);
+const bizCardHi = el('rect', { x: 1004, y: 684, width: 352, height: 212, rx: 22, fill: 'none', stroke: C.blue, 'stroke-width': 4 }, accCam);
+{ const ic = el('g', { transform: 'translate(1046 734)' }, cardB); iconBuilding(ic, 36, C.blue);
+  T(cardB, 1078, 744, 'Betriebskonto', { size: 28, weight: 800 }); }
+const nameG = el('g', {}, cardB);
+const nameT = T(nameG, 1046, 790, 'Anna K.', { size: 24, weight: 600 });
+const nameStrike = el('rect', { x: 1044, y: 780, width: 0, height: 3, fill: C.red }, nameG);
+const addrT = T(cardB, 1046, 824, '', { mono: 1, size: 19, fill: C.ink });
+el('rect', { x: 1030, y: 842, width: 300, height: 1, fill: 'rgba(226,232,246,0.14)' }, cardB);
+T(cardB, 1046, 870, 'TRAINING', { mono: 1, size: 16, fill: C.muted, ls: '0.08em' });
+const trState = T(cardB, 1146, 870, 'AN', { mono: 1, size: 16, fill: C.ink, ls: '0.08em' });
+const tgl = el('g', { transform: 'translate(1300 864)' }, cardB);
+const tglTrack = el('rect', { x: -30, y: -15, width: 60, height: 30, rx: 15, fill: C.blue }, tgl);
+const tglKnob = el('circle', { cx: 15, cy: 0, r: 11, fill: '#fff' }, tgl);
+const tglRing = el('rect', { x: -40, y: -25, width: 80, height: 50, rx: 25, fill: 'none', stroke: C.blue, 'stroke-width': 3 }, tgl);
+// Anbieter
+const tower = el('g', {}, accCam);
+T(tower, 1620, 286, 'ANBIETER', { mono: 1, size: 22, fill: C.muted, anchor: 'middle', ls: '0.12em' });
+el('rect', { x: 1482, y: 304, width: 276, height: 592, rx: 22, fill: '#121b2f', stroke: C.edge, 'stroke-width': 3 }, tower);
+const lights = [];
+for (let r = 0; r < 2; r++) for (let i = 0; i < 9; i++) lights.push(el('circle', { cx: 1514 + i * 26, cy: 336 + r * 26, r: 4, fill: C.blue }, tower));
+el('rect', { x: 1500, y: 404, width: 240, height: 140, rx: 12, fill: '#0c1424' }, tower);
+T(tower, 1516, 430, 'VERLAUF', { mono: 1, size: 14, fill: '#5d6b88', ls: '0.1em' });
+el('rect', { x: 1500, y: 730, width: 240, height: 70, rx: 12, fill: '#0c1424' }, tower);
+const trainBox = el('rect', { x: 1500, y: 822, width: 240, height: 60, rx: 12, fill: '#0c1424', stroke: '#2a3858', 'stroke-width': 2 }, tower);
+T(tower, 1518, 858, 'TRAINING', { mono: 1, size: 16, fill: C.muted, ls: '0.08em' });
+const trainState = T(tower, 1722, 858, 'AUS', { mono: 1, size: 16, fill: C.ink, anchor: 'end', ls: '0.08em' });
+el('rect', { x: 1616, y: 800, width: 8, height: 22, fill: '#2a3858' }, tower);
+const valve = el('g', { transform: 'translate(1620 811)' }, tower);
+el('circle', { r: 13, fill: '#121b2f', stroke: C.muted, 'stroke-width': 3 }, valve);
+const valveBar = el('rect', { x: -10, y: -2.5, width: 20, height: 5, rx: 2.5, fill: C.muted }, valve);
+const valveRing = el('circle', { cx: 1620, cy: 811, r: 26, fill: 'none', stroke: C.blue, 'stroke-width': 3 }, tower);
+const pile = Array.from({ length: 7 }, (_, i) => { const g = el('g', {}, tower); el('rect', { x: -22, y: -28, width: 44, height: 56, rx: 4, fill: C.paper, filter: 'url(#shadowS)' }, g); for (let k = 0; k < 3; k++) el('rect', { x: -14, y: -16 + k * 11, width: 28 - k * 6, height: 5, rx: 2.5, fill: '#c9d1df' }, g); return g; });
+const profile = el('g', {}, tower);
+el('circle', { cx: 0, cy: 0, r: 120, fill: 'url(#gRed)' }, profile);
+el('rect', { x: -104, y: -56, width: 208, height: 112, rx: 14, fill: C.raised, stroke: C.red, 'stroke-width': 3 }, profile);
+{ const ic = el('g', { transform: 'translate(-62 6)' }, profile); iconPerson(ic, 54, C.red); }
+T(profile, -26, -20, 'PROFIL', { mono: 1, size: 17, fill: C.red, ls: '0.1em' });
+[0, 1, 2].forEach((k) => el('rect', { x: -26, y: -4 + k * 16, width: 104 - k * 22, height: 7, rx: 3.5, fill: '#7a5266' }, profile));
+// Freigabe am Tool
+const appr = el('g', {}, accCam);
+el('rect', { x: 330, y: 528, width: 172, height: 40, rx: 20, fill: C.raised, stroke: C.green, 'stroke-width': 2.5 }, appr);
+{ const ic = el('g', { transform: 'translate(354 548)' }, appr); iconCheck(ic, 22, C.green); }
+T(appr, 372, 555, 'FREIGEGEBEN', { mono: 1, size: 16, fill: C.ink, ls: '0.06em' });
+// Datenschutzaufsicht und ihre Empfehlung
+const inst = el('g', {}, accCam);
+el('circle', { cx: 1000, cy: 140, r: 110, fill: 'url(#gPaper)' }, inst);
+{ const ic = el('g', { transform: 'translate(1000 140)' }, inst); iconInstitution(ic, 96, C.ink); }
+T(inst, 1000, 226, 'DATENSCHUTZAUFSICHT · DE', { mono: 1, size: 20, fill: C.muted, anchor: 'middle', ls: '0.08em' });
+const rec = el('g', {}, accCam);
+el('rect', { x: -32, y: -42, width: 64, height: 84, rx: 4, fill: C.paper, filter: 'url(#shadowS)' }, rec);
+el('rect', { x: -20, y: -28, width: 12, height: 12, fill: C.blue }, rec);
+[0, 1, 2].forEach((k) => el('rect', { x: -20, y: -6 + k * 12, width: 40 - k * 8, height: 5, rx: 2.5, fill: '#c9d1df' }, rec));
+el('circle', { cx: 0, cy: -42, r: 6, fill: C.blue }, rec);
+// Die Regel
+const rule = el('g', {}, accCam);
+el('line', { x1: 0, y1: -260, x2: 0, y2: -118, stroke: '#3a4d75', 'stroke-width': 2 }, rule);
+el('rect', { x: -230 + 12, y: -118 + 8, width: 460, height: 236, rx: 6, fill: C.paperBack }, rule);
+const ruleSheet = el('rect', { x: -230, y: -118, width: 460, height: 236, rx: 6, fill: C.paper, filter: 'url(#shadow)' }, rule);
+T(rule, -196, -76, 'REGEL · KI-NUTZUNG', { mono: 1, size: 16, fill: C.pMuted, ls: '0.1em' });
+el('rect', { x: -196, y: -60, width: 392, height: 1.5, fill: '#d7dce6' }, rule);
+const r1 = T(rule, -196, -10, '', { size: 30, weight: 800, fill: C.pInk });
+const r1u = el('rect', { x: -196, y: 4, width: 0, height: 5, rx: 2.5, fill: C.blue }, rule);
+const r2 = T(rule, -196, 54, '', { size: 30, weight: 800, fill: C.blueDeep });
+const conn1 = el('path', { d: 'M 752 185 C 600 185 562 420 562 626', fill: 'none', stroke: C.amber, 'stroke-width': 4, 'stroke-dasharray': '12 10', 'stroke-linecap': 'round' }, accCam);
+const conn1dot = el('circle', { cx: 562, cy: 640, r: 9, fill: C.amber }, accCam);
+const conn2 = el('path', { d: 'M 1208 247 L 1386 247 Q 1414 247 1414 275 L 1414 776', fill: 'none', stroke: C.blue, 'stroke-width': 5, 'stroke-linecap': 'round' }, accCam);
+const conn2dot = el('circle', { cx: 1414, cy: 790, r: 10, fill: C.blue }, accCam);
+const c1len = conn1.getTotalLength(), c2len = conn2.getTotalLength();
+conn1.setAttribute('stroke-dasharray', '12 10');
+
+const spotB = el('rect', { x: 0, y: 0, width: W, height: H, fill: 'url(#gSpot)' }, acc);
+// ---------- Übergänge, Vignette, Einblendungen ----------
+const rings = el('g', {}, svg);
+const ringA = el('circle', { cx: 0, cy: 0, r: 0, fill: 'none', stroke: C.blue, 'stroke-width': 5 }, rings);
+const ringB = el('circle', { cx: 0, cy: 0, r: 0, fill: 'none', stroke: C.blue, 'stroke-width': 5 }, rings);
+el('rect', { x: 0, y: 0, width: W, height: H, fill: 'url(#gVig)' }, svg);
+const hud = el('g', {}, svg);
+function hudBlock(kicker, title) { const g = el('g', {}, hud); T(g, 96, 104, kicker, { mono: 1, size: 24, fill: C.blue, ls: '0.14em' }); if (title) T(g, 94, 166, title, { size: 60, weight: 800 }); return g; }
+const hud1 = hudBlock('3 · WOMIT SIE ANFANGEN', '');
+const hud2 = hudBlock('SCHRITT 1', 'Bestand aufnehmen');
+const hud3 = hudBlock('SCHRITT 2', 'Betriebliche Konten');
+T(hud, 1824, 102, 'SYNTHETISCHE STIMME', { mono: 1, size: 18, fill: C.muted, anchor: 'end', ls: '0.12em' });
+function chip(kind, word) {
+  const g = el('g', {}, hud);
+  const r = el('rect', { x: 96, y: 874, width: 10, height: 54, rx: 27, fill: 'rgba(18,27,47,0.94)', stroke: 'rgba(226,232,246,0.16)', 'stroke-width': 1.5 }, g);
+  const m = el('g', { transform: 'translate(128 901)' }, g); markerShape(m, kind, 18);
+  const tx = T(g, 150, 910, word, { mono: 1, size: 24, fill: kind === 'fakt' ? C.blue : C.purple, ls: '0.12em' });
+  return { g, r, tx };
+}
+const chipF = chip('fakt', 'FAKT'), chipA = chip('auslegung', 'AUSLEGUNG');
+const srcBand = el('g', {}, hud);
+el('rect', { x: 0, y: 952, width: W, height: 72, fill: 'rgba(18,27,47,0.96)' }, srcBand);
+el('rect', { x: 0, y: 952, width: W, height: 1.5, fill: 'rgba(226,232,246,0.14)' }, srcBand);
+const srcT = T(srcBand, 96, 998, 'Quelle: Datenschutzkonferenz, Orientierungshilfe KI und Datenschutz, 6. Mai 2024, Abschn. 2.2, 2.4, 2.5, 3.1 · Abruf 18.10.2026', { mono: 1, size: 24, fill: C.muted });
+const fade = el('rect', { x: 0, y: 0, width: W, height: H, fill: '#05080f' }, svg);
+
+// Maße nach dem Laden der Schriften
+function layout() {
+  [chipF, chipA].forEach((c) => c.r.setAttribute('width', (c.tx.getComputedTextLength() + 88).toFixed(0)));
+  let fs = 24; while (srcT.getComputedTextLength() > 1728 && fs > 18) { fs -= 1; srcT.setAttribute('font-size', fs); }
+}
+
+// ================= Zeitplan (Sekunden ab Ausschnittbeginn; aus woerter-de.json) =================
+const roadLen = road.getTotalLength();
+const slotAt = slots.map(([x]) => { let lo = 0, hi = roadLen; for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (road.getPointAtLength(m).x < x) lo = m; else hi = m; } return lo; });
+const MAP_PAN = [1825, 600];
+function mapState(t) {
+  // gibt Kamera der Karte und Fortschritt der Kreisöffnung zurück
+  let F = [960, 540], S = 1, k = 0, which = null;
+  if (t < 9.55) { const kp = P(t, 4.6, 1.8); F = [lerp(960, MAP_PAN[0], kp), lerp(540, MAP_PAN[1], kp)]; }
+  if (t >= 9.55) { F = MAP_PAN.slice(); }
+  const kA = t < 15 ? P(t, 9.55, 1.3) : 1 - P(t, 20.25, 1.2);
+  const kB = P(t, 25.25, 1.2);
+  if (t >= 9.55 && t < 21.45) { k = kA; which = 'A'; }
+  if (t >= 25.25) { k = kB; which = 'B'; }
+  if (which) { const e = E.io(k); F = [lerp(MAP_PAN[0], slots[0][0], e), lerp(MAP_PAN[1], slots[0][1], e)]; S = lerp(1, 3, e); }
+  const ps = [(slots[0][0] - F[0]) * S + 960, (slots[0][1] - F[1]) * S + 540];
+  const r = which ? 46 * S * lerp(1, 8.4, E.in(k)) : 0;
+  return { F, S, k, which, ps, r };
+}
+function emits(windows, interval) { const out = []; windows.forEach(([a, b]) => { for (let x = a; x <= b + 1e-6; x += interval) out.push(x); }); return out; }
+const SPEED = 360;
+const EM_T = emits([[23.0, 33.2], [55.0, 58.2]], 0.46);
+const EM_B = emits([[34.5, 60.6]], 0.44);
+const EM_A = emits([[48.6, 50.4]], 0.5);
+function placeDots(pool, path, len, ems, t, reverse = false) {
+  let n = 0;
+  for (const e of ems) {
+    const d = (t - e) * SPEED; if (d < 0 || d > len) continue;
+    if (n >= pool.length) break;
+    const pt = path.getPointAtLength(reverse ? len - d : d);
+    const dot = pool[n++]; tr(dot, pt.x, pt.y, 1, 0); O(dot, Math.min(1, d / 30, (len - d) / 30));
+  }
+  for (; n < pool.length; n++) O(pool[n], 0);
+}
+function typeText(e, s, t, t0, dur) { const n = Math.round(clamp((t - t0) / dur) * s.length); e.textContent = s.slice(0, n); }
+
+function render(t) {
+  // ---------- Karte ----------
+  const M = mapState(t);
+  const mapVisible = !(M.which && M.k > 0.999);
+  O(map, mapVisible ? 1 : 0);
+  if (mapVisible) {
+    cam(mapCam, M.F[0], M.F[1], M.S);
+    tr(mapShelves, -(M.F[0] - 960) * 0.25, 0, 1, 0);
+    // Memo
+    const mi = P(t, 0, 0.7, E.out);
+    tr(memo, 560, 560 + (1 - mi) * 50, 1, -2 - (1 - mi) * 2); O(memo, mi);
+    qRows.forEach((q, i) => { const k = P(t, 1.55 + i * 0.13, 0.22, E.out); O(q.sel, k); q.bar.setAttribute('fill', k > 0.5 ? '#cdd5e3' : '#e1e6ee'); });
+    const bk = P(t, 3.2, 0.35, E.out); O(band, bk);
+    const fade7 = Math.min(P(t, 1.7, 0.4, E.out), 1 - P(t, 4.9, 0.5));
+    tr(lab7, 0, (1 - P(t, 1.7, 0.4, E.out)) * 16); O(lab7, fade7); O(lab7sub, fade7 * 0.9);
+    const fade1 = Math.min(P(t, 3.35, 0.4, E.out), 1 - P(t, 4.9, 0.5));
+    tr(lab1, 0, (1 - P(t, 3.35, 0.4, E.out)) * 16); O(lab1, fade1); O(lab1sub, fade1 * 0.9);
+    // Kachel „1“ fliegt vom Memo auf den Weg
+    const tk = P(t, 4.2, 1.1);
+    const start = [569, 810], end = slots[0];
+    const pos = qb(start, [880, 470], end, tk);
+    tr(tile, pos[0], pos[1], lerp(1, 0.62, tk) * (1 + 0.15 * Math.sin(Math.PI * tk)), lerp(-2, 0, tk));
+    O(tile, Math.min(P(t, 4.05, 0.2), 1 - P(t, 5.25, 0.2)));
+    // Weg zeichnet sich
+    const rd = P(t, 5.2, 1.7, E.io) * roadLen;
+    [road, roadBase].forEach((p) => { p.setAttribute('stroke-dasharray', `${roadLen} ${roadLen}`); p.setAttribute('stroke-dashoffset', (roadLen - rd).toFixed(1)); });
+    const pk = P(t, 7.3, 1.4, E.sine), head = pk * roadLen;
+    roadPulse.setAttribute('stroke-dasharray', `160 ${roadLen + 400}`); roadPulse.setAttribute('stroke-dashoffset', (-(head - 160)).toFixed(1));
+    O(roadPulse, Math.min(P(t, 7.25, 0.15), 1 - P(t, 8.6, 0.3)));
+    // Knoten
+    const swapK = P(t, 23.85, 1.2, E.io);
+    nodes.forEach((n, i) => {
+      const appear = P(t, 5.25 + i * 0.26, 0.4, E.back);
+      let pos = slots[i];
+      if (i === 0 && swapK > 0) pos = qb(slots[0], [(slots[0][0] + slots[1][0]) / 2, 790], slots[1], swapK);
+      if (i === 1 && swapK > 0) pos = qb(slots[1], [(slots[0][0] + slots[1][0]) / 2, 430], slots[0], swapK);
+      // Zustand: aktiv, erledigt, ruhend
+      const act0 = i === 0 ? Math.min(P(t, 5.25, 0.3), 1 - P(t, 21.45, 0.4)) : 0;
+      const act1 = i === 1 ? P(t, 21.6, 0.4) : 0;
+      const act = Math.max(act0, act1);
+      const done = i === 0 ? P(t, 21.45, 0.4) : 0;
+      const grow = i === 0 ? P(t, 9.16, 0.35, E.back) * (1 - P(t, 21.45, 0.4)) : 0;
+      const near = Math.exp(-Math.pow((head - slotAt[i]) / 90, 2)) * (pk > 0 && pk < 1 ? 1 : 0);
+      const r = (22 + act * 24 + grow * 8 + done * 8 + near * 8) * appear;
+      n.c.setAttribute('r', Math.max(0.1, r).toFixed(2));
+      n.c.setAttribute('fill', act > 0.5 ? C.blue : done > 0.5 ? C.raised : C.surface);
+      n.c.setAttribute('stroke', act > 0.5 || done > 0.5 || near > 0.4 ? C.blue : '#3a4d75');
+      O(n.glow, (act * 0.9 + near * 0.6) * appear);
+      n.num.setAttribute('fill', act > 0.5 ? '#fff' : done > 0.5 ? C.blue : C.muted);
+      n.num.setAttribute('font-size', (28 + act * 8).toFixed(1));
+      n.num.setAttribute('y', (10 + act * 3).toFixed(1));
+      // Nummer folgt dem Platz in der Reihenfolge
+      const numNow = (i === 0 && swapK > 0.5) ? '2' : (i === 1 && swapK > 0.5) ? '1' : String(i + 1);
+      if (n.num.textContent !== numNow) n.num.textContent = numNow;
+      O(n.num, appear * (swapK > 0 && swapK < 1 && i < 2 ? Math.abs(swapK - 0.5) * 2 : 1));
+      n.lab.setAttribute('fill', act > 0.5 ? C.ink : C.muted);
+      n.lab.setAttribute('font-size', (26 + act * 6).toFixed(1));
+      n.lab.setAttribute('y', (78 + act * 22).toFixed(1));
+      O(n.lab, appear * (act > 0.5 ? 1 : 0.8) * (1 - clamp(M.k * 2.5)));
+      tr(n.g, pos[0], pos[1], 1, 0);
+    });
+    // Merker „privat“ und „unklar“ über dem erledigten Schritt
+    [[badgeP, 22.08], [badgeU, 22.86]].forEach(([g, t0]) => {
+      const k = P(t, t0, 0.45, E.back); const dx = Number(g.dataset.dx);
+      tr(g, dx, -112 - (1 - k) * 20 + Math.sin((t - t0) * 6) * 3 * (t > t0 && t < t0 + 1.2 ? 1 : 0), Math.max(0.01, k), 0); O(g, Math.min(P(t, t0, 0.25), 1 - P(t, 23.55, 0.35)));
+    });
+  }
+
+  // ---------- Kreisöffnung A: in den Betrieb ----------
+  const showA = M.which === 'A';
+  O(office, showA ? 1 : 0);
+  if (showA) {
+    clipAc.setAttribute('cx', M.ps[0].toFixed(2)); clipAc.setAttribute('cy', M.ps[1].toFixed(2)); clipAc.setAttribute('r', M.r.toFixed(2));
+    tr(ringA, 0, 0); ringA.setAttribute('cx', M.ps[0].toFixed(2)); ringA.setAttribute('cy', M.ps[1].toFixed(2)); ringA.setAttribute('r', M.r.toFixed(2));
+    O(ringA, 1 - clamp((M.r - 150) / 500));
+    // Kamera im Betrieb: Heranfahren an Zeile 3 des Registers
+    const zk = Math.min(P(t, 15.95, 0.85), 1 - P(t, 19.45, 0.8));
+    const fx = lerp(960, 1560, zk), fy = lerp(540, 578, zk), z = lerp(1, 1.6, zk);
+    O(spotA, zk * (M.k > 0.99 ? 1 : 0));
+    const sc = M.r / 1159;
+    // Brennpunkt: bei kleiner Öffnung Mitte des Betriebs, sonst Zoom
+    cam(offCam, fx, fy, sc * z, M.ps[0], M.ps[1]);
+    tr(offShelves, 0, 0, 1, 0);
+    // Bildschirme werden hell, wenn die Tools genannt werden
+    [[monA, 11.62], [monB, 11.85]].forEach(([m, t0]) => { const k = P(t, t0, 0.35, E.out); O(m.dim, 0.75 * (1 - k)); O(m.glow, 0.25 + 0.75 * k); });
+    const kc = P(t, 12.1, 0.35, E.out); O(figC.dim, 0.75 * (1 - kc)); O(figC.glow, 0.2 + 0.8 * kc);
+    // Tippen und Zeigen
+    const typing = (ph, a, b) => (t > a && t < b ? 5 * Math.sin(t * 2 * Math.PI * 4.5 + ph) : 0);
+    const pointA = Math.min(P(t, 14.4, 0.3), 1 - P(t, 15.1, 0.35));
+    const pointB = Math.min(P(t, 14.7, 0.3), 1 - P(t, 15.4, 0.35));
+    pose(figA, -112 * pointA, typing(0, 12.5, 14.3) + typing(0, 15.5, 21) - 20 * pointA, 2 * Math.sin(t * 1.3) - 8 * pointA);
+    pose(figB, -112 * pointB, typing(1.7, 12.6, 14.6) + typing(1.7, 15.8, 21) - 20 * pointB, 2 * Math.sin(t * 1.1 + 1) - 8 * pointB);
+    figC.head.setAttribute('transform', `translate(0 -336) rotate(${(3 * Math.sin(t * 0.9)).toFixed(2)})`);
+    // Anhänger mit dem Konto
+    tags.forEach((g, i) => {
+      const t0 = 13.25 + i * 0.27;
+      const k = P(t, t0, 0.4, E.out);
+      tr(g.g, g.x, g.y - (1 - k) * 60, 1, 22 * swing(t, t0 + 0.1) * (k > 0 ? 1 : 0));
+      O(g.g, k);
+    });
+    // Register gleitet herein
+    const rk = P(t, 14.1, 0.7, E.out);
+    tr(reg, REG.x + (1 - rk) * 520, REG.y, 1, REG.r + (1 - rk) * 6); O(reg, rk);
+    // Kopien fliegen in die Zeilen
+    tokens.forEach((g, i) => {
+      const t0 = 14.45 + i * 0.3, k = P(t, t0, 0.8, E.io);
+      const a = [tags[i].x, tags[i].y + 48];
+      const b = [REG.x - 40, REG.y + ROWY[i]];
+      const pos = qb(a, [(a[0] + b[0]) / 2, Math.min(a[1], b[1]) - 230], b, k);
+      tr(g, pos[0], pos[1], lerp(1, 0.8, k), lerp(0, 8, Math.sin(Math.PI * k)));
+      O(g, Math.min(P(t, t0, 0.15), 1 - P(t, t0 + 0.78, 0.15)));
+      O(rows[i].g, P(t, t0 + 0.72, 0.25, E.out));
+    });
+    // Zeile 3: „unklar“ bleibt offen markiert, wird als Befund geführt
+    O(frame3, P(t, 15.8, 0.3) * (0.75 + 0.25 * Math.sin(Math.max(0, t - 16.24) * 7) * (t > 16.24 && t < 17.4 ? 1 : 0)));
+    frame3.setAttribute('stroke-dashoffset', (-(t * 14)).toFixed(1));
+    underline3.setAttribute('width', (408 * P(t, 17.5, 0.6, E.io)).toFixed(1));
+    const bf = P(t, 18.42, 0.45, E.back);
+    befund.setAttribute('transform', `translate(115 ${(ROWY[2] + 64).toFixed(1)}) scale(${Math.max(0.01, bf).toFixed(3)}) translate(-115 ${(-(ROWY[2] + 64)).toFixed(1)})`); O(befund, P(t, 18.42, 0.2));
+  }
+  O(ringA, showA ? Number(ringA.getAttribute('opacity')) : 0);
+
+  // ---------- Kreisöffnung B: Zugangswege ----------
+  const showB = M.which === 'B';
+  O(acc, showB ? 1 : 0);
+  if (showB) {
+    clipBc.setAttribute('cx', M.ps[0].toFixed(2)); clipBc.setAttribute('cy', M.ps[1].toFixed(2)); clipBc.setAttribute('r', M.r.toFixed(2));
+    ringB.setAttribute('cx', M.ps[0].toFixed(2)); ringB.setAttribute('cy', M.ps[1].toFixed(2)); ringB.setAttribute('r', M.r.toFixed(2));
+    O(ringB, 1 - clamp((M.r - 150) / 500));
+    // Kamerafahrten: Profil, Betriebskonto, Training, zurück
+    const shots = [
+      { t: 42.85, d: 0.75, f: [1580, 500], z: 1.5 },
+      { t: 45.85, d: 0.75, f: [1190, 790], z: 1.4 },
+      { t: 47.8, d: 0.7, f: [1350, 760], z: 1.25 },
+      { t: 50.65, d: 0.7, f: [960, 540], z: 1 },
+    ];
+    let f = [960, 540], z = 1;
+    shots.forEach((s) => { const k = P(t, s.t, s.d, E.io); f = [lerp(f[0], s.f[0], k), lerp(f[1], s.f[1], k)]; z = lerp(z, s.z, k); });
+    const sc = M.r / 1159;
+    cam(accCam, f[0], f[1], sc * z, M.ps[0], M.ps[1]);
+    O(spotB, Math.min(P(t, 42.85, 0.75), 1 - P(t, 50.65, 0.7)));
+    // Person tippt, Bildschirm leuchtet
+    pose(figB2, 0, 5 * Math.sin(t * 2 * Math.PI * 4.2) * (t < 36.6 || t > 41 ? 1 : 0.2), 2 * Math.sin(t * 1.2));
+    O(monB2.dim, 0); O(monB2.glow, 0.85);
+    // Betriebsweg zeichnet sich, Betriebskonto erscheint
+    const lb = P(t, 25.9, 0.9, E.io);
+    laneBot.setAttribute('stroke-dasharray', `${lenB} ${lenB}`); laneBot.setAttribute('stroke-dashoffset', ((1 - lb) * lenB).toFixed(1));
+    const ck = P(t, 26.45, 0.5, E.back);
+    cardB.setAttribute('transform', `translate(1180 790) scale(${Math.max(0.01, ck).toFixed(3)}) translate(-1180 -790)`); O(cardB, P(t, 26.45, 0.25));
+    // Hervorhebungen der Wege
+    const privHi = Math.min(P(t, 56.4, 0.4), 1 - P(t, 59.5, 0.5));
+    O(laneTopHi, 0.55 * privHi);
+    O(laneBotHi, 0.3 * P(t, 34.5, 0.6) + 0.4 * Math.min(P(t, 59.3, 0.4), 1));
+    O(bizCardHi, Math.min(P(t, 59.3, 0.35), 1) * (0.7 + 0.3 * Math.sin(t * 5)) + Math.min(P(t, 46.3, 0.3), 1 - P(t, 47.8, 0.4)) * 0.8);
+    // Freigegeben
+    const ak = P(t, 27.3, 0.45, E.back);
+    appr.setAttribute('transform', `translate(416 548) scale(${Math.max(0.01, ak).toFixed(3)}) translate(-416 -548)`); O(appr, P(t, 27.3, 0.2));
+    // Training aus
+    const tk = P(t, 28.75, 0.4, E.io);
+    tglKnob.setAttribute('cx', lerp(15, -15, tk).toFixed(2));
+    tglTrack.setAttribute('fill', tk > 0.5 ? '#3a4660' : C.blue);
+    trState.textContent = tk > 0.5 ? 'AUS' : 'AN';
+    O(tglRing, Math.min(P(t, 28.6, 0.2), 1 - P(t, 29.7, 0.4)) + Math.min(P(t, 46.4, 0.3), 1 - P(t, 47.7, 0.4)));
+    // Funktionsadresse statt Personenname
+    typeText(addrT, 'ki@muster-elektro.example', t, 31.2, 1.35);
+    nameStrike.setAttribute('width', (nameT.getComputedTextLength() * P(t, 32.95, 0.35)).toFixed(1));
+    const no = P(t, 33.3, 0.45, E.in);
+    tr(nameG, no * 40, 0); O(nameG, 1 - no);
+    addrT.setAttribute('y', lerp(824, 792, P(t, 33.45, 0.4, E.io)).toFixed(1));
+    // Schranke: zu ab 34,15; still offen bei 54,7; wieder zu bei 59,5
+    const closed = Math.min(P(t, 34.15, 0.6, E.io), 1 - P(t, 54.7, 0.8, E.sine)) + P(t, 59.5, 0.55, E.io);
+    tr(gateBar, 0, lerp(282, 428, clamp(closed)));
+    O(gateLab, Math.min(P(t, 34.5, 0.4), 1 - P(t, 54.7, 0.4)) + P(t, 59.8, 0.4));
+    // Datenströme
+    placeDots(dotsT, laneTop, lenT, EM_T, t);
+    placeDots(dotsB, laneBot, lenB, EM_B, t);
+    placeDots(dotsA, laneBot, lenB, EM_A, t, true);
+    // Anbieter: Lichter, Verlauf wird zum Profil
+    lights.forEach((l, i) => O(l, 0.25 + 0.5 * (0.5 + 0.5 * Math.sin(t * 2.3 + i * 1.7))));
+    const arrived = EM_T.filter((e) => e + lenT / SPEED <= t && e < 40).length;
+    const morph = P(t, 43.4, 1.0, E.io);
+    pile.forEach((g, i) => {
+      const vis = arrived > i * 2 ? 1 : 0;
+      const bx = 1572 + i * 7, by = 512 - i * 9;
+      tr(g, lerp(bx, 1620, morph), lerp(by, 476, morph), lerp(1, 0.4, morph), (i % 2 ? 3 : -3) * (1 - morph)); O(g, vis * (1 - morph));
+    });
+    const pr = P(t, 43.75, 0.6, E.back);
+    const arrivedLate = EM_T.filter((e) => e > 50 && e + lenT / SPEED <= t).length;
+    tr(profile, 1620, 476, Math.max(0.01, pr) * (1 + 0.04 * arrivedLate), 0); O(profile, P(t, 43.75, 0.3));
+    // Ventil zum Training: schließt mit dem Schalter, wird später gezeigt
+    const vk = P(t, 28.75, 0.4, E.io);
+    valveBar.setAttribute('transform', `rotate(${lerp(90, 0, vk).toFixed(1)})`);
+    valveBar.setAttribute('fill', vk > 0.5 ? C.muted : C.blue);
+    O(valveRing, Math.min(P(t, 48.3, 0.3), 1 - P(t, 50.4, 0.5)) * (0.6 + 0.4 * Math.sin(t * 6)));
+    O(trainState, P(t, 28.9, 0.3));
+    trainBox.setAttribute('stroke', t > 48.3 && t < 50.6 ? C.blue : '#2a3858');
+    // Datenschutzaufsicht mit Empfehlung
+    const ik = Math.min(P(t, 37.3, 0.6, E.out), 1 - P(t, 42.6, 0.5));
+    tr(inst, 0, (1 - P(t, 37.3, 0.6, E.out)) * -30); O(inst, ik);
+    const rk2 = P(t, 39.45, 1.0, E.io);
+    const rp = qb([1000, 170], [900, 160], [831, 318], rk2);
+    tr(rec, rp[0], rp[1], lerp(0.6, 1, rk2), lerp(-8, 4, rk2)); O(rec, Math.min(P(t, 39.4, 0.25), 1 - P(t, 50.9, 0.5)));
+    // Regel hängt sich herab, zuerst nur mit dem Tool
+    const ruleIn = P(t, 52.45, 0.8, E.out);
+    tr(rule, 980, lerp(-120, 205, ruleIn), 1, -1 + 2 * swing(t, 53.2) * (t > 53.2 ? 1 : 0)); O(rule, P(t, 52.45, 0.2));
+    typeText(r1, 'Erlaubt: Textassistent', t, 53.05, 0.75);
+    r1u.setAttribute('width', (r1.getComputedTextLength() * Math.min(P(t, 58.4, 0.45), 1)).toFixed(1));
+    typeText(r2, 'Zugang: Betriebskonto', t, 59.12, 0.7);
+    // Verbindungen: „stillschweigend“ auf beide Wege, dann nur der Betriebsweg
+    const c1 = P(t, 54.45, 0.6, E.io);
+    conn1.setAttribute('stroke-dasharray', `12 10`);
+    conn1.setAttribute('stroke-dashoffset', (-t * 30).toFixed(1));
+    O(conn1, c1 * (1 - P(t, 59.4, 0.5)));
+    O(conn1dot, c1 * (1 - P(t, 59.4, 0.5)));
+    const c2 = P(t, 59.35, 0.6, E.io);
+    conn2.setAttribute('stroke-dasharray', `${c2len} ${c2len}`); conn2.setAttribute('stroke-dashoffset', ((1 - c2) * c2len).toFixed(1));
+    O(conn2, c2 > 0 ? 1 : 0); O(conn2dot, P(t, 59.9, 0.25));
+    O(ruleSheet, 1);
+  }
+  O(ringB, showB ? Number(ringB.getAttribute('opacity')) : 0);
+
+  // ---------- Einblendungen ----------
+  const h1 = Math.min(P(t, 0.2, 0.5, E.out), 1 - P(t, 8.7, 0.4)); O(hud1, h1); tr(hud1, 0, (1 - P(t, 0.2, 0.5, E.out)) * 12);
+  const zoomA = Math.min(P(t, 15.95, 0.6), 1 - P(t, 19.45, 0.6));
+  const zoomB = Math.min(P(t, 42.85, 0.6), 1 - P(t, 50.65, 0.6));
+  const h2 = Math.min(P(t, 9.16, 0.45, E.out), 1 - P(t, 20.2, 0.3)) * (1 - 0.9 * zoomA); O(hud2, h2); tr(hud2, 0, (1 - P(t, 9.16, 0.45, E.out)) * 12);
+  const h3 = P(t, 20.5, 0.45, E.out) * (1 - 0.9 * zoomB); O(hud3, h3); tr(hud3, 0, (1 - P(t, 20.5, 0.45, E.out)) * 12);
+  const cf = Math.min(P(t, 36.8, 0.4, E.out), 1 - P(t, 51.0, 0.35)); O(chipF.g, cf); tr(chipF.g, (1 - P(t, 36.8, 0.4, E.out)) * -20, 0);
+  const ca = P(t, 51.2, 0.4, E.out); O(chipA.g, ca); tr(chipA.g, (1 - ca) * -20, 0);
+  const sb = Math.min(P(t, 36.9, 0.45, E.out), 1 - P(t, 51.0, 0.4)); O(srcBand, sb); tr(srcBand, 0, (1 - sb) * 40);
+  O(fade, P(t, 60.45, 0.35, E.in));
+}
+
+window.ready = (async () => {
+  await Promise.all([document.fonts.load('800 40px Manrope'), document.fonts.load('600 20px Manrope'), document.fonts.load('400 20px "IBM Plex Mono"')]);
+  await document.fonts.ready;
+  layout();
+  render(0);
+  return true;
+})();
+window.render = render;
+</script>
+</body></html>

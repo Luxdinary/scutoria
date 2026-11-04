@@ -1,0 +1,144 @@
+{
+  "css": [
+    {
+      "url": "/tokens.css",
+      "bytes": 7733,
+      "reduced_motion": false,
+      "infinite": false
+    },
+    {
+      "url": "/bundle.css",
+      "bytes": 32314,
+      "reduced_motion": true,
+      "infinite": true
+    },
+    {
+      "url": "/site.css",
+      "bytes": 49543,
+      "reduced_motion": true,
+      "infinite": false
+    },
+    {
+      "url": "/motion.css",
+      "bytes": 18446,
+      "reduced_motion": true,
+      "infinite": false
+    },
+    {
+      "url": "/cinema.css",
+      "bytes": 36525,
+      "reduced_motion": true,
+      "infinite": false
+    }
+  ],
+  "links": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/de/",
+      "status": 200
+    },
+    {
+      "path": "/de/agb",
+      "status": 200
+    },
+    {
+      "path": "/de/bibliothek",
+      "status": 200
+    },
+    {
+      "path": "/de/datenschutz",
+      "status": 200
+    },
+    {
+      "path": "/de/impressum",
+      "status": 200
+    },
+    {
+      "path": "/de/konto",
+      "status": 200
+    },
+    {
+      "path": "/de/memos",
+      "status": 200
+    },
+    {
+      "path": "/de/memos/anmeldesicherheit",
+      "status": 200
+    },
+    {
+      "path": "/de/memos/ki-kennzeichnung",
+      "status": 200
+    },
+    {
+      "path": "/de/memos/nis2",
+      "status": 200
+    },
+    {
+      "path": "/de/memos/wo-anfangen",
+      "status": 200
+    },
+    {
+      "path": "/de/studio",
+      "status": 200
+    },
+    {
+      "path": "/de/toolkits/ki-richtlinien",
+      "status": 200
+    },
+    {
+      "path": "/de/toolkits/ki-richtlinien/handbuch",
+      "status": 200
+    },
+    {
+      "path": "/de/toolkits/sicherheitsnachweis",
+      "status": 200
+    },
+    {
+      "path": "/de/toolkits/sicherheitsnachweis/handbuch",
+      "status": 200
+    },
+    {
+      "path": "/de/tools",
+      "status": 200
+    },
+    {
+      "path": "/de/tools/darf-das-hinein",
+      "status": 200
+    },
+    {
+      "path": "/de/tools/etwas-persoenliches",
+      "status": 200
+    },
+    {
+      "path": "/de/ueber",
+      "status": 200
+    },
+    {
+      "path": "/de/vertrag-widerrufen",
+      "status": 200
+    },
+    {
+      "path": "/de/widerruf",
+      "status": 200
+    },
+    {
+      "path": "/samples/ai-policy/leseprobe-d1-richtlinie-de.pdf",
+      "status": 200
+    },
+    {
+      "path": "/samples/ai-policy/leseprobe-d7-nachweis-de.pdf",
+      "status": 200
+    },
+    {
+      "path": "/samples/security-evidence/leseprobe-d1-selbstauskunft-de.pdf",
+      "status": 200
+    },
+    {
+      "path": "/samples/security-evidence/leseprobe-d3-notfallkarte-de.pdf",
+      "status": 200
+    }
+  ]
+}

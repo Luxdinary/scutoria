@@ -1,0 +1,17 @@
+FÜNF VARIANTEN AUS STUDIO SAPPHIRE
+
+index.html öffnen und die fünf Auftritte vergleichen.
+
+1 Sapphire Cinema: filmische Bühne, am nächsten zur zuletzt gewünschten Richtung.
+2 Sapphire Editorial: ruhiger Fachverlag mit klarer Text-Bild-Trennung.
+3 Sapphire Panorama: zentrierter Einstieg, große offene Panorama-Bühne.
+4 Sapphire Channel: Lernkanal mit Navigation und Themenliste.
+5 Sapphire Collection: markante Kollektion mit breitem und vertikalem Medienframe.
+
+Jede Richtung enthält Startseite, Bibliothek, Produktdetail, Tools und Studio in EN/DE.
+
+Für Claude: gesamtes ZIP + gewählte vorlage-0N.jpg + CLAUDE-FUENF-SAPPHIRE.md.
+Im Brief steht der direkt verwendbare Umsetzungsauftrag.
+Vollständige Startseiten: screenshots/0N-home-full.jpg.
+
+Alle Designs sind lokale Prototypen. Konzepttitel und Videos sind keine verfügbaren neuen Angebote. Die Livewebsite wurde nicht verändert.

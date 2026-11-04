@@ -1,0 +1,202 @@
+[
+  {
+    "variant": 1,
+    "page": "home",
+    "h1": "KI verstehen. Wissen im Alltag nutzen.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 1,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 1,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 1,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 1,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "home",
+    "h1": "Klarheit für Ihren Arbeitsalltag.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 2,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "home",
+    "h1": "Wissen, das Zusammenhänge sichtbar macht.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 3,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 4,
+    "page": "home",
+    "h1": "Ein Thema. Ihr nächster Schritt.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 4,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 4,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 4,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 4,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 5,
+    "page": "home",
+    "h1": "Gutes Wissen verdient eine gute Form.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 5,
+    "page": "library",
+    "h1": "Die Scutoria Bibliothek.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 5,
+    "page": "product",
+    "h1": "KI-Richtlinien-Toolkit",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 5,
+    "page": "tools",
+    "h1": "Wissen, das Sie ausprobieren können.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  },
+  {
+    "variant": 5,
+    "page": "media",
+    "h1": "Verstehen. Sehen. Weiterdenken.",
+    "images": true,
+    "scroll": 1425,
+    "width": 1440
+  }
+]

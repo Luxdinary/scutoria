@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Hauptschrift/Seite",
+    "text": "#EDF3FF",
+    "background": "#080F20",
+    "ratio": 17.16
+  },
+  {
+    "name": "Lesetext/Seite",
+    "text": "#A8B9D2",
+    "background": "#080F20",
+    "ratio": 9.58
+  },
+  {
+    "name": "Lesetext/Karte",
+    "text": "#A8B9D2",
+    "background": "#111D34",
+    "ratio": 8.43
+  },
+  {
+    "name": "Buttontext/Primär",
+    "text": "#FFFFFF",
+    "background": "#306CEA",
+    "ratio": 4.71
+  },
+  {
+    "name": "Link/Karte",
+    "text": "#75A7FF",
+    "background": "#111D34",
+    "ratio": 6.99
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "test": "KI-Kauf DE",
+    "url": "https://scutoria.com/de/toolkits/ki-richtlinien",
+    "checkoutOpened": false
+  },
+  {
+    "test": "Sicherheits-Kauf DE",
+    "url": "https://scutoria.com/de/toolkits/sicherheitsnachweis",
+    "checkoutOpened": false
+  },
+  {
+    "header": "SCUTORIA\nVORSCHAU\nEnglish",
+    "scrollWidth": 375,
+    "test": "Mobile Navigation DE",
+    "visibleHeaderButtons": [],
+    "width": 390
+  }
+]

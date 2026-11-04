@@ -1,0 +1,418 @@
+{
+  "product": "security-evidence",
+  "version": "2026-10-23",
+  "name": { "en": "Security Evidence Toolkit", "de": "Sicherheitsnachweis-Toolkit" },
+  "lead": {
+    "en": "The security questionnaire from your major customer or insurer, answered honestly: a dated self-declaration, an action plan with target dates, an emergency card, an evidence list, a cover letter and a clause checklist. Forty-seven questions; start with your business or look at the example business first.",
+    "de": "Der Sicherheitsfragebogen Ihres Großkunden oder Versicherers, ehrlich beantwortet: eine datierte Selbstauskunft, ein Maßnahmenplan mit Terminen, eine Notfallkarte, eine Nachweisliste, ein Antwortschreiben und eine Klausel-Prüfliste. Siebenundvierzig Fragen; beginnen Sie mit Ihrem Betrieb oder sehen Sie zuerst den Beispielbetrieb an."
+  },
+  "statusOptions": {
+    "yes": { "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+    "partly": { "en": "Partly", "de": "Teilweise" },
+    "notyet": { "en": "Not yet", "de": "Noch nicht" },
+    "na": { "en": "Not applicable", "de": "Nicht anwendbar" }
+  },
+  "blocks": [
+    {
+      "id": "A",
+      "title": { "en": "Your business and the request", "de": "Der Betrieb und die Anfrage" },
+      "questions": [
+        { "id": "A1", "type": "text", "required": true,
+          "label": { "en": "What is the name of the business as it should appear on the documents?", "de": "Wie heißt der Betrieb, so wie er auf den Dokumenten stehen soll?" },
+          "hint": { "en": "The legal name or the name on your letterhead. It appears on every document and in the head of the self-declaration.", "de": "Der Firmenname oder der Name auf dem Briefpapier. Er steht auf jedem Dokument und im Kopf der Selbstauskunft." },
+          "default": { "en": "Example Electrical Ltd", "de": "Muster Elektrotechnik e.U." }, "ref": "handbook 1" },
+        { "id": "A10", "type": "textarea",
+          "label": { "en": "What is the postal address of the business?", "de": "Wie lautet die Postanschrift des Betriebs?" },
+          "hint": { "en": "Street, postcode and town, one per line. It goes into the letterhead of the cover letter, and the town into the line with place and date. Without it the letter is marked as a draft.", "de": "Straße, Postleitzahl und Ort, je eine Zeile. Sie steht im Briefkopf des Antwortschreibens, der Ort in der Zeile mit Ort und Datum. Ohne sie ist das Schreiben als Entwurf gekennzeichnet." },
+          "default": { "en": "", "de": "" }, "ref": "handbook 3" },
+        { "id": "A2", "type": "select", "required": true,
+          "label": { "en": "In which country is the business based?", "de": "In welchem Land sitzt der Betrieb?" },
+          "hint": { "en": "Decides the contacts on the emergency card and the country notes: hotline, computer emergency team, authority, data protection authority.", "de": "Bestimmt die Kontakte auf der Notfallkarte und die Ländernotizen: Hotline, Computer-Notfallteam, Behörde, Datenschutzbehörde." },
+          "options": [
+            { "v": "AT", "en": "Austria", "de": "Österreich" },
+            { "v": "DE", "en": "Germany", "de": "Deutschland" },
+            { "v": "EU", "en": "Another EU member state", "de": "Anderes EU-Land", "text": { "en": "Which country?", "de": "Welches Land?" } }
+          ], "default": "AT", "ref": "handbook 5" },
+        { "id": "A3", "type": "select", "required": true,
+          "label": { "en": "How many people work in the business?", "de": "Wie viele Menschen arbeiten im Betrieb?" },
+          "hint": { "en": "Size is a criterion of proportionality: the directive names it expressly. What is expected of you depends on it.", "de": "Die Größe ist ein Maßstab der Verhältnismäßigkeit: Die Richtlinie nennt sie ausdrücklich. Was von Ihnen erwartet wird, hängt davon ab." },
+          "options": [
+            { "v": "1", "en": "Just me", "de": "Ich allein" },
+            { "v": "2-9", "en": "2 to 9", "de": "2 bis 9" },
+            { "v": "10-49", "en": "10 to 49", "de": "10 bis 49" },
+            { "v": "50-249", "en": "50 to 249", "de": "50 bis 249" },
+            { "v": "250+", "en": "250 or more", "de": "250 oder mehr" }
+          ], "default": "10-49", "ref": "handbook 1" },
+        { "id": "A4", "type": "role", "required": true, "contact": true, "deputy": true,
+          "label": { "en": "Who is responsible for information security, how can they be reached, and who stands in?", "de": "Wer ist für Informationssicherheit verantwortlich, wie ist die Person erreichbar, und wer vertritt?" },
+          "hint": { "en": "A role or named function, with phone and email. In a small business this is usually the management itself; that may be written so. The customer keeps a contact point per supplier.", "de": "Eine Rolle oder benannte Funktion, mit Telefon und E-Mail. In einem kleinen Betrieb ist das meist die Leitung selbst; das darf man so schreiben. Der Auftraggeber führt eine Kontaktstelle je Lieferant." },
+          "roles": [
+            { "v": "owner", "en": "Owner or managing director", "de": "Inhaber oder Geschäftsführung" },
+            { "v": "office", "en": "Office management", "de": "Büroleitung" },
+            { "v": "other", "en": "Another function", "de": "Andere Funktion" }
+          ], "default": { "role": "owner", "contact": { "en": "+43 660 000 00 01 (example), office@example.at", "de": "+43 660 000 00 01 (Beispiel), buero@muster.at" }, "deputy": { "en": "office management", "de": "Büroleitung" } }, "ref": "handbook 2" },
+        { "id": "A5", "type": "select", "required": true,
+          "label": { "en": "Who looks after your IT: an external service provider, yourselves, or both?", "de": "Wer betreut Ihre IT: ein externer Dienstleister, Sie selbst, oder beides?" },
+          "hint": { "en": "The provider's name goes on the documents; its emergency number follows in the next question. No contract details are needed here.", "de": "Der Name des Dienstleisters steht auf den Dokumenten; seine Notfallnummer folgt in der nächsten Frage. Vertragsdetails sind hier nicht nötig." },
+          "options": [
+            { "v": "provider", "en": "An external IT service provider", "de": "Ein externer IT-Dienstleister", "text": { "en": "Name of the provider", "de": "Name des Dienstleisters" } },
+            { "v": "both", "en": "Both: a provider for some things, ourselves for the rest", "de": "Beides: ein Dienstleister für manches, wir selbst für den Rest", "text": { "en": "Name of the provider", "de": "Name des Dienstleisters" } },
+            { "v": "self", "en": "Ourselves", "de": "Wir selbst" }
+          ], "default": "both", "defaultText": { "en": "Example IT Services Ltd", "de": "Muster IT-Service GmbH" }, "ref": "handbook 4" },
+        { "id": "A9", "type": "text",
+          "label": { "en": "Under which number is your IT provider reachable in an emergency?", "de": "Unter welcher Nummer ist Ihr IT-Dienstleister im Notfall erreichbar?" },
+          "hint": { "en": "The emergency number from the service contract. It goes on the emergency card in large type; without a number the field stays yellow. Leave it empty if you look after your IT yourselves.", "de": "Die Notfallnummer aus dem Betreuungsvertrag. Sie steht groß auf der Notfallkarte; ohne Nummer bleibt das Feld gelb. Leer lassen, wenn Sie Ihre IT selbst betreuen." },
+          "default": { "en": "+43 1 000 00 00 (example)", "de": "+43 1 000 00 00 (Beispiel)" }, "ref": "handbook 4" },
+        { "id": "A6", "type": "multi", "required": true,
+          "label": { "en": "Who is asking for security evidence?", "de": "Wer verlangt den Sicherheitsnachweis?" },
+          "hint": { "en": "Shapes the cover letter and the order of the evidence. Tick everything that applies.", "de": "Bestimmt das Antwortschreiben und die Reihenfolge der Nachweise. Alles ankreuzen, was zutrifft." },
+          "options": [
+            { "v": "customer", "en": "A customer sent a security questionnaire", "de": "Ein Kunde hat einen Sicherheitsfragebogen geschickt" },
+            { "v": "contract", "en": "A contract or contract addendum with security clauses is on the table", "de": "Ein Vertrag oder Vertragszusatz mit Sicherheitsklauseln liegt zur Unterschrift vor" },
+            { "v": "insurer", "en": "A cyber insurance application or renewal", "de": "Ein Antrag auf Cyberversicherung oder deren Verlängerung" },
+            { "v": "label", "en": "A label, certificate or audit is requested", "de": "Ein Gütesiegel, Zertifikat oder eine Prüfung wird verlangt" },
+            { "v": "own", "en": "Nobody yet; we want to be ready", "de": "Noch niemand; wir wollen vorbereitet sein" }
+          ], "default": ["customer"], "ref": "handbook 1" },
+        { "id": "A11", "type": "textarea",
+          "label": { "en": "To whom do the documents go: name and address of the customer or insurer?", "de": "An wen gehen die Unterlagen: Name und Anschrift des Kunden oder Versicherers?" },
+          "hint": { "en": "One line each for name, department or contact person, street, postcode and town. It goes into the address block of the cover letter and the head of the self-declaration; change it for each recipient. Without it the letter is marked as a draft.", "de": "Je eine Zeile für Name, Abteilung oder Ansprechperson, Straße, Postleitzahl und Ort. Sie steht im Anschriftfeld des Antwortschreibens und im Kopf der Selbstauskunft; für jeden Empfänger ändern. Ohne sie ist das Schreiben als Entwurf gekennzeichnet." },
+          "default": { "en": "", "de": "" }, "ref": "handbook 1" },
+        { "id": "A12", "type": "select", "required": true,
+          "label": { "en": "Is the recipient a bank, an insurer or another financial entity?", "de": "Ist der Empfänger eine Bank, ein Versicherer oder ein anderes Finanzunternehmen?" },
+          "hint": { "en": "Answer for the customer who receives the documents. Financial entities have their own contract rules (DORA); only then does the cover letter ask how they classify your service. If the documents only go to your own cyber insurer, answer no.", "de": "Antworten Sie für den Kunden, der die Unterlagen bekommt. Finanzunternehmen haben eigene Vertragsregeln (DORA); nur dann fragt das Antwortschreiben, wie sie Ihre Leistung einstufen. Gehen die Unterlagen nur an Ihren eigenen Cyberversicherer, antworten Sie mit Nein." },
+          "options": [
+            { "v": "yes", "en": "Yes", "de": "Ja" },
+            { "v": "no", "en": "No", "de": "Nein" },
+            { "v": "unknown", "en": "Unknown", "de": "Unbekannt" }
+          ], "default": "no", "ref": "handbook 1" },
+        { "id": "A7", "type": "select", "required": true,
+          "label": { "en": "What do you deliver to the customer who asks, and do you access their systems?", "de": "Was liefern Sie dem fragenden Kunden, und greifen Sie auf seine Systeme zu?" },
+          "hint": { "en": "Access to the customer's systems or data raises what is expected of you; goods without data access lower it. The answer goes into section A of the self-declaration.", "de": "Zugriff auf Systeme oder Daten des Kunden erhöht, was von Ihnen erwartet wird; Waren ohne Datenzugriff senken es. Die Antwort steht in Abschnitt A der Selbstauskunft." },
+          "options": [
+            { "v": "goods", "en": "Goods or materials, without access to the customer's data", "de": "Waren oder Material, ohne Zugriff auf Daten des Kunden" },
+            { "v": "services", "en": "Services on site or in our workshop, with some customer data (contacts, plans, orders)", "de": "Leistungen vor Ort oder in unserer Werkstatt, mit einigen Kundendaten (Kontakte, Pläne, Aufträge)" },
+            { "v": "it", "en": "Software, IT services or devices with software", "de": "Software, IT-Dienstleistungen oder Geräte mit Software" },
+            { "v": "access", "en": "Services with access to the customer's systems or networks", "de": "Leistungen mit Zugriff auf Systeme oder Netze des Kunden", "text": { "en": "Which systems, and how (remote, on site)?", "de": "Welche Systeme, und wie (Fernzugriff, vor Ort)?" } }
+          ], "default": "services", "ref": "handbook 1" },
+        { "id": "A8", "type": "text",
+          "label": { "en": "Where is the evidence folder kept?", "de": "Wo liegt der Nachweisordner?" },
+          "hint": { "en": "The place where the self-declaration, the plan, the lists and the records live: a folder on the server, a paper folder, both. It is named on the evidence list.", "de": "Der Ort, an dem Selbstauskunft, Plan, Listen und Protokolle liegen: ein Ordner am Server, ein Papierordner, beides. Er steht auf der Nachweisliste." },
+          "default": { "en": "Folder “Security” on the office server and the paper folder in the office", "de": "Ordner „Sicherheit“ auf dem Büroserver und der Papierordner im Büro" }, "ref": "handbook 3" }
+      ]
+    },
+    {
+      "id": "B",
+      "title": { "en": "Organisation", "de": "Organisation" },
+      "questions": [
+        { "id": "B1", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Are there written security rules for staff: devices, passwords, email, what to report?", "de": "Gibt es schriftliche Sicherheitsregeln für die Belegschaft: Geräte, Passwörter, E-Mail, was zu melden ist?" },
+          "hint": { "en": "Almost every questionnaire starts here. A single signed page counts; a policy nobody has read does not.", "de": "Fast jeder Fragebogen beginnt hier. Eine einzige unterschriebene Seite zählt; eine Richtlinie, die niemand gelesen hat, nicht." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben", "text": { "en": "Optional: since when, and what is it called?", "de": "Freiwillig: seit wann, und wie heißt es?" } },
+            { "v": "partly", "en": "Partly: a few rules exist, not as one document", "de": "Teilweise: Ein paar Regeln gibt es, nicht als ein Dokument" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "partly", "ref": "handbook 2" },
+        { "id": "B2", "type": "select", "required": true, "prio": 3,
+          "label": { "en": "Is there a cyber insurance policy?", "de": "Gibt es eine Cyberversicherung?" },
+          "hint": { "en": "No law requires it. Insurers ask, and the answer feeds the emergency card. “No” is a complete answer. If yes, the insurer's emergency number and reporting deadline go on the emergency card.", "de": "Kein Gesetz verlangt sie. Versicherer fragen danach, und die Antwort gehört auf die Notfallkarte. „Nein“ ist eine vollständige Antwort. Falls ja, kommen Notfallnummer und Meldefrist des Versicherers auf die Notfallkarte." },
+          "options": [
+            { "v": "yes", "en": "Yes", "de": "Ja", "text": { "en": "Insurer, emergency number and the reporting deadline from the policy", "de": "Versicherer, Notfallnummer und Meldefrist laut Police" } },
+            { "v": "planned", "en": "Applied for or planned", "de": "Beantragt oder geplant" },
+            { "v": "no", "en": "No", "de": "Nein" }
+          ], "default": "no", "ref": "handbook 2" },
+        { "id": "B3", "type": "multi", "required": true,
+          "label": { "en": "Which certificates, labels or audits does the business already have?", "de": "Welche Zertifikate, Gütesiegel oder Prüfungen hat der Betrieb schon?" },
+          "hint": { "en": "Most small businesses have none; that is a normal answer. Whatever exists becomes an attachment.", "de": "Die meisten kleinen Betriebe haben keine; das ist eine normale Antwort. Was vorhanden ist, wird eine Anlage." },
+          "options": [
+            { "v": "none", "en": "None", "de": "Keine" },
+            { "v": "iso27001", "en": "ISO/IEC 27001 certificate", "de": "Zertifikat nach ISO/IEC 27001" },
+            { "v": "cta", "en": "Cyber Trust Austria label", "de": "Cyber Trust Austria Label" },
+            { "v": "tisax", "en": "TISAX label", "de": "TISAX-Label" },
+            { "v": "check", "en": "A documented security check by a provider or consultant", "de": "Ein dokumentierter Sicherheitscheck durch Dienstleister oder Berater" },
+            { "v": "other", "en": "Something else", "de": "Etwas anderes", "text": { "en": "What?", "de": "Was?" } }
+          ], "default": ["none"], "ref": "handbook 3" }
+      ]
+    },
+    {
+      "id": "C",
+      "title": { "en": "Access and identities", "de": "Zugang und Identität" },
+      "questions": [
+        { "id": "C1", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Does every person have their own account, with no shared logins?", "de": "Hat jede Person ein eigenes Konto, ohne geteilte Logins?" },
+          "hint": { "en": "A shared login cannot be attributed to a person and keeps working after someone leaves. Shared mailboxes with delegated access are fine.", "de": "Ein geteiltes Login lässt sich keiner Person zuordnen und funktioniert nach einem Austritt weiter. Gemeinsame Postfächer mit delegiertem Zugriff sind in Ordnung." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: a few shared logins remain", "de": "Teilweise: Ein paar geteilte Logins gibt es noch", "text": { "en": "Which ones?", "de": "Welche?" } },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "yes", "ref": "handbook 2" },
+        { "id": "C2", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Is multi-factor authentication switched on for every email account?", "de": "Ist die Multi-Faktor-Authentifizierung für jedes E-Mail-Konto eingeschaltet?" },
+          "hint": { "en": "One of the first questions insurers ask, and a mandatory condition for some. An authenticator app or a security key; a code by SMS only as a last resort.", "de": "Eine der ersten Fragen der Versicherer, bei manchen eine zwingende Bedingung. Authenticator-App oder Sicherheitsschlüssel; ein Code per SMS nur als letzte Möglichkeit." },
+          "options": [
+            { "v": "yes", "en": "Yes, for every account", "de": "Ja, für jedes Konto", "text": { "en": "Optional: which second factor?", "de": "Freiwillig: welcher zweite Faktor?" } },
+            { "v": "partly", "en": "Partly: for some accounts", "de": "Teilweise: für manche Konten" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "yes", "defaultText": { "en": "authenticator app", "de": "Authenticator-App" }, "ref": "handbook 2" },
+        { "id": "C3", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Is it switched on for remote access, administrator accounts, cloud consoles and online banking?", "de": "Ist sie für Fernzugriff, Administratorkonten, Cloud-Konsolen und Online-Banking eingeschaltet?" },
+          "hint": { "en": "Remote access (VPN, remote desktop) and administrator accounts are the entry points attackers try first.", "de": "Fernzugriff (VPN, Remote Desktop) und Administratorkonten sind die Eingänge, die Angreifer zuerst versuchen." },
+          "options": [
+            { "v": "yes", "en": "Yes, for all of them", "de": "Ja, für alle" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise", "text": { "en": "Where is it missing?", "de": "Wo fehlt sie?" } },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" },
+            { "v": "na", "en": "Not applicable: no remote access and no admin consoles", "de": "Nicht anwendbar: kein Fernzugriff und keine Administrationskonsolen" }
+          ], "default": "partly", "defaultText": { "en": "VPN yes, the admin console of the cloud not yet", "de": "VPN ja, die Administrationskonsole der Cloud noch nicht" }, "ref": "handbook 2" },
+        { "id": "C4", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Are the accounts of leavers disabled the same day, from a list of all accounts?", "de": "Werden die Konten ausscheidender Personen am selben Tag deaktiviert, anhand einer Liste aller Konten?" },
+          "hint": { "en": "Questionnaires call this “offboarding” or “revocation of access”. The list is the evidence; without it nobody knows what to switch off.", "de": "Fragebögen nennen das „Offboarding“ oder „Rechteentzug“. Die Liste ist der Nachweis; ohne sie weiß niemand, was abzuschalten ist." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: usually, without a list", "de": "Teilweise: meist, ohne Liste" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "partly", "ref": "handbook 2" },
+        { "id": "C5", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Is daily work done without administrator rights, with separate accounts for administration?", "de": "Wird die tägliche Arbeit ohne Administratorrechte erledigt, mit getrennten Konten für die Administration?" },
+          "hint": { "en": "Malware runs with the rights of the person who opened it. Daily work as administrator turns every click into a risk.", "de": "Schadsoftware läuft mit den Rechten der Person, die sie geöffnet hat. Tägliche Arbeit als Administrator macht jeden Klick zum Risiko." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "notyet", "ref": "handbook 2" },
+        { "id": "C6", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Is there a password rule: one long password per account in a password manager, changed only on suspicion?", "de": "Gibt es eine Passwortregel: ein langes Passwort je Konto in einem Passwort-Manager, nur bei Verdacht geändert?" },
+          "hint": { "en": "Length instead of forced changes: NIST and the BSI have advised against routine changes for years. Some customers still ask for intervals; the handbook (section 2.2) says how to answer.", "de": "Länge statt erzwungener Wechsel: NIST und BSI raten seit Jahren von Routinewechseln ab. Manche Kunden verlangen noch Intervalle; das Handbuch (Abschnitt 2.2) sagt, wie man antwortet." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: a manager for some, no written rule", "de": "Teilweise: ein Manager für manche, keine schriftliche Regel" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "partly", "ref": "handbook 2" }
+      ]
+    },
+    {
+      "id": "D",
+      "title": { "en": "Backup and continuity", "de": "Sicherung und Wiederanlauf" },
+      "questions": [
+        { "id": "D1", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Is all business data backed up automatically every day, with one copy offline or otherwise out of reach of an attacker?", "de": "Werden alle Geschäftsdaten täglich automatisch gesichert, mit einer Kopie offline oder sonst außerhalb der Reichweite eines Angreifers?" },
+          "hint": { "en": "A copy on the same network is the next thing to be encrypted. Offline, a rotated disk, or a cloud copy that cannot be deleted from the computer.", "de": "Eine Kopie im selben Netz ist das Nächste, was verschlüsselt wird. Offline, eine gewechselte Platte oder eine Cloud-Kopie, die sich vom Rechner aus nicht löschen lässt." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben", "text": { "en": "What, how often, where?", "de": "Was, wie oft, wohin?" } },
+            { "v": "partly", "en": "Partly: backups exist, but no copy out of reach", "de": "Teilweise: Sicherungen gibt es, aber keine Kopie außer Reichweite", "text": { "en": "What, how often, where?", "de": "Was, wie oft, wohin?" } },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "partly", "defaultText": { "en": "daily to the NAS in the office, no offline copy", "de": "täglich auf das NAS im Büro, keine Offline-Kopie" }, "ref": "handbook 2" },
+        { "id": "D2", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Has a restore from backup been tested in the last twelve months, with the time it took written down?", "de": "Wurde in den letzten zwölf Monaten eine Wiederherstellung aus der Sicherung geprobt, mit notierter Dauer?" },
+          "hint": { "en": "A backup that was never restored is an assumption. Restore one folder, stop the time, write it down: that is the evidence.", "de": "Eine Sicherung, die nie zurückgespielt wurde, ist eine Vermutung. Einen Ordner zurückspielen, Zeit stoppen, notieren: Das ist der Nachweis." },
+          "options": [
+            { "v": "yes", "en": "Yes", "de": "Ja", "text": { "en": "When, and how long did it take?", "de": "Wann, und wie lange hat es gedauert?" } },
+            { "v": "partly", "en": "Partly: tested longer ago, or without a record", "de": "Teilweise: länger her, oder ohne Protokoll" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "notyet", "ref": "handbook 2" },
+        { "id": "D3", "type": "select", "required": true,
+          "label": { "en": "How long could the business keep working if its IT were down?", "de": "Wie lange könnte der Betrieb weiterarbeiten, wenn seine IT ausfällt?" },
+          "hint": { "en": "Questionnaires ask this as “maximum tolerable downtime”. It is not the same as the recovery time (RTO), which the restore test measures. The honest estimate goes into the self-declaration; the restore test tells you whether it holds.", "de": "Fragebögen nennen das maximal tolerierbare Ausfallzeit. Sie ist nicht dasselbe wie die Wiederanlaufzeit (RTO), die der Wiederherstellungstest misst. Die ehrliche Schätzung steht in der Selbstauskunft; der Wiederherstellungstest zeigt, ob sie hält." },
+          "options": [
+            { "v": "hours", "en": "A few hours, then we stop", "de": "Ein paar Stunden, dann steht alles" },
+            { "v": "day", "en": "About a day", "de": "Etwa einen Tag" },
+            { "v": "days", "en": "A few days", "de": "Ein paar Tage" },
+            { "v": "week", "en": "A week or more", "de": "Eine Woche oder länger" }
+          ], "default": "day", "ref": "handbook 2" },
+        { "id": "D4", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Is there a written emergency plan: who to call, what to do first, in which order to restore?", "de": "Gibt es einen schriftlichen Notfallplan: wen anrufen, was zuerst tun, in welcher Reihenfolge wiederherstellen?" },
+          "hint": { "en": "The toolkit produces the emergency card from your answers. Printed and posted, it is the plan a small business needs; your answer here records whether one exists today.", "de": "Das Toolkit erzeugt die Notfallkarte aus Ihren Antworten. Gedruckt und ausgehängt ist sie der Plan, den ein kleiner Betrieb braucht; Ihre Antwort hier hält fest, ob es heute einen gibt." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: contacts are known, nothing is written down", "de": "Teilweise: Kontakte sind bekannt, nichts ist aufgeschrieben" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "notyet", "ref": "handbook 4" }
+      ]
+    },
+    {
+      "id": "E",
+      "title": { "en": "Updates and devices", "de": "Updates und Geräte" },
+      "questions": [
+        { "id": "E1", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Are updates installed automatically within days on every computer, phone and server?", "de": "Werden Updates auf jedem Computer, Telefon und Server automatisch innerhalb von Tagen installiert?" },
+          "hint": { "en": "Questionnaires ask for the update deadline in days. Automatic updates with a check once a month is an honest answer for a small business.", "de": "Fragebögen fragen nach der Updatefrist in Tagen. Automatische Updates mit einer Kontrolle einmal im Monat ist eine ehrliche Antwort für einen kleinen Betrieb." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: on most devices, nobody checks", "de": "Teilweise: auf den meisten Geräten, niemand kontrolliert" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "yes", "ref": "handbook 2" },
+        { "id": "E2", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Is there a list of all devices, and is every device and program still supported by its manufacturer?", "de": "Gibt es eine Liste aller Geräte, und wird jedes Gerät und Programm vom Hersteller noch unterstützt?" },
+          "hint": { "en": "An old operating system without updates is a frequent finding; insurers exclude or ask about it. The device list is the evidence customers ask for as “asset inventory”.", "de": "Ein altes Betriebssystem ohne Updates ist ein häufiger Befund; Versicherer fragen danach oder schließen es aus. Die Geräteliste ist der Nachweis, den Kunden als „Asset-Inventar“ verlangen." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: no list, or one old device remains", "de": "Teilweise: keine Liste, oder ein altes Gerät gibt es noch", "text": { "en": "Which?", "de": "Welches?" } },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "partly", "defaultText": { "en": "no written list; the workshop computer still runs an old system", "de": "keine schriftliche Liste; der Werkstattrechner läuft noch mit einem alten System" }, "ref": "handbook 2" },
+        { "id": "E3", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Is protective software active on every computer, and are laptops and phones encrypted?", "de": "Ist auf jedem Computer eine Schutzsoftware aktiv, und sind Notebooks und Telefone verschlüsselt?" },
+          "hint": { "en": "The built-in protection of the operating system, switched on and updating, counts. Encryption protects the data on a lost device.", "de": "Der eingebaute Schutz des Betriebssystems, eingeschaltet und aktuell, zählt. Verschlüsselung schützt die Daten auf einem verlorenen Gerät." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise", "text": { "en": "What is missing?", "de": "Was fehlt?" } },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "yes", "ref": "handbook 2" },
+        { "id": "E4", "type": "select", "required": true, "prio": 3,
+          "label": { "en": "If you supply software or devices: is there a contact for reporting vulnerabilities, and a support period for your products?", "de": "Wenn Sie Software oder Geräte liefern: Gibt es einen Kontakt für Schwachstellenmeldungen und einen Unterstützungszeitraum für Ihre Produkte?" },
+          "hint": { "en": "Only for suppliers of software or devices with software. Everyone else answers “not applicable”.", "de": "Nur für Lieferanten von Software oder Geräten mit Software. Alle anderen antworten „nicht anwendbar“." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" },
+            { "v": "na", "en": "Not applicable: we supply no software or devices", "de": "Nicht anwendbar: Wir liefern keine Software und keine Geräte" }
+          ], "default": "na", "ref": "handbook 2" },
+        { "id": "E5", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Is the router or firewall kept current, with its own administrator password changed, remote administration switched off and a separate guest network for visitors?", "de": "Ist der Router oder die Firewall aktuell, mit geändertem Administratorpasswort, abgeschalteter Fernadministration und einem getrennten Gastnetz für Besucher?" },
+          "hint": { "en": "The router is the front door. Questionnaires ask for “network segmentation” and “firewall”; for a small business this is what it means.", "de": "Der Router ist die Eingangstür. Fragebögen fragen nach „Netzsegmentierung“ und „Firewall“; für einen kleinen Betrieb heißt es das." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise", "text": { "en": "What is missing?", "de": "Was fehlt?" } },
+            { "v": "notyet", "en": "Not yet, or nobody knows", "de": "Noch nicht, oder niemand weiß es" }
+          ], "default": "partly", "defaultText": { "en": "guest network yes, firmware and password unknown", "de": "Gastnetz ja, Firmware und Passwort unbekannt" }, "ref": "handbook 2" }
+      ]
+    },
+    {
+      "id": "F",
+      "title": { "en": "Incidents and reporting", "de": "Vorfälle und Meldung" },
+      "questions": [
+        { "id": "F1", "type": "select", "required": true,
+          "label": { "en": "Within what time can you promise to inform a customer about an incident that may affect them?", "de": "Innerhalb welcher Zeit können Sie einem Kunden einen Vorfall melden, der ihn betreffen könnte?" },
+          "hint": { "en": "Choose a deadline you can keep at night and on holiday. A customer covered by NIS 2 must send an early warning within 24 hours of becoming aware of a significant incident, which is why customers write a deadline into the contract.", "de": "Wählen Sie eine Frist, die Sie auch nachts und im Urlaub halten. Ein Kunde unter NIS 2 muss binnen 24 Stunden nach Kenntnis eines erheblichen Vorfalls eine Frühwarnung senden; deshalb schreiben Kunden eine Frist in den Vertrag." },
+          "options": [
+            { "v": "h24", "en": "Within 24 hours of becoming aware, by phone, through the management or the deputy", "de": "Innerhalb von 24 Stunden nach Kenntnis, telefonisch, durch die Leitung oder ihre Vertretung" },
+            { "v": "h48", "en": "Within 48 hours", "de": "Innerhalb von 48 Stunden" },
+            { "v": "h72", "en": "Within 72 hours", "de": "Innerhalb von 72 Stunden" },
+            { "v": "days", "en": "On the next business day", "de": "Am nächsten Werktag" }
+          ], "default": "h24", "ref": "handbook 4" },
+        { "id": "F2", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Is it known who checks after an incident whether personal data is affected, and who reports to the data protection authority within 72 hours?", "de": "Ist bekannt, wer nach einem Vorfall prüft, ob personenbezogene Daten betroffen sind, und wer binnen 72 Stunden an die Datenschutzbehörde meldet?" },
+          "hint": { "en": "The GDPR deadline runs from the moment you become aware. The named person decides within the first day whether personal data is affected; unless a risk to the persons concerned is unlikely, the report goes to the authority within 72 hours. Every breach is written down either way (F4). The emergency card names the person and the authority.", "de": "Die DSGVO-Frist läuft ab Kenntnis. Die benannte Person entscheidet am ersten Tag, ob personenbezogene Daten betroffen sind; außer ein Risiko für die Betroffenen ist unwahrscheinlich, geht die Meldung binnen 72 Stunden an die Behörde. Aufgeschrieben wird jede Verletzung (F4). Die Notfallkarte benennt die Person und die Behörde." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: known in principle, nothing written down", "de": "Teilweise: im Grundsatz bekannt, nichts aufgeschrieben" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "partly", "ref": "handbook 4" },
+        { "id": "F3", "type": "select", "required": true,
+          "label": { "en": "Were there security incidents in the last 24 months, such as ransomware, a hacked mailbox or a fraudulent payment?", "de": "Gab es in den letzten 24 Monaten Sicherheitsvorfälle, etwa Erpressungssoftware, ein gekapertes Postfach oder eine betrügerische Zahlung?" },
+          "hint": { "en": "Insurers and customers ask. An honest yes with what was changed afterwards is better than a no that a claim later contradicts. The 24 months are our choice, not a legal term; when you fill in an insurer's form, use its period. No details are needed here.", "de": "Versicherer und Kunden fragen. Ein ehrliches Ja mit dem, was danach geändert wurde, ist besser als ein Nein, das ein Schadensfall später widerlegt. Die 24 Monate sind unsere Wahl, kein Rechtsbegriff; wer einen Versicherungsantrag ausfüllt, nimmt dessen Zeitraum. Details sind hier nicht nötig." },
+          "options": [
+            { "v": "none", "en": "None known", "de": "Keine bekannt" },
+            { "v": "yes", "en": "Yes, resolved and documented", "de": "Ja, behoben und dokumentiert", "text": { "en": "Optional: what was changed afterwards?", "de": "Freiwillig: Was wurde danach geändert?" } },
+            { "v": "unknown", "en": "We do not know", "de": "Wir wissen es nicht" }
+          ], "default": "none", "ref": "handbook 4" },
+        { "id": "F4", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Are incidents written down: what happened, how, what was missing, what was changed?", "de": "Werden Vorfälle aufgeschrieben: Was ist passiert, auf welchem Weg, was hat gefehlt, was wurde geändert?" },
+          "hint": { "en": "The GDPR requires a record of every breach; questionnaires ask for the incident log. One page per incident in the evidence folder is enough.", "de": "Die DSGVO verlangt eine Dokumentation jeder Verletzung; Fragebögen fragen nach dem Vorfallsprotokoll. Eine Seite je Vorfall im Nachweisordner genügt." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "notyet", "ref": "handbook 4" },
+        { "id": "F5", "type": "text",
+          "label": { "en": "Under which number do you block your bank cards and online banking?", "de": "Unter welcher Nummer sperren Sie Bankkarten und Online-Banking?" },
+          "hint": { "en": "The blocking number on the card or in the online banking of your bank. It goes on the emergency card; without it the field stays yellow.", "de": "Die Sperrnummer auf der Karte oder im Online-Banking Ihrer Bank. Sie steht auf der Notfallkarte; ohne sie bleibt das Feld gelb." },
+          "default": { "en": "", "de": "" }, "ref": "handbook 4" },
+        { "id": "F6", "type": "text",
+          "label": { "en": "How do you reach the support of your email and cloud provider?", "de": "Wie erreichen Sie den Support Ihres E-Mail- und Cloud-Anbieters?" },
+          "hint": { "en": "Provider, customer portal and support number. It goes on the emergency card; without it the field stays yellow.", "de": "Anbieter, Kundenportal und Supportnummer. Sie stehen auf der Notfallkarte; ohne sie bleibt das Feld gelb." },
+          "default": { "en": "", "de": "" }, "ref": "handbook 4" },
+        { "id": "F7", "type": "text",
+          "label": { "en": "Where are the recovery codes and the account list kept, outside the computers?", "de": "Wo liegen die Wiederherstellungscodes und die Kontenliste, außerhalb der Rechner?" },
+          "hint": { "en": "A place someone can reach while the computers are encrypted, for example a sealed envelope in a locked cabinet. It goes on the emergency card; without it the field stays yellow.", "de": "Ein Ort, den man erreicht, während die Rechner verschlüsselt sind, etwa ein verschlossener Umschlag in einem versperrten Schrank. Er steht auf der Notfallkarte; ohne ihn bleibt das Feld gelb." },
+          "default": { "en": "", "de": "" }, "ref": "handbook 4" }
+      ]
+    },
+    {
+      "id": "G",
+      "title": { "en": "People and training", "de": "Personal und Schulung" },
+      "questions": [
+        { "id": "G1", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Have staff been briefed on phishing, passwords and the reporting channel in the last twelve months, with an attendance record?", "de": "Wurde die Belegschaft in den letzten zwölf Monaten zu Phishing, Passwörtern und dem Meldeweg eingewiesen, mit Teilnehmerliste?" },
+          "hint": { "en": "Half an hour held by the management counts, if it is recorded. The attendance list is the evidence.", "de": "Eine halbe Stunde, von der Leitung gehalten, zählt, wenn sie protokolliert ist. Die Teilnehmerliste ist der Nachweis." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben", "text": { "en": "Optional: when?", "de": "Freiwillig: wann?" } },
+            { "v": "partly", "en": "Partly: informally, without a record", "de": "Teilweise: informell, ohne Nachweis" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "notyet", "ref": "handbook 2" },
+        { "id": "G2", "type": "select", "required": true, "prio": 3,
+          "label": { "en": "Are staff bound to confidentiality in writing, for example in the employment contract?", "de": "Sind die Beschäftigten schriftlich zur Vertraulichkeit verpflichtet, etwa im Dienstvertrag?" },
+          "hint": { "en": "Not every questionnaire asks, but a data processing agreement requires it; most employment contracts already contain a clause. Check, do not assume.", "de": "Nicht jeder Fragebogen fragt danach, aber ein Auftragsverarbeitungsvertrag verlangt es; die meisten Dienstverträge enthalten schon eine Klausel. Nachsehen, nicht annehmen." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "yes", "ref": "handbook 2" },
+        { "id": "G3", "type": "select", "required": true, "prio": 1,
+          "label": { "en": "Is there a rule for payments: every change of bank details and every unusual payment request is confirmed by a call-back to a known number?", "de": "Gibt es eine Regel für Zahlungen: Jede Änderung von Bankdaten und jede ungewöhnliche Zahlungsaufforderung wird per Rückruf unter einer bekannten Nummer bestätigt?" },
+          "hint": { "en": "The one rule against payment fraud and the “boss scam”. Some insurers ask about a four-eyes rule for payments; it costs nothing.", "de": "Die eine Regel gegen Zahlungsbetrug und die Chef-Masche. Manche Versicherer fragen nach dem Vier-Augen-Prinzip bei Zahlungen; sie kostet nichts." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: practised, not written down", "de": "Teilweise: gelebt, nicht aufgeschrieben" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "yes", "ref": "handbook 2" }
+      ]
+    },
+    {
+      "id": "H",
+      "title": { "en": "Your own providers and the cloud", "de": "Eigene Lieferanten und Cloud" },
+      "questions": [
+        { "id": "H1", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Is there a list of the providers that handle your data or your customers' data: email, file storage, accounting, website hosting, with country and purpose?", "de": "Gibt es eine Liste der Dienstleister, die Ihre Daten oder die Ihrer Kunden verarbeiten: E-Mail, Dateiablage, Buchhaltung, Website-Hosting, mit Land und Zweck?" },
+          "hint": { "en": "Customers ask for “subcontractors” and “processing locations”. The country stands in each provider's terms.", "de": "Kunden fragen nach „Unterauftragnehmern“ und „Verarbeitungsorten“. Das Land steht in den Bedingungen des jeweiligen Anbieters." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly: known, not as a list", "de": "Teilweise: bekannt, nicht als Liste" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "partly", "ref": "handbook 2" },
+        { "id": "H2", "type": "select", "required": true, "prio": 2,
+          "label": { "en": "Do you have data processing agreements with those providers, and are their security settings (multi-factor authentication, two administrators) switched on?", "de": "Haben Sie mit diesen Dienstleistern Auftragsverarbeitungsverträge, und sind deren Sicherheitseinstellungen (Multi-Faktor-Authentifizierung, zwei Administratoren) eingeschaltet?" },
+          "hint": { "en": "The agreement is a GDPR requirement wherever a provider processes personal data on your behalf; the large providers offer it as a standard document.", "de": "Der Vertrag ist eine Pflicht der DSGVO, wo ein Anbieter personenbezogene Daten in Ihrem Auftrag verarbeitet; die großen Anbieter bieten ihn als Standarddokument an." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "partly", "ref": "handbook 2" },
+        { "id": "H3", "type": "select", "required": true, "prio": 3,
+          "label": { "en": "Would you inform the customer before changing a provider that handles their data?", "de": "Würden Sie den Kunden informieren, bevor Sie einen Dienstleister wechseln, der seine Daten verarbeitet?" },
+          "hint": { "en": "A standard clause in supplier contracts. Saying yes costs an email per change.", "de": "Eine Standardklausel in Lieferantenverträgen. Ein Ja kostet eine E-Mail je Wechsel." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" },
+            { "v": "na", "en": "Not applicable: no provider handles customer data", "de": "Nicht anwendbar: Kein Dienstleister verarbeitet Kundendaten" }
+          ], "default": "notyet", "ref": "handbook 2" }
+      ]
+    },
+    {
+      "id": "I",
+      "title": { "en": "Evidence, dates and review", "de": "Nachweise, Termine und Wiedervorlage" },
+      "questions": [
+        { "id": "I1", "type": "select", "required": true, "prio": 3,
+          "label": { "en": "At the end of a contract, are the customer's data returned or deleted, and can you confirm it in writing?", "de": "Werden am Ende eines Vertrags die Daten des Kunden zurückgegeben oder gelöscht, und können Sie das schriftlich bestätigen?" },
+          "hint": { "en": "Asked in almost every contract and questionnaire. For a business that only holds contacts and orders, the answer is usually a simple yes.", "de": "Steht in fast jedem Vertrag und Fragebogen. Für einen Betrieb, der nur Kontakte und Aufträge hält, ist die Antwort meist ein einfaches Ja." },
+          "options": [
+            { "v": "yes", "en": "Yes, in place and written down", "de": "Ja, vorhanden und aufgeschrieben" },
+            { "v": "partly", "en": "Partly", "de": "Teilweise" },
+            { "v": "notyet", "en": "Not yet", "de": "Noch nicht" }
+          ], "default": "yes", "ref": "handbook 3" },
+        { "id": "I2", "type": "date", "required": true,
+          "label": { "en": "What is the date of the self-declaration?", "de": "Welches Datum trägt die Selbstauskunft?" },
+          "hint": { "en": "It describes the state of the business on one day. It is renewed when something essential changes, and at least once a year.", "de": "Sie beschreibt den Stand des Betriebs an einem Tag. Sie wird erneuert, wenn sich etwas Wesentliches ändert, und mindestens einmal im Jahr." },
+          "default": "+0", "ref": "handbook 3" },
+        { "id": "I3", "type": "date", "required": true,
+          "label": { "en": "By when will the first measures of the action plan be done?", "de": "Bis wann sind die ersten Maßnahmen des Maßnahmenplans erledigt?" },
+          "hint": { "en": "The plan sorts every “not yet” and “partly” into three waves: this date, two months later, five months later. Choose a date you can keep; it goes into the self-declaration.", "de": "Der Plan sortiert jedes „noch nicht“ und „teilweise“ in drei Wellen: dieses Datum, zwei Monate später, fünf Monate später. Wählen Sie ein Datum, das Sie halten; es steht in der Selbstauskunft." },
+          "default": "+30", "ref": "handbook 3" },
+        { "id": "I4", "type": "select", "required": true,
+          "label": { "en": "How often is the self-declaration reviewed?", "de": "Wie oft wird die Selbstauskunft überprüft?" },
+          "hint": { "en": "Also on every occasion: a new customer questionnaire, a departure or a change of contact person, a new provider, a change to the backup, an incident.", "de": "Außerdem bei jedem Anlass: ein neuer Kundenfragebogen, ein Austritt oder der Wechsel einer Ansprechperson, ein neuer Dienstleister, eine Änderung der Sicherung, ein Vorfall." },
+          "options": [
+            { "v": "6", "en": "Every six months", "de": "Alle sechs Monate" },
+            { "v": "12", "en": "Every twelve months", "de": "Alle zwölf Monate" }
+          ], "default": "12", "ref": "handbook 3" }
+      ]
+    }
+  ]
+}

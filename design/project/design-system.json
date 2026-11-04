@@ -1,0 +1,25 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": { "v": 1, "at": "2026-10-18T16:50:00Z" },
+  "title": "Scutoria",
+  "namespace": "Scutoria",
+  "libraries": [],
+  "sections": {},
+  "groups": ["Logos"],
+  "assetGroups": {
+    "Logos": {
+      "name": "Logos",
+      "tile": "m",
+      "order": ["scutum-mark.svg", "scutum-mark-ink.svg", "favicon.svg"],
+      "files": {
+        "scutum-mark.svg": { "name": "scutum-mark.svg", "blob": "fecccf5bc087155f33426c653aee80c8", "size": 304, "type": "image/svg+xml" },
+        "scutum-mark-ink.svg": { "name": "scutum-mark-ink.svg", "blob": "3d93659dbf7357e35ffd6cd2245fec14", "size": 304, "type": "image/svg+xml" },
+        "favicon.svg": { "name": "favicon.svg", "blob": "5cd12346fce7b1bc207887865112331f", "size": 421, "type": "image/svg+xml" }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": { "readme": "project/README.md", "sections": [] },
+  "lastChange": { "by": "Stefan", "at": "2026-10-21T06:30:00Z", "via": "Claude Code", "note": "Design Runde 2 (Nachtarchiv): Glas und Lichtkegel entfernt, Tokens paper, paper-ink, shadow-paper, shadow-paper-lift, Zeilenmaß 62ch; neue Bausteine Paper und Book, Marker als Kacheln und Reiter, Cover in der Linienfarbe; Bewegungsregeln." }
+}

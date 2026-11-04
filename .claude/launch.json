@@ -1,0 +1,54 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "scutoria-site",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--disable-warning=ExperimentalWarning",
+        "--import",
+        "./site/scripts/local/register.mjs",
+        "site/scripts/local/serve.mjs"
+      ],
+      "port": 8787,
+      "env": {
+        "PORT": "8787",
+        "SITE_MODE": "preview",
+        "BASE_URL": "https://scutoria.com",
+        "DATA_DIR": "C:\\Users\\Stefa\\Videos\\scutoria\\site-data"
+      }
+    },
+    {
+      "name": "scutoria-site-live",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--disable-warning=ExperimentalWarning",
+        "--import",
+        "./site/scripts/local/register.mjs",
+        "site/scripts/local/serve.mjs"
+      ],
+      "port": 8791,
+      "env": {
+        "PORT": "8791",
+        "SITE_MODE": "live",
+        "BASE_URL": "https://scutoria.com",
+        "DATA_DIR": "C:\\Users\\Stefa\\AppData\\Local\\Temp\\claude\\C--Users-Stefa-OneDrive-scutoria\\2bd5f3e6-fc88-4cc8-85f2-34265e43c491\\scratchpad\\live-data"
+      }
+    },
+    {
+      "name": "varianten-vorschau",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-I",
+        "-m",
+        "http.server",
+        "8766",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "C:\\Users\\Stefa\\AppData\\Local\\Temp\\claude\\C--Users-Stefa-OneDrive-scutoria\\2bd5f3e6-fc88-4cc8-85f2-34265e43c491\\scratchpad\\varianten"
+      ],
+      "port": 8766
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+--- site/content/legal/legal-notice.en.md	2026-11-03 08:23:52.093864800 +0200
++++ live/rechtstexte-2026-11/legal-notice.en.B-standard-vat.md	2026-11-02 20:47:33.426531100 +0200
+@@ -1,7 +1,7 @@
+ ---
+ title: Legal notice
+ description: Provider identification and disclosure for Scutoria under Austrian law.
+-status: draft 2026-10-30, house number from the Stripe account (to be checked); trade licence, chamber and VAT await Stefan's details
++status: draft 2026-11-02 (clean-up), variant B standard VAT; trade details from the GISA extract to be inserted
+ ---
+ # Legal notice
+ 
+@@ -20,18 +20,18 @@
+ 
+ ## Trade licence and chamber
+ 
+-Trade licence: [designation as registered in GISA]  
+-Trade authority: District Authority Waidhofen an der Thaya [to be checked]  
+-Member of the Austrian Economic Chamber, Lower Austria, [professional group as registered]  
++Trade licence: [wording as registered in GISA]  
++Trade authority: District Authority Waidhofen an der Thaya (Bezirkshauptmannschaft Waidhofen an der Thaya)  
++Member of the Austrian Economic Chamber, Lower Austria, professional group [as registered]  
+ Applicable regulations: Austrian Trade Act 1994 (Gewerbeordnung), available at www.ris.bka.gv.at
+ 
+ ## VAT
+ 
+-[VAT identification number, once issued] or [Small business exemption under section 6 (1) 27 of the Austrian VAT Act; no VAT is charged]. To be settled after decision E19 and the tax adviser's answer.
++VAT identification number: [ATU…]
+ 
+ ## Dispute resolution
+ 
+-The European Commission's online dispute resolution platform was discontinued on 20 July 2025 [to be checked]. We are neither obliged nor willing to take part in dispute resolution proceedings before a consumer arbitration board unless required by law.
++The European Commission's online dispute resolution platform was discontinued on 20 July 2025 (Regulation (EU) 2024/3228). We are neither obliged nor willing to take part in dispute resolution proceedings before a consumer arbitration board unless required by law.
+ 
+ ## Content
+ 

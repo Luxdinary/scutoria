@@ -1,0 +1,9 @@
+
+.hero-badge{position:absolute;right:24px;bottom:22px;z-index:3;border:1px solid #7da4e04d;background:#0c1c34ce;backdrop-filter:blur(8px);padding:10px 15px;color:#b6d0f4;font:9px Consolas,monospace;letter-spacing:.12em}
+.v1 .hero-cinematic .hero-art{box-shadow:0 22px 60px #0004}
+.v1 .hero-cinematic .hero-copy{width:65%}
+.v1 .feature{grid-template-columns:1fr 1.15fr}
+.v1 .sourceband{background:#11223c}
+.v1 .media-grid{gap:24px}
+@media(max-width:1100px) and (min-width:761px){.v1 .hero-cinematic .hero-copy{width:73%}}
+@media(max-width:760px){.hero-badge{display:none}.v1 .hero-cinematic .hero-copy{width:100%}.v1 .feature{grid-template-columns:1fr}}

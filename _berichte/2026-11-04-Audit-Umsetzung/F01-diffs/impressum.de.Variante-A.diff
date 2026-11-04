@@ -1,0 +1,35 @@
+--- site/content/legal/impressum.de.md	2026-11-03 08:23:51.623542300 +0200
++++ live/rechtstexte-2026-11/impressum.de.A-kleinunternehmer.md	2026-11-02 20:47:33.424507200 +0200
+@@ -1,7 +1,7 @@
+ ---
+ title: Impressum
+ description: Anbieterkennzeichnung und Offenlegung von Scutoria.
+-status: entwurf 2026-10-30, Hausnummer aus dem Stripe-Konto (Stand prüfen); Gewerbe, Kammer und Umsatzsteuer warten auf Stefans Angaben
++status: entwurf 2026-11-02 (Bereinigung), Variante A Kleinunternehmer; Gewerbeangaben aus dem GISA-Auszug einsetzen
+ ---
+ # Impressum
+ 
+@@ -20,18 +20,18 @@
+ 
+ ## Gewerbe und Kammer
+ 
+-Gewerbeberechtigung: [Bezeichnung laut GISA-Auszug]  
+-Gewerbebehörde: Bezirkshauptmannschaft Waidhofen an der Thaya [Stand prüfen]  
+-Mitglied der Wirtschaftskammer Niederösterreich, [Fachgruppe laut GISA]  
++Gewerbeberechtigung: [Wortlaut laut GISA-Auszug]  
++Gewerbebehörde: Bezirkshauptmannschaft Waidhofen an der Thaya  
++Mitglied der Wirtschaftskammer Niederösterreich, Fachgruppe [laut GISA-Auszug]  
+ Anwendbare Rechtsvorschriften: Gewerbeordnung 1994 (GewO), abrufbar unter www.ris.bka.gv.at
+ 
+ ## Umsatzsteuer
+ 
+-[Umsatzsteuer-Identifikationsnummer, sobald erteilt] oder [Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG; Umsatzsteuer wird nicht ausgewiesen]. Festlegung nach Entscheidung E19 und Auskunft des Steuerberaters.
++Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG; Umsatzsteuer wird nicht ausgewiesen. [UID-Nummer, falls erteilt: ATU…]
+ 
+ ## Streitbeilegung
+ 
+-Die Plattform der Europäischen Kommission zur Online-Streitbeilegung wurde mit 20. Juli 2025 eingestellt [Stand prüfen]. Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen, soweit keine gesetzliche Pflicht besteht.
++Die Plattform der Europäischen Kommission zur Online-Streitbeilegung wurde am 20. Juli 2025 eingestellt (Verordnung (EU) 2024/3228). Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen, soweit keine gesetzliche Pflicht besteht.
+ 
+ ## Inhalte
+ 

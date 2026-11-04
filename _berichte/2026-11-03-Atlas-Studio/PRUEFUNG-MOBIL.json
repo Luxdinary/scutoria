@@ -1,0 +1,92 @@
+[
+  {
+    "variant": 1,
+    "page": "home",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 1,
+    "page": "library",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 1,
+    "page": "product",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 1,
+    "page": "tools",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 1,
+    "page": "studio",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 2,
+    "page": "home",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 2,
+    "page": "library",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 2,
+    "page": "product",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 2,
+    "page": "tools",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 2,
+    "page": "studio",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 3,
+    "page": "home",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 3,
+    "page": "library",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 3,
+    "page": "product",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 3,
+    "page": "tools",
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "variant": 3,
+    "page": "studio",
+    "scroll": 375,
+    "width": 390
+  }
+]

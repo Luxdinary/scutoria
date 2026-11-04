@@ -1,0 +1,228 @@
+[
+  {
+    "url": "https://scutoria.com/",
+    "status": 200,
+    "h1": 1,
+    "title": "Sourced. Dated. Ready to show. · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/",
+    "status": 200,
+    "h1": 1,
+    "title": "Belegt. Datiert. Vorzeigbar. · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/toolkits/ai-policy",
+    "status": 200,
+    "h1": 1,
+    "title": "AI Policy Toolkit · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/toolkits/ki-richtlinien",
+    "status": 200,
+    "h1": 1,
+    "title": "KI-Richtlinien-Toolkit · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/toolkits/ai-policy/handbook",
+    "status": 200,
+    "h1": 1,
+    "title": "AI Policy Toolkit · Handbook · Reading sample · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/toolkits/ki-richtlinien/handbuch",
+    "status": 200,
+    "h1": 1,
+    "title": "KI-Richtlinien-Toolkit · Handbuch · Leseprobe · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/toolkits/security-evidence",
+    "status": 200,
+    "h1": 1,
+    "title": "Security Evidence Toolkit · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/toolkits/sicherheitsnachweis",
+    "status": 200,
+    "h1": 1,
+    "title": "Sicherheitsnachweis-Toolkit · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/toolkits/security-evidence/handbook",
+    "status": 200,
+    "h1": 1,
+    "title": "Security Evidence Toolkit · Handbook · Reading sample · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/toolkits/sicherheitsnachweis/handbuch",
+    "status": 200,
+    "h1": 1,
+    "title": "Sicherheitsnachweis-Toolkit · Handbuch · Leseprobe · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/library",
+    "status": 200,
+    "h1": 1,
+    "title": "Library · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/bibliothek",
+    "status": 200,
+    "h1": 1,
+    "title": "Bibliothek · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/studio",
+    "status": 200,
+    "h1": 1,
+    "title": "Studio · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/studio",
+    "status": 200,
+    "h1": 1,
+    "title": "Studio · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/tools",
+    "status": 200,
+    "h1": 1,
+    "title": "Tools · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/tools",
+    "status": 200,
+    "h1": 1,
+    "title": "Tools · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/tools/may-this-go-in",
+    "status": 200,
+    "h1": 1,
+    "title": "May this go in? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/tools/darf-das-hinein",
+    "status": 200,
+    "h1": 1,
+    "title": "Darf das hinein? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/tools/anything-personal",
+    "status": 200,
+    "h1": 1,
+    "title": "Is there anything personal in it? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/tools/etwas-persoenliches",
+    "status": 200,
+    "h1": 1,
+    "title": "Steht da etwas Persönliches drin? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/memos",
+    "status": 200,
+    "h1": 1,
+    "title": "Memo generators · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/memos",
+    "status": 200,
+    "h1": 1,
+    "title": "Memo-Generatoren · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/memos/nis2",
+    "status": 200,
+    "h1": 1,
+    "title": "Does NIS2 apply to us? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/memos/nis2",
+    "status": 200,
+    "h1": 1,
+    "title": "Sind wir von NIS2 betroffen? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/memos/ai-labelling",
+    "status": 200,
+    "h1": 1,
+    "title": "Must we label what our AI produces? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/memos/ki-kennzeichnung",
+    "status": 200,
+    "h1": 1,
+    "title": "Müssen wir kennzeichnen, was unsere KI erzeugt? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/memos/sign-in-security",
+    "status": 200,
+    "h1": 1,
+    "title": "Where does our sign-in stand? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/memos/anmeldesicherheit",
+    "status": 200,
+    "h1": 1,
+    "title": "Wo steht unsere Anmeldung? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/memos/where-to-start",
+    "status": 200,
+    "h1": 1,
+    "title": "Where do we start with AI rules? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/memos/wo-anfangen",
+    "status": 200,
+    "h1": 1,
+    "title": "Womit fangen wir bei KI-Regeln an? · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/about",
+    "status": 200,
+    "h1": 1,
+    "title": "About Scutoria · Scutoria",
+    "placeholders": []
+  },
+  {
+    "url": "https://scutoria.com/de/ueber",
+    "status": 200,
+    "h1": 1,
+    "title": "Über Scutoria · Scutoria",
+    "placeholders": [
+      "Quellenbasiert. Keine Rechtsberatung. „Stand prüfen“ heißt bei uns: Datum und Quelle stehen dabei, die Prüfung im Einzelfall bleibt Ihre."
+    ]
+  }
+]

@@ -1,0 +1,58 @@
+# Render-Dienst für die neue Website (E18: Docker-Image aus der privaten Registry, kein GitHub).
+# Vorlage für den ersten Deploy; Claude legt den Dienst damit oder über die Render-Oberfläche an, sobald das Image
+# in Docker Hub liegt. Werte in spitzen Klammern werden beim Anlegen ersetzt. Geheimnisse (sync: false) werden nur
+# im Render-Dashboard eingetragen, nie hier. Der alte Dienst swk-shop bleibt bis zum Umzug der Domain unberührt.
+services:
+  - type: web
+    name: scutoria-site
+    runtime: image
+    image:
+      url: docker.io/luxdinary/scutoria-site:latest
+      creds:
+        fromRegistryCreds:
+          name: dockerhub-scutoria
+    region: frankfurt
+    plan: starter
+    healthCheckPath: /health
+    autoDeploy: false
+    disk:
+      name: data
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: SITE_MODE
+        value: preview
+      - key: BASE_URL
+        value: https://scutoria-site.onrender.com
+      - key: DATA_DIR
+        value: /app/data
+      - key: APP_VERSION
+        value: preview
+      - key: LEGAL_REVIEWED_AT
+        value: ""
+      - key: PREVIEW_ACCESS_EMAILS
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: STRIPE_AUTOMATIC_TAX
+        value: "true"
+      - key: STRIPE_TAX_BEHAVIOR
+        value: inclusive
+      - key: PRICE_YEAR_CENTS
+        value: "19900"
+      - key: PRICE_PILOT_CENTS
+        value: "9900"
+      - key: PILOT_SEATS
+        value: "10"
+      - key: BREVO_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        value: kontakt@scutoria.com
+      - key: MAIL_FROM_NAME
+        value: Scutoria
+      - key: MEMO_PDF_PUBLIC
+        value: "false"
+      - key: BREVO_MEMO_LIST_ID
+        value: ""

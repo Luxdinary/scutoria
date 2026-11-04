@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://scutoria.com/favicon.svg",
+    "status": 200,
+    "bytes": 404,
+    "type": "image/svg+xml"
+  },
+  {
+    "url": "https://scutoria.com/og/scutoria-en.png",
+    "status": 200,
+    "bytes": 41746,
+    "type": "image/png"
+  },
+  {
+    "url": "https://scutoria.com/og/scutoria-de.png",
+    "status": 200,
+    "bytes": 40778,
+    "type": "image/png"
+  }
+]
